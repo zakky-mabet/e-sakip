@@ -1,19 +1,19 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends Skpd {
+class Home extends skpd {
 
 	public function __construct()
 	{
 		parent::__construct();
-		 
+
 		$this->breadcrumbs->unshift(0, 'Home', "administrator/home");
-
 	}
-	
-	public function index(){
 
-		$this->adminpage_title->push('Dashboard', 'Selamat datang di Administrator');
+	public function index() 
+	{
+
+		$this->page_title->push('Dashboard', 'Selamat datang di Administrator');
 
 		$this->data = array(
 			'title' => "Main Dashboard", 

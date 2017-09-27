@@ -23,9 +23,9 @@ class Skpd extends MY_Controller
 	{
 		parent::__construct();
 
-		$this->load->library( array('session', 'form_validation', 'session','template','pagination'));
+		$this->load->library( array('session', 'form_validation', 'session','template','pagination', 'page_title', 'breadcrumbs'));
 
-		$this->load->helper(array('url','menus','indonesia'));
+		$this->load->helper(array('url','menus'));
 		
 		if($this->session->has_userdata('skpd_login')==FALSE) 
 		{	

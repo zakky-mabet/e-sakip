@@ -7,7 +7,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @package Codeigniter
  * @subpackage Admin Template
- * @since Tamtv 1.0
  */
 ?>
 <!DOCTYPE html>
@@ -17,16 +16,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title><?php echo $title; ?></title>
 	<link rel="shortcut icon" href="<?php echo base_url("public/image/site/favicon.png"); ?>">
-	<link rel="stylesheet" href="<?php echo base_url("public/bootstraps/css/bootstrap.min.css"); ?>">
-	<link rel="stylesheet" href="<?php echo base_url("public/font-awesome/css/font-awesome.min.css"); ?>">
-	<link rel="stylesheet" href="<?php echo base_url("public/skpd/css/style-login.css"); ?>">
-	<link rel="stylesheet" href="<?php echo base_url("public/admin/css/animate.min.css"); ?>">
+	<link rel="stylesheet" href="<?php echo base_url("assets/asset/css/bootstrap.min.css"); ?>">
+	<link rel="stylesheet" href="<?php echo base_url("assets/public/font-awesome/css/font-awesome.min.css"); ?>">
+	<link rel="stylesheet" href="<?php echo base_url("assets/skpd/css/style-login.css"); ?>">
+	<link rel="stylesheet" href="<?php echo base_url("assets/css/animate.css"); ?>">
 </head>
 <body>
 	<div class="container">
 		<div class="col-md-4 col-md-offset-4 box-login">
 			<div class="box-logo">
-	      		<img src="" alt="">
+	      		<img src="<?php echo base_url("assets/images/logo-login.png"); ?>" alt="">
 	      	</div>
 	      	<?php  
 	      	/**
@@ -54,9 +53,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	      			<button type="submit" class="btn btn-primary btn-block">Masuk</button>
 	      		</form>
 	      	</div>
-<!-- 	      	<div class="box-footer">
-	<a href="?action=lostpassword" class="forgot">Lupa password anda?</a>
-</div> -->
 	      	<?php else : ?>
 	      	<div class="box-alert">
 	      		<div class="alert alert-info">
@@ -78,8 +74,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	      	<?php endif; ?>
 		</div>
 	</div>
-	<script src="<?php echo base_url("public/theme/js/jquery-3.2.1.min.js"); ?>"></script>
-	<script src="<?php echo base_url("public/bootstraps/js/bootstrap.min.js"); ?>"></script>
+	<script src="<?php echo base_url("assets/js/jquery-2.1.4.min.js"); ?>"></script>
+	<script src="<?php echo base_url("assets/asset/js/bootstrap.min.js"); ?>"></script>
 </body>
 </html>
 <?php  

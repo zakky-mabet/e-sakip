@@ -45,7 +45,7 @@ class Login_skpd extends CI_Controller
 					{
 						redirect($this->input->get('back-to'));
 					} else {
-						redirect(base_url("administrator"));
+						redirect(base_url('skpd/home'));
 					}
 				} else {
 					$this->template->alert(
