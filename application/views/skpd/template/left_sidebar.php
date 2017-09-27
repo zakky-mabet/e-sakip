@@ -20,7 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </li>
         <li class="<?php  echo active_link_controller('home'); ?>">
             <a href="<?php  echo site_url('skpd/home') ?>">
-               <i class="fa fa-dashboard"></i> <span>Instansi</span>
+               <i class="fa fa-bank"></i> <span>Instansi</span>
             </a>
         </li>
         </ul>
