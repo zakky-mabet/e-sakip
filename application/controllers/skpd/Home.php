@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends skpd {
+class Home extends Skpd {
 
 	public function __construct()
 	{
@@ -16,7 +16,7 @@ class Home extends skpd {
 
 		$this->data = array(
 			'title' => "Main Dashboard", 
-			'breadcrumb' => $this->breadcrumbs->show(),
+			'breadcrumbs' => $this->breadcrumbs->show(),
 			'page_title' => $this->page_title->show(),
 			);
 
