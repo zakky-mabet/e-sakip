@@ -1,8 +1,5 @@
 <div class="row">
    <div class="col-md-12">
-    <?php echo "<pre>";
-    print_r ($this->session->userdata());
-    echo "</pre>"; ?>
         <form action="" method="POST" role="form">
         <ul class="timeline">
             <li class="time-label">
@@ -14,11 +11,13 @@
                     <div class="timeline-body">
                         <div class="form-group">
                             <label for="">Visi</label>
-                            <textarea name="" class="form-control" rows="2"></textarea>
+                            <textarea name="visi" class="form-control" rows="2"></textarea>
+                            <p class="help-block"><?php echo form_error('visi', '<small class="text-red">', '</small>'); ?></p>
                         </div>
                         <div class="form-group">
                             <label for="">Penjabaran Visi</label>
-                            <textarea name="sdf" class="form-control summernote "></textarea>
+                            <p class="help-block"><?php echo form_error('penjabaran', '<small class="text-red">', '</small>'); ?></p>
+                            <textarea name="penjabaran" class="form-control summernote"></textarea>
                         </div>
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-3">

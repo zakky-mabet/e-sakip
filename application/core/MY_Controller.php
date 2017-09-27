@@ -29,7 +29,7 @@ class Skpd extends MY_Controller
 		
 		$this->breadcrumbs->unshift(0, 'Home', "home");
 
-		if($this->session->has_userdata('skpd_login')==FALSE) 
+		if($this->session->has_userdata('SKPD')==FALSE) 
 		{	
 			redirect(site_url('login?from_url='.current_url()));
 		}
