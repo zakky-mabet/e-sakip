@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-// inspired from the source >> https://github.com/nobuti/Codeigniter-breadcrumbs
+// inspired from the source >> https://github.com/nobuti/Codeigniter-breadcrumds
 class Breadcrumbs {
 
     protected $CI;
@@ -36,7 +36,7 @@ class Breadcrumbs {
 
 		$url = site_url($url);
 
-		$this->breadcrumbs[$url] = array('id' => $id, 'page' => $page, 'href' => $url);
+		$this->breadcrumds[$url] = array('id' => $id, 'page' => $page, 'href' => $url);
 	}
 
 
@@ -46,21 +46,21 @@ class Breadcrumbs {
 
 		$url = site_url($url);
 
-		array_unshift($this->breadcrumbs, array('id' => $id, 'page' => $page, 'href' => $url));
+		array_unshift($this->breadcrumds, array('id' => $id, 'page' => $page, 'href' => $url));
 	}
 
 
 	public function show()
 	{
-		if ($this->breadcrumbs)
+		if ($this->breadcrumds)
         {
 			$output = $this->_open ."\n";
 
-            usort($this->breadcrumbs, $this->array_sorter('id'));
+            usort($this->breadcrumds, $this->array_sorter('id'));
 
-			foreach ($this->breadcrumbs as $key => $value)
+			foreach ($this->breadcrumds as $key => $value)
             {
-				$keys = array_keys($this->breadcrumbs);
+				$keys = array_keys($this->breadcrumds);
 
                 if (reset($keys) == $key)
                 {
