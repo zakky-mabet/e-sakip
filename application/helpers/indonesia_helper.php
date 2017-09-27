@@ -101,6 +101,52 @@ if ( ! function_exists('bulan'))
 	}
 }
 
+if ( ! function_exists('bulan_english'))
+{
+	function bulan_english($bln)
+	{
+		switch ($bln)
+		{
+			case 01:
+				return "JAN";
+				break;
+			case 02:
+				return "FEB";
+				break;
+			case 03:
+				return "MAR";
+				break;
+			case 04:
+				return "APR";
+				break;
+			case 05:
+				return "MAY";
+				break;
+			case 06:
+				return "JUN";
+				break;
+			case 07:
+				return "JUL";
+				break;
+			case 08:
+				return "Augt";
+				break;
+			case 09:
+				return "SEP";
+				break;
+			case 10:
+				return "OCT";
+				break;
+			case 11:
+				return "NOV";
+				break;
+			case 12:
+				return "DEC";
+				break;
+		}
+	}
+}
+
 
 if( !  function_exists('nomo_urut') )
 {
@@ -121,29 +167,6 @@ if( !  function_exists('nomo_urut') )
 				return $number;
 				break;
 		}
-	}
-}
-
-if( !  function_exists('romawi') )
-{
-	function romawi($integer = 1)
-	{
-	    $table = array('M'=>1000, 'CM'=>900, 'D'=>500, 'CD'=>400, 'C'=>100, 'XC'=>90, 'L'=>50, 'XL'=>40, 'X'=>10, 'IX'=>9, 'V'=>5, 'IV'=>4, 'I'=>1); 
-	    $return = ''; 
-	    while($integer > 0) 
-	    { 
-	        foreach($table as $rom=>$arb) 
-	        { 
-	            if($integer >= $arb) 
-	            { 
-	                $integer -= $arb; 
-	                $return .= $rom; 
-	                break; 
-	            } 
-	        } 
-	    } 
-
-	    return $return; 
 	}
 }
 
@@ -213,6 +236,166 @@ if( ! function_exists('terbilang') )
 	            break;
 	    }     
 	    return $hasil;
+	}
+}
+
+if( !  function_exists('get_file') )
+{
+	function get_file($file = '', $title='')
+	{	$array = explode('.', $file);
+		switch ($array[1]) 
+		{
+			case 'pdf':
+				return '<embed src="'.base_url('assets/images/'.$file).'" type="application/pdf" width="100%" height="200"></embed>';
+				break;
+			case 'jpg':
+				return '<a class="lightbox" title=" '.$title.' " href="'.base_url('assets/images/'.$file).'">
+                			<img alt="'.$title.'" width="100%" src="'.base_url('assets/images/'.$file).'" />
+             			 </a>';
+				break;
+			default:
+				return '<span class="text-orange">Tidak Terdefinisi</span>';
+				break;
+		}
+	}
+}
+
+if( !  function_exists('status') )
+{
+	function status($status = '')
+	{
+		switch ($status) 
+		{
+			case 'show':
+				return '<span class="text-blue">Publish<span>';
+				break;
+			case 'hide':
+				return '<span class="text-red">Pending</span>';
+				break;
+			default:
+				return '<span class="text-orange">Tidak Terdefinisi</span>';
+				break;
+		}
+	}
+}
+
+if( !  function_exists('status_read') )
+{
+	function status_read($status_read = '')
+	{
+		switch ($status_read) 
+		{
+			case 'read':
+				return '<span class="text-blue">Read<span>';
+				break;
+			case 'unread':
+				return '<span class="text-red">Unread</span>';
+				break;
+			default:
+				return '<span class="text-orange">Tidak Terdefinisi</span>';
+				break;
+		}
+	}
+}
+
+
+if( !  function_exists('status_log') )
+{
+	function status_log($status_log = '')
+	{
+		switch ($status_log) 
+		{
+			case 'yes':
+				return '<span class="text-blue">YA<span>';
+				break;
+			case 'no':
+				return '<span class="text-red">TIDAK</span>';
+				break;
+			default:
+				return '<span class="text-orange">Tidak Terdefinisi</span>';
+				break;
+		}
+	}
+}
+
+
+if( !  function_exists('status_hak') )
+{
+	function status_hak($status_hak = '')
+	{
+		switch ($status_hak) 
+		{
+			case 'admin':
+				return '<span class="text-blue">Admin<span>';
+				break;
+			case 'operator':
+				return '<span class="text-red">Operator</span>';
+				break;
+			case 'khusus_pembangunan':
+				return '<span class="text-green">Khusus Pembangunan</span>';
+				break;
+			default:
+				return '<span class="text-orange">Tidak Terdefinisi</span>';
+				break;
+		}
+	}
+}
+
+
+if( !  function_exists('eye_status') )
+{
+	function eye_status($eye_status = '')
+	{
+		switch ($eye_status) 
+		{
+			case 'show':
+				return 'fa-eye';
+				break;
+			case 'hide':
+				return 'fa-eye-slash';
+				break;
+			default:
+				return '';
+				break;
+		}
+	}
+}
+
+if( !  function_exists('kontak_status') )
+{
+	function kontak_status($kontak_status = '')
+	{
+		switch ($kontak_status) 
+		{
+			case 'read':
+				return 'fa-eye';
+				break;
+			case 'unread':
+				return 'fa-eye-slash';
+				break;
+			default:
+				return '';
+				break;
+		}
+	}
+}
+
+if( !  function_exists('admin_status') )
+{
+	function admin_status($admin_status = '')
+	{
+		switch ($admin_status) 
+		{
+			case 'yes':
+				return 'fa-eye';
+				break;
+			case 'no':
+				return 'fa-eye-slash';
+				break;
+			default:
+				return '';
+				break;
+		}
 	}
 }
 
