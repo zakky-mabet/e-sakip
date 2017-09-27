@@ -9,6 +9,7 @@ class Home extends skpd {
 
 		$this->breadcrumbs->unshift(0, 'Home', "administrator/home");
 	}
+
 	public function index() 
 	{
 
