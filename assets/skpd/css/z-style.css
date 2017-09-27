@@ -1,0 +1,11 @@
+.bold { font-weight: 600 }
+
+/* time line dashboard */
+
+.em1 { font-size: 0.8em; }
+.em2 { font-size: 0.6em; }
+.em3 { font-size: 0.9em; }
+
+.border-radius {
+	border-radius: 9px 9px 9px 9px;
+}

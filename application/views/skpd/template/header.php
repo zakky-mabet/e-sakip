@@ -9,6 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <title><?php  echo (isset($title)) ? $title : "Sistem Akuntabilitas Kinerja Instansi Pemerintah"; ?></title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
  
+  <link rel="stylesheet" href="<?php echo base_url("assets/skpd/css/z-style.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/bootstrap/css/bootstrap.min.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/font-awesome/css/font-awesome.min.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/ionicons/css/ionicons.min.css"); ?>">
@@ -18,8 +19,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <link rel="stylesheet" href="<?php echo base_url("assets/public/dist/css/animate.css"); ?>">  
   <link rel="stylesheet" href="<?php echo base_url("assets/public/plugins/bootstrap-checkbox/awesome-bootstrap-checkbox.min.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/plugins/datepicker/datepicker3.min.css"); ?>">
-  <link rel="stylesheet" href="<?php echo base_url("assets/public/summernote/summernote.css"); ?>">
-  <link rel="shortcut icon" type="image/png" href="<?php echo base_url('assets/public/image/avatar.jpg') ?>"/>
+  <link rel="shortcut icon" type="image/png" href="<?php echo base_url('assets/public/image/favicon-title.png') ?>"/>
+
   <script src="<?php echo base_url("assets/public/plugins/jQuery/jquery-2.2.3.min.js"); ?>"></script>
   <script src="<?php echo base_url("assets/public/bootstrap/js/bootstrap.min.js"); ?>"></script>
   <script src="<?php echo base_url("assets/public/plugins/slimScroll/jquery.slimscroll.min.js"); ?>"></script>
