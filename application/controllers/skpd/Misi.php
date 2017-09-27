@@ -7,19 +7,20 @@ class Misi extends Skpd
 	{
 		parent::__construct();
 		
-		$this->breadcrumbs->unshift(1, 'Misi', "home");
+		$this->breadcrumbs->unshift(1, 'Misi',  $this->uri->uri_string());
 	}
+
 	public function index()
 	{
-		$this->page_title->push('Misi', 'Selamat datang di Administrator');
+		$this->page_title->push('Misi', 'Misi Rencana Strategis');
 
 		$this->data = array(
-			'title' => "Main Dashboard", 
-			'breadcrumb' => $this->breadcrumbs->show(),
+			'title' => "Misi", 
+			'breadcrumbs' => $this->breadcrumbs->show(),
 			'page_title' => $this->page_title->show(),
 		);
 
-		$this->template->view('skpd/v_home', $this->data);
+		$this->template->view('skpd/vMisi', $this->data);
 	}
 
 }
