@@ -18,6 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <link rel="stylesheet" href="<?php echo base_url("assets/public/dist/css/animate.css"); ?>">  
   <link rel="stylesheet" href="<?php echo base_url("assets/public/plugins/bootstrap-checkbox/awesome-bootstrap-checkbox.min.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/plugins/datepicker/datepicker3.min.css"); ?>">
+  <link rel="stylesheet" href="<?php echo base_url("assets/public/summernote/summernote.css"); ?>">
   <link rel="shortcut icon" type="image/png" href="<?php echo base_url('assets/public/image/avatar.jpg') ?>"/>
   <script src="<?php echo base_url("assets/public/plugins/jQuery/jquery-2.2.3.min.js"); ?>"></script>
   <script src="<?php echo base_url("assets/public/bootstrap/js/bootstrap.min.js"); ?>"></script>
@@ -30,6 +31,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <script src="<?php echo base_url("assets/public/plugins/bnotify/bootstrap-notify.min.js"); ?>"></script>
   <script src="<?php echo base_url("assets/public/dist/js/jquery.timeago.js"); ?>"></script>
   <script src="<?php echo base_url("assets/public/dist/js/moment.min.js"); ?>"></script>
+  <script src="<?php echo base_url("assets/public/plugins/datepicker/bootstrap-datepicker.min.js"); ?>"></script>
+  <script src="<?php echo base_url("assets/public/summernote/summernote.min.js"); ?>"></script>
   <script type="text/javascript"> 
       var base_url   = '<?php echo site_url(); ?>';
       var base_path  = '<?php echo base_url('assets/public'); ?>';
@@ -69,6 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     .bg-2 { background-color: #FF9800 }
     .bg-3 { background-color: #FFA726 }
     .text-white { color: white }
+    .tinymce-300 { height: 200px !important;}
   </style>
 </head>
 <?php

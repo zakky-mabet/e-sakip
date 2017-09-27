@@ -28,13 +28,13 @@ class Skpd extends MY_Controller
 		$this->load->helper(array('url','menus'));
 		
 		$this->breadcrumbs->unshift(0, 'Home', "home");
-		
+
 		if($this->session->has_userdata('skpd_login')==FALSE) 
 		{	
 			redirect(site_url('login?from_url='.current_url()));
 		}
 
-		
+		$this->load->js(base_url("assets/public/app/component.js"));
 	}
 }
 

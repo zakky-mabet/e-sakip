@@ -17,7 +17,7 @@ class Misi extends Skpd
 			'title' => "Main Dashboard", 
 			'breadcrumb' => $this->breadcrumbs->show(),
 			'page_title' => $this->page_title->show(),
-			);
+		);
 
 		$this->template->view('skpd/v_home', $this->data);
 	}
