@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <b>Versi</b> 1.0.0 (Pre Release)
     </div>
    <div class="container text-center">
-      <small>Hak Cipta &copy; 2017 <?php if(date('Y')!=2017) echo "- ".date('Y'); ?> Kec. Koba, Kab. Koba All rights reserved. Develop By <a href="http://teitramega.co.id" target="_blank">Teitra Mega</a>
+      <small>Hak Cipta &copy; 2017 <?php if(date('Y')!=2017) echo "- ".date('Y'); ?> Sekretariat Daerah Bangka Tengah All rights reserved. Develop By <a href="http://teitramega.co.id" target="_blank">Teitra Mega</a>
         .<small>
    </div>
 </footer>
