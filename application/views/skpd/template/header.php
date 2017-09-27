@@ -73,6 +73,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     .bg-1 { background-color: #FB8C00 }
     .bg-2 { background-color: #FF9800 }
     .bg-3 { background-color: #FFA726 }
+    .right2x { margin-right: 20px; }
+    .top50x { margin-top: 50px; }
     .text-white { color: white }
     .tinymce-300 { height: 200px !important;}
   </style>

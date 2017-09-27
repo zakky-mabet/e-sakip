@@ -24,10 +24,10 @@ class Visi extends Skpd
 			$this->mvisi->CreateUpdate();
 
 			redirect(current_url());
-		}
+		} 
 
 		$this->data = array(
-			'title' => "Visi", 
+			'title' => "Visi Rencana Strategis", 
 			'breadcrumbs' => $this->breadcrumbs->show(),
 			'page_title' => $this->page_title->show(),
 			'visi' => $this->mvisi->getByLogin()

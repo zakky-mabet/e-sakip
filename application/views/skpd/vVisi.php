@@ -12,7 +12,7 @@
                     <?php if( $visi == FALSE) : ?>
                         <div class="form-group">
                             <label>Visi</label>
-                            <textarea name="visi" class="form-control" rows="2"><?php echo set_value('visi') ?></textarea>
+                            <textarea name="visi" class="form-control" rows="3"><?php echo set_value('visi') ?></textarea>
                             <p class="help-block"><?php echo form_error('visi', '<small class="text-red">', '</small>'); ?></p>
                         </div>
                         <div class="form-group">
@@ -23,7 +23,7 @@
                     <?php else : ?>
                         <div class="form-group">
                             <label>Visi</label>
-                            <textarea name="visi" class="form-control" rows="2"><?php echo (set_value('visi')) ? set_value('visi') : $visi->deskripsi ?></textarea>
+                            <textarea name="visi" class="form-control" rows="3"><?php echo (set_value('visi')) ? set_value('visi') : $visi->deskripsi ?></textarea>
                             <p class="help-block"><?php echo form_error('visi', '<small class="text-red">', '</small>'); ?></p>
                         </div>
                         <div class="form-group">
