@@ -7,12 +7,11 @@ class Home extends Skpd {
 	{
 		parent::__construct();
 		 
-
-	$this->breadcrumbs->unshift(0, 'Home', "administrator/home");
+		$this->breadcrumbs->unshift(0, 'Home', "administrator/home");
 
 	}
-
-		public function index(){
+	
+	public function index(){
 
 		$this->adminpage_title->push('Dashboard', 'Selamat datang di Administrator');
 

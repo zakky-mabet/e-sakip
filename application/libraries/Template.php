@@ -28,7 +28,6 @@ class Template
         }
     }
 
-    
     public function alert($message, $config)
     {
         $alert  = "<div class='alert alert-{$config['type']} animated fadeIn'>";
