@@ -16,6 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                      <i class="glyphicon glyphicon-user" style="font-size: 16px;"></i>
                   </a>
                </li>
+               
                <li>
                   <a href="<?php echo site_url("administrator/login/signout") ?>" style="font-size: 20px;" data-toggle="tooltip" data-toggle="modal" data-target="#keluar" data-placement="bottom" title="Keluar dari Sistem">
                      <i class="fa fa-power-off"></i>

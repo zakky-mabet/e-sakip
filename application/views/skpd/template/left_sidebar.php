@@ -14,8 +14,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
       <ul class="sidebar-menu">
         <li class="<?php  echo active_link_controller('home'); ?>">
-            <a href="<?php  echo site_url('administrator/home') ?>">
+            <a href="<?php  echo site_url('skpd/home') ?>">
                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            </a>
+        </li>
+        <li class="<?php  echo active_link_controller('home'); ?>">
+            <a href="<?php  echo site_url('skpd/home') ?>">
+               <i class="fa fa-dashboard"></i> <span>Instansi</span>
             </a>
         </li>
         </ul>
@@ -37,7 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
          *
          * @var string
          **/
-          echo $breadcrumbs; 
+          echo $breadcrumb; 
         ?>
       </section>
       <section class="content">
