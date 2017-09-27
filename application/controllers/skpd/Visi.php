@@ -21,7 +21,7 @@ class Visi extends Skpd
 
 		if ($this->form_validation->run() == TRUE)
 		{
-			$this->mvisi->create();
+			$this->mvisi->CreateUpdate();
 
 			redirect(current_url());
 		}
@@ -30,6 +30,7 @@ class Visi extends Skpd
 			'title' => "Visi", 
 			'breadcrumbs' => $this->breadcrumbs->show(),
 			'page_title' => $this->page_title->show(),
+			'visi' => $this->mvisi->getByLogin()
 		);
 
 		$this->template->view('skpd/vVisi', $this->data);

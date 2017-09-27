@@ -34,10 +34,6 @@ class Skpd_model extends MY_Model
 		$this->SKPD = $this->session->userdata('SKPD')->ID;
 
 		$this->kepala = $this->session->userdata('SKPD')->kepala;
-		
-		echo "<pre>";
-		print_r($this);
-		echo "</pre>";
 	}
 }
 
