@@ -13,18 +13,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
          </div>
       </div>
       <ul class="sidebar-menu">
-        <li class="<?php  echo active_link_controller('home'); ?>">
+        <li class="<?php echo active_link_controller('home'); ?>">
             <a href="<?php  echo site_url('skpd/home') ?>">
-               <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+               <i class="fa fa-dashboard"></i> <span>Home</span>
             </a>
         </li>
-        <li class="<?php  echo active_link_controller('home'); ?>">
+        <li class="treeview <?php  echo active_link_multiple(array('visi')); ?>">
+          <a href="#">
+            <i class="fa fa-files-o"></i>
+            <span>Rencanan Strategis</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php echo active_link_method('index','visi'); ?>">
+                <a href="<?php echo base_url("skpd/visi") ?>"> Visi</a>
+            </li>
+            <li><a href=""> Misi</a></li>
+          </ul>
+        </li>
+        <li class="<?php echo active_link_controller('instansi'); ?>">
             <a href="<?php  echo site_url('skpd/home') ?>">
-               <i class="fa fa-dashboard"></i> <span>Instansi</span>
+               <i class="fa fa-bank"></i> <span>Instansi</span>
             </a>
         </li>
         </ul>
-
       </section>
    </aside>
    <div class="content-wrapper">
@@ -42,7 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
          *
          * @var string
          **/
-          echo $breadcrumb; 
+          echo $breadcrumbs; 
         ?>
       </section>
       <section class="content">

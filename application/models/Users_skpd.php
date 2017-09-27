@@ -12,7 +12,9 @@ class Users_skpd extends CI_Model
 			$this->db->where('username', $this->input->post('username'));
 		}
 
-		return $this->db->get('skpd')->row();
+		$this->db->join('skpd', 'kepala_skpd.id_kepala = skpd.ID', 'left');
+
+		return $this->db->get('kepala_skpd')->row();
 	}
 	
 

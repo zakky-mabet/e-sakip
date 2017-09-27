@@ -30,12 +30,15 @@ class Login_skpd extends CI_Controller
 			        $user_session = array(
 			        	'skpd_login' => TRUE,
 			        	'ID' => $user->ID,
-			        	'user' => (Object) array(
+			        	'SKPD' => (Object) array(
 			        		'ID' => $user->ID,
 			        		'nama' => $user->nama,
 			        		'telepon' => $user->no_telp,
 			        		'email' => $user->email,
 			        		'username' => $user->username,
+			        		'kepala' => $user->id_kepala,
+			        		'periode_awal' => $user->periode_awal,
+			        		'periode_akhir' => $user->periode_akhir
 			        	)
 			        );	
 
@@ -72,7 +75,7 @@ class Login_skpd extends CI_Controller
 	{
 		$this->session->sess_destroy();
 
-		redirect(base_url("administrator/auth"));
+		redirect(base_url("login"));
 	}
 }
 
