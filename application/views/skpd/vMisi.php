@@ -57,7 +57,6 @@
                                 </td>
                                 <td><span class="btn btn-small btn-danger"><i class="fa fa-trash"></i></td></span>
                             </tr>
-
                         <?php } ?>    
                         </tbody>
                         <tfoot>
