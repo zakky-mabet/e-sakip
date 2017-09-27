@@ -1,18 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends skpd {
-
+class Misi extends Skpd 
+{
 	public function __construct()
 	{
 		parent::__construct();
-
-		$this->breadcrumbs->unshift(1, 'Main', "home");
+		
+		$this->breadcrumbs->unshift(1, 'Misi', "home");
 	}
-
-	public function index() 
+	public function index()
 	{
-		$this->page_title->push('Dashboard', 'Selamat datang di Administrator');
+		$this->page_title->push('Misi', 'Selamat datang di Administrator');
 
 		$this->data = array(
 			'title' => "Main Dashboard", 
@@ -24,3 +23,6 @@ class Home extends skpd {
 	}
 
 }
+
+/* End of file Misi.php */
+/* Location: ./application/controllers/skpd/Misi.php */
