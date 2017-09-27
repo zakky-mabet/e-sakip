@@ -42,7 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
          *
          * @var string
          **/
-          echo $breadcrumb; 
+          echo $breadcrumbs; 
         ?>
       </section>
       <section class="content">
