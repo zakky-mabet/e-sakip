@@ -30,14 +30,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
          *
          * @return stringsas
          **/
-          echo $adminpage_title;
+          echo $page_title;
 
         /**
          * Generate Breadcrumbs from library
          *
          * @var string
          **/
-          echo $adminbreadcrumb; 
+          echo $breadcrumbs; 
         ?>
       </section>
       <section class="content">
