@@ -65,4 +65,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /* End of file left_sidebar.php */
 /* Location: ./application/views/template/left_sidebar.php */
 ?>
-
