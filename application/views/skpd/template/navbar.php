@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body class="hold-transition skin-green-light sidebar-mini fixed">
    <div class="wrapper">
       <header class="main-header">
-         <a href="<?php echo site_url('administrator/home') ?>" class="logo">
+         <a href="<?php echo site_url('skpd/home') ?>" class="logo">
             <img src="<?php echo base_url("assets/public/image/logo.png"); ?>" class="logo-head" alt="Logo">
          </a>
          <nav class="navbar navbar-static-top">
