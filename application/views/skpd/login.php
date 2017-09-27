@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title><?php echo $title; ?></title>
 	<link rel="shortcut icon" href="<?php echo base_url("public/image/site/favicon.png"); ?>">
-	<link rel="stylesheet" href="<?php echo base_url("assets/public/bootstrap/css/bootstrap.min.css"); ?>">
+	<link rel="stylesheet" href="<?php echo base_url("assets/public/css/bootstrap.min.css"); ?>">
 	<link rel="stylesheet" href="<?php echo base_url("assets/public/font-awesome/css/font-awesome.min.css"); ?>">
 	<link rel="stylesheet" href="<?php echo base_url("assets/skpd/css/style-login.css"); ?>">
 	<link rel="stylesheet" href="<?php echo base_url("assets/css/animate.css"); ?>">
