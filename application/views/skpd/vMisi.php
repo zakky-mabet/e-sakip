@@ -4,7 +4,7 @@
     
         <ul class="timeline">
             <li class="time-label">
-                  <span class="bg-green">Entry Misi</span>
+                  <span class="bg-blue">Entry Misi</span>
             </li>
             <li>
                 <i class="fa fa-arrow-down"></i>
@@ -13,9 +13,9 @@
                          <div class="row-fluid">
             <div class="span6">
           
-                <form action="<?php echo site_url('skpd/sasaran/createorupdate') ?>" class="form-horizontal" method="post">
+                <form action="<?php echo site_url('skpd/misi/createorupdate') ?>" class="form-horizontal" method="post">
                     <table class="table table-bordered ">
-                        <thead class="bg-green">
+                        <thead class="bg-blue">
                             <tr>
                                 <th width="5px" class="text-center">No</th>
                                 <th width="10px" class="text-center">Tahun Aktif</th>

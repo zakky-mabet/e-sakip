@@ -29,25 +29,12 @@ class Msasaran extends Skpd_model
 					$object = array(
 						'id_tujuan' => $key,
 						'deskripsi' => $value,
-						'tahun' => implode(',', $this->input->post("create[tahun][{$key}]"))
+						'tahun' => implode(',', $this->input->post("create[tahun][{$key}]")),
+						'opsi_sasaran' => $this->input->post("create[opsi_sasaran][{$key}]"),
 					);
 
 					$this->db->insert('sasaran', $object);
 				}
-
-				if($this->db->affected_rows())
-				{
-					$this->template->alert(
-						' Data berhasil disimpan.', 
-						array('type' => 'success','icon' => 'check')
-					);
-				} else {
-					$this->template->alert(
-						' Tidak ada data yang tersimpan.', 
-						array('type' => 'warning','icon' => 'warning')
-					);
-				}
-
 			}
 		} else {
 			if( is_array($this->input->post('update')) )
@@ -56,29 +43,17 @@ class Msasaran extends Skpd_model
 				{
 					$object = array(
 						'deskripsi' => $this->input->post("update[deskripsi][{$value}]"),
-						'tahun' => implode(',', $this->input->post("update[tahun][{$value}]"))
+						'tahun' => implode(',', $this->input->post("update[tahun][{$value}]")),
+						'opsi_sasaran' => $this->input->post("update[opsi_sasaran][{$key}]"),
 					);
-
-					$this->db->update('sasaran', $object, array('id_tujuan' => $value));
+					$this->db->update('sasaran', $object, array('id_sasaran' => $value));
 				}
-
-				if($this->db->affected_rows())
-				{
-					$this->template->alert(
-						' Data berhasil diubah', 
-						array('type' => 'success','icon' => 'check')
-					);
-				} else {
-					$this->template->alert(
-						' Tidak ada data yang diubah.', 
-						array('type' => 'warning','icon' => 'warning')
-					);
-				}
+			
 			}
 		}
 	}
 
-	public function getTujuanByMisi($misi = 0)
+	public function getTujuanSasaran($misi = 0)
 	{
 		return $this->db->get_where('sasaran', array('id_tujuan' => $misi))->result();
 	}
@@ -104,6 +79,11 @@ class Msasaran extends Skpd_model
 		return $this->db->get_where('sasaran', array('id_tujuan' => $misi))->result();
 	}
 
+	public function master_sasaran()
+	{
+		return $this->db->get_where('master_sasaran', array('id_skpd' => $this->kepala))->result();
+	}
+
 	public function delete($param = 0, $key = '')
 	{
 		switch ($key) 
@@ -111,7 +91,18 @@ class Msasaran extends Skpd_model
 			case 'sasaran':
 				$this->db->delete('sasaran', array('id_sasaran' => $param));
 
-				$respon['status'] = 'success';
+				if($this->db->affected_rows())
+				{
+					$this->template->alert(
+						' Data berhasil diubah', 
+						array('type' => 'success','icon' => 'check')
+					);
+				} else {
+					$this->template->alert(
+						' Tidak ada data yang diubah.', 
+						array('type' => 'warning','icon' => 'warning')
+					);
+				}
 				break;
 			case 'indikator':
 				# code...
