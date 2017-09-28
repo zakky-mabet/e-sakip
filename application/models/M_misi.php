@@ -19,8 +19,6 @@ class M_misi extends CI_Model
 	
 	public function get_misi(){
 	
-		$this->db->select('misi.id_misi,misi.id_kepala,misi.deskripsi,misi.tahun,kepala_skpd.periode_awal,kepala_skpd.periode_akhir');
-
 		$this->db->join('kepala_skpd', 'kepala_skpd.id_kepala = misi.id_kepala', 'left');
 
 		return $this->db->get('misi')->result();
