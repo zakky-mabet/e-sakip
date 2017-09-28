@@ -28,7 +28,7 @@
                     <div class="timeline-body">
 	                    <table class="table table-default" data-id="<?php echo $misi->id_tujuan ?>">
 	                        <thead>
-	                            <tr class="bg-gray">
+	                            <tr class="bg-blue">
 	                                <th class="text-center">NO.</th>
 	                                <th class="text-center" width="170">AKTIF</th>
 	                                <th class="text-center">SASARAN</th>

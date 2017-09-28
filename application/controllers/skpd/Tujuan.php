@@ -43,7 +43,7 @@ class Tujuan extends Skpd
 
 	public function indikator_tujuan()
 	{
-		$this->page_title->push('Tujuan', 'Indikator Tujuan');
+		$this->page_title->push('Indikator Tujuan', 'Indikator Tujuan');
 
 		$this->breadcrumbs->unshift(2, 'Indikator Tujuan',  $this->uri->uri_string());
 
@@ -54,6 +54,13 @@ class Tujuan extends Skpd
 		);
 
 		$this->template->view('skpd/vIndikatorTujuan', $this->data);
+	}
+
+	public function createupdateindikator()
+	{
+		$this->tjuan->createupdateindikator();
+
+		redirect("skpd/tujuan/indikator_tujuan");
 	}
 }
 

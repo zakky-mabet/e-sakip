@@ -36,12 +36,12 @@
 					            <?php 
 					            if( $this->tjuan->getTujuanByMisi($misi->id_misi) ) :
 					            /* Loop Tujuan terisi */
-					            $Jmltujuan = count($this->tjuan->getTujuanByMisi($misi->id_misi));
+					            $cekLoop = true;
 					            foreach( $this->tjuan->getTujuanByMisi($misi->id_misi) as $keyTjuan => $tujuan) : 
 					            	echo form_hidden("update[ID][]", $tujuan->id_tujuan);
 					            ?>
 	                        	<tr class="dt-<?php echo $tujuan->id_tujuan; ?>">
-	                        		<td><?php echo $key ?>.<?php echo ($key+$keyTjuan) ?></td>
+	                        		<td><?php echo ++$keyTjuan ?>.</td>
 	                        		<td>
 	                        		<?php for($tahun = $this->tjuan->periode_awal; $tahun <= $this->tjuan->periode_akhir; $tahun++) : ?>
 	                        			<div class="col-md-6">
@@ -62,13 +62,17 @@
 										data-remove="tr.dt-<?php echo $tujuan->id_tujuan; ?>">
 											<i class="fa fa-times"></i>
 										</a>
+										<?php if( $cekLoop) : 
+										$cekLoop = false;
+										?>
 										<button id="btn-add-tujuan" type="button" class="btn btn-default" 
 										data-id="<?php echo $misi->id_misi ?>" 
-										data-parent="<?php echo $key ?>"
-										data-key="<?php echo ($keyTjuan+1) ?>"
+										data-parent="<?php echo $keyTjuan ?>"
+										data-key="<?php echo $keyTjuan	 ?>"
 										title="Tambah Form">
 											<i class="fa fa-plus"></i>
 										</button>
+									<?php endif; ?>
 	                        		</td>
 	                        	</tr>					            
 					            <?php endforeach;
@@ -76,7 +80,7 @@
 					            ?>
 								<!-- End Update -->
 	                        	<tr>
-	                        		<td><?php echo $key ?>.1</td>
+	                        		<td>1.</td>
 	                        		<td>
 	                        		<?php for($tahun = $this->tjuan->periode_awal; $tahun <= $this->tjuan->periode_akhir; $tahun++) : ?>
 	                        			<div class="col-md-6">

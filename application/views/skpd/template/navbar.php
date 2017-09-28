@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed'); 
 ?>
-<body class="hold-transition skin-green-light sidebar-mini fixed">
+<body class="hold-transition skin-blue-light sidebar-mini fixed">
    <div class="wrapper">
       <header class="main-header">
          <a href="<?php echo site_url('skpd/home') ?>" class="logo">

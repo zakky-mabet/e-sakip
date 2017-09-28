@@ -36,6 +36,12 @@ class Skpd extends MY_Controller
 
 		$this->load->js(base_url("assets/public/app/component.js"));
 	}
+
+	public function get_satuan_json()
+	{
+		$query = $this->db->get('master_satuan')->result();
+		return $this->output->set_content_type('application/json')->set_output(json_encode($query));
+	}
 }
 
 /**
