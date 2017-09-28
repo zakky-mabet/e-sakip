@@ -1,8 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_misi extends CI_Model 
+class M_sasaran extends CI_Model 
 {
+
+	public function __construct()
+	{
+		parent::__construct();
+		//Do your magic here
+	}
+	
 	public function get_admin_login()
 	{
 		if (filter_var($this->input->post('username'), FILTER_VALIDATE_EMAIL)) 
