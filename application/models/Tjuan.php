@@ -29,7 +29,8 @@ class Tjuan extends Skpd_model
 					$object = array(
 						'id_misi' => $key,
 						'deskripsi' => $value,
-						'tahun' => implode(',', $this->input->post("create[tahun][{$key}]"))
+						'tahun' => implode(',', $this->input->post("create[tahun][{$key}]")),
+						'id_kepala' => $this->kepala
 					);
 
 					$this->db->insert('tujuan', $object);
