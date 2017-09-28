@@ -39,10 +39,10 @@
 	                        <tbody id="data-<?php echo $misi->id_tujuan ?>" data-tahun-awal="<?php echo $this->msasaran->periode_awal ?>" data-tahun-akhir="<?php echo $this->msasaran->periode_akhir ?>">
 								<!-- UPDATE -->
 					            <?php 
-					            if( $this->msasaran->getTujuanByMisi($misi->id_tujuan) ) :
+					            if( $this->msasaran->getTujuanSasaran($misi->id_tujuan) ) :
 					            /* Loop Tujuan terisi */
-					            $Jmltujuan = count($this->msasaran->getTujuanByMisi($misi->id_tujuan));
-					            foreach( $this->msasaran->getTujuanByMisi($misi->id_tujuan) as $keyTjuan => $tujuan) : 
+					            $Jmltujuan = count($this->msasaran->getTujuanSasaran($misi->id_tujuan));
+					            foreach( $this->msasaran->getTujuanSasaran($misi->id_tujuan) as $keyTjuan => $tujuan) : 
 					            	echo form_hidden("update[ID][]", $tujuan->id_tujuan);
 					            ?>
 	                        	<tr class="dt-<?php echo $tujuan->id_tujuan; ?>">
@@ -57,23 +57,30 @@
 	                        		<?php endfor; ?>
 	                        		</td>
 	                        		<td>
+	                        			<select name="update[opsi_sasaran][<?php echo $tujuan->id_sasaran ?>]" class="form-control " data-placeholder="" style="width: 100%;">
+						                    <option  value="">-- pilih sasaran Kota / Kab --</option>
+						                    <?php foreach ($this->msasaran->master_sasaran() as $key => $sasaran): ?>
+						                    	 <option <?php if ($tujuan->opsi_sasaran == $sasaran->id): ?> selected <?php endif ?>  value="<?php echo $sasaran->id ?>"> <?php echo $sasaran->deskripsi; ?> </option>
+						                    <?php endforeach ?>
+						                </select> <br>
+
 	                        			<textarea name="update[deskripsi][<?php echo $tujuan->id_tujuan ?>]" class="form-control" rows="4" required="required"><?php echo $tujuan->deskripsi ?></textarea>
 	                        		</td>
 	                        		<td class="text-center">
-	                        			<button class="btn btn-warning" type="button"><i class="fa fa-warning"></i></button>
+	                        			<button data-toggle="tooltip" data-placement="top" title="Permasalahan" style="margin-top: 40px" class="btn btn-warning" type="button"><i class="fa fa-warning"></i></button>
 	                        		</td>
 	                        		<td class="text-center">
-										<a href="#" class="btn btn-default" title="Hapus Sasaran ini?" 
+										<a style="margin-top: 40px" href="#" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Hapus Sasaran ini?" 
 										id="btn-delete"
 										data-id="<?php echo $tujuan->id_sasaran ?>"
 										data-key="delete-sasaran"
 										data-remove="tr.dt-<?php echo $tujuan->id_sasaran; ?>">
 											<i class="fa fa-times"></i>
 										</a>
-										<button id="btn-add-tujuan" type="button" class="btn btn-default" 
-										data-id="<?php echo $misi->id_tujuan ?>" 
+										<button style="margin-top: 40px" id="btn-add-sasaran" type="button" class="btn btn-default" 
+										data-id="<?php echo $tujuan->id_tujuan ?>" 
 										data-parent="<?php echo $key ?>"
-										data-key="<?php echo ($keyTjuan+1) ?>"
+										data-key="<?php echo ($keyTjuan+1) ?>" data-toggle="tooltip" data-placement="top"
 										title="Tambah Form">
 											<i class="fa fa-plus"></i>
 										</button>
@@ -95,6 +102,12 @@
 	                        		<?php endfor; ?>
 	                        		</td>
 	                        		<td>
+	                        			<select name="create[opsi_sasaran][<?php echo $misi->id_tujuan ?>]" class="form-control " data-placeholder="" style="width: 100%;">
+						                    <option  value="">-- pilih sasaran Kota / Kab --</option>
+						                    <?php foreach ($this->msasaran->master_sasaran() as $key => $sasaran): ?>
+						                    	 <option value="<?php echo $sasaran->id ?>"> <?php echo $sasaran->deskripsi; ?> </option>
+						                    <?php endforeach ?>
+						                </select> <br>
 	                        			<textarea name="create[deskripsi][<?php echo $misi->id_tujuan ?>]" class="form-control" rows="4" required="required"></textarea>
 	                        		</td>
 	                        		<td class="text-center">
@@ -113,6 +126,7 @@
 	                </div>
                 </div>
             </li>
+
             <?php 
             /* End Loop Misi */
             endforeach; ?>
@@ -142,3 +156,42 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	
+	function add_form_sasaran(data, key, nomor, parent) {
+
+	var html = '<tr id="baris-'+data+'-'+nomor+'"><td>'+ nomor +'</td>';
+	html += '<td>';
+
+	for( var tahun = $('tbody#data-' + data).data('tahun-awal'); tahun <= $('tbody#data-' + data).data('tahun-akhir'); tahun++)
+	{
+		html += '<div class="col-md-6"><label>';
+		html += '<input type="checkbox" name="create[tahun]['+data+']['+tahun+']" value="'+tahun+'"> ' + tahun;
+		html += '</label></div>'
+	}
+		html += '</td><td>';
+		html += '<select name="create[opsi_sasaran]['+ data +']" class="form-control " style="width: 100%;"><option  value="" >-- pilih sasaran Kota / Kab --</option><?php foreach ($master_sasaran as $key => $sasaran): ?><option  value="<?php echo $sasaran->id ?>"> <?php echo $sasaran->deskripsi; ?></option><?php endforeach ?></select> <br>';
+		html += '<textarea name="create[deskripsi]['+data+']" class="form-control" rows="4"></textarea>';
+		html += '</td><td class="text-center">',
+		html += '<a href="javascript:void(0)" id="delete-form" data-delete="tr#baris-'+data+'-'+nomor+'" title="Hapus tujuan ini?" class="btn btn-default"><i class="fa fa-times"></i></a>';
+	    html += '</td>';
+	    html += '</tr>';
+
+	$(html).appendTo('tbody#data-' + data).hide().fadeIn(500).addClass('bg-silver');
+
+	setInterval(function() {
+		$('tr#baris-'+data+'-'+nomor).fadeIn(500).removeClass('bg-silver');
+	}, 400);
+
+	$('a#delete-form').on('click', function()
+	{
+		key--;
+		nomor--;
+		$($(this).data('delete')).addClass('bg-red').fadeOut(300, function() {
+			$(this).remove();
+		});
+	});
+}
+
+</script>

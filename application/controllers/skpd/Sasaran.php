@@ -12,6 +12,7 @@ class Sasaran extends Skpd
 		$this->load->model(array('msasaran'));
 
 		$this->load->js(base_url("assets/public/app/dynamic-form.js"));
+		$this->load->js(base_url("assets/public/app/zdynamic-form.js"));
 	}
 
 	public function index()
@@ -22,6 +23,7 @@ class Sasaran extends Skpd
 			'title' => "Sasaran Rencana Strategis", 
 			'breadcrumbs' => $this->breadcrumbs->show(),
 			'page_title' => $this->page_title->show(),
+			'master_sasaran' => $this->msasaran->master_sasaran(),
 		);
 
 		$this->template->view('skpd/vSasaran', $this->data);
@@ -55,6 +57,14 @@ class Sasaran extends Skpd
 
 		$this->template->view('skpd/vIndikatorTujuan', $this->data);
 	}
+
+	public function post()
+	{
+		echo '<pre>';
+		print_r($this->input->post());
+		$this->msasaran->CreateUpdate();
+	}
+
 }
 
 /* End of file Tujuan.php */

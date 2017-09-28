@@ -64,6 +64,12 @@ class Skpd extends MY_Controller
 		$query = $this->db->get_where('master_indikator_sasaran', array('id_skpd' => $this->SKPD))->result();
 		return $this->output->set_content_type('application/json')->set_output(json_encode($query));
 	}
+
+	public function get_sasaran_json()
+	{
+		$query = $this->db->get_where('master_sasaran', array('id_skpd' => $this->session->userdata('SKPD')->ID ))->result();
+		return $this->output->set_content_type('application/json')->set_output(json_encode($query));
+	}
 }
 
 /**
