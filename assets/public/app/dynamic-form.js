@@ -83,21 +83,6 @@ $(document).ready( function()
 					});
 				});
 			break;
-		}
-
-		return true;
-	});
-
-	/* DELETE FUNGSI */
-	$('a#btn-delete').on('click', function()
-	{
-		var ID =  $(this).data('id'),
-			remove =  $(this).data('remove');
-
-		$('#modal-delete').modal('show');
-
-		switch($(this).data('key'))
-		{
 			case 'delete-sasaran':
 				$('a#btn-yes').on('click', function() 
 				{
@@ -122,7 +107,8 @@ $(document).ready( function()
 		}
 
 		return true;
-	}); 
+	});
+
 
 });
 
