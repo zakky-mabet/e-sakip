@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Misi extends Skpd 
+class Sasaran extends Skpd 
 {
 	public function __construct()
 	{
