@@ -69,13 +69,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <a href="<?php echo base_url("skpd/program") ?>"> Program</a>
                   </li>
                   <li class="<?php echo active_link_method('anggaran','program'); ?>">
-                    <a href="">Anggaran Program</a>
+                    <a href="<?php echo base_url("skpd/program/indikator") ?>">Anggaran Program</a>
                   </li>
                   <li class="<?php echo active_link_method('indikator','program'); ?>">
-                    <a href="">Indikator Kinerja Program</a>
+                    <a href="<?php echo base_url('skpd/program/indikator'); ?>">Indikator Kinerja Program</a>
                   </li>
                   <li class="<?php echo active_link_method('target','program'); ?>">
-                    <a href=""><small>Target Indikator Kinerja Program</small></a>
+                    <a href="<?php echo base_url("skpd/program/target") ?>"><small>Target Indikator Kinerja Program</small></a>
                   </li>
                 </ul>
               </li>
