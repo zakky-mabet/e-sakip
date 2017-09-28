@@ -47,6 +47,43 @@ $(document).ready( function()
 
 		return true;
 	});
+
+	/* DELETE FUNGSI */
+	$('a#btn-delete').on('click', function()
+	{
+		var ID =  $(this).data('id'),
+			remove =  $(this).data('remove');
+
+		$('#modal-delete').modal('show');
+
+		switch($(this).data('key'))
+		{
+			case 'delete-sasaran':
+				$('a#btn-yes').on('click', function() 
+				{
+					$.post(base_url + '/sasaran/delete/' + ID + '/' + 'sasaran', function(result) 
+					{
+						$('#modal-delete').modal('hide');
+							if( result.status === 'success')
+							{
+								$(remove).addClass('bg-red').fadeOut(300, function() {
+									$(this).remove();
+								});
+							} else {
+								alert("Terjadi kesalahan saat menhapus data!");
+							}
+						$(document).ajaxComplete(function(e, xhr, opt)
+						{
+
+						});
+					});
+				});
+			break;
+		}
+
+		return true;
+	}); 
+
 });
 
 
