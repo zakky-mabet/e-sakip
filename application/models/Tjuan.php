@@ -15,21 +15,25 @@ class Tjuan extends Skpd_model
 		{
 			if( is_array($this->input->post('create')) )
 			{
-				$object = array();
-
 				foreach($this->input->post('create[deskripsi]') as $key => $value) 
 				{
-					if( $value == FALSE OR $this->input->post("create[tahun][{$key}]") == FALSE)
+					if( $value == FALSE OR $this->input->post("create[tahun][{$key}]") == FALSE) 
+					{
+						$this->template->alert(
+							' Maaf! tahun aktif dan tujuan tidak boleh kosong.', 
+							array('type' => 'danger','icon' => 'warning')
+						);
 						continue;
-					
-					$object[] = array(
+					}
+
+					$object = array(
 						'id_misi' => $key,
 						'deskripsi' => $value,
 						'tahun' => implode(',', $this->input->post("create[tahun][{$key}]"))
 					);
-				}
 
-				$this->db->insert_batch('tujuan', $object);
+					$this->db->insert('tujuan', $object);
+				}
 			}
 		} else {
 			if( is_array($this->input->post('update')) )
@@ -57,9 +61,40 @@ class Tjuan extends Skpd_model
 		return $this->db->get_where('misi', array('id_kepala' => $this->kepala))->result();
 	}
 
+	public function getTujuanLogin()
+	{
+		$misi = array();
+		foreach ($this->getMisiLogin() as $row) 
+			$misi[] = $row->id_misi;
+
+		$this->db->where_in('id_misi', $misi);
+
+		return $this->db->get('tujuan')->result();
+	}
+
 	public function getByMisi($misi = 0)
 	{
 		return $this->db->get_where('tujuan', array('id_misi' => $misi))->result();
+	}
+
+	public function delete($param = 0, $key = '')
+	{
+		switch ($key) 
+		{
+			case 'tujuan':
+				$this->db->delete('tujuan', array('id_tujuan' => $param));
+
+				$respon['status'] = 'success';
+				break;
+			case 'indikator':
+				# code...
+				break;
+			default:
+				# code...
+				break;
+		}
+
+		return $respon;
 	}
 
 }

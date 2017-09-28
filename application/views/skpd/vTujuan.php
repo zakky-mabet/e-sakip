@@ -1,4 +1,7 @@
 <div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<?php echo $this->session->flashdata('alert'); ?>
+	</div>
 	<form action="<?php echo base_url("skpd/tujuan/createupdate") ?>" method="POST" role="form">
    	<div class="col-md-10">
         <ul class="timeline">
@@ -19,7 +22,7 @@
                 <i class="fa fa-pencil"></i>
                 <div class="timeline-item">
                     <div class="timeline-body">
-	                    <table class="table table-default" id="table-dynamic-<?php echo $misi->id_misi ?>" data-id="<?php echo $misi->id_misi ?>">
+	                    <table class="table table-default" data-id="<?php echo $misi->id_misi ?>">
 	                        <thead>
 	                            <tr class="bg-gray">
 	                                <th class="text-center">NO.</th>
@@ -37,8 +40,8 @@
 					            foreach( $this->tjuan->getTujuanByMisi($misi->id_misi) as $keyTjuan => $tujuan) : 
 					            	echo form_hidden("update[ID][]", $tujuan->id_tujuan);
 					            ?>
-	                        	<tr>
-	                        		<td><?php echo $key ?>.1</td>
+	                        	<tr class="dt-<?php echo $tujuan->id_tujuan; ?>">
+	                        		<td><?php echo $key ?>.<?php echo ($key+$keyTjuan) ?></td>
 	                        		<td>
 	                        		<?php for($tahun = $this->tjuan->periode_awal; $tahun <= $this->tjuan->periode_akhir; $tahun++) : ?>
 	                        			<div class="col-md-6">
@@ -49,23 +52,23 @@
 	                        		<?php endfor; ?>
 	                        		</td>
 	                        		<td>
-	                        			<textarea name="update[deskripsi][<?php echo $tujuan->id_tujuan ?>]" class="form-control" rows="4"><?php echo $tujuan->deskripsi ?></textarea>
+	                        			<textarea name="update[deskripsi][<?php echo $tujuan->id_tujuan ?>]" class="form-control" rows="4" required="required"><?php echo $tujuan->deskripsi ?></textarea>
 	                        		</td>
 	                        		<td class="text-center">
-										<button type="button" class="btn btn-default" title="Hapus tujuan ini?" data-id="<?php echo $misi->id_misi ?>">
+										<a href="#" class="btn btn-default" title="Hapus tujuan ini?" 
+										id="btn-delete"
+										data-id="<?php echo $tujuan->id_tujuan ?>"
+										data-key="delete-tujuan"
+										data-remove="tr.dt-<?php echo $tujuan->id_tujuan; ?>">
 											<i class="fa fa-times"></i>
-										</button>
-										<?php 
-										    if ($keyTjuan == $Jmltujuan - 1) :
-										 ?>
+										</a>
 										<button id="btn-add-tujuan" type="button" class="btn btn-default" 
 										data-id="<?php echo $misi->id_misi ?>" 
 										data-parent="<?php echo $key ?>"
-										data-key="<?php echo $key ?>"
+										data-key="<?php echo ($keyTjuan+1) ?>"
 										title="Tambah Form">
 											<i class="fa fa-plus"></i>
 										</button>
-									<?php endif;?>
 	                        		</td>
 	                        	</tr>					            
 					            <?php endforeach;
@@ -84,13 +87,13 @@
 	                        		<?php endfor; ?>
 	                        		</td>
 	                        		<td>
-	                        			<textarea name="create[deskripsi][<?php echo $misi->id_misi ?>]" class="form-control" rows="4"></textarea>
+	                        			<textarea name="create[deskripsi][<?php echo $misi->id_misi ?>]" class="form-control" rows="4" required="required"></textarea>
 	                        		</td>
 	                        		<td class="text-center">
 										<button id="btn-add-tujuan" type="button" class="btn btn-default" 
 										data-id="<?php echo $misi->id_misi ?>" 
 										data-parent="<?php echo $key ?>"
-										data-key="<?php echo $key ?>"
+										data-key="1"
 										title="Tambah Form">
 											<i class="fa fa-plus"></i>
 										</button>
@@ -113,4 +116,21 @@
    		</div>
    	</div>
    	</form>
+</div>
+
+
+<div class="modal" id="modal-delete">
+	<div class="modal-dialog modal-sm modal-danger">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title"><i class="fa fa-info-circle"></i> Hapus!</h4>
+				<span>Hapus data ini dari database?</span>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Batal</button>
+				<a href="#" id="btn-yes" class="btn btn-outline">Hapus</a>
+			</div>
+		</div>
+	</div>
 </div>

@@ -33,6 +33,28 @@ class Tujuan extends Skpd
 
 		redirect("skpd/tujuan");
 	}
+
+	public function delete($param = 0, $key = '')
+	{
+		$this->results = $this->tjuan->delete($param, $key);
+
+		$this->output->set_content_type('application/json')->set_output(json_encode($this->results));
+	}
+
+	public function indikator_tujuan()
+	{
+		$this->page_title->push('Tujuan', 'Indikator Tujuan');
+
+		$this->breadcrumbs->unshift(2, 'Indikator Tujuan',  $this->uri->uri_string());
+
+		$this->data = array(
+			'title' => "Indikator Tujuan", 
+			'breadcrumbs' => $this->breadcrumbs->show(),
+			'page_title' => $this->page_title->show(),
+		);
+
+		$this->template->view('skpd/vIndikatorTujuan', $this->data);
+	}
 }
 
 /* End of file Tujuan.php */
