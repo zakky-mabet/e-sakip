@@ -13,7 +13,7 @@
                          <div class="row-fluid">
             <div class="span6">
           
-                <form action="<?php echo site_url('skpd/misi/createorupdate') ?>" class="form-horizontal" method="post">
+                <form action="<?php echo site_url('skpd/sasaran/createorupdate') ?>" class="form-horizontal" method="post">
                     <table class="table table-bordered ">
                         <thead class="bg-green">
                             <tr>
@@ -52,7 +52,7 @@
                                 <textarea required="required" name="update[deskripsi][<?php echo $value->id_misi ?>]" class="input-block-level form-control"><?php echo $value->deskripsi ?></textarea>
                                
                                 </td>
-                                <td><a href="#" class="get-delete-misi" data-id="<?php echo $value->id_misi; ?>" data-toggle="tooltip" data-placement="top" title="Hapus"><span class="btn btn-small btn-danger"><i class="fa fa-trash"></i></td></span></a>
+                                <td><a href="#" class="get-delete-misi" data-id="<?php echo $value->id_misi; ?>" data-toggle="tooltip" data-placement="top" title="Hapus"><span class="btn btn-small btn-danger"><i class="fa fa-trash"></i></td>
                             </tr>
                         <?php } ?>    
                         </tbody>

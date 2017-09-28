@@ -1,175 +1,144 @@
 <div class="row">
-<div class="col-md-8 col-md-offset-2 col-xs-12"><?php echo $this->session->flashdata('alert'); ?></div>
-   <div class="col-md-12">
-    
+	<div class="col-md-6 col-md-offset-3">
+		<?php echo $this->session->flashdata('alert'); ?>
+	</div>
+
+	<form action="<?php echo base_url("skpd/sasaran/createupdate") ?>" method="POST" role="form">
+   	<div class="col-md-10">
+   	
+	
         <ul class="timeline">
             <li class="time-label">
-                  <span class="bg-green">Entry Misi</span>
+                  <span class="bg-default">Entry Sasaran</span>
+            </li>
+            <?php 
+            /**
+             * Loop Misi
+             *
+             * @var string
+             **/
+
+            foreach( $this->msasaran->getMisiLogin() as $key => $misi) : ?>
+            <li class="time-label">
+                  <span class="bg-blue">Tujuan <?php echo ++$key ?>. <small><?php echo $misi->deskripsi ?></small></span>
             </li>
             <li>
-                <i class="fa fa-arrow-down"></i>
+                <i class="fa fa-pencil"></i>
                 <div class="timeline-item">
                     <div class="timeline-body">
-                         <div class="row-fluid">
-            <div class="span6">
-          
-                <form action="<?php echo site_url('skpd/misi/createorupdate') ?>" class="form-horizontal" method="post">
-                    <table class="table table-bordered ">
-                        <thead class="bg-green">
-                            <tr>
-                                <th width="5px" class="text-center">No</th>
-                                <th width="10px" class="text-center">Tahun Aktif</th>
-                                <th width="230px" class="text-center"> Misi</th>
-                                <th width="10px" class="text-center">Aksi</th>
-                            </tr>
-                        </thead>
-
-                        <!--elemet sebagai target append-->
-
-                        <tbody id="itemlist">
-
-                        <?php 
-                        $no=1;
-                        foreach ($misi as $key => $value) { ?>
-                            <tr>
-                                <td class="text-center"><?php echo $no++ ?></td>
-                                <td width="30px" class="">
-                        <?php 
-                            $x = $value->periode_awal;
-                            while($x <= $value->periode_akhir ){ ?>
-                               
-                                <button type="button" class="btn btn-md" style="margin-bottom: 4px; margin-bottom: 4px">
-                                <input  <?php if (in_array($x,explode(',', $value->tahun) )) {echo 'checked="checked"';
-                                    
-                                } ?> name="update[tahun][<?php echo $value->id_misi ?>][]" value="<?php echo $x ?>" type="checkbox" class="minimal" >
-                                <span class="em3 text-center"> <?php echo $x ?></span>
-                            </button>
-
-                        <?php echo form_hidden("update[ID][]", $value->id_misi);   $x++; } ?>
-                         
-                                </td>
-                                <td width="240px">
-                                <textarea required="required" name="update[deskripsi][<?php echo $value->id_misi ?>]" class="input-block-level form-control"><?php echo $value->deskripsi ?></textarea>
-                               
-                                </td>
-                                <td><a href="#" class="get-delete-misi" data-id="<?php echo $value->id_misi; ?>" data-toggle="tooltip" data-placement="top" title="Hapus"><span class="btn btn-small btn-danger"><i class="fa fa-trash"></i></td></span></a>
-                            </tr>
-                        <?php } ?>    
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="3"></td>
-                                <td width="10px">
-                                    <button class="btn btn-small btn-default" onclick="additem(); return false">
-                                    <i class="fa fa-plus"></i></button>
-                                    <button name="submit" class="btn btn-small btn-success"><i class="fa fa-save"></i> Simpan</button>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </form>
-               
- 
-            </div>
-     
-        </div>
-
-       
-
-        <script>
-            var i = 1;
-            function additem() {
-//                menentukan target append
-                var itemlist = document.getElementById('itemlist');
-                
-//              membuat element
-                var row = document.createElement('tr');
-                var no = document.createElement('td');
-                var tahun = document.createElement('td');
-                var jumlah = document.createElement('td');
-                var aksi = document.createElement('td');
- 
-                // meng append element
-                itemlist.appendChild(row);
-                row.appendChild(no);
-                row.appendChild(tahun);
-                row.appendChild(jumlah);
-                row.appendChild(aksi);
- 
-//              membuat element input
-                var input_misi = document.createElement('textarea');
-                input_misi.setAttribute('name', 'create[deskripsi][<?php echo $value->id_kepala ?>]');
-                input_misi.setAttribute('class', 'input-block-level form-control');
-                input_misi.setAttribute('required', 'required');
- 
-                var hapus = document.createElement('span');
-
-                var input_tahun = document.createElement('span');
-
-//              meng append element input
-                tahun.appendChild(input_tahun);
-                jumlah.appendChild(input_misi);
-                aksi.appendChild(hapus);
-
-
-                hapus.innerHTML = '<button class="btn btn-small btn-danger"><i class="fa fa-trash"></i></button>';
-
-           
-
-                input_tahun.innerHTML ='<?php
-                            $x = $value->periode_awal;
-                            while($x <= $value->periode_akhir ){ ?><button type="button" class="btn btn-md" style="margin-bottom:4px;  margin-bottom:4px"><input  name="create[tahun][<?php echo $value->id_kepala ?>][]" value="<?php echo $x ?>"  type="checkbox" <?php if ($x==date('Y')) {echo 'required="required"';} ?>class="minimal" ><span class="em3 text-center"> <?php echo $x ?></span></button><?php $x++; } ?>' ;
-
-               
-//              membuat aksi delete element
-                hapus.onclick = function () {
-                    row.parentNode.removeChild(row);
-
-
-                };
- 
-                i++;
-            }
-               
-        </script>
-        
-                    </div>
+	                    <table class="table table-default" data-id="<?php echo $misi->id_tujuan ?>">
+	                        <thead>
+	                            <tr class="bg-blue">
+	                                <th class="text-center">NO.</th>
+	                                <th class="text-center" width="170">AKTIF</th>
+	                                <th class="text-center">SASARAN</th>
+	                                <th class="text-center">PERMASALAHAN</th>
+	                                <th class="text-center" width="150">KELOLA</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody id="data-<?php echo $misi->id_tujuan ?>" data-tahun-awal="<?php echo $this->msasaran->periode_awal ?>" data-tahun-akhir="<?php echo $this->msasaran->periode_akhir ?>">
+								<!-- UPDATE -->
+					            <?php 
+					            if( $this->msasaran->getTujuanByMisi($misi->id_tujuan) ) :
+					            /* Loop Tujuan terisi */
+					            $Jmltujuan = count($this->msasaran->getTujuanByMisi($misi->id_tujuan));
+					            foreach( $this->msasaran->getTujuanByMisi($misi->id_tujuan) as $keyTjuan => $tujuan) : 
+					            	echo form_hidden("update[ID][]", $tujuan->id_tujuan);
+					            ?>
+	                        	<tr class="dt-<?php echo $tujuan->id_tujuan; ?>">
+	                        		<td><?php echo $key ?>.<?php echo ($key+$keyTjuan) ?></td>
+	                        		<td>
+	                        		<?php for($tahun = $this->msasaran->periode_awal; $tahun <= $this->msasaran->periode_akhir; $tahun++) : ?>
+	                        			<div class="col-md-6">
+		                        			<label>
+		                        				<input type="checkbox" name="update[tahun][<?php echo $tujuan->id_tujuan ?>][]" value="<?php echo $tahun ?>" <?php if(in_array($tahun, explode(',', $tujuan->tahun))) echo 'checked'; ?>> <?php echo $tahun ?>
+		                        			</label>
+										</div>
+	                        		<?php endfor; ?>
+	                        		</td>
+	                        		<td>
+	                        			<textarea name="update[deskripsi][<?php echo $tujuan->id_tujuan ?>]" class="form-control" rows="4" required="required"><?php echo $tujuan->deskripsi ?></textarea>
+	                        		</td>
+	                        		<td class="text-center">
+	                        			<button class="btn btn-warning" type="button"><i class="fa fa-warning"></i></button>
+	                        		</td>
+	                        		<td class="text-center">
+										<a href="#" class="btn btn-default" title="Hapus Sasaran ini?" 
+										id="btn-delete"
+										data-id="<?php echo $tujuan->id_sasaran ?>"
+										data-key="delete-sasaran"
+										data-remove="tr.dt-<?php echo $tujuan->id_sasaran; ?>">
+											<i class="fa fa-times"></i>
+										</a>
+										<button id="btn-add-tujuan" type="button" class="btn btn-default" 
+										data-id="<?php echo $misi->id_tujuan ?>" 
+										data-parent="<?php echo $key ?>"
+										data-key="<?php echo ($keyTjuan+1) ?>"
+										title="Tambah Form">
+											<i class="fa fa-plus"></i>
+										</button>
+	                        		</td>
+	                        	</tr>					            
+					            <?php endforeach;
+					        	else :
+					            ?>
+								<!-- End Update -->
+	                        	<tr>
+	                        		<td><?php echo $key ?>.1</td>
+	                        		<td>
+	                        		<?php for($tahun = $this->msasaran->periode_awal; $tahun <= $this->msasaran->periode_akhir; $tahun++) : ?>
+	                        			<div class="col-md-6">
+		                        			<label>
+		                        				<input type="checkbox" name="create[tahun][<?php echo $misi->id_tujuan ?>][]" value="<?php echo $tahun ?>"> <?php echo $tahun ?>
+		                        			</label>
+										</div>
+	                        		<?php endfor; ?>
+	                        		</td>
+	                        		<td>
+	                        			<textarea name="create[deskripsi][<?php echo $misi->id_tujuan ?>]" class="form-control" rows="4" required="required"></textarea>
+	                        		</td>
+	                        		<td class="text-center">
+										<button id="btn-add-tujuan" type="button" class="btn btn-default" 
+										data-id="<?php echo $misi->id_tujuan ?>" 
+										data-parent="<?php echo $key ?>"
+										data-key="1"
+										title="Tambah Form">
+											<i class="fa fa-plus"></i>
+										</button>
+	                        		</td>
+	                        	</tr>
+	                        	<?php endif; ?>
+	                        </tbody>
+	                    </table>
+	                </div>
                 </div>
             </li>
-            <li class="time-label">
-    
-                  <i class="fa  fa-circle"></i>
-            </li>
-        </ul>
-        </form>
-    </div>
+            <?php 
+            /* End Loop Misi */
+            endforeach; ?>
+    	</ul>
+   	</div>
+   	<div class="col-md-2 top50x">
+   		<div id="stickerButton100x">
+   			<button class="btn bg-blue btn-app"><i class="fa fa-save"></i> Simpan</button>
+   		</div>
+   	</div>
+   	</form>
 </div>
 
-<script>
-                         /*!
-    * Modal Delete 
-    */
-    $('.get-delete-misi').click( function() 
-    {
-        $('#modal-delete').modal('show');
 
-        $('a#btn-delete').attr('href', base_url + '/skpd/misi/delete/' + $(this).data('id'));
-    });
-                </script>
-
-
-<div class="modal animated fadeIn modal-danger" id="modal-delete" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><i class="fa fa-question-circle"></i> Hapus!</h4>
-                <span>Hapus data ini dari sistem?</span>    
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak</button>
-                <a href="#" id="btn-delete" class="btn btn-outline"> Hapus </a>
-            </div>
-        </div>
-    </div>
+<div class="modal" id="modal-delete">
+	<div class="modal-dialog modal-sm modal-danger">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title"><i class="fa fa-info-circle"></i> Hapus!</h4>
+				<span>Hapus data ini dari database?</span>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Batal</button>
+				<a href="#" id="btn-yes" class="btn btn-outline">Hapus</a>
+			</div>
+		</div>
+	</div>
 </div>

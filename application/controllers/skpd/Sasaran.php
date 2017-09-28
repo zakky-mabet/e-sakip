@@ -7,40 +7,55 @@ class Sasaran extends Skpd
 	{
 		parent::__construct();
 
-		$this->load->model(array('m_misi'));
+		$this->breadcrumbs->unshift(1, 'Sasaran',  $this->uri->uri_string());
 
-		$this->breadcrumbs->unshift(1, 'Misi',  $this->uri->uri_string());
+		$this->load->model(array('msasaran'));
+
+		$this->load->js(base_url("assets/public/app/dynamic-form.js"));
 	}
 
 	public function index()
 	{
-		$this->page_title->push('Misi', 'Misi Rencana Strategis');
+		$this->page_title->push('Sasaran', 'Sasaran Rencana Strategis');
 
 		$this->data = array(
-			'title' => "Misi", 
+			'title' => "Sasaran Rencana Strategis", 
 			'breadcrumbs' => $this->breadcrumbs->show(),
 			'page_title' => $this->page_title->show(),
-			'misi' => $this->m_misi->get_misi(),
 		);
 
-		$this->template->view('skpd/vMisi', $this->data);
+		$this->template->view('skpd/vSasaran', $this->data);
 	}
 
-	public function createorupdate()
+	public function createupdate()
 	{
-		$this->m_misi->createorupdate();
-		
-		redirect("skpd/misi");
-		
+		$this->msasaran->CreateUpdate();
+
+		redirect("skpd/sasaran");
 	}
-	public function delete($param = 0)
-    {
-        $this->m_misi->delete($param);
 
-        redirect('skpd/misi');
-    }
+	public function delete($param = 0, $key = '')
+	{
+		$this->results = $this->msasaran->delete($param, $key);
 
+		$this->output->set_content_type('application/json')->set_output(json_encode($this->results));
+	}
+
+	public function indikator_tujuan()
+	{
+		$this->page_title->push('Tujuan', 'Indikator Tujuan');
+
+		$this->breadcrumbs->unshift(2, 'Indikator Tujuan',  $this->uri->uri_string());
+
+		$this->data = array(
+			'title' => "Indikator Tujuan", 
+			'breadcrumbs' => $this->breadcrumbs->show(),
+			'page_title' => $this->page_title->show(),
+		);
+
+		$this->template->view('skpd/vIndikatorTujuan', $this->data);
+	}
 }
 
-/* End of file Misi.php */
-/* Location: ./application/controllers/skpd/Misi.php */
+/* End of file Tujuan.php */
+/* Location: ./application/controllers/skpd/Tujuan.php */

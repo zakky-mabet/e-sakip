@@ -11,7 +11,6 @@ class M_misi extends CI_Model
 		} else {
 			$this->db->where('username', $this->input->post('username'));
 		}
-
 		$this->db->join('skpd', 'kepala_skpd.id_kepala = skpd.ID', 'left');
 
 		return $this->db->get('kepala_skpd')->row();
