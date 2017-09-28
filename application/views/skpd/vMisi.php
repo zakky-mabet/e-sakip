@@ -53,7 +53,6 @@
                                
                                 </td>
                                 <td><a href="#" class="get-delete-misi" data-id="<?php echo $value->id_misi; ?>" data-toggle="tooltip" data-placement="top" title="Hapus"><span class="btn btn-small btn-danger"><i class="fa fa-trash"></i></td></span></a>
-                                <td><span class="btn btn-small btn-danger"><i class="fa fa-trash"></i></td></span>
                             </tr>
                         <?php } ?>    
                         </tbody>
