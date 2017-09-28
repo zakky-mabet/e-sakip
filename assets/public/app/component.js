@@ -1,7 +1,9 @@
 $(function() 
 {
+	$("#stickerButton100x").sticky({topSpacing:100});
+
 	$('.summernote').summernote({
-		height: 200
+		height: 250
 	});
 
 });

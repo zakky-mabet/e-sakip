@@ -8,8 +8,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <img src="<?php echo base_url('assets/public/image/avatar.jpg') // echo (!$this->setting->get_admin()->photo) ? base_url("assets/public/image/avatar.jpg") : base_url("assets/public/image/{$this->setting->get_admin()->photo}"); ?>" class="img-circle" alt="User Image">
          </div>
          <div class="pull-left info">
-            <p><?php // echo $this->session->userdata('account_admin')->nama_lengkap ?></p>
-            <small style="text-transform: capitalize;"><?php // echo $this->session->userdata('account_admin')->hak_akses ?></small>
+            <p><?php  echo $this->session->userdata('SKPD')->nama ?></p>
+            <small><?php  echo $this->session->userdata('SKPD')->email ?></small>
          </div>
       </div>
       <ul class="sidebar-menu">
@@ -19,6 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </a>
         </li>
         <li class="treeview <?php  echo active_link_multiple(array('visi','misi')); ?>">
+        <li class="treeview <?php  echo active_link_multiple(array('visi','tujuan')); ?>">
           <a href="#">
             <i class="fa fa-files-o"></i>
             <span>Rencanan Strategis</span>
@@ -47,7 +48,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </li>
             </li>
              <li><a href="<?php echo base_url("skpd/sasaran") ?>"> Sasaran</a></li>
-
+            <li><a href=""> Misi</a></li>
+            <li class="<?php echo active_link_method('index','tujuan'); ?>">
+                <a href="<?php echo base_url("skpd/tujuan") ?>"> Tujuan</a>
+            </li>
           </ul>
         </li>
         <li class="<?php echo active_link_controller('instansi'); ?>">

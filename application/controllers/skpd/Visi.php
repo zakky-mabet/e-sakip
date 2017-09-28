@@ -8,16 +8,29 @@ class Visi extends Skpd
 		parent::__construct();
 		
 		$this->breadcrumbs->unshift(1, 'Visi',  $this->uri->uri_string());
+
+		$this->load->model(array('mvisi'));
 	}
 
 	public function index()
 	{
 		$this->page_title->push('Visi', 'Visi Rencana Strategis');
 
+		$this->form_validation->set_rules('visi', 'Visi', 'trim|required');
+		$this->form_validation->set_rules('penjabaran', 'Penjabaran Visi', 'trim|required');
+
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->mvisi->CreateUpdate();
+
+			redirect(current_url());
+		} 
+
 		$this->data = array(
-			'title' => "Visi", 
+			'title' => "Visi Rencana Strategis", 
 			'breadcrumbs' => $this->breadcrumbs->show(),
 			'page_title' => $this->page_title->show(),
+			'visi' => $this->mvisi->getByLogin()
 		);
 
 		$this->template->view('skpd/vVisi', $this->data);
