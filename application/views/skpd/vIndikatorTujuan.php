@@ -13,7 +13,7 @@
              **/
             foreach(  $this->tjuan->getTujuanLogin() as $key => $tujuan) : ?>
             <li class="time-label">
-                  <span class="bg-green">Tujuan <?php echo ++$key ?> <small><?php echo $tujuan->deskripsi ?></small></span>
+                  <span class="bg-blue">Tujuan <?php echo ++$key ?> <small><?php echo $tujuan->deskripsi ?></small></span>
             </li>
             <li>
                 <i class="fa fa-pencil"></i>
@@ -21,7 +21,7 @@
                     <div class="timeline-body">
 	                    <table class="table table-default" data-id="<?php echo $tujuan->id_tujuan ?>">
 	                        <thead>
-	                            <tr class="bg-gray">
+	                            <tr class="bg-blue">
 	                                <th class="text-center">NO.</th>
 	                                <th class="text-center">INDIKATOR</th>
 	                                <th class="text-center" width="140">SATUAN</th>
@@ -115,7 +115,7 @@
    	</div>
    	<div class="col-md-2 top50x">
    		<div id="stickerButton100x">
-   			<button class="btn bg-green btn-app"><i class="fa fa-save"></i> Simpan</button>
+   			<button class="btn bg-blue btn-app"><i class="fa fa-save"></i> Simpan</button>
    		</div>
    	</div>
    	</form>

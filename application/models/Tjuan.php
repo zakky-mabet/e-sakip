@@ -77,6 +77,11 @@ class Tjuan extends Skpd_model
 		return $this->db->get_where('tujuan', array('id_misi' => $misi))->result();
 	}
 
+	public function getSasaranByTujuan($tujuan = 0)
+	{
+		return $this->db->get_where('sasaran', array('id_tujuan' => $tujuan))->result();
+	}
+
 	public function delete($param = 0, $key = '')
 	{
 		switch ($key) 

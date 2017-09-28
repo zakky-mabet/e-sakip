@@ -18,8 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                <i class="fa fa-dashboard"></i> <span>Home</span>
             </a>
         </li>
-        <li class="treeview <?php  echo active_link_multiple(array('visi','misi')); ?>">
-        <li class="treeview <?php  echo active_link_multiple(array('visi','tujuan')); ?>">
+        <li class="treeview <?php  echo active_link_multiple(array('visi','misi','tujuan','strategi', 'sasaran')); ?>">
           <a href="#">
             <i class="fa fa-files-o"></i>
             <span>Rencanan Strategis</span>
@@ -31,23 +30,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li class="<?php echo active_link_method('index','visi'); ?>">
                 <a href="<?php echo base_url("skpd/visi") ?>"> Visi</a>
             </li>
-            <li><a href="<?php echo base_url("skpd/misi") ?>"> Misi</a></li>
+            <li class="<?php echo active_link_method('index','misi'); ?>">
+                <a href="<?php echo base_url("skpd/misi") ?>"> Misi</a>
+            </li>
             <li>
-              <li class="treeview <?php  echo active_link_multiple(array('tujuan','indikator_tujuan')); ?>">
+              <li class="treeview <?php  echo active_link_multiple(array('tujuan')); ?>">
                 <a href="#">
-                
                   <span>Tujuan</span>
                   <span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
                   </span>
                 </a>
                 <ul class="treeview-menu">
-                  <li><a href="<?php echo base_url("skpd/tujuan") ?>"> Tujuan</a></li>
-                  <li><a href="<?php echo base_url("skpd/indikator_tujuan") ?>">Indikator dan Target</a></li>
+                  <li class="<?php echo active_link_method('index','tujuan'); ?>"><a href="<?php echo base_url("skpd/tujuan") ?>"> Tujuan</a></li>
+                  <li class="<?php echo active_link_method('indikator_tujuan','tujuan'); ?>"><a href="<?php echo base_url("skpd/tujuan/indikator_tujuan") ?>">Indikator dan Target</a></li>
                 </ul>
               </li>
             </li>
-             <li><a href="<?php echo base_url("skpd/sasaran") ?>"> Sasaran</a></li>
+             <li class="<?php echo active_link_method('index','sasaran'); ?>">
+                <a href="<?php echo base_url("skpd/sasaran") ?>"> Sasaran</a>
+             </li>
+             <li class="<?php echo active_link_method('index','strategi'); ?>">
+                <a href="<?php echo base_url("skpd/strategi") ?>"> Strategi</a>
+             </li>
           </ul>
         </li>
         <li class="<?php echo active_link_controller('instansi'); ?>">

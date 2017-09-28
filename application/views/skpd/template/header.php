@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <link rel="stylesheet" href="<?php echo base_url("assets/public/ionicons/css/ionicons.min.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/plugins/select2/select2.min.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/dist/css/AdminLTE.min.css"); ?>">
-  <link rel="stylesheet" href="<?php echo base_url("assets/public/dist/css/skins/skin-green-light.css"); ?>">
+  <link rel="stylesheet" href="<?php echo base_url("assets/public/dist/css/skins/skin-blue-light.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/dist/css/animate.css"); ?>">  
   <link rel="stylesheet" href="<?php echo base_url("assets/public/plugins/bootstrap-checkbox/awesome-bootstrap-checkbox.min.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/plugins/datepicker/datepicker3.min.css"); ?>">
@@ -78,6 +78,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     .top50x { margin-top: 50px; }
     .text-white { color: white }
     .tinymce-300 { height: 200px !important;}
+    li.time-label > span:first-child {
+      border-radius: 5px 0px 0px 5px;
+      padding-right: 10px;
+    }
+    li.time-label > span:last-child {
+      border-radius: 0px 5px 5px 0px;
+    }
   </style>
 </head>
 <?php

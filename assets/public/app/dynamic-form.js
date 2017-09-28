@@ -10,6 +10,7 @@ $(document).ready( function()
 		add_form_tujuan(ID, key, nomor, $(this).data('parent') );
 	});
 
+	/* ADD Indikator Tujuan */
 	$('button#btn-add-indikator-tujuan').on('click', function() 
 	{
 		var key = $(this).data('key');
@@ -18,6 +19,17 @@ $(document).ready( function()
 
 		add_form_indikator_tujuan(ID, key, nomor, $(this).data('parent') );
 	});
+
+	/* ADD Strategi */
+	$('button#btn-add-strategi').on('click', function() 
+	{
+		var key = $(this).data('key');
+		var ID = $(this).data('id');
+		var nomor = $('tbody#data-'+ ID ).children().length;
+
+		add_form_strategi(ID, key, ++nomor, $(this).data('parent') );
+	});
+
 
 	/* DELETE FUNGSI */
 	$('a#btn-delete').on('click', function()
@@ -76,6 +88,32 @@ $(document).ready( function()
 		return true;
 	});
 });
+
+function add_form_strategi(data, key, nomor, parent) {
+	var html = '<tr id="baris-'+data+'-'+nomor+'"><td>'+ nomor +'</td>';
+		html += '<td>';
+		html += '<textarea name="create[deskripsi]['+data+']" class="form-control" rows="4"></textarea>';
+		html += '</td>';
+		html += '<td class="text-center">',
+		html += '<a href="javascript:void(0)" id="delete-form" data-delete="tr#baris-'+data+'-'+nomor+'" title="Hapus tujuan ini?" class="btn btn-default"><i class="fa fa-times"></i></a>';
+	    html += '</td>';
+	    html += '</tr>';
+
+	$(html).appendTo('tbody#data-' + data).hide().fadeIn(500).addClass('bg-silver');	
+	
+	setInterval(function() {
+		$('tr#baris-'+data+'-'+nomor).fadeIn(500).removeClass('bg-silver');
+	}, 400);
+
+	$('a#delete-form').on('click', function()
+	{
+		key--;
+		nomor--;
+		$($(this).data('delete')).addClass('bg-red').fadeOut(300, function() {
+			$(this).remove();
+		});
+	});
+}
 
 function add_form_indikator_tujuan(data, key, nomor, parent) {
 
