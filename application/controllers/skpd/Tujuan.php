@@ -55,6 +55,13 @@ class Tujuan extends Skpd
 
 		$this->template->view('skpd/vIndikatorTujuan', $this->data);
 	}
+
+	public function createupdateindikator()
+	{
+		$this->tjuan->createupdateindikator();
+
+		redirect("skpd/tujuan/indikator_tujuan");
+	}
 }
 
 /* End of file Tujuan.php */

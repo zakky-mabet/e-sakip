@@ -48,10 +48,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </li>
             </li>
              <li><a href="<?php echo base_url("skpd/sasaran") ?>"> Sasaran</a></li>
-            <li><a href=""> Misi</a></li>
-            <li class="<?php echo active_link_method('index','tujuan'); ?>">
-                <a href="<?php echo base_url("skpd/tujuan") ?>"> Tujuan</a>
-            </li>
           </ul>
         </li>
         <li class="<?php echo active_link_controller('instansi'); ?>">

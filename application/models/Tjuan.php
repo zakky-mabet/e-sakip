@@ -83,20 +83,69 @@ class Tjuan extends Skpd_model
 		{
 			case 'tujuan':
 				$this->db->delete('tujuan', array('id_tujuan' => $param));
-
+				$this->db->delete('indikator_tujuan', array('id_tujuan' => $param));
 				$respon['status'] = 'success';
 				break;
 			case 'indikator':
-				# code...
+				$this->db->delete('indikator_tujuan', array('id_indikator_tujuan' => $param));
+				$respon['status'] = 'success';
 				break;
 			default:
-				# code...
+				$respon['status'] = 'failed';
 				break;
 		}
 
 		return $respon;
 	}
 
+	public function createupdateindikator()
+	{
+		if( $this->input->post('create') )
+		{
+			if( is_array($this->input->post('create')) )
+			{
+				foreach($this->input->post('create[indikator]') as $key => $value) 
+				{
+					if( $value == FALSE ) 
+					{
+						$this->template->alert(
+							' Maaf! tahun aktif dan tujuan tidak boleh kosong.', 
+							array('type' => 'danger','icon' => 'warning')
+						);
+						continue;
+					}
+
+					$object = array(
+						'id_tujuan' => $key,
+						'indikator' => $value,
+						'id_satuan' => $this->input->post("create[satuan][{$key}]"),
+						'nilai_target' => $this->input->post("create[nilai][{$key}]")
+					);
+
+					$this->db->insert('indikator_tujuan', $object);
+				}
+			}
+		} else {
+			if( is_array($this->input->post('update')) )
+			{
+				foreach($this->input->post('update[ID]') as $key => $value) 
+				{
+					$object = array(
+						'indikator' => $this->input->post("update[indikator][{$value}]"),
+						'id_satuan' => $this->input->post("update[satuan][{$value}]"),
+						'nilai_target' => $this->input->post("update[nilai][{$value}]")
+					);
+
+					$this->db->update('indikator_tujuan', $object, array('id_indikator_tujuan' => $value));
+				}
+			}
+		}
+	}
+
+	public function getIndikatorByTujuan($tujuan = 0)
+	{
+		return $this->db->get_where('indikator_tujuan', array('id_tujuan' => $tujuan))->result();
+	}
 }
 
 /* End of file Tjuan.php */
