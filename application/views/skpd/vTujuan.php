@@ -16,7 +16,7 @@
              **/
             foreach( $this->tjuan->getMisiLogin() as $key => $misi) : ?>
             <li class="time-label">
-                  <span class="bg-green">Misi <?php echo ++$key ?>. <small><?php echo $misi->deskripsi ?></small></span>
+                  <span class="bg-blue">Misi <?php echo ++$key ?>. <small><?php echo $misi->deskripsi ?></small></span>
             </li>
             <li>
                 <i class="fa fa-pencil"></i>
@@ -116,7 +116,7 @@
    	</div>
    	<div class="col-md-2 top50x">
    		<div id="stickerButton100x">
-   			<button class="btn bg-green btn-app"><i class="fa fa-save"></i> Simpan</button>
+   			<button class="btn bg-blue btn-app"><i class="fa fa-save"></i> Simpan</button>
    		</div>
    	</div>
    	</form>

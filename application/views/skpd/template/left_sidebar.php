@@ -18,7 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                <i class="fa fa-dashboard"></i> <span>Home</span>
             </a>
         </li>
-        <li class="treeview <?php  echo active_link_multiple(array('visi','misi','tujuan','strategi', 'sasaran')); ?>">
+        <li class="treeview <?php  echo active_link_multiple(array('visi','misi','tujuan','strategi', 'sasaran','kebijakan','program')); ?>">
           <a href="#">
             <i class="fa fa-files-o"></i>
             <span>Rencanan Strategis</span>
@@ -53,6 +53,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
              <li class="<?php echo active_link_method('index','strategi'); ?>">
                 <a href="<?php echo base_url("skpd/strategi") ?>"> Strategi</a>
              </li>
+             <li class="<?php echo active_link_method('index','kebijakan'); ?>">
+                <a href="<?php echo base_url("skpd/kebijakan") ?>"> Kebijakan</a>
+             </li>
+            <li>
+              <li class="treeview <?php  echo active_link_multiple(array('program')); ?>">
+                <a href="#">
+                  <span>Program</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li class="<?php echo active_link_method('index','program'); ?>">
+                    <a href="<?php echo base_url("skpd/program") ?>"> Program</a>
+                  </li>
+                  <li class="<?php echo active_link_method('anggaran','program'); ?>">
+                    <a href="<?php echo base_url("skpd/program/anggaran") ?>">Anggaran Program</a>
+                  </li>
+                  <li class="<?php echo active_link_method('indikator','program'); ?>">
+                    <a href="<?php echo base_url('skpd/program/indikator'); ?>">Indikator Kinerja Program</a>
+                  </li>
+                  <li class="<?php echo active_link_method('target','program'); ?>">
+                    <a href="<?php echo base_url("skpd/program/target") ?>"><small>Target Indikator Kinerja Program</small></a>
+                  </li>
+                </ul>
+              </li>
+            </li>
           </ul>
         </li>
         <li class="<?php echo active_link_controller('instansi'); ?>">

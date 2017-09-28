@@ -2,11 +2,11 @@
 	<div class="col-md-6 col-md-offset-3">
 		<?php echo $this->session->flashdata('alert'); ?>
 	</div>
-	<form action="<?php echo base_url("skpd/strategi/createupdate"); ?>" method="POST" role="form">
+	<form action="<?php echo base_url("skpd/kebijakan/createupdate"); ?>" method="POST" role="form">
    	<div class="col-md-10">
         <ul class="timeline">
             <li class="time-label">
-                  <span class="bg-white">Entry Strategi</span>
+                  <span class="bg-white">Entry Kebijakan</span>
             </li>
             <?php 
             /**
@@ -24,7 +24,7 @@
              *
              * @var string
              **/
-            foreach(  $this->tjuan->getTujuanByMisi( $misi->id_misi) as $key => $tujuan) : ?>
+            foreach(  $this->tjuan->getTujuanByMisi( $misi->id_misi) as $tujuan) : ?>
             <li class="time-label" style="margin-left: 10px;">
                   <span class="bg-gray">Tujuan</span><span class="bg-blue"><small><?php echo $tujuan->deskripsi ?></small></span>
             </li>
@@ -34,9 +34,19 @@
              *
              * @var string
              **/
-            foreach(  $this->tjuan->getSasaranByTujuan( $tujuan->id_tujuan) as $key => $sasaran) : ?>
+            foreach(  $this->tjuan->getSasaranByTujuan( $tujuan->id_tujuan) as $sasaran) : ?>
             <li class="time-label" style="margin-left: 20px;">
                   <span class="bg-gray">Sasaran</span><span class="bg-blue"><small><?php echo $sasaran->deskripsi ?></small></span>
+            </li>
+            <?php 
+            /**
+             * Loop Strategi
+             *
+             * @var string
+             **/
+            foreach(  $this->mstrategi->getStrategiBySasaran( $sasaran->id_sasaran) as $key => $strategi) : ?>
+            <li class="time-label" style="margin-left: 30px;">
+                  <span class="bg-gray">Strategi</span><span class="bg-blue"><small><?php echo $strategi->deskripsi ?></small></span>
             </li>
             <li>
                 <i class="fa fa-pencil"></i>
@@ -47,46 +57,46 @@
 	                            <tr class="bg-gray">
 	                                <th width="30">NO.</th>
 	                                <th class="text-center" width="170">AKTIF</th>
-	                                <th class="text-center">STRATEGI</th>
+	                                <th class="text-center">KEBIJAKAN</th>
 	                                <th class="text-center" width="150">KELOLA</th>
 	                            </tr>
 	                        </thead>
-	                        <tbody id="data-<?php echo $sasaran->id_sasaran ?>" data-id="<?php echo $sasaran->id_sasaran ?>" data-tahun-awal="<?php echo $this->tjuan->periode_awal ?>" data-tahun-akhir="<?php echo $this->tjuan->periode_akhir ?>">
+	                        <tbody id="data-<?php echo $strategi->id_strategi ?>" data-id="<?php echo $strategi->id_strategi ?>" data-tahun-awal="<?php echo $this->tjuan->periode_awal ?>" data-tahun-akhir="<?php echo $this->tjuan->periode_akhir ?>">
 								<!-- UPDATE -->
 					            <?php 
-					            if( $this->mstrategi->getStrategiBySasaran($sasaran->id_sasaran) ) :
+					            if( $this->kbjakan->getKebijakanByStrategi($strategi->id_strategi) ) :
 					            /* Loop Indikator terisi */
 					            $cekLoop = true;
-					            foreach( $this->mstrategi->getStrategiBySasaran($sasaran->id_sasaran) as $key => $strategi) :
-					            	echo form_hidden("update[ID][]", $strategi->id_strategi);
+					            foreach( $this->kbjakan->getKebijakanByStrategi($strategi->id_strategi) as $keyKebijakan => $kebijakan) :
+					            	echo form_hidden("update[ID][]", $kebijakan->id_kebijakan);
 					            ?>
-	                        	<tr class="dt-<?php echo $strategi->id_strategi; ?>">
-	                        		<td>1.</td>
+	                        	<tr class="dt-<?php echo $kebijakan->id_kebijakan; ?>">
+	                        		<td><?php echo ++$keyKebijakan ?>.</td>
 	                        		<td>
 	                        		<?php for($tahun = $this->tjuan->periode_awal; $tahun <= $this->tjuan->periode_akhir; $tahun++) : ?>
 	                        			<div class="col-md-6">
 		                        			<label>
-		                        				<input type="checkbox" name="update[tahun][<?php echo $strategi->id_strategi ?>][]" value="<?php echo $tahun ?>" <?php if(in_array($tahun, explode(',', $strategi->tahun))) echo 'checked'; ?>> <?php echo $tahun ?>
+		                        				<input type="checkbox" name="update[tahun][<?php echo $kebijakan->id_kebijakan ?>][]" value="<?php echo $tahun ?>" <?php if(in_array($tahun, explode(',', $kebijakan->tahun))) echo 'checked'; ?>> <?php echo $tahun ?>
 		                        			</label>
 										</div>
 	                        		<?php endfor; ?>
 	                        		</td>
 	                        		<td>
-	                        			<textarea name="update[deskripsi][<?php echo $strategi->id_strategi ?>]" class="form-control" rows="4" required="required"><?php echo $strategi->deskripsi ?></textarea>
+	                        			<textarea name="update[deskripsi][<?php echo $kebijakan->id_kebijakan ?>]" class="form-control" rows="4" required="required"><?php echo $kebijakan->deskripsi ?></textarea>
 	                        		</td>
 	                        		<td class="text-center">
-										<a href="#" class="btn btn-default" title="Hapus Strategi ini?" 
+										<a href="#" class="btn btn-default" title="Hapus Kebijakan ini?" 
 										id="btn-delete"
-										data-id="<?php echo $strategi->id_strategi ?>"
-										data-key="delete-strategi"
-										data-remove="tr.dt-<?php echo $strategi->id_strategi; ?>">
+										data-id="<?php echo $kebijakan->id_kebijakan ?>"
+										data-key="delete-kebijakan"
+										data-remove="tr.dt-<?php echo $kebijakan->id_kebijakan; ?>">
 											<i class="fa fa-times"></i>
 										</a>
 										<?php if( $cekLoop) : 
 										$cekLoop = false;
 										?>
-										<button id="btn-add-strategi" type="button" class="btn btn-default" 
-										data-id="<?php echo $sasaran->id_sasaran ?>" 
+										<button id="btn-add-kebijakan" type="button" class="btn btn-default" 
+										data-id="<?php echo $kebijakan->id_kebijakan ?>" 
 										data-parent="<?php echo $key ?>"
 										data-key="1"
 										title="Tambah Form">
@@ -106,17 +116,17 @@
 	                        		<?php for($tahun = $this->tjuan->periode_awal; $tahun <= $this->tjuan->periode_akhir; $tahun++) : ?>
 	                        			<div class="col-md-6">
 		                        			<label>
-		                        				<input type="checkbox" name="create[tahun][<?php echo $sasaran->id_sasaran ?>][]" value="<?php echo $tahun ?>" <?php if(in_array($tahun, explode(',', $sasaran->tahun))) echo 'checked'; ?>> <?php echo $tahun ?>
+		                        				<input type="checkbox" name="create[tahun][<?php echo $strategi->id_strategi ?>][]" value="<?php echo $tahun ?>" <?php if(in_array($tahun, explode(',', $strategi->tahun))) echo 'checked'; ?>> <?php echo $tahun ?>
 		                        			</label>
 										</div>
 	                        		<?php endfor; ?>
 	                        		</td>
 	                        		<td>
-	                        			<textarea name="create[deskripsi][<?php echo $sasaran->id_sasaran ?>]" class="form-control" rows="4" required="required"></textarea>
+	                        			<textarea name="create[deskripsi][<?php echo $strategi->id_strategi ?>]" class="form-control" rows="4" required="required"></textarea>
 	                        		</td>
 	                        		<td class="text-center">
-										<button id="btn-add-strategi" type="button" class="btn btn-default" 
-										data-id="<?php echo $sasaran->id_sasaran ?>" 
+										<button id="btn-add-kebijakan" type="button" class="btn btn-default" 
+										data-id="<?php echo $strategi->id_strategi ?>" 
 										data-parent="<?php echo $key ?>"
 										data-key="1"
 										title="Tambah Form">
@@ -131,6 +141,8 @@
                 </div>
             </li>
             <?php 
+            /* End Loop Strategi */
+        	endforeach;
             /* End Loop Sasaran */
         	endforeach;
             /* End Loop Tujuan */

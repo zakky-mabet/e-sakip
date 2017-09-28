@@ -1,16 +1,19 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Mstrategi extends Skpd_model 
+class Kbjakan extends Skpd_model 
 {
 	public function __construct()
 	{
 		parent::__construct();
 		//Do your magic here
 	}
-
+	
 	public function CreateUpdate()
 	{
+		echo "<pre>";
+		print_r ($this->input->post());
+		echo "</pre>";
 		if( $this->input->post('create') )
 		{
 			if( is_array($this->input->post('create')) )
@@ -27,12 +30,12 @@ class Mstrategi extends Skpd_model
 					}
 
 					$object = array(
-						'id_sasaran' => $key,
+						'id_strategi' => $key,
 						'deskripsi' => $value,
 						'tahun' => implode(',', $this->input->post("create[tahun][{$key}]"))
 					);
 
-					$this->db->insert('strategi', $object);
+					$this->db->insert('kebijakan', $object);
 
 					$this->template->alert(
 						' Data berhasil disimpan.', 
@@ -50,7 +53,7 @@ class Mstrategi extends Skpd_model
 						'tahun' => implode(',', $this->input->post("update[tahun][{$value}]"))
 					);
 
-					$this->db->update('strategi', $object, array('id_strategi' => $value));
+					$this->db->update('kebijakan', $object, array('id_strategi' => $value));
 
 					$this->template->alert(
 						' Data berhasil disimpan.', 
@@ -61,14 +64,14 @@ class Mstrategi extends Skpd_model
 		}
 	}
 
-	public function getStrategiBySasaran($sasaran = 0)
+	public function getKebijakanByStrategi($strategi = 0)
 	{
-		return $this->db->get_where('strategi', array('id_sasaran' => $sasaran))->result();
+		return $this->db->get_where('kebijakan', array('id_strategi' => $strategi))->result();
 	}
 
 	public function delete($param = 0)
 	{
-		$this->db->delete('strategi', array('id_strategi' => $param));
+		$this->db->delete('kebijakan', array('id_kebijakan' => $param));
 
 		return array(
 			'status' => 'success'
@@ -76,5 +79,5 @@ class Mstrategi extends Skpd_model
 	}
 }
 
-/* End of file Mstrategi.php */
-/* Location: ./application/models/Mstrategi.php */
+/* End of file Kbjakan.php */
+/* Location: ./application/models/Kbjakan.php */

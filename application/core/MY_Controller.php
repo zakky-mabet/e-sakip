@@ -19,6 +19,14 @@ class MY_Controller extends CI_Controller
 */
 class Skpd extends MY_Controller
 {
+	public $periode_awal;
+
+	public $periode_akhir;
+
+	public $SKPD;
+
+	public $kepala;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -35,11 +43,25 @@ class Skpd extends MY_Controller
 		}
 
 		$this->load->js(base_url("assets/public/app/component.js"));
+
+		$this->periode_awal = $this->session->userdata('SKPD')->periode_awal;
+
+		$this->periode_akhir = $this->session->userdata('SKPD')->periode_akhir;
+
+		$this->SKPD = $this->session->userdata('SKPD')->ID;
+
+		$this->kepala = $this->session->userdata('SKPD')->kepala;
 	}
 
 	public function get_satuan_json()
 	{
 		$query = $this->db->get('master_satuan')->result();
+		return $this->output->set_content_type('application/json')->set_output(json_encode($query));
+	}
+
+	public function indikator_program_json()
+	{
+		$query = $this->db->get_where('master_indikator_sasaran', array('id_skpd' => $this->SKPD))->result();
 		return $this->output->set_content_type('application/json')->set_output(json_encode($query));
 	}
 
