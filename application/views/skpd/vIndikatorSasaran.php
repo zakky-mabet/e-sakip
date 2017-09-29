@@ -18,7 +18,6 @@
              *
              * @var string
              **/
-
             foreach( $this->msasaran->get_tujuandansasaran() as $key => $tujuan) : ?>
             <li class="time-label">
                   <span class="bg-blue">Tujuan <?php echo ++$key ?>. <small><?php echo $tujuan->deskripsi ?></small></span>
