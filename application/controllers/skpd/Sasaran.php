@@ -36,6 +36,13 @@ class Sasaran extends Skpd
 		redirect("skpd/sasaran");
 	}
 
+	public function indikatorcreateupdate()
+	{
+		$this->msasaran->IndikatorCreateUpdate();
+
+		redirect("skpd/sasaran/indikator_sasaran");
+	}
+
 	public function delete($param = 0, $key = '')
 	{
 		$this->results = $this->msasaran->delete($param, $key);
@@ -43,27 +50,38 @@ class Sasaran extends Skpd
 		$this->output->set_content_type('application/json')->set_output(json_encode($this->results));
 	}
 
-	public function indikator_tujuan()
+	public function indikator_sasaran()
 	{
-		$this->page_title->push('Tujuan', 'Indikator Tujuan');
+		$this->page_title->push('Sasaran', 'Indikator Sasaran');
 
-		$this->breadcrumbs->unshift(2, 'Indikator Tujuan',  $this->uri->uri_string());
+		$this->breadcrumbs->unshift(2, 'Indikator Sasaran',  $this->uri->uri_string());
 
 		$this->data = array(
-			'title' => "Indikator Tujuan", 
+			'title' => "Indikator Sasaran", 
 			'breadcrumbs' => $this->breadcrumbs->show(),
 			'page_title' => $this->page_title->show(),
 		);
 
-		$this->template->view('skpd/vIndikatorTujuan', $this->data);
+		$this->template->view('skpd/vIndikatorSasaran', $this->data);
 	}
 
 	public function post()
 	{
 		echo '<pre>';
 		print_r($this->input->post());
-		$this->msasaran->CreateUpdate();
+		//$this->msasaran->CreateUpdate();
 	}
+
+	public function createmasalah()
+	{
+
+		print_r($this->input->post());
+		
+		$this->msasaran->createmasalah();
+
+		redirect("skpd/sasaran");
+	}
+
 
 }
 

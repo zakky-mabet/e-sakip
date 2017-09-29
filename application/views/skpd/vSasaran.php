@@ -29,7 +29,7 @@
 	                    <table class="table table-default" data-id="<?php echo $misi->id_tujuan ?>">
 	                        <thead>
 	                            <tr class="bg-blue">
-	                                <th class="text-center">NO.</th>
+	                                <th class="text-center">NO.</th> 
 	                                <th class="text-center" width="170">AKTIF</th>
 	                                <th class="text-center">SASARAN</th>
 	                                <th class="text-center">PERMASALAHAN</th>
@@ -43,15 +43,16 @@
 					            /* Loop Tujuan terisi */
 					            $Jmltujuan = count($this->msasaran->getTujuanSasaran($misi->id_tujuan));
 					            foreach( $this->msasaran->getTujuanSasaran($misi->id_tujuan) as $keyTjuan => $tujuan) : 
-					            	echo form_hidden("update[ID][]", $tujuan->id_tujuan);
+					            	echo form_hidden("update[ID][]", $tujuan->id_sasaran);
+					            	
 					            ?>
-	                        	<tr class="dt-<?php echo $tujuan->id_tujuan; ?>">
+	                        	<tr class="dt-<?php echo $tujuan->id_sasaran; ?>">
 	                        		<td><?php echo $key ?>.<?php echo ($key+$keyTjuan) ?></td>
 	                        		<td>
 	                        		<?php for($tahun = $this->msasaran->periode_awal; $tahun <= $this->msasaran->periode_akhir; $tahun++) : ?>
 	                        			<div class="col-md-6">
 		                        			<label>
-		                        				<input type="checkbox" name="update[tahun][<?php echo $tujuan->id_tujuan ?>][]" value="<?php echo $tahun ?>" <?php if(in_array($tahun, explode(',', $tujuan->tahun))) echo 'checked'; ?>> <?php echo $tahun ?>
+		                        				<input type="checkbox" name="update[tahun][<?php echo $tujuan->id_sasaran ?>][]" value="<?php echo $tahun ?>" <?php if(in_array($tahun, explode(',', $tujuan->tahun))) echo 'checked'; ?>> <?php echo $tahun ?>
 		                        			</label>
 										</div>
 	                        		<?php endfor; ?>
@@ -64,10 +65,14 @@
 						                    <?php endforeach ?>
 						                </select> <br>
 
-	                        			<textarea name="update[deskripsi][<?php echo $tujuan->id_tujuan ?>]" class="form-control" rows="4" required="required"><?php echo $tujuan->deskripsi ?></textarea>
+	                        			<textarea name="update[deskripsi][<?php echo $tujuan->id_sasaran ?>]" class="form-control" rows="4" required="required"><?php echo $tujuan->deskripsi ?></textarea>
 	                        		</td>
+
 	                        		<td class="text-center">
-	                        			<button data-toggle="tooltip" data-placement="top" title="Permasalahan" style="margin-top: 40px" class="btn btn-warning" type="button"><i class="fa fa-warning"></i></button>
+
+	                        		<!-- permasalahan -->
+	                        			<button data-toggle="tooltip" data-placement="top" title="Permasalahan" style="margin-top: 40px" class="btn btn-warning get-modal-masalah" data-id-sasaran="<?php echo $tujuan->id_sasaran ?>" type="button"><i class="fa fa-warning"></i></button>
+	                        			
 	                        		</td>
 	                        		<td class="text-center">
 										<a style="margin-top: 40px" href="#" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Hapus Sasaran ini?" 
@@ -157,41 +162,61 @@
 	</div>
 </div>
 
-<script>
-	
-	function add_form_sasaran(data, key, nomor, parent) {
 
-	var html = '<tr id="baris-'+data+'-'+nomor+'"><td>'+ nomor +'</td>';
-	html += '<td>';
 
-	for( var tahun = $('tbody#data-' + data).data('tahun-awal'); tahun <= $('tbody#data-' + data).data('tahun-akhir'); tahun++)
-	{
-		html += '<div class="col-md-6"><label>';
-		html += '<input type="checkbox" name="create[tahun]['+data+']['+tahun+']" value="'+tahun+'"> ' + tahun;
-		html += '</label></div>'
-	}
-		html += '</td><td>';
-		html += '<select name="create[opsi_sasaran]['+ data +']" class="form-control " style="width: 100%;"><option  value="" >-- pilih sasaran Kota / Kab --</option><?php foreach ($master_sasaran as $key => $sasaran): ?><option  value="<?php echo $sasaran->id ?>"> <?php echo $sasaran->deskripsi; ?></option><?php endforeach ?></select> <br>';
-		html += '<textarea name="create[deskripsi]['+data+']" class="form-control" rows="4"></textarea>';
-		html += '</td><td class="text-center">',
-		html += '<a href="javascript:void(0)" id="delete-form" data-delete="tr#baris-'+data+'-'+nomor+'" title="Hapus tujuan ini?" class="btn btn-default"><i class="fa fa-times"></i></a>';
-	    html += '</td>';
-	    html += '</tr>';
+<div class="modal" id="modal-masalah">
+	<div class="modal-dialog modal-lg modal-default">
+		<form action="" method="POST" >
+		<div class="modal-content">
+			<div class="modal-header bg-blue">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title"><i class="fa fa-warning"></i> Sasaran !</h4>
+				<span></span>
+			</div>
+			<div class="modal-body">
+				
+					<div class="callout callout-default">
+	                	<h5><b>Permasalahan</b></h5>
+		                <p><textarea class="form-control" name="update"></textarea></p>
+	              	</div>
+	              	<div class="callout callout-default">
+						  <table class="table table-default" data-id="<?php echo $misi->id_tujuan ?>">
+	                        <thead>
+	                            <tr class="bg-blue">
+	                                <th class="text-center" width="20">NO</th>
+	                                <th class="text-center" width="100">Akar Permasalahan</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+		                        <tr>
+		                        	<td class="text-center">1</td>
+		                        	<td><textarea class="form-control" name="update"></textarea></td>
+		                        </tr>
+		                         <tr>
+		                        	<td class="text-center">2</td>
+		                        	<td><textarea class="form-control" name="update"></textarea></td>
+		                        </tr>
+		                         <tr>
+		                        	<td class="text-center">3</td>
+		                        	<td><textarea class="form-control" name="update"></textarea></td>
+		                        </tr>
+		                         <tr>
+		                        	<td class="text-center">4</td>
+		                        	<td><textarea class="form-control" name="update"></textarea></td>
+		                        </tr>
+	                        </tbody>
+	                        </table>
+	              	</div>
+				
+			</div>
+			<div class="modal-footer bg-silver">
+				<button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Batal</button>
+				 <input type="submit" class="btn btn-success">
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
 
-	$(html).appendTo('tbody#data-' + data).hide().fadeIn(500).addClass('bg-silver');
 
-	setInterval(function() {
-		$('tr#baris-'+data+'-'+nomor).fadeIn(500).removeClass('bg-silver');
-	}, 400);
 
-	$('a#delete-form').on('click', function()
-	{
-		key--;
-		nomor--;
-		$($(this).data('delete')).addClass('bg-red').fadeOut(300, function() {
-			$(this).remove();
-		});
-	});
-}
-
-</script>
