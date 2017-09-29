@@ -3,10 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Msasaran extends Skpd_model 
 {
+	protected $CI;
+
 	public function __construct()
 	{
 		parent::__construct();
-		//Do your magic here
+
+		$this->CI =& get_instance();
+
+		$this->CI->load->model('tjuan');
 	}
 
 	public function CreateUpdate()
@@ -126,7 +131,7 @@ class Msasaran extends Skpd_model
 
 	public function get_sasaran($param){
 	
-		return $this->db->get_where('sasaran', array('id_tujuan' => $param))->result();
+		return $this->db->get_where('sasaran', array('id_sasaran' => $param))->result();
 	}
 
 	public function get_sasaran_indikator($id_sasaran = 0)
@@ -208,6 +213,13 @@ class Msasaran extends Skpd_model
 		}
 	}
 
+
+	/* Sasaran Target */
+
+	public function get_sasaranTarget()
+	{
+		return $this->db->get('sasaran')->result();
+	}
 
 }
 
