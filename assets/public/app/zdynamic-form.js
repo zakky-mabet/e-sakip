@@ -1,5 +1,27 @@
 	$(document).ready( function() 
 	{
+	$('button#btn-add-sasaran').on('click', function()
+	{
+		var key = $(this).data('key');
+		var ID = $(this).data('id');
+		var nomor = $('tbody#data-'+ ID ).children().length;
+
+		add_form_sasaran(ID, key, nomor, $(this).data('parent') );
+	});
+
+
+     /*!
+    * Modal Masalah 
+    */
+    $('.get-modal-masalah').click( function() 
+    {
+        $('#modal-masalah').modal('show');
+
+        $(this).data('id-sasaran');
+        //console.log($(this).data('id-sasaran'));
+    });
+
+
 
 	/* DELETE FUNGSI */
 	$('a#btn-delete').on('click', function()

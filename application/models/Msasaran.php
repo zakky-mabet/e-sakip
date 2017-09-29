@@ -44,7 +44,7 @@ class Msasaran extends Skpd_model
 					$object = array(
 						'deskripsi' => $this->input->post("update[deskripsi][{$value}]"),
 						'tahun' => implode(',', $this->input->post("update[tahun][{$value}]")),
-						'opsi_sasaran' => $this->input->post("update[opsi_sasaran][{$key}]"),
+						'opsi_sasaran' => $this->input->post("update[opsi_sasaran][{$value}]"),
 					);
 					$this->db->update('sasaran', $object, array('id_sasaran' => $value));
 				}
@@ -81,7 +81,7 @@ class Msasaran extends Skpd_model
 
 	public function master_sasaran()
 	{
-		return $this->db->get_where('master_sasaran', array('id_skpd' => $this->kepala))->result();
+		return $this->db->get_where('master_sasaran', array('id_skpd' => $this->session->userdata('SKPD')->ID))->result();
 	}
 
 	public function delete($param = 0, $key = '')
@@ -114,6 +114,47 @@ class Msasaran extends Skpd_model
 
 		return $respon;
 	}
+
+	public function createmasalah (){
+
+		$object = array(
+			'id_sasaran' => $this->input->post('permasalahan[id_sasaran]'),
+			'deskripsi'  => $this->input->post('permasalahan[deskripsi]'),
+			);
+		$this->db->insert('permasalahan_sasaran', $object);
+	}
+
+
+	/* Model Indikator Sasaran */
+
+	
+	public function get_tujuandansasaran(){
+	
+		$this->db->join('tujuan', 'tujuan.id_tujuan = sasaran.id_tujuan', 'left');
+
+		return $this->db->get_where('sasaran', array('tujuan.id_kepala' => $this->kepala))->result();
+	}
+
+	public function get_sasaran($param){
+	
+		return $this->db->get_where('sasaran', array('id_tujuan' => $param))->result();
+	}
+
+	public function get_sasaran_indikator($id_sasaran = 0)
+	{
+		return $this->db->get_where('indikator_sasaran', array('id_sasaran' => $id_sasaran))->result();
+	}
+
+	public function satuan()
+	{	
+		return $this->db->get('master_satuan')->result();
+	}
+
+	public function master_indikator()
+	{	
+		return $this->db->get('master_indikator', array('id_skpd' => $this->session->userdata('SKPD')->ID))->result();
+	}
+
 
 }
 
