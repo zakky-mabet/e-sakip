@@ -3,10 +3,9 @@
 		<?php echo $this->session->flashdata('alert'); ?>
 	</div>
 
-	<form action="<?php echo base_url("skpd/sasaran/createupdate") ?>" method="POST" role="form">
+	<form action="<?php echo base_url("skpd/sasaran/indikatorcreateupdate") ?>" method="POST" role="form">
    	<div class="col-md-10">
-   	
-	
+   		
         <ul class="timeline">
             <li class="time-label">
                   <span class="bg-default">Entry Indikator Sasaran</span>
@@ -24,10 +23,10 @@
             <li class="time-label">
                   <span class="bg-blue">Tujuan <?php echo ++$key ?>. <small><?php echo $tujuan->deskripsi ?></small></span>
             </li>
-            <?php foreach ($this->msasaran->get_sasaran($tujuan->id_sasaran) as $keys => $sasaran): ?>
+            <?php $nos=1; foreach ($this->msasaran->get_sasaran($tujuan->id_sasaran) as $keys => $sasaran): ?>
             
            	<li class="time-label">
-                  <span class="bg-blue">Sasaran <?php echo ++$keys ?> <small><?php echo $sasaran->deskripsi ?></small></span>
+                  <span class="bg-blue">Sasaran <?php echo $nos++; ?> <small><?php echo $sasaran->deskripsi ?></small></span>
             </li>
             <li>
                 <i class="fa fa-pencil"></i>
@@ -41,21 +40,21 @@
 	                                <th class="text-center" width="10">NO.</th>
 	                                <th class="text-center" width="20">AKTIF</th>
 	                                <th class="text-center" width="200">INDIKATOR</th>
-	                                <th class="text-center" width="150">SATUAN</th>
+	                                <th class="text-center" width="90">SATUAN</th>
 	                                <th class="text-center" width="15">PK</th>
-	                                <th class="text-center" width="15">IK</th>
-	                                <th class="text-center" width="15">KEOLA</th>
+	                                <th class="text-center" width="15">IKU</th>
+	                                <th class="text-center" width="15">KELOLA</th>
 	                            </tr>
 	                        </thead>
-	                        <tbody>
+	                        <tbody id="data-<?php echo $sasaran->id_sasaran ?>" data-tahun-awal="<?php echo $this->msasaran->periode_awal ?>" data-tahun-akhir="<?php echo $this->msasaran->periode_akhir ?>">
 	                        	
 	                        	<?php if ($this->msasaran->get_sasaran_indikator($sasaran->id_sasaran) ): ?>
 
-	                        	<?php foreach ($this->msasaran->get_sasaran_indikator($sasaran->id_sasaran) as $key => $indikator): 
+	                        	<?php $no=1; foreach ($this->msasaran->get_sasaran_indikator($sasaran->id_sasaran) as $key => $indikator): 
 	                        		echo form_hidden("update[ID][]", $indikator->id_indikator_sasaran);
 	                        	?>
-	                        	<tr>
-	                        		<td>1</td>
+	                        	<tr class="dt-<?php echo $indikator->id_indikator_sasaran; ?>">
+	                        		<td class="text-center"><?php echo $key ?>.<?php echo ($key+$key) ?></td>
 	                        		<td>               
 				                       <?php for($tahun = $this->msasaran->periode_awal; $tahun <= $this->msasaran->periode_akhir; $tahun++) : ?>
 	                        			<div class="col-md-6">
@@ -64,35 +63,104 @@
 		                        			</label>
 										</div>
 	                        		<?php endfor; ?>
-				                        
 	                        		</td>
 	                        		<td>
-	                        			<select name="update[opsi_sasaran][]" class="form-control " data-placeholder="" style="width: 100%;">
-						                    <?php foreach ($this->msasaran->master_indikator() as $key => $values): ?>
-						                    	 <option <?php if ($indikator->id == $values->id): ?> selected <?php endif ?>  value="<?php echo $values->id ?>"><?php echo $values->deskripsi ?></option>
+	                        			<select name="update[indikator][<?php echo $indikator->id_indikator_sasaran ?>]" class="form-control " data-placeholder="" style="width: 100%;">
+						                    <?php foreach ($this->msasaran->master_indikator() as $key => $value): ?>
+						                    	 <option <?php if ($indikator->indikator == $value->id): ?> selected <?php endif ?>  value="<?php echo $value->id ?>"><?php echo $value->deskripsi ?></option>
 						                    <?php endforeach ?>
 						                </select> <br>
 
-	                        			<textarea name="update[deskripsi][]" class="form-control" rows="4" required="required"><?php echo $indikator->deskripsi ?></textarea>
+	                        			<textarea name="update[deskripsi][<?php echo $indikator->id_indikator_sasaran ?>]" class="form-control" rows="" required="required"><?php echo $indikator->deskripsi ?></textarea>
 	                        		</td>
 	                        		<td class="text-center">
-	                        			<select name="update[opsi_sasaran][]" class="form-control " data-placeholder="" style="width: 100%;">
+	                        			<select name="update[id_satuan][<?php echo $indikator->id_indikator_sasaran ?>]" class="form-control " data-placeholder="" style="width: 100%;">
 						                    <?php foreach ($this->msasaran->satuan() as $key => $value): ?>
 						                    	 <option <?php if ($indikator->id_satuan == $value->id): ?> selected <?php endif ?>  value="<?php echo $value->id ?>"><?php echo $value->nama ?></option>
 						                    <?php endforeach ?>
 						                </select>
 	                        		</td>
 	                        		<td class="text-center">
-				                            <input <?php if ($indikator->PK=='yes') {echo 'checked';} ?>  name="update[pk][1][]" value="" type="checkbox" class="minimal"> PK
+				                            <input <?php if ($indikator->PK=='yes') {echo 'checked';} ?>  name="update[pk][<?php echo $indikator->id_indikator_sasaran ?>]" value="yes" type="checkbox" class="minimal"> PK
 	                        		</td>
 	                        		<td>
-				                            <input <?php if ($indikator->IKU=='yes') {echo 'checked';} ?> name="update[iku][1][]" value="" type="checkbox" class="minimal" > IKU
+				                            <input <?php if ($indikator->IKU=='yes') {echo 'checked';} ?> name="update[iku][<?php echo $indikator->id_indikator_sasaran ?>]" value="yes" type="checkbox" class="minimal" > IKU
 				                       
 	                        		</td>
-	                        		<td></td>
+	                        		<td>
+	                        			<a style="margin-top: 40px" href="#" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Hapus Indikator Sasaran ini?" 
+										id="btn-delete"
+										data-id="<?php echo $indikator->id_indikator_sasaran ?>"
+										data-key="deleteindikator"
+										data-remove="tr.dt-<?php echo $indikator->id_indikator_sasaran; ?>">
+											<i class="fa fa-times"></i>
+										</a>
+										<button style="margin-top: 40px" id="btn-add-indikator-sasaran" type="button" class="btn btn-default" 
+										data-id="<?php echo $sasaran->id_sasaran ?>" 
+										data-parent="<?php echo $key ?>"
+										data-key="1" data-toggle="tooltip" data-placement="top"
+										title="Tambah Form">
+											<i class="fa fa-plus"></i>
+										</button>
+	                        		</td>
 	                        	</tr>
-	                        	
 	                        	<?php endforeach ?>
+	                        	<?php else :?>
+	                        		<tr>
+	                        		<td class="text-center"></td>
+	                        		<td>               
+				                       <?php for($tahun = $this->msasaran->periode_awal; $tahun <= $this->msasaran->periode_akhir; $tahun++) : ?>
+	                        			<div class="col-md-6">
+		                        			<label>
+		                        				<input type="checkbox" name="create[tahun][<?php echo $sasaran->id_sasaran ?>][]" value="<?php echo $tahun ?>">  <?php echo $tahun ?>
+		                        			</label>
+										</div>
+	                        		<?php endfor; ?>
+	                        		</td>
+	                        		<td>
+	                        			<select name="create[indikator][<?php echo $sasaran->id_sasaran ?>]" class="form-control " data-placeholder="" style="width: 100%;">
+	                        				<option value="">-- pilih indikator sasaran --</option>
+						                    <?php foreach ($this->msasaran->master_indikator() as $key => $value): ?>
+						                    	 <option value="<?php echo $value->id ?>"><?php echo $value->deskripsi ?></option>
+						                    <?php endforeach ?>
+						                </select> <br>
+
+	                        			<textarea name="create[deskripsi][<?php echo $sasaran->id_sasaran ?>]" class="form-control" rows="" required="required"></textarea>
+	                        		</td>
+	                        		<td class="text-center">
+	                        			<select name="create[id_satuan][<?php echo $sasaran->id_sasaran ?>]" class="form-control " data-placeholder="" style="width: 100%;">
+	                        				<option value="">-- pilih satuan --</option>
+						                    <?php foreach ($this->msasaran->satuan() as $key => $value): ?>
+						                    	 <option value="<?php echo $value->id ?>"><?php echo $value->nama ?></option>
+						                    <?php endforeach ?>
+						                </select>
+	                        		</td>
+	                        		<td class="text-center">
+				                            <input name="create[pk][<?php echo $sasaran->id_sasaran ?>]" value="yes" type="checkbox" class="minimal"> PK
+	                        		</td>
+	                        		<td>
+				                            <input name="create[iku][<?php echo $sasaran->id_sasaran ?>]" value="yes" type="checkbox" class="minimal" > IKU
+	                        		</td>
+	                        		<td>
+	                        			<a style="margin-top: 40px" href="#" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Hapus Sasaran ini?" 
+										id="btn-delete"
+										data-id="<?php echo $tujuan->id_sasaran ?>"
+										data-key="delete-sasaran"
+										data-remove="tr.dt-<?php echo $tujuan->id_sasaran; ?>">
+											<i class="fa fa-times"></i>
+										</a>
+										<button style="margin-top: 40px"  id="btn-add-indikator-sasaran" type="button"  class="btn btn-default" 
+										data-id="<?php echo $sasaran->id_sasaran ?>" 
+										data-parent="<?php echo $key ?>"
+										data-key="1"
+										title="Tambah Form"
+										data-toggle="tooltip" data-placement="top">
+										<i class="fa fa-plus"></i>
+										</button>
+
+
+	                        		</td>
+	                        	</tr>
 	                        	<?php endif ?>
 	                        </tbody>
 	                   	</table>

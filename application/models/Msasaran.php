@@ -90,22 +90,11 @@ class Msasaran extends Skpd_model
 		{
 			case 'sasaran':
 				$this->db->delete('sasaran', array('id_sasaran' => $param));
-
-				if($this->db->affected_rows())
-				{
-					$this->template->alert(
-						' Data berhasil diubah', 
-						array('type' => 'success','icon' => 'check')
-					);
-				} else {
-					$this->template->alert(
-						' Tidak ada data yang diubah.', 
-						array('type' => 'warning','icon' => 'warning')
-					);
-				}
+				$respon['status'] = 'success';
 				break;
 			case 'indikator':
-				# code...
+				$this->db->delete('indikator_sasaran', array('id_indikator_sasaran' => $param));
+				$respon['status'] = 'success';
 				break;
 			default:
 				# code...
@@ -152,7 +141,71 @@ class Msasaran extends Skpd_model
 
 	public function master_indikator()
 	{	
-		return $this->db->get('master_indikator', array('id_skpd' => $this->session->userdata('SKPD')->ID))->result();
+		return $this->db->get_where('master_indikator_sasaran', array('id_skpd' => $this->session->userdata('SKPD')->ID))->result();
+	}
+
+	
+
+	public function IndikatorCreateUpdate()
+	{
+		if( $this->input->post('create') )
+		{
+			if( is_array($this->input->post('create')) )
+			{
+				foreach($this->input->post('create[deskripsi]') as $key => $value) 
+				{
+					if( $value == FALSE OR $this->input->post("create[tahun][{$key}]") == FALSE) 
+					{
+						$this->template->alert(
+							' Maaf! tahun aktif dan indikator tidak boleh kosong.', 
+							array('type' => 'danger','icon' => 'warning')
+						);
+						continue;
+					}
+
+					$object = array(
+						'id_sasaran' => $key,
+						'deskripsi' => $value,
+						'tahun' => implode(',', $this->input->post("create[tahun][{$key}]")),
+						'id_satuan' => $this->input->post("create[id_satuan][{$key}]"),
+						'PK' => $this->input->post("create[pk][{$key}]"),
+						'IKU' => $this->input->post("create[iku][{$key}]"),
+						'indikator' => $this->input->post("create[indikator][{$key}]"),
+					);
+
+					$this->db->insert('indikator_sasaran', $object);
+				}
+			}
+		} else {
+			if( is_array($this->input->post('update')) )
+			{
+				foreach($this->input->post('update[ID]') as $key => $value) 
+				{
+					$object = array(
+						'deskripsi' => $this->input->post("update[deskripsi][{$value}]"),
+						'tahun' => implode(',', $this->input->post("update[tahun][{$value}]")),
+						'id_satuan' => $this->input->post("update[id_satuan][{$value}]"),
+						'PK' => $this->input->post("update[pk][{$value}]"),
+						'IKU' => $this->input->post("update[iku][{$value}]"),
+						'indikator' => $this->input->post("update[indikator][{$value}]"),
+					);
+					$this->db->update('indikator_sasaran', $object, array('id_indikator_sasaran' => $value));
+				}
+				if($this->db->affected_rows())
+				{
+					$this->template->alert(
+						' Data berhasil diubah.', 
+						array('type' => 'success','icon' => 'check')
+					);
+				} else {
+					$this->template->alert(
+						' Tidak ada data yang diubah.', 
+						array('type' => 'warning','icon' => 'warning')
+					);
+				}
+			
+			}
+		}
 	}
 
 

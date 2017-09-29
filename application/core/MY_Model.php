@@ -40,6 +40,10 @@ class Skpd_model extends MY_Model
 	{
 		return $this->db->get('master_satuan')->result();
 	}
+
+	
+
+	
 }
 
 /* End of file MY_Model.php */

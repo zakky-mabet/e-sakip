@@ -29,7 +29,7 @@
 	                    <table class="table table-default" data-id="<?php echo $misi->id_tujuan ?>">
 	                        <thead>
 	                            <tr class="bg-blue">
-	                                <th class="text-center">NO.</th>
+	                                <th class="text-center">NO.</th> 
 	                                <th class="text-center" width="170">AKTIF</th>
 	                                <th class="text-center">SASARAN</th>
 	                                <th class="text-center">PERMASALAHAN</th>
@@ -46,7 +46,7 @@
 					            	echo form_hidden("update[ID][]", $tujuan->id_sasaran);
 					            	
 					            ?>
-	                        	<tr class="dt-<?php echo $tujuan->id_tujuan; ?>">
+	                        	<tr class="dt-<?php echo $tujuan->id_sasaran; ?>">
 	                        		<td><?php echo $key ?>.<?php echo ($key+$keyTjuan) ?></td>
 	                        		<td>
 	                        		<?php for($tahun = $this->msasaran->periode_awal; $tahun <= $this->msasaran->periode_akhir; $tahun++) : ?>

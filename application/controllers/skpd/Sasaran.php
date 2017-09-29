@@ -36,6 +36,13 @@ class Sasaran extends Skpd
 		redirect("skpd/sasaran");
 	}
 
+	public function indikatorcreateupdate()
+	{
+		$this->msasaran->IndikatorCreateUpdate();
+
+		redirect("skpd/sasaran/indikator_sasaran");
+	}
+
 	public function delete($param = 0, $key = '')
 	{
 		$this->results = $this->msasaran->delete($param, $key);
@@ -64,7 +71,7 @@ class Sasaran extends Skpd
 		print_r($this->input->post());
 		//$this->msasaran->CreateUpdate();
 	}
-	
+
 	public function createmasalah()
 	{
 
