@@ -18,7 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                <i class="fa fa-dashboard"></i> <span>Home</span>
             </a>
         </li>
-        <li class="treeview <?php  echo active_link_multiple(array('visi','misi','tujuan','strategi', 'sasaran','kebijakan','program')); ?>">
+        <li class="treeview <?php  echo active_link_multiple(array('visi','misi','tujuan','strategi', 'sasaran','kebijakan','program','kegiatan')); ?>">
           <a href="#">
             <i class="fa fa-files-o"></i>
             <span>Rencanan Strategis</span>
@@ -101,7 +101,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </ul>
               </li>
             <li>
-              <li class="treeview <?php  echo active_link_multiple(array('kegiatan')); ?>">
+              <li class="treeview <?php echo active_link_multiple(array('kegiatan')); ?>">
                 <a href="#">
                   <span>Kegiatan</span>
                   <span class="pull-right-container">
@@ -110,7 +110,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </a>
                 <ul class="treeview-menu">
                   <li class="<?php echo active_link_method('index','kegiatan'); ?>">
-                    <a href=""> Kegiatan</a>
+                    <a href="<?php echo base_url("skpd/kegiatan"); ?>"> Kegiatan</a>
                   </li>
                   <li class="<?php echo active_link_method('anggaran','kegiatan'); ?>">
                     <a href=""><small>Penanggung Jawab Kegiatan</small></a>

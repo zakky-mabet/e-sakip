@@ -42,8 +42,11 @@ class Mprogram extends Skpd_model
 
 	public function getIndikatorKinerjaProgram($program = 0, $tahun = '-')
 	{
-		$this->db->where('id_program', $program)
-				 ->like('tahun', $tahun);
+		$this->db->select('master_satuan.nama AS satuan, indikator_kinerja_program.*');
+		$this->db->join('master_satuan', 'master_satuan.id = indikator_kinerja_program.id_satuan', 'left');
+
+		$this->db->where('indikator_kinerja_program.id_program', $program)
+				 ->like('indikator_kinerja_program.tahun', $tahun);
 
 		return $this->db->get('indikator_kinerja_program')->result();
 	}
@@ -103,6 +106,29 @@ class Mprogram extends Skpd_model
 			'id_indikator_kinerja_program' => $indikator,
 			'tahun' => $tahun
 		))->row('target');
+	}
+
+	public function getAnggaranKegiatanByProgramTahun($program = 0, $tahun = 0)
+	{
+		$program = array();
+		foreach($this->getProgramByLogin() as $row)
+			$program[] = $row->id_program;
+
+		$kegiatan = array();
+		foreach($this->getKegiatanProgramByProgram( $program ) as $row)
+			$kegiatan[] = $row->id_kegiatan;
+
+		if( $kegiatan )
+			$this->db->where_in('id_kegiatan', $kegiatan)
+				 ->where('tahun', $tahun);
+
+		return $this->db->get('anggaran_kegiatan')->row();
+	}
+
+	public function getKegiatanProgramByProgram($kegiatan = FALSE)
+	{
+		$this->db->where_in('id_kegiatan', $kegiatan);
+		return $this->db->get('kegiatan_program')->result();
 	}
 
 	public function IndikatorCreateUpdate()

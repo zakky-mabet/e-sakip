@@ -67,7 +67,7 @@
  							<tr>
 								<td><?php echo ++$keyInd ?>.</td>
 								<td><?php echo $indikator->deskripsi; ?></td>
-								<td class="text-center">Rp. 23.000.000</td>
+								<td class="text-center"><?php echo $indikator->satuan ?></td>
 								<td>
 									<input type="text"  name="target[<?php echo $indikator->id_indikator_kinerja_program ?>][<?php echo $tahun ?>]" value="<?php echo $nilaitarget ?>" class="form-control">
 								</td>

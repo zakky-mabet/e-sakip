@@ -106,6 +106,14 @@ class Program extends Skpd
 		redirect("skpd/program/target/{$this->periode_awal}");	
 	}
 
+	public function saveanggaran()
+	{
+		echo "<pre>";
+		print_r ($this->input->post());
+		echo "</pre>";
+		exit('Now in progress!');
+	}
+
 }
 
 /* End of file Program.php */

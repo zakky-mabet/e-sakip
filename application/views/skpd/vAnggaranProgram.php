@@ -1,4 +1,5 @@
 <div class="row">
+	<?php echo form_open(base_url("skpd/program/saveanggaran")); ?>
 	<div class="col-md-10">
 		<div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
@@ -30,23 +31,30 @@
             <div class="tab-content">
             <?php for($tahun = $this->tjuan->periode_awal; $tahun <= $this->tjuan->periode_akhir; $tahun++) : ?>
 				<div class="tab-pane <?php if($this->tahun==$tahun) echo 'active'; ?>" id="tab-<?php echo $tahun; ?>">
-			    <?php 
-			    /**
-			     * Loop Tujuan
-			     *
-			     * @var string
-			     **/
-			    foreach($this->tjuan->getTujuanLogin() as $keyTjuan => $tujuan) : ?>
-					<table class="table table-bordered">
+			        <ul class="timeline">
+			            <?php 
+			            /**
+			             * Loop Tujuan
+			             *
+			             * @var string
+			             **/
+			            foreach(  $this->tjuan->getTujuanLogin() as $keyTjuan => $tujuan) : ?>
+			            <li class="time-label">
+			                  <span class="bg-gray">Tujuan</span><span class="bg-blue"> <small><?php echo $tujuan->deskripsi ?></small></span>
+			            </li>
+			            <?php 
+			            /**
+			             * Loop Sasaran
+			             *
+			             * @var string
+			             **/
+			            foreach(  $this->tjuan->getSasaranByTujuan( $tujuan->id_tujuan) as $key => $sasaran) : ?>
+			            <li>
+					<table class="table table-bordered bg-white">
 						<thead class="bg-blue">
 							<tr>
-								<th rowspan="3" width="50"><div class="text-vertical"><?php echo $tahun ?></div></th>
-							</tr>
-							<tr style="color: black" class="bg-silver">
-								<td colspan="4" width="100"><strong>Tujuan :</strong> <?php echo $tujuan->deskripsi ?></td>
-							</tr>
-							<tr style="color: black" class="bg-silver">
-								<td colspan="4" width="100"><strong>Sasaran :</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit</td>
+								<th rowspan="1" width="50"><?php echo $tahun ?></th>
+								<td colspan="4" width="100" valign="middle" class="bg-silver" style="color: black"><strong>Sasaran :</strong> <?php echo $sasaran->deskripsi ?></td>
 							</tr>
 							<tr>
 								<th class="text-center">No.</th>
@@ -56,17 +64,32 @@
 							</tr>
 						</thead>
 						<tbody>
+						<?php  
+						/**
+						 * Loop Program
+						 *
+						 * @var string
+						 **/
+						foreach($this->mprogram->getProgramBySasaran( $sasaran->id_sasaran) as $keyProgram => $program) :
+							$anggaran = $this->mprogram->getAnggaranKegiatanByProgramTahun($program->id_program, $tahun);
+						?>
 							<tr>
-								<td>1.</td>
-								<td>Lorem ipsum dolor sit amet, consectetur.</td>
-								<td class="text-center">Rp. 23.000.000</td>
-								<td><input type="text" class="form-control"></td>
+								<td><?php echo ++$keyProgram ?>.</td>
+								<td><?php echo $program->deskripsi; ?></td>
+								<td class="text-center">Rp. <?php echo @number_format($anggaran->nilai_anggaran) ?></td>
+								<td><input type="text" name="sumber[<?php echo @$program->id_program ?>][<?php echo $tahun ?>]" value="" class="form-control"></td>
 							</tr>
+						<?php endforeach; ?>
 						</tbody>
 					</table>
+						</li>
 				<?php  
+				/* End Sasaran */
+				endforeach;
+				/* End Tujuan */
 				endforeach;
 				?>
+					</ul>
 				</div>
 			<?php endfor; ?>
             </div>
@@ -77,4 +100,5 @@
    			<button class="btn bg-blue btn-app"><i class="fa fa-save"></i> Simpan</button>
    		</div>
    	</div>
+   <?php echo form_close(); ?>
 </div>
