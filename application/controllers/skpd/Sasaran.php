@@ -65,6 +65,8 @@ class Sasaran extends Skpd
 		$this->template->view('skpd/vIndikatorSasaran', $this->data);
 	}
 
+	
+
 	public function post()
 	{
 		echo '<pre>';

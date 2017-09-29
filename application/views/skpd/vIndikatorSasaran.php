@@ -22,7 +22,7 @@
             <li class="time-label">
                   <span class="bg-blue">Tujuan <?php echo ++$key ?>. <small><?php echo $tujuan->deskripsi ?></small></span>
             </li>
-            <?php $nos=1; foreach ($this->msasaran->get_sasaran($tujuan->id_sasaran) as $keys => $sasaran): ?>
+            <?php $nos=1; foreach ($this->msasaran->get_sasaran($tujuan->id_sasaran) as $key => $sasaran): ?>
             
            	<li class="time-label">
                   <span class="bg-blue">Sasaran <?php echo $nos++; ?> <small><?php echo $sasaran->deskripsi ?></small></span>
@@ -34,8 +34,6 @@
 	                   <table class="table table-default" data-id="<?php echo $sasaran->id_sasaran ?>">
 	                        <thead>
 	                            <tr class="bg-blue">
-	                            
-	                           
 	                                <th class="text-center" width="10">NO.</th>
 	                                <th class="text-center" width="20">AKTIF</th>
 	                                <th class="text-center" width="200">INDIKATOR</th>
@@ -45,7 +43,7 @@
 	                                <th class="text-center" width="15">KELOLA</th>
 	                            </tr>
 	                        </thead>
-	                        <tbody id="data-<?php echo $sasaran->id_sasaran ?>" data-tahun-awal="<?php echo $this->msasaran->periode_awal ?>" data-tahun-akhir="<?php echo $this->msasaran->periode_akhir ?>">
+	                        <tbody id="data-<?php echo $sasaran->id_sasaran; ?>" data-tahun-awal="<?php echo $this->msasaran->periode_awal ?>" data-tahun-akhir="<?php echo $this->msasaran->periode_akhir ?>">
 	                        	
 	                        	<?php if ($this->msasaran->get_sasaran_indikator($sasaran->id_sasaran) ): ?>
 
@@ -53,7 +51,7 @@
 	                        		echo form_hidden("update[ID][]", $indikator->id_indikator_sasaran);
 	                        	?>
 	                        	<tr class="dt-<?php echo $indikator->id_indikator_sasaran; ?>">
-	                        		<td class="text-center"><?php echo $key ?>.<?php echo ($key+$key) ?></td>
+	                        		<td class="text-center"><?php echo $key+1 ?></td>
 	                        		<td>               
 				                       <?php for($tahun = $this->msasaran->periode_awal; $tahun <= $this->msasaran->periode_akhir; $tahun++) : ?>
 	                        			<div class="col-md-6">
@@ -106,7 +104,7 @@
 	                        	<?php endforeach ?>
 	                        	<?php else :?>
 	                        		<tr>
-	                        		<td class="text-center"></td>
+	                        		<td class="text-center"><?php echo $key ?></td>
 	                        		<td>               
 				                       <?php for($tahun = $this->msasaran->periode_awal; $tahun <= $this->msasaran->periode_akhir; $tahun++) : ?>
 	                        			<div class="col-md-6">
