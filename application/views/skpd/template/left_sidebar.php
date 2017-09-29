@@ -112,17 +112,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <li class="<?php echo active_link_method('index','kegiatan'); ?>">
                     <a href="<?php echo base_url("skpd/kegiatan"); ?>"> Kegiatan</a>
                   </li>
+                  <li class="<?php echo active_link_method('penanggungjawab','kegiatan'); ?>">
+                    <a href="<?php echo base_url("skpd/kegiatan/penanggungjawab/{$this->periode_awal}"); ?>"><small>Penanggung Jawab Kegiatan</small></a>
+                  </li>
                   <li class="<?php echo active_link_method('anggaran','kegiatan'); ?>">
-                    <a href=""><small>Penanggung Jawab Kegiatan</small></a>
+                    <a href="<?php echo base_url("skpd/kegiatan/anggaran/{$this->periode_awal}"); ?>">Anggaran Kegiatan</a>
                   </li>
-                  <li class="<?php echo active_link_method('indikator','kegiatan'); ?>">
-                    <a href="">Anggaran Kegiatan</a>
-                  </li>
-                  <li class="<?php echo active_link_method('target','kegiatan'); ?>">
-                    <a href="">Output Kegiatan</a>
+                  <li class="<?php echo active_link_method('output','kegiatan'); ?>">
+                    <a href="<?php echo base_url("skpd/kegiatan/output"); ?>">Output Kegiatan</a>
                   </li>
                   <li class="<?php echo active_link_method('target','kegiatan'); ?>">
-                    <a href="">Target Output Kegiatan</a>
+                    <a href="<?php echo base_url("skpd/kegiatan/target/{$this->periode_awal}"); ?>">Target Output Kegiatan</a>
                   </li>
                 </ul>
               </li>

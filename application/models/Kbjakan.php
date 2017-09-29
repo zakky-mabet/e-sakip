@@ -11,9 +11,6 @@ class Kbjakan extends Skpd_model
 	
 	public function CreateUpdate()
 	{
-		echo "<pre>";
-		print_r ($this->input->post());
-		echo "</pre>";
 		if( $this->input->post('create') )
 		{
 			if( is_array($this->input->post('create')) )
@@ -53,7 +50,7 @@ class Kbjakan extends Skpd_model
 						'tahun' => implode(',', $this->input->post("update[tahun][{$value}]"))
 					);
 
-					$this->db->update('kebijakan', $object, array('id_strategi' => $value));
+					$this->db->update('kebijakan', $object, array('id_kebijakan' => $value));
 
 					$this->template->alert(
 						' Data berhasil disimpan.', 
