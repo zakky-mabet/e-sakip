@@ -9,7 +9,8 @@ class Mtarget extends Skpd_model
 	
 	public function getAllSasaran()
 	{
-		return $this->db->get('sasaran')->result();
+		
+		return $this->db->get_where('sasaran',array('id_kepala' => $this->session->userdata('SKPD')->ID))->result();
 	}
 
 	public function get_periode()
@@ -46,8 +47,30 @@ class Mtarget extends Skpd_model
 						'nilai_target' => $this->input->post("update[nilai_target][{$value}]"),
 					);
 					$this->db->update('target_sasaran', $object, array('id_target_sasaran' => $value));
+					
 				}
+
+				$this->SelectIdTargetSasaran();
 			}
+		}
+	}
+
+	//fungsi untuk select id target sasaran jika tidak ada maka inser ke rkt target indikator
+	public function SelectIdTargetSasaran()
+	{
+		foreach ($this->input->post('update[ID]') as $key => $value) 
+		{
+			$query = $this->db->get_where('rkt_target_indikator', array(
+			'id_target_sasaran' => $value,
+		) );
+		 if ($query->num_rows()==0) 
+		 {
+
+		 	$object = array(
+				'id_target_sasaran' => $value,
+			);
+		  	$this->db->insert('rkt_target_indikator', $object);
+		  } 
 		}
 	}
  }

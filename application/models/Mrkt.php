@@ -1,40 +1,38 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Mformulasi extends Skpd_model 
+class Mrkt extends Skpd_model 
 {
-
 	public function __construct()
 	{
 		parent::__construct();
-
 	}
 	
 	public function getAllSasaran()
 	{
-		
-		return $this->db->get_where('sasaran',array('id_kepala' => $this->session->userdata('SKPD')->ID))->result();
+		return $this->db->get('sasaran')->result();
 	}
-
 
 	public function get_periode()
 	{
 		return $this->db->get_where('kepala_skpd',array('id_kepala' => $this->session->userdata('SKPD')->ID))->result();
 	}
 
-	public function getIndikatorSasaranDANformulasi($param=0)
+	public function getIndikatorSasarantoTarget($param = 0 , $tahun='' )
 	{
 		
-		$this->db->join('indikator_sasaran', 'indikator_sasaran.id_indikator_sasaran = formulasi_sasaran.id_indikator_sasaran', 'left');
+		$this->db->join('indikator_sasaran', 'indikator_sasaran.id_indikator_sasaran = target_sasaran.id_indikator_sasaran', 'left');
 
-		return $this->db->get_where('formulasi_sasaran', array('id_sasaran' => $param ))->result();
-	}
+		$this->db->join('rkt_target_indikator', 'rkt_target_indikator.id_target_sasaran = target_sasaran.id_target_sasaran', 'left');
+		
+		return $this->db->get_where('target_sasaran', array('id_sasaran'=> $param, 'tahunan'=> $tahun))->result();
+ 	}
 
 	public function getsatuan($param = 0)
 	{	
 		return $this->db->get_where('master_satuan', array('id'=> $param))->row();
 	}
 
-	public function Update_formulasi()
+	public function Update()
 	{
 		if( $this->input->post('create') )
 		{
@@ -48,16 +46,17 @@ class Mformulasi extends Skpd_model
 				foreach($this->input->post('update[ID]') as $key => $value) 
 				{
 					$object = array(
-						'alasan' => $this->input->post("update[alasan][{$value}]"),
-						'cara_pengukuran' => $this->input->post("update[cara_pengukuran][{$value}]"),
-						'keterangan' => $this->input->post("update[keterangan][{$value}]"),
+						'nilai_target_rkt' => $this->input->post("update[nilai_target_rkt][{$value}]"),
+						'sebab' => $this->input->post("update[sebab][{$value}]"),
 					);
-					$this->db->update('formulasi_sasaran', $object, array('id_formulasi_sasaran' => $value));
-
-									
-
+					$this->db->update('rkt_target_indikator', $object, array('rkt_id_target' => $value));
+					
 				}
+
+				
 			}
 		}
 	}
+
+
  }

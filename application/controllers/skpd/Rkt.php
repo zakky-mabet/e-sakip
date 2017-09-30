@@ -1,41 +1,41 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Target extends Skpd 
+class Rkt extends Skpd 
 {
 	public function __construct()
 	{
 		parent::__construct();
 
-		$this->breadcrumbs->unshift(1, 'Sasaran',  $this->uri->uri_string());
+		$this->breadcrumbs->unshift(1, 'Rencana Kinerja Tahunan',  $this->uri->uri_string());
 
-		$this->load->model(array('mtarget','msasaran'));
+		$this->load->model(array('mrkt','msasaran'));
 
 		$this->load->js(base_url("assets/public/app/dynamic-form.js"));
 	}
 
 	public function index()
 	{
-		$this->breadcrumbs->unshift(2, 'Sasaran Target',  $this->uri->uri_string());
+		$this->breadcrumbs->unshift(2, 'Target Indikator Rencana Kinerja Tahunan ',  $this->uri->uri_string());
 
-		$this->page_title->push('Target', 'Sasaran Target');
+		$this->page_title->push('RKT', 'Target Indikator Rencana Kinerja Tahunan ');
 
 		$this->tahun = $this->uri->segment(4);
 
 		$this->data = array(
-			'title' => "Sasaran Target", 
+			'title' => "Target Indikator Rencana Kinerja Tahunan ", 
 			'breadcrumbs' => $this->breadcrumbs->show(),
 			'page_title' => $this->page_title->show(),
 		);
 
-		$this->template->view('skpd/vTarget', $this->data);
+		$this->template->view('skpd/vRkt', $this->data);
 	}
 
 	public function save()
 	{
-		$this->mtarget->SelectIdTargetSasaran();
+		$this->mrkt->Update();
 
-		redirect("skpd/target");
+		redirect("skpd/rkt");
 	}
 
 	
