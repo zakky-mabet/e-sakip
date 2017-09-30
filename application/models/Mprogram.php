@@ -319,6 +319,8 @@ class Mprogram extends Skpd_model
 
 					$this->insertRktIndikatorProgram($this->input->post("create[tahun][{$key}]"), $indikator);
 
+					$this->insertPKIndikatorKinerjaProgram($this->input->post("create[tahun][{$key}]"), $indikator);
+
 					$this->template->alert(
 						' Data berhasil ditambahkan.', 
 						array('type' => 'success','icon' => 'check')
@@ -340,6 +342,8 @@ class Mprogram extends Skpd_model
 
 					$this->insertRktIndikatorProgram($this->input->post("update[tahun][{$value}]"), $value);
 
+					$this->insertPKIndikatorKinerjaProgram($this->input->post("update[tahun][{$value}]"), $value);
+
 					$this->db->update('indikator_kinerja_program', $object, array('id_indikator_kinerja_program' => $value));
 				}
 
@@ -348,6 +352,110 @@ class Mprogram extends Skpd_model
 					array('type' => 'success','icon' => 'check')
 				);
 			}
+		}
+	}
+
+	public function checkPKIndikatorProgram($indikator = 0, $tahun = 0, $triwulan = FALSE)
+	{
+		if( $triwulan == FALSE) 
+		{
+			$query = $this->db->get_where('pk_indikator_program', array(
+				'id_indikator_kinerja_program' => $indikator,
+				'tahun' => $tahun
+			) );
+		} else {
+			$query = $this->db->get_where('pk_indikator_program', array(
+				'id_indikator_kinerja_program' => $indikator,
+				'tahun' => $tahun,
+				'triwulan' => $triwulan
+			) );
+		}
+		return $query->num_rows(); 
+	}
+
+	public function insertPKIndikatorKinerjaProgram($tahun = FALSE, $indikator = 0)
+	{
+		if( is_array($tahun) )
+		{
+			foreach ($tahun as $key => $item) 
+			{
+				if( $this->checkPKIndikatorProgram($indikator, $item) ) 
+				{
+					continue;
+				} else {
+					$this->db->insert('pk_indikator_program', array(
+						'id_indikator_kinerja_program' => $indikator,
+						'tahun' => $item,
+						'pk_induk' => 0,
+						'triwulan' => null,
+						'sebab' => null,
+						'nilai_target' => null
+					));
+
+					$induk = $this->db->insert_id();
+
+					if( $induk ) 
+					{
+						for($i = 1; $i <= 4; $i++) 
+						{
+							if( $this->checkPKIndikatorProgram($indikator, $item, "T".$i) == FALSE )
+							{
+								$this->db->insert('pk_indikator_program', array(
+									'id_indikator_kinerja_program' => $indikator,
+									'tahun' => $item,
+									'pk_induk' => $induk,
+									'triwulan' => "T".$i,
+									'sebab' => null,
+									'nilai_target' => null
+								));
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public function getPKIndikatorProgram($indikator = 0, $tahun = 0, $triwulan = FALSE)
+	{
+		if( $triwulan == FALSE) 
+		{
+			$query = $this->db->get_where('pk_indikator_program', array(
+				'id_indikator_kinerja_program' => $indikator,
+				'tahun' => $tahun,
+				'pk_induk' => 0
+			) );
+		} else {
+			$query = $this->db->get_where('pk_indikator_program', array(
+				'id_indikator_kinerja_program' => $indikator,
+				'tahun' => $tahun,
+				'triwulan' => $triwulan
+			) );
+		}
+		return $query->row(); 
+	}
+
+	public function UpdateTargePKtTargetIndikatorProgram()
+	{
+		if( is_array($this->input->post('target')) )
+		{
+			foreach ($this->input->post('target') as $key => $value) 
+			{
+				if( $key == FALSE)
+				 continue;
+
+				$this->db->update('pk_indikator_program', array(
+					'nilai_target' => $value,
+					'sebab' => $this->input->post("sebab[{$key}]")
+				), array(
+					'id_pk_program' => $key,
+				));
+			}
+
+			$this->template->alert(
+				' Data berhasil diubah.', 
+				array('type' => 'success','icon' => 'check')
+			); 
 		}
 	}
 

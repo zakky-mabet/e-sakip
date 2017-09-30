@@ -13,19 +13,19 @@ class Pkprogram extends Skpd
 
 	public function index()
 	{
-		$this->page_title->push('Program Kerja', 'Target PK Tahunan Indikator Program');
+		$this->page_title->push('Program Kerja', 'Target PK Indikator Program');
 
-		$this->breadcrumbs->unshift(2, 'Tahunan',  'skpd/rktprogram');
+		$this->breadcrumbs->unshift(2, 'Target PK Indikator Program',  'skpd/rktprogram');
 
 		$this->tahun = $this->periode_awal;
 
 		$this->data = array(
-			'title' => "Target PK Tahunan Indikator Program", 
+			'title' => "Target PK Indikator Program", 
 			'breadcrumbs' => $this->breadcrumbs->show(),
 			'page_title' => $this->page_title->show(),
 		);
 
-		$this->template->view('skpd/vPKIndikatorProgramTahun', $this->data);
+		$this->template->view('skpd/vPKIndikatorProgram', $this->data);
 	}
 
 	public function triwulan()
@@ -42,7 +42,19 @@ class Pkprogram extends Skpd
 			'page_title' => $this->page_title->show(),
 		);
 
-		$this->template->view('skpd/vPKIndikatorProgramTriwulan', $this->data);
+		$this->template->view('skpd/vPKIndikatorProgram', $this->data);
+	}
+
+	public function savetargetindikatorprogram()
+	{
+		$this->mprogram->UpdateTargePKtTargetIndikatorProgram();
+
+		if( $this->input->post('type')=='triwulan') 
+		{
+			redirect('skpd/pkprogram/triwulan');
+		} else {
+			redirect('skpd/pkprogram');
+		}
 	}
 
 }
