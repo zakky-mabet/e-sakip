@@ -146,15 +146,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li class="<?php echo active_link_method('rktoutputkegiatan','rktprogram'); ?>">
                 <a href="<?php echo base_url("skpd/rktprogram/rktoutputkegiatan"); ?>"> Target RKT Ouput Kegiatan</a>
             </li>
-            <li class="<?php echo active_link_method('index','misi'); ?>">
-                <a href=""> Anggaran Program RKT</a>
+            <li class="<?php echo active_link_method('anggaranprogramrkt','rktprogram'); ?>">
+                <a href="<?php echo base_url("skpd/rktprogram/anggaranprogramrkt"); ?>"> Anggaran Program RKT</a>
             </li>
-            <li class="<?php echo active_link_method('index','misi'); ?>">
-                <a href=""> Anggaran Kegiatan RKT</a>
+            <li class="<?php echo active_link_method('anggarankegiatanrkt','rktprogram'); ?>">
+                <a href="<?php echo base_url("skpd/rktprogram/anggarankegiatanrkt"); ?>"> Anggaran Kegiatan RKT</a>
             </li>
           </ul>
         </li>
-        <li class="treeview <?php  echo active_link_multiple(array('reg')); ?>">
+        <li class="treeview <?php  echo active_link_multiple(array('pkprogram')); ?>">
           <a href="#">
             <i class="fa fa-file-text-o"></i>
             <span>Program Kerja</span>
@@ -163,20 +163,64 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="<?php echo active_link_method('rkt','sd'); ?>">
-                <a href=""> Target RKT Idikator Sasaran</a>
+            <li class="<?php echo active_link_method('rkt'); ?>">
+              <li class="treeview <?php  echo active_link_multiple(array('sasarsdan')); ?>">
+                <a href="#">
+                  <span>Target PK Indikator Sasaran</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li class="<?php echo active_link_method('index','dgd'); ?>">
+                    <a href=""> Tahunan</a>
+                  </li>
+                  <li class="<?php echo active_link_method('indikator_sasaran','dgd'); ?>">
+                    <a href="">Triwulan</a>
+                  </li>
+                </ul>
+              </li>
             </li>
-            <li class="<?php echo active_link_method('i;ndex','misi'); ?>">
-                <a href=""> Target RKT Idikator Program</a>
+            <li class="<?php echo active_link_controller('pkprogram'); ?>">
+              <li class="treeview <?php echo active_link_controller('pkprogram'); ?>">
+                <a href="#">
+                  <span>Target PK Indikator Program</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li class="<?php echo active_link_method('index','pkprogram'); ?>">
+                    <a href="<?php echo base_url("skpd/pkprogram"); ?>"> Tahunan</a>
+                  </li>
+                  <li class="<?php echo active_link_method('triwulan','pkprogram'); ?>">
+                    <a href="<?php echo base_url("skpd/pkprogram/triwulan"); ?>">Triwulan</a>
+                  </li>
+                </ul>
+              </li>
+            <li class="<?php echo active_link_method('rkt'); ?>">
+              <li class="treeview <?php  echo active_link_multiple(array('sasarsdan')); ?>">
+                <a href="#">
+                  <span>Target PK Output Kegiatan</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li class="<?php echo active_link_method('index','dgd'); ?>">
+                    <a href=""> Tahunan</a>
+                  </li>
+                  <li class="<?php echo active_link_method('indikator_sasaran','dgd'); ?>">
+                    <a href="">Triwulan</a>
+                  </li>
+                </ul>
+              </li>
             </li>
-            <li class="<?php echo active_link_method('i;ndex','misi'); ?>">
-                <a href=""> Target RKT Ouput Kegiatan</a>
+            <li class="<?php echo active_link_method('ww','rktprogram'); ?>">
+                <a href=""> Anggaran Program PK</a>
             </li>
-            <li class="<?php echo active_link_method('i;ndex','misi'); ?>">
-                <a href=""> Anggaran Program RKT</a>
-            </li>
-            <li class="<?php echo active_link_method('i;ndex','misi'); ?>">
-                <a href=""> Anggaran Kegiatan RKT</a>
+            <li class="<?php echo active_link_method('wd','rktprogram'); ?>">
+                <a href=""> Anggaran Kegiatan PK</a>
             </li>
           </ul>
         </li>

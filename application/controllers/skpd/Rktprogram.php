@@ -63,6 +63,47 @@ class Rktprogram extends Skpd
 
 		redirect('skpd/rktprogram/rktoutputkegiatan');
 	}
+
+	public function anggaranprogramrkt()
+	{
+		$this->page_title->push('RKT', 'Program dan Anggaran Rencana Kinerja Tahunan');
+
+		$this->breadcrumbs->unshift(2, 'Program dan Anggaran Rencana Kinerja Tahunan',  'skpd/anggaranprogramrkt');
+
+		$this->tahun = $this->periode_awal;
+
+		$this->data = array(
+			'title' => "Program dan Anggaran Rencana Kinerja Tahunan", 
+			'breadcrumbs' => $this->breadcrumbs->show(),
+			'page_title' => $this->page_title->show(),
+		);
+
+		$this->template->view('skpd/vAnggaranProgramRkt', $this->data);
+	}
+
+	public function anggarankegiatanrkt()
+	{
+		$this->page_title->push('RKT', 'Anggaran Kegiatan Rencana Kinerja Tahunan');
+
+		$this->breadcrumbs->unshift(2, 'Anggaran Kegiatan Rencana Kinerja Tahunan',  'skpd/anggarankegiatanrkt');
+
+		$this->tahun = $this->periode_awal;
+
+		$this->data = array(
+			'title' => "Anggaran Kegiatan Rencana Kinerja Tahunan", 
+			'breadcrumbs' => $this->breadcrumbs->show(),
+			'page_title' => $this->page_title->show(),
+		);
+
+		$this->template->view('skpd/vAnggaranKegiatanRkt', $this->data);
+	}
+
+	public function saveanggarankegiatanrkt()
+	{
+		$this->mprogram->UpdateAnggaranKegiatanRkt();
+
+		redirect('skpd/rktprogram/anggarankegiatanrkt');
+	}
 }
 
 /* End of file Rktprogram.php */
