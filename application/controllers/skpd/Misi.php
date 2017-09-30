@@ -31,6 +31,7 @@ class Misi extends Skpd
 		$this->m_misi->createorupdate();
 		
 		redirect("skpd/misi");
+
 		
 	}
 	public function delete($param = 0)
