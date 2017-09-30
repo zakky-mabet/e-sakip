@@ -1,5 +1,8 @@
 <div class="row">
 	<?php echo form_open(base_url("skpd/formulasi/save")); ?>
+		<div class="col-md-6 col-md-offset-3">
+		<?php echo $this->session->flashdata('alert'); ?>
+	</div>
 	<div class="col-md-10">		
 		<ul class="timeline">
             <li class="time-label">

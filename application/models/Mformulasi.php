@@ -52,6 +52,9 @@ class Mformulasi extends Skpd_model
 						'keterangan' => $this->input->post("update[keterangan][{$value}]"),
 					);
 					$this->db->update('formulasi_sasaran', $object, array('id_formulasi_sasaran' => $value));
+
+									
+
 				}
 			}
 		}

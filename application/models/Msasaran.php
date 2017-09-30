@@ -37,9 +37,7 @@ class Msasaran extends Skpd_model
 						'tahun' => implode(',', $this->input->post("create[tahun][{$key}]")),
 						'opsi_sasaran' => $this->input->post("create[opsi_sasaran][{$key}]"),
 					);
-
 					$this->db->insert('sasaran', $object);
-					
 				}
 			}
 		} else {
@@ -103,6 +101,7 @@ class Msasaran extends Skpd_model
 			case 'indikator':
 				$this->db->delete('indikator_sasaran', array('id_indikator_sasaran' => $param));
 				$this->db->delete('formulasi_sasaran', array('id_formulasi_sasaran' => $param));
+				$this->db->delete('target_sasaran', array('id_indikator_sasaran' => $param));
 				$respon['status'] = 'success';
 				break;
 			default:
@@ -179,7 +178,7 @@ class Msasaran extends Skpd_model
 						'id_satuan' => $this->input->post("create[id_satuan][{$key}]"),
 						'PK' => $this->input->post("create[pk][{$key}]"),
 						'IKU' => $this->input->post("create[iku][{$key}]"),
-						'indikator' => $this->input->post("create[indikator][{$key}]"),
+			
 					);
 
 					$this->db->insert('indikator_sasaran', $object);
@@ -197,6 +196,9 @@ class Msasaran extends Skpd_model
 						}
 					}
 
+
+					$this->Insert_to_target($this->input->post("create[tahun][{$key}]"), $get_id_indikator_sasaran);
+
 					if($this->db->affected_rows())
 					{
 						$this->template->alert(
@@ -210,6 +212,8 @@ class Msasaran extends Skpd_model
 						);
 					}
 				}
+
+
 			}
 		} else {
 			if( is_array($this->input->post('update')) )
@@ -222,21 +226,22 @@ class Msasaran extends Skpd_model
 						'id_satuan' => $this->input->post("update[id_satuan][{$value}]"),
 						'PK' => $this->input->post("update[pk][{$value}]"),
 						'IKU' => $this->input->post("update[iku][{$value}]"),
-						'indikator' => $this->input->post("update[indikator][{$value}]"),
+					
 					);
 					$this->db->update('indikator_sasaran', $object, array('id_indikator_sasaran' => $value));
 
 					//fungsi ci ambil id saat insert
+
 					$get_id_indikator_sasaran = $this->db->insert_id();
 
-					if( is_array($this->input->post("create[tahun][{$key}]")) )
+					if( is_array($this->input->post("update[tahun][{$key}]")) )
 					{
-						foreach ($this->input->post("create[tahun][{$key}]") as $item => $tahun) 
+						foreach ($this->input->post("update[tahun][{$key}]") as $item => $tahun) 
 						{
 							$this->Insert_id_ke_formulasi($get_id_indikator_sasaran, $tahun);
-
 						}
 					}
+					$this->Insert_to_target($this->input->post("update[tahun][{$key}]"), $get_id_indikator_sasaran);
 
 					if($this->db->affected_rows())
 					{
@@ -251,12 +256,20 @@ class Msasaran extends Skpd_model
 						);
 					}
 				}
+
+				
 			}
 		}
 	}
 	//ini adalah fungsi get id dari indikator saat inser indikator sasaran
 	public function Insert_id_ke_formulasi($get_id_indikator_sasaran = 0, $tahun = 0)
 	{
+		if ($get_id_indikator_sasaran == 0) {
+
+			redirect("skpd/sasaran");
+			
+		} else {
+			
 		if( $this->cek_id_indikator_sasaran($get_id_indikator_sasaran, $tahun) == FALSE)
 		{
 			$this->db->insert('formulasi_sasaran', array(
@@ -265,6 +278,7 @@ class Msasaran extends Skpd_model
 				'cara_pengukuran' => NULL,
 				'keterangan' => NULL
 			));
+		}
 		}
 	}
 	//ini adalah fungsi get id dari indikator saat inser indikator sasaran
@@ -277,11 +291,45 @@ class Msasaran extends Skpd_model
 	}
 
 
-	/* Sasaran Target */
+	/* Sasaran get_id_indikator_sasaran */
 
 	public function get_sasaranTarget()
 	{
 		return $this->db->get('sasaran')->result();
+	}
+
+	public function Insert_to_target($tahun = FALSE, $get_id_indikator_sasaran = 0)
+	{
+		if( is_array($tahun) )
+		{
+			foreach ($tahun as $key => $item) 
+			{
+				if( $this->checkTarget($get_id_indikator_sasaran, $item) ) 
+				{
+					continue;
+				} else {
+					$this->db->insert('target_sasaran', array(
+						'id_indikator_sasaran' => $get_id_indikator_sasaran,
+						'nilai_target' => NULL,
+						'tahun' => $item
+					));
+				}
+			}
+
+			$this->template->alert(
+				' Tersimpan! Data berhasil tersimpan.', 
+				array('type' => 'success','icon' => 'check')
+			);
+		}
+	}
+
+	public function checkTarget($get_id_indikator_sasaran = 0, $tahun = 0)
+	{
+		$query = $this->db->get_where('target_sasaran', array(
+			'id_indikator_sasaran' => $get_id_indikator_sasaran,
+			'tahun' => $tahun
+		) );
+		return $query->num_rows();
 	}
 
 }
