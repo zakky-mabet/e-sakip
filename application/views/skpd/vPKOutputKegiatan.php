@@ -2,7 +2,7 @@
 	<div class="col-md-6 col-md-offset-2">
 		<?php echo $this->session->flashdata('alert'); ?>
 	</div>
-	<?php echo form_open(base_url("skpd/pkprogram/savetargetindikatorprogram")); ?>
+	<?php echo form_open(base_url("skpd/pkkegiatan/savepkoutputkegiatan")); ?>
 	<div class="col-md-10">
 		<div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
@@ -17,10 +17,10 @@
 					</a>
 					<ul class="dropdown-menu">
 	                  <li class="<?php echo active_link_method('index','program'); ?>">
-	                    <a href="<?php echo base_url("skpd/pkprogram/") ?>"> Tahunan</a>
+	                    <a href="<?php echo base_url("skpd/pkkegiatan/") ?>"> Tahunan</a>
 	                  </li>
 	                  <li class="<?php echo active_link_method('anggaran','program'); ?>">
-	                    <a href="<?php echo base_url("skpd/pkprogram/triwulan") ?>">Triwulan</a>
+	                    <a href="<?php echo base_url("skpd/pkkegiatan/triwulan") ?>">Triwulan</a>
 	                  </li>
 					</ul>
               	</li>
@@ -29,9 +29,9 @@
 				<?php  
 				if( $this->router->fetch_method() == 'index' )
 				{
-					$this->load->view('skpd/vPKIndikatorProgramTahun', $this->data);
+					$this->load->view('skpd/vPKOuputKegiatanTahun', $this->data);
 				} else {
-					$this->load->view('skpd/vPKIndikatorProgramTriwulan', $this->data);
+					$this->load->view('skpd/vPKOuputKegiatanTriwulan', $this->data);
 				}
 				?>
 

@@ -154,7 +154,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
           </ul>
         </li>
-        <li class="treeview <?php  echo active_link_multiple(array('pkprogram')); ?>">
+        <li class="treeview <?php  echo active_link_multiple(array('pkprogram','pkkegiatan')); ?>">
           <a href="#">
             <i class="fa fa-file-text-o"></i>
             <span>Program Kerja</span>
@@ -173,8 +173,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   Target PK Indikator Program
                 </a>
             </li>
-            <li class="<?php echo active_link_controller('d'); ?>">
-                <a href="<?php echo base_url("skpd/pkprogram"); ?>">
+            <li class="<?php echo active_link_controller('pkkegiatan'); ?>">
+                <a href="<?php echo base_url("skpd/pkkegiatan"); ?>">
                   Target PK Output Kegiatan
                 </a>
             </li>
