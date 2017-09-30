@@ -36,7 +36,8 @@ class Msasaran extends Skpd_model
 						'deskripsi' => $value,
 						'tahun' => implode(',', $this->input->post("create[tahun][{$key}]")),
 						'opsi_sasaran' => $this->input->post("create[opsi_sasaran][{$key}]"),
-						'id_kepala' =>$this->session->userdata('SKPD')->ID)),
+						'id_kepala' =>$this->session->userdata('SKPD')->ID
+
 					);
 					$this->db->insert('sasaran', $object);
 				}
@@ -53,7 +54,6 @@ class Msasaran extends Skpd_model
 					);
 					$this->db->update('sasaran', $object, array('id_sasaran' => $value));
 				}
-			
 			}
 		}
 	}

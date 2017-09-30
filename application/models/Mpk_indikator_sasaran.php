@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Mrkt extends Skpd_model 
+class Mpk_indikator_sasaran extends Skpd_model 
 {
 	public function __construct()
 	{
@@ -9,7 +9,7 @@ class Mrkt extends Skpd_model
 	
 	public function getAllSasaran()
 	{
-		return $this->db->get_where('sasaran', array('id_kepala' => $this->session->userdata('SKPD')->ID))->result();
+		return $this->db->get('sasaran')->result();
 	}
 
 	public function get_periode()
