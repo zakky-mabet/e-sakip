@@ -101,6 +101,37 @@ class Kegiatan extends Skpd
 		$this->template->view('skpd/vOutputKegiatan', $this->data);
 	}
 
+	public function ouput_createupdate()
+	{
+		$this->kgiatan->OutputKegiatanCreateUpdate();
+
+		redirect('skpd/kegiatan/output');
+	}
+
+	public function target()
+	{
+		$this->page_title->push('Target Output Kegiatan', '');
+
+		$this->breadcrumbs->unshift(2, 'Target Output Kegiatan',  $this->uri->uri_string());
+
+		$this->tahun = $this->uri->segment(4);
+
+		$this->data = array(
+			'title' => "Target Output Kegiatan Rencana Strategis", 
+			'breadcrumbs' => $this->breadcrumbs->show(),
+			'page_title' => $this->page_title->show(),
+		);
+
+		$this->template->view('skpd/vTargetOutputKegiatan', $this->data);
+	}
+
+	public function savatargetoutput()
+	{
+		$this->kgiatan->SaveTargetOutputKegiatan();
+
+		redirect("skpd/kegiatan/target/{$this->periode_awal}");
+	}
+
 	public function delete($param = 0, $key = '')
 	{
 		$this->response = $this->kgiatan->delete($param, $key);

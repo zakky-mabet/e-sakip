@@ -27,7 +27,7 @@ $(document).ready( function()
 		var ID = $(this).data('id');
 		var nomor = $('tbody#data-'+ ID ).children().length;
 
-		add_form_strategi(ID, key, ++nomor, $(this).data('parent') );
+		add_form_strategi(ID, key, nomor, $(this).data('parent') );
 	});
 
 	/* ADD FORM Kebijakan */
@@ -295,7 +295,7 @@ function add_form_indikator_program(data, key, nomor, parent) {
 	for( var tahun = $('tbody#data-' + data).data('tahun-awal'); tahun <= $('tbody#data-' + data).data('tahun-akhir'); tahun++)
 	{
 		html += '<div class="col-md-6"><label>';
-		html += '<input type="checkbox" name="create[tahun]['+data+']['+tahun+']" value="'+tahun+'"> ' + tahun;
+		html += '<input type="checkbox" name="create[tahun]['+data+']['+tahun+']" value="'+tahun+'" checked> ' + tahun;
 		html += '</label></div>'
 	}
 		html += '</td><td>';
@@ -525,23 +525,4 @@ function get_indikator_program_json(selector) {
 	});
 }
 
-function formatnomor(id) {
-	var num = $("#anggaran"+id).val();
-	$("#anggaran"+id).val(num.replace(".",""));
-	num = $("#anggaran"+id).val();
-	$("#anggaran"+id).val(num.replace(".",""));
-	num = $("#anggaran"+id).val();
-	$("#anggaran"+id).val(num.replace(".",""));
-	num = $("#anggaran"+id).val();
-	$("#anggaran"+id).val(num.replace(".",""));
-}
-	
-function getformatnomor(nilai) {
-	var num = nilai.replace(".","")
-	num = num.replace(".","")
-	num = num.replace(".","")
-	num = num.replace(".","")
-	num = num.replace(".","")
-	return num;
-}
 $(".inputmask").maskMoney({prefix:'', allowNegative: false, thousands:',', affixesStay: false,  precision:0});

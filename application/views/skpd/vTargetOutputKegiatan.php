@@ -2,7 +2,7 @@
 	<div class="col-md-6 col-md-offset-2">
 		<?php echo $this->session->flashdata('alert'); ?>
 	</div>
-	<?php echo form_open(base_url("skpd/kegiatan/saveanggaran")); ?>
+	<?php echo form_open(base_url("skpd/kegiatan/savatargetoutput")); ?>
 	<div class="col-md-10">
 		<div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
@@ -37,35 +37,23 @@
             <div class="tab-content">
             <?php for($tahun = $this->tjuan->periode_awal; $tahun <= $this->tjuan->periode_akhir; $tahun++) : ?>
 				<div class="tab-pane <?php if($this->tahun==$tahun) echo 'active'; ?>" id="tab-<?php echo $tahun; ?>">
-			        <ul class="timeline">
 			            <?php 
 			            /**
-			             * Loop Sasaran
+			             * Loop Kegiatan
 			             *
 			             * @var string
 			             **/
-			            foreach(  $this->mprogram->getSasaranByLogin() as $keySasaran => $sasaran) : ?>
-			            <li class="time-label">
-			                  <span class="bg-gray">Sasaran</span><span class="bg-blue"> <small><?php echo $sasaran->deskripsi ?></small></span>
-			            </li>
-			            <?php 
-			            /**
-			             * Loop Program
-			             *
-			             * @var string
-			             **/
-			            foreach(  $this->mprogram->getProgramBySasaran($sasaran->id_sasaran) as $key => $program) : ?>
-			            <li>
+			            foreach(  $this->kgiatan->getKegiatanProgramByLogin() as $key => $kegiatan) : ?>
 					<table class="table table-bordered bg-white">
 						<thead class="bg-blue">
 							<tr>
 								<th rowspan="1" width="50"><?php echo $tahun ?></th>
-								<td colspan="4" width="100" valign="middle" class="bg-silver" style="color: black"><strong>Program :</strong> <?php echo $program->deskripsi ?></td>
+								<td colspan="4" width="100" valign="middle" class="bg-silver" style="color: black"><strong>Kegiatan :</strong> <?php echo $kegiatan->deskripsi ?></td>
 							</tr>
 							<tr>
 								<th class="text-center">No.</th>
 								<th class="text-center">Kegiatan</th>
-								<th class="text-center" width="250">Nilai Anggaran</th>
+								<th class="text-center" width="250">Target</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -75,25 +63,21 @@
 						 *
 						 * @var string
 						 **/
-						foreach($this->kgiatan->getKegiatanProgramByProgram( $program->id_program ) as $keyKegiatan => $kegiatan) :
-							$ang = $this->kgiatan->getAnggaranKegiatan($kegiatan->id_kegiatan, $tahun);
+						foreach( $this->kgiatan->getOutputByKegiatanProgram($kegiatan->id_kegiatan) as $keyOutput => $output) :
+							$target = $this->kgiatan->getTargetOutputByKegiatanProgram($kegiatan->id_kegiatan, $tahun);
 						?>
 							<tr>
-								<td><?php echo ++$keyKegiatan ?>.</td>
-								<td><?php echo $kegiatan->deskripsi; ?></td>
-								<td><input type="text" name="anggaran[<?php echo @$ang->id_anggaran_kegiatan ?>]" value="<?php echo number_format(@$ang->nilai_anggaran) ?>" class="form-control inputmask"></td>
+								<td><?php echo ++$keyOutput ?>.</td>
+								<td><?php echo $output->deskripsi ?></td>
+								<td><input type="text" name="target[<?php echo @$target->id_target_output ?>]" value="<?php echo @$target->target ?>" class="form-control" <?php if($target==FALSE) echo 'desabled'; ?>></td>
 							</tr>
 						<?php endforeach; ?>
 						</tbody>
 					</table>
-						</li>
 				<?php  
-				/* End Program */
-				endforeach;
-				/* End Sasaran */
+				/* End Kegiatan */
 				endforeach;
 				?>
-					</ul>
 				</div>
 			<?php endfor; ?>
             </div>

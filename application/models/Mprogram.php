@@ -76,6 +76,10 @@ class Mprogram extends Skpd_model
 					);
 
 					$this->db->insert('program', $object);
+
+					$program = $this->db->insert_id();
+
+					$this->insertSumberAnggaranProgram($this->input->post("create[tahun][{$key}]"), $program);
 				}
 			}
 		} else {
@@ -90,9 +94,54 @@ class Mprogram extends Skpd_model
 					);
 
 					$this->db->update('program', $object, array('id_program' => $value));
+
+					$this->insertSumberAnggaranProgram($this->input->post("update[tahun][{$key}]"), $value);
 				}
 			}
 		}
+	}
+
+	public function insertSumberAnggaranProgram($tahun = FALSE, $program = 0)
+	{
+		if( is_array($tahun) )
+		{
+			foreach ($tahun as $key => $item) 
+			{
+				if( $this->checkSumberAnggaranProgram($program, $item) ) 
+				{
+					continue;
+				} else {
+					$this->db->insert('sumber_anggaran_program', array(
+						'id_program' => $program,
+						'sumber_anggaran' => null,
+						'tahun' => $item
+					));
+				}
+			}
+
+			$this->template->alert(
+				' Tersimpan! Data berhasil tersimpan.', 
+				array('type' => 'success','icon' => 'check')
+			);
+		}
+	}
+
+	public function checkSumberAnggaranProgram($program = 0, $tahun = 0)
+	{
+		$query = $this->db->get_where('sumber_anggaran_program', array(
+			'id_program' => $program,
+			'tahun' => $tahun
+		) );
+		return $query->num_rows();
+	}
+
+	public function getSumberAnggaranProgram($program = 0, $tahun = 0)
+	{
+		$query = $this->db->get_where('sumber_anggaran_program', array(
+			'id_program' => $program,
+			'tahun' => $tahun
+		) );
+		return $query->row();
 	}
 
 	public function getProgramBySasaran($sasaran = 0)
@@ -108,27 +157,65 @@ class Mprogram extends Skpd_model
 		))->row('target');
 	}
 
-	public function getAnggaranKegiatanByProgramTahun($program = 0, $tahun = 0)
+	public function getTotalAnggaranKegiatanByProgramTahun($program = 0, $tahun = 0)
 	{
-		$program = array();
-		foreach($this->getProgramByLogin() as $row)
-			$program[] = $row->id_program;
+		$program = $this->db->query(
+			"SELECT kegiatan_program.id_kegiatan FROM kegiatan_program
+			WHERE kegiatan_program.id_program IN(SELECT program.id_program FROM program WHERE program.id_program = '{$program}')
+		");
 
 		$kegiatan = array();
-		foreach($this->getKegiatanProgramByProgram( $program ) as $row)
-			$kegiatan[] = $row->id_kegiatan;
+		foreach ($program->result() as $key => $value) {
+			$kegiatan[] = $value->id_kegiatan;
+		}
 
 		if( $kegiatan )
-			$this->db->where_in('id_kegiatan', $kegiatan)
-				 ->where('tahun', $tahun);
+		{
+			$IDKegiatan = join(",", $kegiatan);
 
-		return $this->db->get('anggaran_kegiatan')->row();
+			$anggaran = $this->db->query("
+				SELECT SUM(anggaran_kegiatan.nilai_anggaran) AS anggaran FROM anggaran_kegiatan 
+				WHERE id_kegiatan IN ({$IDKegiatan}) AND tahun = '{$tahun}'
+			")->row('anggaran');
+		} else {
+			return 0;
+		}
+
+	 	return $anggaran;
+	}
+
+	public function SaveAnggaranProgram()
+	{
+		if( is_array($this->input->post('sumber')) )
+		{
+			foreach ($this->input->post('sumber') as $key => $value) 
+			{
+				$this->db->update('sumber_anggaran_program', array(
+					'sumber_anggaran' => $value
+				), array(
+					'id_sumber_anggaran_program' => $key
+				));
+			}
+
+			$this->template->alert(
+				' Tersimpan! Data berhasil tersimpan.', 
+				array('type' => 'success','icon' => 'check')
+			);
+		}
 	}
 
 	public function getKegiatanProgramByProgram($kegiatan = FALSE)
 	{
 		$this->db->where_in('id_kegiatan', $kegiatan);
 		return $this->db->get('kegiatan_program')->result();
+	}
+
+	public function getSumberAnggaranProgramByProgramTahun($program = 0, $tahun = 0)
+	{
+		return $this->db->get_where('sumber_anggaran_program', array(
+			'id_program' => $program,
+			'tahun' => $tahun
+		))->row();
 	}
 
 	public function IndikatorCreateUpdate()
@@ -157,7 +244,9 @@ class Mprogram extends Skpd_model
 
 					$this->db->insert('indikator_kinerja_program', $object);
 
-					$this->insertTargetIndikatorKinerjaProgram($this->input->post("create[tahun][{$key}]"), $key);
+					$indikator = $this->db->insert_id();
+
+					$this->insertTargetIndikatorKinerjaProgram($this->input->post("create[tahun][{$key}]"), $indikator);
 
 					$this->template->alert(
 						' Data berhasil ditambahkan.', 

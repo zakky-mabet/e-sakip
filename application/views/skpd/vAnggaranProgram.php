@@ -1,4 +1,7 @@
 <div class="row">
+	<div class="col-md-6 col-md-offset-2">
+		<?php echo $this->session->flashdata('alert'); ?>
+	</div>
 	<?php echo form_open(base_url("skpd/program/saveanggaran")); ?>
 	<div class="col-md-10">
 		<div class="nav-tabs-custom">
@@ -71,13 +74,14 @@
 						 * @var string
 						 **/
 						foreach($this->mprogram->getProgramBySasaran( $sasaran->id_sasaran) as $keyProgram => $program) :
-							$anggaran = $this->mprogram->getAnggaranKegiatanByProgramTahun($program->id_program, $tahun);
+							$anggaran = $this->mprogram->getTotalAnggaranKegiatanByProgramTahun($program->id_program, $tahun);
+							$sumber = $this->mprogram->getSumberAnggaranProgram($program->id_program, $tahun);
 						?>
 							<tr>
 								<td><?php echo ++$keyProgram ?>.</td>
 								<td><?php echo $program->deskripsi; ?></td>
-								<td class="text-center">Rp. <?php echo @number_format($anggaran->nilai_anggaran) ?></td>
-								<td><input type="text" name="sumber[<?php echo @$program->id_program ?>][<?php echo $tahun ?>]" value="" class="form-control"></td>
+								<td class="text-center">Rp. <?php echo @number_format($anggaran) ?></td>
+								<td><input type="text" name="sumber[<?php echo @$sumber->id_sumber_anggaran_program ?>]" value="<?php echo @$sumber->sumber_anggaran; ?>" class="form-control"></td>
 							</tr>
 						<?php endforeach; ?>
 						</tbody>

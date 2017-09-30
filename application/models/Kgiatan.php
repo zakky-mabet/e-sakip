@@ -4,13 +4,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Kgiatan extends Skpd_model 
 {
 	protected $CI;
+
 	public function __construct()
 	{
 		parent::__construct();
 
 		$this->CI =& get_instance();
 		
-		$this->CI->load->model('tjuan');
+		$this->CI->load->model(array('tjuan','mprogram'));
 	}
 
 	public function CreateUpdate()
@@ -92,8 +93,7 @@ class Kgiatan extends Skpd_model
 			$this->db->insert('anggaran_kegiatan', array(
 				'id_kegiatan' => $kegiatan,
 				'tahun' => $tahun,
-				'nilai_anggaran' => null,
-				'sumber_anggaran' => null
+				'nilai_anggaran' => null
 			));
 		}
 	}
@@ -147,6 +147,16 @@ class Kgiatan extends Skpd_model
 		return $this->db->get_where('kegiatan_program', array('id_program' => $program))->result();
 	}
 
+	public function getKegiatanProgramByLogin()
+	{
+		$program = array();
+		foreach ($this->CI->mprogram->getProgramByLogin() as $row) 
+			$program[] = $row->id_program;
+
+		$this->db->where_in('id_program', $program);
+		return $this->db->get('kegiatan_program')->result();
+	}
+
 	public function getPenanggungJawabKegiatanByKegiatanTahun($kegiatan = 0, $tahun = 0)
 	{
 		$query = $this->db->get_where('penanggung_jawab_kegiatan', array(
@@ -168,6 +178,11 @@ class Kgiatan extends Skpd_model
 					'id_penangung_jawab_kegiatan' => $key
 				));
 			}
+
+			$this->template->alert(
+				' Tersimpan! Data berhasil tersimpan.', 
+				array('type' => 'success','icon' => 'check')
+			);
 		}
 	}
 
@@ -183,6 +198,128 @@ class Kgiatan extends Skpd_model
 					'id_anggaran_kegiatan' => $key
 				));
 			}
+		}
+	}
+
+	public function OutputKegiatanCreateUpdate()
+	{
+		if( $this->input->post('create') )
+		{
+			if( is_array($this->input->post('create')) )
+			{
+				foreach($this->input->post('create[deskripsi]') as $key => $value) 
+				{
+					if( $value == FALSE OR $this->input->post("create[tahun][{$key}]") == FALSE) 
+					{
+						$this->template->alert(
+							' Maaf! data tidak boleh kosong.', 
+							array('type' => 'danger','icon' => 'warning')
+						);
+						continue;
+					}
+
+					$object = array(
+						'id_kegiatan' =>$key,
+						'deskripsi' => $value,
+						'tahun' => implode(',', $this->input->post("create[tahun][{$key}]")),
+						'satuan' => $this->input->post("create[satuan][{$key}]")
+					);
+
+					$this->db->insert('output_kegiatan_program', $object);
+
+					$indikator = $this->db->insert_id();
+
+					$this->insertTargetOutputKinerjaProgram($this->input->post("create[tahun][{$key}]"), $indikator);
+
+					$this->template->alert(
+						' Data berhasil ditambahkan.', 
+						array('type' => 'success','icon' => 'check')
+					);
+				}
+			}
+		} else {
+			if( is_array($this->input->post('update')) )
+			{
+				foreach($this->input->post('update[ID]') as $key => $value) 
+				{
+					$object = array(
+						'deskripsi' => $this->input->post("update[deskripsi][{$value}]"),
+						'tahun' => implode(',', $this->input->post("update[tahun][{$value}]")),
+						'satuan' => $this->input->post("update[satuan][{$value}]")
+					);
+
+					$this->insertTargetOutputKinerjaProgram($this->input->post("update[tahun][{$value}]"), $value);
+
+					$this->db->update('output_kegiatan_program', $object, array('id_output_kegiatan_program' => $value));
+				}
+
+				$this->template->alert(
+					' Data berhasil diubah.', 
+					array('type' => 'success','icon' => 'check')
+				);
+			}
+		}
+	}
+
+	public function checkTargetOutputKinerjaProgram($output = 0, $tahun = 0)
+	{
+		$query = $this->db->get_where('target_output', array(
+			'id_output_kegiatan_program' => $output,
+			'tahun' => $tahun
+		) );
+		return $query->num_rows(); 
+	}
+
+	public function insertTargetOutputKinerjaProgram($tahun = FALSE, $output = 0)
+	{
+		if( is_array($tahun) )
+		{
+			foreach ($tahun as $key => $item) 
+			{
+				if( $this->checkTargetOutputKinerjaProgram($output, $item) ) 
+				{
+					continue;
+				} else {
+					$this->db->insert('target_output', array(
+						'id_output_kegiatan_program' => $output,
+						'tahun' => $item,
+						'target' => null
+					));
+				}
+			}
+		}
+	}
+
+	public function getTargetOutputByKegiatanProgram($output = 0, $tahun = 0)
+	{
+		$query = $this->db->get_where('target_output', array(
+			'id_output_kegiatan_program' => $output,
+			'tahun' => $tahun
+		) );
+		return $query->row(); 
+	}
+
+	public function getOutputByKegiatanProgram($program = 0)
+	{
+		return $this->db->get_where('output_kegiatan_program', array('id_kegiatan' => $program))->result();
+	}
+
+	public function SaveTargetOutputKegiatan()
+	{
+		if( is_array($this->input->post('target')) )
+		{
+			foreach($this->input->post('target') as $key => $value) 
+			{
+				$this->db->update('target_output', array(
+					'target' => $value 
+				), array(
+					'id_target_output' => $key
+				));
+			}
+			$this->template->alert(
+				' Data berhasil diubah.', 
+				array('type' => 'success','icon' => 'check')
+			);
 		}
 	}
 

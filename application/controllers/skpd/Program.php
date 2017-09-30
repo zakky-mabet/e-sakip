@@ -18,7 +18,7 @@ class Program extends Skpd
 
 	public function index()
 	{
-		$this->page_title->push('Program', 'Kebijakan Rencana Strategis');
+		$this->page_title->push('Program', 'Program Rencana Strategis');
 
 		$this->data = array(
 			'title' => "Program Rencana Strategis", 
@@ -108,10 +108,8 @@ class Program extends Skpd
 
 	public function saveanggaran()
 	{
-		echo "<pre>";
-		print_r ($this->input->post());
-		echo "</pre>";
-		exit('Now in progress!');
+		$this->mprogram->SaveAnggaranProgram();
+		redirect("skpd/program/anggaran/$this->periode_awal");
 	}
 
 }
