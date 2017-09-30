@@ -9,9 +9,7 @@
         <ul class="timeline">
             <li class="time-label">
                   <span class="bg-default">Entry Indikator Sasaran</span>
-            </li>
-
-           
+            </li>           
             <?php 
             /**
              * Loop Tujuan
@@ -56,22 +54,20 @@
 				                       <?php for($tahun = $this->msasaran->periode_awal; $tahun <= $this->msasaran->periode_akhir; $tahun++) : ?>
 	                        			<div class="col-md-6">
 		                        			<label>
-		                        				<input type="checkbox" name="update[tahun][<?php echo $indikator->id_indikator_sasaran ?>][]" value="<?php echo $tahun ?>" <?php if(in_array($tahun, explode(',', $indikator->tahun))) echo 'checked'; ?>> <?php echo $tahun ?>
+		                        				<input type="checkbox" <?php if (date('Y')==$tahun): ?>
+		                        					checked
+		                        				<?php endif ?> name="update[tahun][<?php echo $indikator->id_indikator_sasaran ?>][]" value="<?php echo $tahun ?>" <?php if(in_array($tahun, explode(',', $indikator->tahun))) echo 'checked'; ?>> <?php echo $tahun ?>
 		                        			</label>
 										</div>
 	                        		<?php endfor; ?>
 	                        		</td>
 	                        		<td>
-	                        			<select name="update[indikator][<?php echo $indikator->id_indikator_sasaran ?>]" class="form-control " data-placeholder="" style="width: 100%;">
-						                    <?php foreach ($this->msasaran->master_indikator() as $key => $value): ?>
-						                    	 <option <?php if ($indikator->indikator == $value->id): ?> selected <?php endif ?>  value="<?php echo $value->id ?>"><?php echo $value->deskripsi ?></option>
-						                    <?php endforeach ?>
-						                </select> <br>
-
-	                        			<textarea name="update[deskripsi][<?php echo $indikator->id_indikator_sasaran ?>]" class="form-control" rows="" required="required"><?php echo $indikator->deskripsi ?></textarea>
+	                        		
+	                        			<textarea required="required" name="update[deskripsi][<?php echo $indikator->id_indikator_sasaran ?>]" class="form-control" rows="" ><?php echo $indikator->deskripsi ?></textarea>
 	                        		</td>
 	                        		<td class="text-center">
-	                        			<select name="update[id_satuan][<?php echo $indikator->id_indikator_sasaran ?>]" class="form-control " data-placeholder="" style="width: 100%;">
+	                        			<select required="required" name="update[id_satuan][<?php echo $indikator->id_indikator_sasaran ?>]" class="form-control " data-placeholder="" style="width: 100%;">
+	                        			 <option  value="">-- PILIH --</option>
 						                    <?php foreach ($this->msasaran->satuan() as $key => $value): ?>
 						                    	 <option <?php if ($indikator->id_satuan == $value->id): ?> selected <?php endif ?>  value="<?php echo $value->id ?>"><?php echo $value->nama ?></option>
 						                    <?php endforeach ?>
@@ -109,23 +105,19 @@
 				                       <?php for($tahun = $this->msasaran->periode_awal; $tahun <= $this->msasaran->periode_akhir; $tahun++) : ?>
 	                        			<div class="col-md-6">
 		                        			<label>
-		                        				<input type="checkbox" name="create[tahun][<?php echo $sasaran->id_sasaran ?>][]" value="<?php echo $tahun ?>">  <?php echo $tahun ?>
+		                        				<input type="checkbox" <?php if (date('Y')==$tahun): ?>
+		                        					checked
+		                        				<?php endif ?>  name="create[tahun][<?php echo $sasaran->id_sasaran ?>][]" value="<?php echo $tahun ?>">  <?php echo $tahun ?>
 		                        			</label>
 										</div>
 	                        		<?php endfor; ?>
 	                        		</td>
 	                        		<td>
-	                        			<select name="create[indikator][<?php echo $sasaran->id_sasaran ?>]" class="form-control " data-placeholder="" style="width: 100%;">
-	                        				<option value="">-- pilih indikator sasaran --</option>
-						                    <?php foreach ($this->msasaran->master_indikator() as $key => $value): ?>
-						                    	 <option value="<?php echo $value->id ?>"><?php echo $value->deskripsi ?></option>
-						                    <?php endforeach ?>
-						                </select> <br>
-
-	                        			<textarea name="create[deskripsi][<?php echo $sasaran->id_sasaran ?>]" class="form-control" rows="" required="required"></textarea>
+	                        			
+	                        			<textarea  name="create[deskripsi][<?php echo $sasaran->id_sasaran ?>]" class="form-control" rows="" required="required"></textarea>
 	                        		</td>
 	                        		<td class="text-center">
-	                        			<select name="create[id_satuan][<?php echo $sasaran->id_sasaran ?>]" class="form-control " data-placeholder="" style="width: 100%;">
+	                        			<select required="required" name="create[id_satuan][<?php echo $sasaran->id_sasaran ?>]" class="form-control " data-placeholder="" style="width: 100%;">
 	                        				<option value="">-- pilih satuan --</option>
 						                    <?php foreach ($this->msasaran->satuan() as $key => $value): ?>
 						                    	 <option value="<?php echo $value->id ?>"><?php echo $value->nama ?></option>
@@ -139,6 +131,9 @@
 				                            <input name="create[iku][<?php echo $sasaran->id_sasaran ?>]" value="yes" type="checkbox" class="minimal" > IKU
 	                        		</td>
 	                        		<td>
+	                        		<?php if (count($this->msasaran->get_tujuandansasaran()) == 0): ?>
+	                        			
+	                        		
 	                        			<a style="margin-top: 40px" href="#" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Hapus Sasaran ini?" 
 										id="btn-delete"
 										data-id="<?php echo $tujuan->id_sasaran ?>"
@@ -155,7 +150,7 @@
 										<i class="fa fa-plus"></i>
 										</button>
 
-
+										<?php endif ?>
 	                        		</td>
 	                        	</tr>
 	                        	<?php endif ?>

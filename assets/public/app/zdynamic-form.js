@@ -106,7 +106,7 @@
 	}
 
 	function get_satuan_json(selector) {
-		var option = '<option value="">-- PILIH -- </option>';
+		var option = '<option value="">-- pilih satuan -- </option>';
 		$.get(base_url + '/sasaran/get_satuan_json', function(resultSatuan) {
 			$.each(resultSatuan, function(key, value)
 			{                    			
@@ -177,16 +177,15 @@ function add_form_indikator_sasaran(data, key, nomor, parent) {
 	for( var tahun = $('tbody#data-' + data).data('tahun-awal'); tahun <= $('tbody#data-' + data).data('tahun-akhir'); tahun++)
 	{
 		html += '<div class="col-md-6"><label>';
-		html += '<input type="checkbox" name="create[tahun]['+data+']['+tahun+']" value="'+tahun+'"> ' + tahun;
+		html += '<input type="checkbox" checked name="create[tahun]['+data+']['+tahun+']" value="'+tahun+'"> ' + tahun;
 		html += '</label></div>'
 	}
 		html += '</td><td>';
-		html += '<select name="create[indikator]['+data+']" id="select-'+data+'-'+nomor+'" class="form-control input-sm" required="required">';
+		
 
-	    html +=	'</select><br>';
-		html += '<textarea name="create[deskripsi]['+data+']" class="form-control" rows="4"></textarea>';
+		html += '<textarea required="required" name="create[deskripsi]['+data+']" class="form-control" rows="2"></textarea>';
 		html += '</td><td class="text-center">',
-		html += '<select name="create[id_satuan]['+data+']" id="selectSatuan-'+data+'-'+nomor+'" class="form-control input-sm" required="required">';
+		html += '<select required="required" name="create[id_satuan]['+data+']" id="selectSatuan-'+data+'-'+nomor+'" class="form-control input-sm" >';
 		html += '</td><td class="text-center">',
 		html+=  '<input name="create[pk]['+data+']" value="yes" type="checkbox" class="minimal" > PK';
 		html += '</td><td class="text-center">',

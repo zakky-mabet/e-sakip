@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Target extends Skpd 
 {
-	
 	public function __construct()
 	{
 		parent::__construct();
@@ -30,6 +29,13 @@ class Target extends Skpd
 		);
 
 		$this->template->view('skpd/vTarget', $this->data);
+	}
+
+	public function save()
+	{
+		$this->mtarget->Update_nilai_target();
+		
+		redirect("skpd/target");
 	}
 
 	

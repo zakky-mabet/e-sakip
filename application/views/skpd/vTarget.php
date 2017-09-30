@@ -1,6 +1,7 @@
 <div class="row">
-	<?php echo form_open(base_url("skpd/program/saveanggaran")); ?>
+	<?php echo form_open(base_url("skpd/target/save")); ?>
 	<div class="col-md-10">
+
 		<div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
             <?php for($tahun = $this->mtarget->periode_awal; $tahun <= $this->mtarget->periode_akhir; $tahun++) : ?>
@@ -8,25 +9,7 @@
 					<a href="#tab-<?php echo $tahun; ?>" data-toggle="tab"><strong><?php echo $tahun ?></strong></a>
 				</li>
             <?php endfor; ?>
-				<li class="dropdown pull-right">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                  		Program <span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu">
-	                  <li class="<?php echo active_link_method('index','program'); ?>">
-	                    <a href="<?php echo base_url("skpd/program") ?>"> Program</a>
-	                  </li>
-	                  <li class="<?php echo active_link_method('anggaran','program'); ?>">
-	                    <a href="<?php echo base_url("skpd/program/anggaran/{$this->periode_awal}") ?>">Anggaran Program</a>
-	                  </li>
-	                  <li class="<?php echo active_link_method('indikator','program'); ?>">
-	                    <a href="<?php echo base_url('skpd/program/indikator'); ?>">Indikator Kinerja Program</a>
-	                  </li>
-	                  <li class="<?php echo active_link_method('target','program'); ?>">
-	                    <a href="<?php echo base_url("skpd/program/target") ?>">Target Indikator Kinerja Program</a>
-	                  </li>
-					</ul>
-              	</li>
+				
             </ul>
             <div class="tab-content">
             <?php for($tahun = $this->mtarget->periode_awal; $tahun <= $this->mtarget->periode_akhir; $tahun++) : ?>
@@ -65,14 +48,17 @@
 			             *
 			             * @var string
 			             **/
+			            foreach ($this->mtarget->getIndikatorSasarantoTarget($sasaran->id_sasaran, $tahun ) as $key => $indikator) : 
 
-			            foreach ($this->mtarget->getIndikatorSasaran($sasaran->id_sasaran) as $key => $indikator) : ?>
+			            	?>
 							<tr>
 								<td class="text-center"><?php echo ++$key ?></td>
-								<td><?php echo $indikator->deskripsi ?></td>
+								<td><?php echo $indikator->deskripsi.$indikator->tahunan?></td>
 								<td class="text-center"><?php echo $this->mtarget->getsatuan($indikator->id_satuan)->nama ?></td>
 								<td class="text-center"> <?php if ($indikator->IKU=='yes'):  ?> <i class="fa fa-check "></i>	<?php endif ?>  </td>
-								<td><input type="text" name="sumber[][]" value="" class="form-control"></td>
+								<td>
+								<?php echo form_hidden("update[ID][]", $indikator->id_target_sasaran);?>
+								<input type="text" name="update[nilai_target][<?php echo $indikator->id_target_sasaran ?>]" value="<?php echo $indikator->nilai_target  ?>" class="form-control"></td>
 							</tr>
 					<?php endforeach ?>
 						</tbody>
@@ -81,7 +67,6 @@
 				<?php  
 				/* End Sasaran */
 				endforeach;
-
 				?>
 					</ul>
 				</div>

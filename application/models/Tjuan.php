@@ -152,6 +152,8 @@ class Tjuan extends Skpd_model
 	{
 		return $this->db->get_where('indikator_tujuan', array('id_tujuan' => $tujuan))->result();
 	}
+
+
 }
 
 /* End of file Tjuan.php */
