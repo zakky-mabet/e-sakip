@@ -231,6 +231,8 @@ class Kgiatan extends Skpd_model
 
 					$this->insertTargetOutputKinerjaProgram($this->input->post("create[tahun][{$key}]"), $indikator);
 
+					$this->insertOutputKegiatanProgram($this->input->post("create[tahun][{$key}]"), $indikator);
+
 					$this->template->alert(
 						' Data berhasil ditambahkan.', 
 						array('type' => 'success','icon' => 'check')
@@ -250,6 +252,8 @@ class Kgiatan extends Skpd_model
 
 					$this->insertTargetOutputKinerjaProgram($this->input->post("update[tahun][{$value}]"), $value);
 
+					$this->insertOutputKegiatanProgram($this->input->post("update[tahun][{$value}]"), $value);
+
 					$this->db->update('output_kegiatan_program', $object, array('id_output_kegiatan_program' => $value));
 				}
 
@@ -257,6 +261,36 @@ class Kgiatan extends Skpd_model
 					' Data berhasil diubah.', 
 					array('type' => 'success','icon' => 'check')
 				);
+			}
+		}
+	}
+
+	public function checkOutputKegiatanProgram($output = 0, $tahun = 0)
+	{
+		$query = $this->db->get_where('rkt_output_kegiatan', array(
+			'id_output_kegiatan_program' => $output,
+			'tahun' => $tahun
+		) );
+		return $query->num_rows(); 
+	}
+
+	public function insertOutputKegiatanProgram($tahun = FALSE, $output = 0)
+	{
+		if( is_array($tahun) )
+		{
+			foreach ($tahun as $key => $item) 
+			{
+				if( $this->checkOutputKegiatanProgram($output, $item) ) 
+				{
+					continue;
+				} else {
+					$this->db->insert('rkt_output_kegiatan', array(
+						'id_output_kegiatan_program' => $output,
+						'tahun' => $item,
+						'nilai_target_rkt' => null,
+						'sebab'=> null
+					));
+				}
 			}
 		}
 	}
@@ -301,7 +335,43 @@ class Kgiatan extends Skpd_model
 
 	public function getOutputByKegiatanProgram($program = 0)
 	{
-		return $this->db->get_where('output_kegiatan_program', array('id_kegiatan' => $program))->result();
+		$this->db->select('output_kegiatan_program.*, master_satuan.nama as nama_satuan');
+
+		$this->db->join('master_satuan', 'master_satuan.id = output_kegiatan_program.satuan', 'left');
+
+		$this->db->where('id_kegiatan', $program);
+		return $this->db->get('output_kegiatan_program')->result();
+	}
+
+	public function getRktOutputKegiatan($output = 0, $tahun = 0)
+	{
+		$query = $this->db->get_where('rkt_output_kegiatan', array(
+			'id_output_kegiatan_program' => $output,
+			'tahun' => $tahun
+		) );
+		return $query->row(); 
+	}
+
+	public function SaveRktOutputKegiatan()
+	{
+		if( is_array($this->input->post('target')) )
+		{
+			foreach($this->input->post('target') as $key => $value) 
+			{
+				if($this->db->get_where('rkt_output_kegiatan', array('rkt_id_output_kegiatan' => $key))->num_rows()) {
+					$this->db->update('rkt_output_kegiatan', array(
+						'nilai_target_rkt' => $value ,
+						'sebab' => $this->input->post("sebab[{$key}]")
+					), array(
+						'rkt_id_output_kegiatan' => $key
+					));
+				}
+			}
+			$this->template->alert(
+				' Data berhasil diubah.', 
+				array('type' => 'success','icon' => 'check')
+			);
+		}
 	}
 
 	public function SaveTargetOutputKegiatan()
@@ -310,11 +380,13 @@ class Kgiatan extends Skpd_model
 		{
 			foreach($this->input->post('target') as $key => $value) 
 			{
-				$this->db->update('target_output', array(
-					'target' => $value 
-				), array(
-					'id_target_output' => $key
-				));
+				if($this->db->get_where('target_output', array('id_target_output' => $key))->num_rows()) {
+					$this->db->update('target_output', array(
+						'target' => $value 
+					), array(
+						'id_target_output' => $key
+					));
+				}
 			}
 			$this->template->alert(
 				' Data berhasil diubah.', 

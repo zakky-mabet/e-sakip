@@ -18,7 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                <i class="fa fa-dashboard"></i> <span>Home</span>
             </a>
         </li>
-        <li class="treeview <?php  echo active_link_multiple(array('visi','misi','tujuan','strategi', 'sasaran','kebijakan','program','kegiatan')); ?>">
+        <li class="treeview <?php  echo active_link_multiple(array('visi','misi','tujuan','strategi', 'sasaran','kebijakan','program','kegiatan', 'formulasi', 'target')); ?>">
           <a href="#">
             <i class="fa fa-files-o"></i>
             <span>Rencanan Strategis</span>
@@ -48,7 +48,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </li>
             </li>
             <li>
-              <li class="treeview <?php  echo active_link_multiple(array('sasaran')); ?>">
+              <li class="treeview <?php  echo active_link_multiple(array('sasaran','formulasi','target')); ?>">
                 <a href="#">
                   <span>Sasaran</span>
                   <span class="pull-right-container">
@@ -62,11 +62,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <li class="<?php echo active_link_method('indikator_sasaran','sasaran'); ?>">
                     <a href="<?php echo base_url("skpd/sasaran/indikator_sasaran") ?>">Indikator</a>
                   </li>
-                  <li class="<?php echo active_link_method('indikator_target','sasaran'); ?>">
-                    <a href="<?php echo base_url('skpd/sasaran/indikator_target'); ?>">Target</a>
+                  <li class="<?php echo active_link_method('index','target'); ?>">
+                    <a href="<?php echo base_url('skpd/target'); ?>">Target</a>
                   </li>
-                  <li class="<?php echo active_link_method('indikator_formulasi','sasaran'); ?>">
-                    <a href="<?php echo base_url("skpd/sasaran/indikator_formulasi") ?>">Formulasi</a>
+                  <li class="<?php echo active_link_method('index','formulasi'); ?>">
+                    <a href="<?php echo base_url("skpd/formulasi") ?>">Formulasi</a>
                   </li>
                 </ul>
               </li>
@@ -129,9 +129,116 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
           </ul>
         </li>
+        <li class="treeview <?php  echo active_link_multiple(array('rkt','rktprogram')); ?>">
+          <a href="#">
+            <i class="fa fa-files-o"></i> <span>RKT</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php echo active_link_method('index','rkt'); ?>">
+                <a href="<?php echo base_url("skpd/rkt"); ?>"> Target RKT Idikator Sasaran</a>
+            </li>
+            <li class="<?php echo active_link_method('index','rktprogram'); ?>">
+                <a href="<?php echo base_url("skpd/rktprogram") ?>"> Target RKT Idikator Program</a>
+            </li>
+            <li class="<?php echo active_link_method('rktoutputkegiatan','rktprogram'); ?>">
+                <a href="<?php echo base_url("skpd/rktprogram/rktoutputkegiatan"); ?>"> Target RKT Ouput Kegiatan</a>
+            </li>
+            <li class="<?php echo active_link_method('index','misi'); ?>">
+                <a href=""> Anggaran Program RKT</a>
+            </li>
+            <li class="<?php echo active_link_method('index','misi'); ?>">
+                <a href=""> Anggaran Kegiatan RKT</a>
+            </li>
+          </ul>
+        </li>
+        <li class="treeview <?php  echo active_link_multiple(array('reg')); ?>">
+          <a href="#">
+            <i class="fa fa-file-text-o"></i>
+            <span>Program Kerja</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php echo active_link_method('rkt','sd'); ?>">
+                <a href=""> Target RKT Idikator Sasaran</a>
+            </li>
+            <li class="<?php echo active_link_method('i;ndex','misi'); ?>">
+                <a href=""> Target RKT Idikator Program</a>
+            </li>
+            <li class="<?php echo active_link_method('i;ndex','misi'); ?>">
+                <a href=""> Target RKT Ouput Kegiatan</a>
+            </li>
+            <li class="<?php echo active_link_method('i;ndex','misi'); ?>">
+                <a href=""> Anggaran Program RKT</a>
+            </li>
+            <li class="<?php echo active_link_method('i;ndex','misi'); ?>">
+                <a href=""> Anggaran Kegiatan RKT</a>
+            </li>
+          </ul>
+        </li>
+        <li class="treeview <?php  echo active_link_multiple(array('pk')); ?>">
+          <a href="#">
+            <i class="fa fa-file-text-o"></i>
+            <span>PK Perubahan</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
+                <a href=""> Target RKT Idikator Sasaran</a>
+            </li>
+          </ul>
+        </li>
+        <li class="treeview <?php  echo active_link_multiple(array('pka')); ?>">
+          <a href="#">
+            <i class="fa fa-trophy"></i>
+            <span>Kinerja</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
+                <a href=""> Target RKT Idikator Sasaran</a>
+            </li>
+          </ul>
+        </li>
+        <li class="treeview <?php  echo active_link_multiple(array('pka')); ?>">
+          <a href="#">
+            <i class="fa fa-line-chart"></i>
+            <span>Laporan</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
+                <a href=""> Target RKT Idikator Sasaran</a>
+            </li>
+          </ul>
+        </li>
+        <li class="treeview <?php  echo active_link_multiple(array('pka')); ?>">
+          <a href="#">
+            <i class="fa fa-bank"></i>
+            <span>Instansi</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
+                <a href=""> Profil Instansi</a>
+            </li>
+          </ul>
+        </li>
         <li class="<?php echo active_link_controller('instansi'); ?>">
             <a href="<?php  echo site_url('skpd/home') ?>">
-               <i class="fa fa-bank"></i> <span>Instansi</span>
+               <i class="fa fa-info-circle"></i> <span>Panduan Pengguna</span>
             </a>
         </li>
         </ul>

@@ -128,7 +128,7 @@ class Kegiatan extends Skpd
 	public function savatargetoutput()
 	{
 		$this->kgiatan->SaveTargetOutputKegiatan();
-
+		
 		redirect("skpd/kegiatan/target/{$this->periode_awal}");
 	}
 

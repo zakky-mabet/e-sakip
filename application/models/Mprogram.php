@@ -248,6 +248,8 @@ class Mprogram extends Skpd_model
 
 					$this->insertTargetIndikatorKinerjaProgram($this->input->post("create[tahun][{$key}]"), $indikator);
 
+					$this->insertRktIndikatorProgram($this->input->post("create[tahun][{$key}]"), $indikator);
+
 					$this->template->alert(
 						' Data berhasil ditambahkan.', 
 						array('type' => 'success','icon' => 'check')
@@ -267,6 +269,8 @@ class Mprogram extends Skpd_model
 
 					$this->insertTargetIndikatorKinerjaProgram($this->input->post("update[tahun][{$value}]"), $value);
 
+					$this->insertRktIndikatorProgram($this->input->post("update[tahun][{$value}]"), $value);
+
 					$this->db->update('indikator_kinerja_program', $object, array('id_indikator_kinerja_program' => $value));
 				}
 
@@ -285,6 +289,66 @@ class Mprogram extends Skpd_model
 			'tahun' => $tahun
 		) );
 		return $query->num_rows(); 
+	}
+
+	public function checkRktIndikatorProgram($indikator = 0, $tahun = 0)
+	{
+		$query = $this->db->get_where('rkt_indikator_program', array(
+			'id_indikator_kinerja_program' => $indikator,
+			'tahun' => $tahun
+		) );
+		return $query->num_rows(); 
+	}
+
+	public function insertRktIndikatorProgram($tahun = FALSE, $indikator = 0)
+	{
+		if( is_array($tahun) )
+		{
+			foreach ($tahun as $key => $item) 
+			{
+				if( $this->checkRktIndikatorProgram($indikator, $item) ) 
+				{
+					continue;
+				} else {
+					$this->db->insert('rkt_indikator_program', array(
+						'id_indikator_kinerja_program' => $indikator,
+						'tahun' => $item,
+						'nilai_target_rkt' => null,
+						'sebab' => null
+					));
+				}
+			}
+		}
+	}
+
+	public function getRktIndikatorProgram($indikator = 0, $tahun = 0)
+	{
+		$query = $this->db->get_where('rkt_indikator_program', array(
+			'id_indikator_kinerja_program' => $indikator,
+			'tahun' => $tahun
+		) );
+		return $query->row(); 
+	}
+
+	public function SaveRktIndikatorProgram()
+	{
+		if( is_array($this->input->post('target')) )
+		{
+			 foreach ($this->input->post('target') as $key => $value) 
+			 {
+				$this->db->update('rkt_indikator_program', array(
+					'nilai_target_rkt' => $value,
+					'sebab' => $this->input->post("sebab[{$key}]")
+				), array(
+					'id_indikator_kinerja_program' => $key,
+				));
+			 }
+
+			$this->template->alert(
+				' Data berhasil diubah.', 
+				array('type' => 'success','icon' => 'check')
+			); 
+		}
 	}
 
 	public function insertTargetIndikatorKinerjaProgram($tahun = FALSE, $indikator = 0)

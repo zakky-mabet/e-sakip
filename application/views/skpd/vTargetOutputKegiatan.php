@@ -64,7 +64,7 @@
 						 * @var string
 						 **/
 						foreach( $this->kgiatan->getOutputByKegiatanProgram($kegiatan->id_kegiatan) as $keyOutput => $output) :
-							$target = $this->kgiatan->getTargetOutputByKegiatanProgram($kegiatan->id_kegiatan, $tahun);
+							$target = $this->kgiatan->getTargetOutputByKegiatanProgram($output->id_output_kegiatan_program, $tahun);
 						?>
 							<tr>
 								<td><?php echo ++$keyOutput ?>.</td>

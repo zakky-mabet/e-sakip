@@ -12,6 +12,11 @@ class Login_skpd extends CI_Controller
 		$this->load->model('users_skpd', 'user');
 
 		$this->load->helper(array('url'));
+
+		if($this->session->has_userdata('SKPD')==TRUE) 
+		{	
+			redirect(site_url('skpd/home?from_url='.current_url()));
+		}
 	}
 
 	public function index()

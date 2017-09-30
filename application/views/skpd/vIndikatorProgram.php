@@ -6,7 +6,7 @@
    	<div class="col-md-10">
         <ul class="timeline">
             <li class="time-label">
-                  <span class="bg-white">Entry Kebijakan</span>
+                  <span class="bg-white">Entry Indikator Kinerja Program</span>
             </li>
             <?php 
             /**
@@ -57,7 +57,7 @@
 	                            <tr class="bg-gray">
 	                                <th width="30">NO.</th>
 	                                <th class="text-center" width="170">AKTIF</th>
-	                                <th class="text-center">KEBIJAKAN</th>
+	                                <th class="text-center">INDIKATOR</th>
 	                                <th class="text-center" width="140">SATUAN</th>
 	                                <th class="text-center" width="150">KELOLA</th>
 	                            </tr>

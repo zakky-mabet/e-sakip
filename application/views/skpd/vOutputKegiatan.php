@@ -10,7 +10,7 @@
             </li>
             <?php 
             /**
-             * Loop Misi
+             * Loop Kegiatan
              *
              * @var string
              **/
