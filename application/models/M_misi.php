@@ -20,7 +20,7 @@ class M_misi extends CI_Model
 	
 		$this->db->join('kepala_skpd', 'kepala_skpd.id_kepala = misi.id_kepala', 'left');
 
-		return $this->db->get('misi')->result();
+		return $this->db->get_where('misi', array('id_skpd' => $this->session->userdata('SKPD')->ID))->result();
 	}
 
 	public function createorupdate()
@@ -38,7 +38,7 @@ class M_misi extends CI_Model
 						continue;			
 					
 					$object[] = array(
-						'id_kepala' => $key,
+						'id_kepala' => $this->session->userdata('SKPD')->kepala,
 						'deskripsi' => $value,
 						'tahun' => implode(',', $this->input->post("create[tahun][{$key}]")),
 					);
@@ -91,6 +91,11 @@ class M_misi extends CI_Model
 				array('type' => 'warning','icon' => 'warning')
 			);
 		}
+	}
+
+	public function get_periode()
+	{
+		return $this->db->get_where('kepala_skpd', array('id_kepala' => $this->session->userdata('SKPD')->kepala))->row();
 	}
 
 }

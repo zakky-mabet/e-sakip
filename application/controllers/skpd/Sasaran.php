@@ -84,6 +84,13 @@ class Sasaran extends Skpd
 		redirect("skpd/sasaran");
 	}
 
+	public function id($param)
+	{
+
+		print_r(array($this->db->insert_id()));
+		
+	}
+
 
 }
 

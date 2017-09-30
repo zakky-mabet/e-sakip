@@ -7,7 +7,7 @@
                   <span class="bg-blue">Entry Misi</span>
             </li>
             <li>
-                <i class="fa fa-arrow-down"></i>
+                <i class="fa fa-pencil"></i>
                 <div class="timeline-item">
                     <div class="timeline-body">
                          <div class="row-fluid">
@@ -17,10 +17,10 @@
                     <table class="table table-bordered ">
                         <thead class="bg-blue">
                             <tr>
-                                <th width="5px" class="text-center">No</th>
-                                <th width="10px" class="text-center">Tahun Aktif</th>
-                                <th width="230px" class="text-center"> Misi</th>
-                                <th width="10px" class="text-center">Aksi</th>
+                                <th width="5" class="text-center">No</th>
+                                <th width="100" class="text-center">Tahun Aktif</th>
+                                <th width="430" class="text-center"> Misi</th>
+                                <th width="10" class="text-center">Aksi</th>
                             </tr>
                         </thead>
 
@@ -29,11 +29,12 @@
                         <tbody id="itemlist">
 
                         <?php 
+
                         $no=1;
                         foreach ($misi as $key => $value) { ?>
                             <tr>
                                 <td class="text-center"><?php echo $no++ ?></td>
-                                <td width="30px" class="">
+                                <td class="">
                         <?php 
                             $x = $value->periode_awal;
                             while($x <= $value->periode_akhir ){ ?>
@@ -48,13 +49,41 @@
                         <?php echo form_hidden("update[ID][]", $value->id_misi);   $x++; } ?>
                          
                                 </td>
-                                <td width="240px">
+                                <td >
                                 <textarea required="required" name="update[deskripsi][<?php echo $value->id_misi ?>]" class="input-block-level form-control"><?php echo $value->deskripsi ?></textarea>
                                
                                 </td>
                                 <td><a href="#" class="get-delete-misi" data-id="<?php echo $value->id_misi; ?>" data-toggle="tooltip" data-placement="top" title="Hapus"><span class="btn btn-small btn-danger"><i class="fa fa-trash"></i></td>
                             </tr>
-                        <?php } ?>    
+                          
+                            
+                        <?php } ?>
+
+                        <?php if (count($misi) == 0): ?>
+                                <tr>
+                                <td class="text-center"><?php echo $no++ ?></td>
+                                <td class="">
+                                    <?php 
+                                $x = $this->m_misi->get_periode()->periode_awal;
+                                while($x <= $this->m_misi->get_periode()->periode_akhir ){ ?>
+                               
+                                <button type="button" class="btn btn-md" style="margin-bottom: 4px; margin-bottom: 4px">
+                                <input  name="create[tahun]['<?php echo $this->session->userdata('SKPD')->kepala ?>'][]" value="<?php echo $x ?>" type="checkbox" class="minimal" >
+                                <span class="em3 text-center"> <?php echo $x ?></span>
+                            </button>
+
+                        <?php  $x++; } ?>                    
+                                </td>
+                                
+                                <td >
+                                <textarea required="required" name="create[deskripsi]['<?php echo $this->session->userdata('SKPD')->kepala ?>']" class="input-block-level form-control"></textarea>
+
+                                </td>
+                                <td></td>
+                            </tr>
+                            <?php endif ?>
+                        
+
                         </tbody>
                         <tfoot>
                             <tr>
@@ -62,7 +91,7 @@
                                 <td width="10px">
                                     <button class="btn btn-small btn-default" onclick="additem(); return false">
                                     <i class="fa fa-plus"></i></button>
-                                    <button name="submit" class="btn btn-small btn-success"><i class="fa fa-save"></i> Simpan</button>
+                                    <button class="btn btn-small btn-success"><i class="fa fa-save"></i> Simpan</button>
                                 </td>
                             </tr>
                         </tfoot>
@@ -98,7 +127,7 @@
  
 //              membuat element input
                 var input_misi = document.createElement('textarea');
-                input_misi.setAttribute('name', 'create[deskripsi][<?php echo $value->id_kepala ?>]');
+                input_misi.setAttribute('name', 'create[deskripsi][<?php echo $this->session->userdata('SKPD')->kepala ?>]');
                 input_misi.setAttribute('class', 'input-block-level form-control');
                 input_misi.setAttribute('required', 'required');
  
@@ -111,20 +140,18 @@
                 jumlah.appendChild(input_misi);
                 aksi.appendChild(hapus);
 
-
                 hapus.innerHTML = '<button class="btn btn-small btn-danger"><i class="fa fa-trash"></i></button>';
 
            
 
                 input_tahun.innerHTML ='<?php
-                            $x = $value->periode_awal;
-                            while($x <= $value->periode_akhir ){ ?><button type="button" class="btn btn-md" style="margin-bottom:4px;  margin-bottom:4px"><input  name="create[tahun][<?php echo $value->id_kepala ?>][]" value="<?php echo $x ?>"  type="checkbox" <?php if ($x==date('Y')) {echo 'required="required"';} ?>class="minimal" ><span class="em3 text-center"> <?php echo $x ?></span></button><?php $x++; } ?>' ;
+                            $x = $this->m_misi->get_periode()->periode_awal;
+                            while($x <= $this->m_misi->get_periode()->periode_akhir ){ ?><button type="button" class="btn btn-md" style="margin-bottom:4px;  margin-bottom:4px"><input  name="create[tahun][<?php  echo $this->session->userdata('SKPD')->kepala ?>][]" value="<?php echo $x ?>"  type="checkbox" <?php if ($x==date('Y')) {echo 'required="required"';} ?>class="minimal" ><span class="em3 text-center"> <?php echo $x ?></span></button><?php $x++; } ?>' ;
 
                
 //              membuat aksi delete element
                 hapus.onclick = function () {
                     row.parentNode.removeChild(row);
-
 
                 };
  
@@ -153,7 +180,7 @@
     {
         $('#modal-delete').modal('show');
 
-        $('a#btn-delete').attr('href', base_url + '/skpd/misi/delete/' + $(this).data('id'));
+        $('a#btn-delete').attr('href', base_url + '/misi/delete/' + $(this).data('id'));
     });
                 </script>
 
