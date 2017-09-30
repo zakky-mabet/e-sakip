@@ -36,6 +36,8 @@ class Msasaran extends Skpd_model
 						'deskripsi' => $value,
 						'tahun' => implode(',', $this->input->post("create[tahun][{$key}]")),
 						'opsi_sasaran' => $this->input->post("create[opsi_sasaran][{$key}]"),
+						'id_kepala' =>$this->session->userdata('SKPD')->ID
+
 					);
 					$this->db->insert('sasaran', $object);
 				}
@@ -52,12 +54,9 @@ class Msasaran extends Skpd_model
 					);
 					$this->db->update('sasaran', $object, array('id_sasaran' => $value));
 				}
-			
 			}
 		}
 	}
-
-	
 
 	public function getTujuanSasaran($misi = 0)
 	{
@@ -152,8 +151,6 @@ class Msasaran extends Skpd_model
 		return $this->db->get_where('master_indikator_sasaran', array('id_skpd' => $this->session->userdata('SKPD')->ID))->result();
 	}
 
-	
-
 	public function IndikatorCreateUpdate()
 	{
 		if( $this->input->post('create') )
@@ -178,11 +175,9 @@ class Msasaran extends Skpd_model
 						'id_satuan' => $this->input->post("create[id_satuan][{$key}]"),
 						'PK' => $this->input->post("create[pk][{$key}]"),
 						'IKU' => $this->input->post("create[iku][{$key}]"),
-			
 					);
 
 					$this->db->insert('indikator_sasaran', $object);
-
 
 					//fungsi ci ambil id saat insert
 					$get_id_indikator_sasaran = $this->db->insert_id();
@@ -212,8 +207,6 @@ class Msasaran extends Skpd_model
 						);
 					}
 				}
-
-
 			}
 		} else {
 			if( is_array($this->input->post('update')) )
@@ -226,7 +219,6 @@ class Msasaran extends Skpd_model
 						'id_satuan' => $this->input->post("update[id_satuan][{$value}]"),
 						'PK' => $this->input->post("update[pk][{$value}]"),
 						'IKU' => $this->input->post("update[iku][{$value}]"),
-					
 					);
 					$this->db->update('indikator_sasaran', $object, array('id_indikator_sasaran' => $value));
 
@@ -242,33 +234,14 @@ class Msasaran extends Skpd_model
 						}
 					}
 					$this->Insert_to_target($this->input->post("update[tahun][{$key}]"), $get_id_indikator_sasaran);
-
-					if($this->db->affected_rows())
-					{
-						$this->template->alert(
-							' Data berhasil diubah.', 
-							array('type' => 'success','icon' => 'check')
-						);
-					} else {
-						$this->template->alert(
-							' Tidak ada data yang diubah.', 
-							array('type' => 'warning','icon' => 'warning')
-						);
-					}
 				}
-
-				
 			}
 		}
 	}
 	//ini adalah fungsi get id dari indikator saat inser indikator sasaran
 	public function Insert_id_ke_formulasi($get_id_indikator_sasaran = 0, $tahun = 0)
 	{
-		if ($get_id_indikator_sasaran == 0) {
-
-			redirect("skpd/sasaran");
-			
-		} else {
+		
 			
 		if( $this->cek_id_indikator_sasaran($get_id_indikator_sasaran, $tahun) == FALSE)
 		{
@@ -279,7 +252,7 @@ class Msasaran extends Skpd_model
 				'keterangan' => NULL
 			));
 		}
-		}
+		
 	}
 	//ini adalah fungsi get id dari indikator saat inser indikator sasaran
 	public function cek_id_indikator_sasaran($get_id_indikator_sasaran = 0, $tahun = 0)
@@ -290,7 +263,6 @@ class Msasaran extends Skpd_model
 		return $query->num_rows(); 
 	}
 
-
 	/* Sasaran get_id_indikator_sasaran */
 
 	public function get_sasaranTarget()
@@ -298,7 +270,7 @@ class Msasaran extends Skpd_model
 		return $this->db->get('sasaran')->result();
 	}
 
-	public function Insert_to_target($tahun = FALSE, $get_id_indikator_sasaran = 0)
+	public function Insert_to_target($tahun = 0, $get_id_indikator_sasaran = 0)
 	{
 		if( is_array($tahun) )
 		{
@@ -311,7 +283,7 @@ class Msasaran extends Skpd_model
 					$this->db->insert('target_sasaran', array(
 						'id_indikator_sasaran' => $get_id_indikator_sasaran,
 						'nilai_target' => NULL,
-						'tahun' => $item
+						'tahunan' => $item
 					));
 				}
 			}
@@ -327,7 +299,7 @@ class Msasaran extends Skpd_model
 	{
 		$query = $this->db->get_where('target_sasaran', array(
 			'id_indikator_sasaran' => $get_id_indikator_sasaran,
-			'tahun' => $tahun
+			'tahunan' => $tahun
 		) );
 		return $query->num_rows();
 	}

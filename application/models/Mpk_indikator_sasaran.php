@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Mtarget extends Skpd_model 
+class Mpk_indikator_sasaran extends Skpd_model 
 {
 	public function __construct()
 	{
@@ -9,8 +9,7 @@ class Mtarget extends Skpd_model
 	
 	public function getAllSasaran()
 	{
-		
-		return $this->db->get_where('sasaran',array('id_kepala' => $this->session->userdata('SKPD')->ID))->result();
+		return $this->db->get('sasaran')->result();
 	}
 
 	public function get_periode()
@@ -20,7 +19,10 @@ class Mtarget extends Skpd_model
 
 	public function getIndikatorSasarantoTarget($param = 0 , $tahun='' )
 	{
+		
 		$this->db->join('indikator_sasaran', 'indikator_sasaran.id_indikator_sasaran = target_sasaran.id_indikator_sasaran', 'left');
+
+		$this->db->join('rkt_target_indikator', 'rkt_target_indikator.id_target_sasaran = target_sasaran.id_target_sasaran', 'left');
 		
 		return $this->db->get_where('target_sasaran', array('id_sasaran'=> $param, 'tahunan'=> $tahun))->result();
  	}
@@ -30,7 +32,7 @@ class Mtarget extends Skpd_model
 		return $this->db->get_where('master_satuan', array('id'=> $param))->row();
 	}
 
-	public function Update_nilai_target()
+	public function Update()
 	{
 		if( $this->input->post('create') )
 		{
@@ -44,33 +46,17 @@ class Mtarget extends Skpd_model
 				foreach($this->input->post('update[ID]') as $key => $value) 
 				{
 					$object = array(
-						'nilai_target' => $this->input->post("update[nilai_target][{$value}]"),
+						'nilai_target_rkt' => $this->input->post("update[nilai_target_rkt][{$value}]"),
+						'sebab' => $this->input->post("update[sebab][{$value}]"),
 					);
-					$this->db->update('target_sasaran', $object, array('id_target_sasaran' => $value));
+					$this->db->update('rkt_target_indikator', $object, array('rkt_id_target' => $value));
 					
 				}
 
-				$this->SelectIdTargetSasaran();
+				
 			}
 		}
 	}
 
-	//fungsi untuk select id target sasaran jika tidak ada maka inser ke rkt target indikator
-	public function SelectIdTargetSasaran()
-	{
-		foreach ($this->input->post('update[ID]') as $key => $value) 
-		{
-			$query = $this->db->get_where('rkt_target_indikator', array(
-			'id_target_sasaran' => $value,
-		) );
-		 if ($query->num_rows()==0) 
-		 {
 
-		 	$object = array(
-				'id_target_sasaran' => $value,
-			);
-		  	$this->db->insert('rkt_target_indikator', $object);
-		  } 
-		}
-	}
  }
