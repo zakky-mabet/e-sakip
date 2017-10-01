@@ -58,13 +58,7 @@
 	                        		<?php endfor; ?>
 	                        		</td>
 	                        		<td>
-	                        			<select name="update[opsi_sasaran][<?php echo $tujuan->id_sasaran ?>]" class="form-control " data-placeholder="" style="width: 100%;">
-						                    <option  value="">-- pilih sasaran Kota / Kab --</option>
-						                    <?php foreach ($this->msasaran->master_sasaran() as $key => $sasaran): ?>
-						                    	 <option <?php if ($tujuan->opsi_sasaran == $sasaran->id): ?> selected <?php endif ?>  value="<?php echo $sasaran->id ?>"> <?php echo $sasaran->deskripsi; ?> </option>
-						                    <?php endforeach ?>
-						                </select> <br>
-
+	                        		
 	                        			<textarea name="update[deskripsi][<?php echo $tujuan->id_sasaran ?>]" class="form-control" rows="4" required="required"><?php echo $tujuan->deskripsi ?></textarea>
 	                        		</td>
 
@@ -107,12 +101,7 @@
 	                        		<?php endfor; ?>
 	                        		</td>
 	                        		<td>
-	                        			<select name="create[opsi_sasaran][<?php echo $misi->id_tujuan ?>]" class="form-control " data-placeholder="" style="width: 100%;">
-						                    <option  value="">-- pilih sasaran Kota / Kab --</option>
-						                    <?php foreach ($this->msasaran->master_sasaran() as $key => $sasaran): ?>
-						                    	 <option value="<?php echo $sasaran->id ?>"> <?php echo $sasaran->deskripsi; ?> </option>
-						                    <?php endforeach ?>
-						                </select> <br>
+	                        		
 	                        			<textarea name="create[deskripsi][<?php echo $misi->id_tujuan ?>]" class="form-control" rows="4" required="required"></textarea>
 	                        		</td>
 	                        		<td class="text-center">
@@ -146,9 +135,98 @@
 </div>
 
 
-<div class="modal" id="modal-delete">
+
+
+<?php  foreach( $this->msasaran->getTujuanSasaran($misi->id_tujuan) as $keyTjuan => $permasalahan) : ?>
+		
+	<?php foreach ($this->msasaran->getpermasalahan($permasalahan->id_sasaran) as $value) : ?>
+		
+	
+
+		
+	
+<div class="modal" id="modal-masalah<?php echo $permasalahan->id_sasaran ?>">
+	<div class="modal-dialog modal-lg modal-default">
+		<form action="<?php echo base_url("skpd/sasaran/createupdatemasalah") ?>" method="POST" >
+		<div class="modal-content">
+			<div class="modal-header bg-blue">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title"><i class="fa fa-warning"></i> Sasaran !</h4>
+				<span><?php echo $permasalahan->deskripsi ?></span>
+			</div>
+			<div class="modal-body">
+				
+					<div class="callout callout-default">
+	                	<h5><b>Permasalahan</b></h5>
+	                	<h1 id="tampildata"></h1>
+	                	<?php echo form_hidden("update[ID][]", $value->id_permasalahan); ?>
+		                <p><textarea class="form-control" name="update[deskripsi][<?php echo $value->id_permasalahan ?>]"><?php echo $value->deskripsi_permasalahan; ?></textarea></p>
+	              	</div>
+	              	<div class="callout callout-default">
+						  <table class="table table-bordered" >
+	                        <thead>
+	                            <tr class="bg-blue">
+	                                <th class="text-center" width="20">NO</th>
+	                                <th class="text-center" width="100">AKAR PERMASALAHAN</th>
+	                                <th class="text-center" width="100">KELOLA</th>
+	                             
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+	                        
+	                        <?php if (count($this->msasaran->getAkarpermasalahan($value->id_permasalahan))==0 ): ?>
+
+
+	                        <tr>
+	                        	<td colspan="3" valign="middle"  >
+	                        		 <div class="callout callout-danger" width="80%">
+						                <p>Maaf! Belum Ada Akar Permasalahan, Silahkan Input Permasalahah terlebih dahulu</p>
+						              </div>
+	                        	</td>
+	                        </tr>
+	                        
+	                        	
+	                        <?php else:  ?>
+	                        	<?php foreach ($this->msasaran->getAkarpermasalahan($value->id_permasalahan) as $key => $valueakar): ?>
+
+	                        <tr>
+	                        	<td class="text-center" style="vertical-align: middle;" >
+	                        		<b><?php echo ++$key ?></b>
+	                        	</td>
+	                        	<td>
+	                        		<?php echo form_hidden("updateakar[ID][]", $valueakar->id); ?>
+	                        		<textarea name="updateakar[deskripsi][<?php echo $valueakar->id ?>]" class="form-control"  ><?php echo $valueakar->deskripsi_akar; ?></textarea>
+	                        	</td>
+	                        	<td class="text-center" style="vertical-align: middle;" >
+	                        		<a href="#" class="get-delete-akar" data-id="<?php echo $valueakar->id ?>" data-toggle="tooltip" data-placement="top" title="Hapus"><span class="btn btn-small btn-danger"><i class="fa fa-trash"></i>
+	                        	</td>
+	                        
+	                        </tr>
+	                        <?php endforeach ?>
+		                    <?php endif ?>
+	                        
+	                        </tbody>
+	                        </table>
+	              	</div>
+				
+			</div>
+			<div class="modal-footer bg-silver">
+				<button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Batal</button>
+				 <input type="submit" value="Simpan"  class="btn btn-success">
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+		<?php endforeach ?>
+	<?php endforeach ?>
+
+	<div class="modal" id="modal-delete">
 	<div class="modal-dialog modal-sm modal-danger">
 		<div class="modal-content">
+
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				<h4 class="modal-title"><i class="fa fa-info-circle"></i> Hapus!</h4>
@@ -161,62 +239,3 @@
 		</div>
 	</div>
 </div>
-
-
-
-<div class="modal" id="modal-masalah">
-	<div class="modal-dialog modal-lg modal-default">
-		<form action="" method="POST" >
-		<div class="modal-content">
-			<div class="modal-header bg-blue">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title"><i class="fa fa-warning"></i> Sasaran !</h4>
-				<span></span>
-			</div>
-			<div class="modal-body">
-				
-					<div class="callout callout-default">
-	                	<h5><b>Permasalahan</b></h5>
-		                <p><textarea class="form-control" name="update"></textarea></p>
-	              	</div>
-	              	<div class="callout callout-default">
-						  <table class="table table-default" data-id="<?php echo $misi->id_tujuan ?>">
-	                        <thead>
-	                            <tr class="bg-blue">
-	                                <th class="text-center" width="20">NO</th>
-	                                <th class="text-center" width="100">Akar Permasalahan</th>
-	                            </tr>
-	                        </thead>
-	                        <tbody>
-		                        <tr>
-		                        	<td class="text-center">1</td>
-		                        	<td><textarea class="form-control" name="update"></textarea></td>
-		                        </tr>
-		                         <tr>
-		                        	<td class="text-center">2</td>
-		                        	<td><textarea class="form-control" name="update"></textarea></td>
-		                        </tr>
-		                         <tr>
-		                        	<td class="text-center">3</td>
-		                        	<td><textarea class="form-control" name="update"></textarea></td>
-		                        </tr>
-		                         <tr>
-		                        	<td class="text-center">4</td>
-		                        	<td><textarea class="form-control" name="update"></textarea></td>
-		                        </tr>
-	                        </tbody>
-	                        </table>
-	              	</div>
-				
-			</div>
-			<div class="modal-footer bg-silver">
-				<button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Batal</button>
-				 <input type="submit" class="btn btn-success">
-			</div>
-			</form>
-		</div>
-	</div>
-</div>
-
-
-

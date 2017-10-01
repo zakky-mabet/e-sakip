@@ -14,16 +14,40 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title><?php echo $title; ?></title>
+	<title><?php echo $title; ?> Kabupaten Bangka Tengah</title>
+	 <link rel="shortcut icon" type="image/png" href="<?php echo base_url('assets/public/image/favicon-title.png') ?>"/>
 	<link rel="shortcut icon" href="<?php echo base_url("public/image/site/favicon.png"); ?>">
 	<link rel="stylesheet" href="<?php echo base_url("assets/public/bootstrap/css/bootstrap.min.css"); ?>">
 	<link rel="stylesheet" href="<?php echo base_url("assets/public/font-awesome/css/font-awesome.min.css"); ?>">
 	<link rel="stylesheet" href="<?php echo base_url("assets/skpd/css/style-login.css"); ?>">
 	<link rel="stylesheet" href="<?php echo base_url("assets/public/dist/css/animate.css"); ?>">
+	<style type="text/css" media="screen">
+		.bg {
+			background: #4b7aea; /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover, #4b7aea 18%, #467fdb 55%, #0956b5 91%, #06108b 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(18%,#4b7aea), color-stop(55%,#467fdb), color-stop(91%,#0956b5), color-stop(100%,#06108b)); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover, #4b7aea 18%,#467fdb 55%,#0956b5 91%,#06108b 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover, #4b7aea 18%,#467fdb 55%,#0956b5 91%,#06108b 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover, #4b7aea 18%,#467fdb 55%,#0956b5 91%,#06108b 100%); /* IE10+ */
+background: radial-gradient(ellipse at center, #4b7aea 18%,#467fdb 55%,#0956b5 91%,#06108b 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b7aea', endColorstr='#06108b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+		}
+
+		body {
+			 background-image: url('http://localhost/kiss/assets/img/bg-big.jpg') ;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+		}
+	</style>
 </head>
-<body>
-	<div class="container">
-		<div class="col-md-4 col-md-offset-4 box-login">
+<body class="bg">
+	<div class="container " style="border: 1pt solid black; padding-bottom: 300px">
+		<div class="col-md-4 col-md-offset-4 box-login ">
 			<div class="box-logo">
 	      		<img src="<?php echo base_url("assets/images/logo-login.png"); ?>" alt="">
 	      	</div>
@@ -68,9 +92,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	      			<button type="submit" class="btn btn-primary btn-block">Dapatkan password baru</button>
 	      		</form>
 	      	</div>
-	      	<div class="box-footer">
-	      		<a href="<?php echo base_url("administrator/auth"); ?>" class="forgot"><i class="fa fa-arrow-left"></i> Masuk</a>
-	      	</div>
+	      	
 	      	<?php endif; ?>
 		</div>
 	</div>

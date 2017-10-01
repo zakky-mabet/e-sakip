@@ -36,6 +36,14 @@ class Sasaran extends Skpd
 		redirect("skpd/sasaran");
 	}
 
+	public function createupdatemasalah()
+	{
+		
+		$this->msasaran->CreateUpdatemasalah();
+
+		redirect("skpd/sasaran");
+	}
+
 	public function indikatorcreateupdate()
 	{
 		$this->msasaran->IndikatorCreateUpdate();
@@ -48,6 +56,14 @@ class Sasaran extends Skpd
 		$this->results = $this->msasaran->delete($param, $key);
 
 		$this->output->set_content_type('application/json')->set_output(json_encode($this->results));
+	}
+
+
+	public function delete_akar($param = 0)
+	{
+		$this->msasaran->delete_akar($param);
+
+		redirect("skpd/sasaran");
 	}
 
 	public function indikator_sasaran()

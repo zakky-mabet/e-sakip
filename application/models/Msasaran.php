@@ -35,11 +35,21 @@ class Msasaran extends Skpd_model
 						'id_tujuan' => $key,
 						'deskripsi' => $value,
 						'tahun' => implode(',', $this->input->post("create[tahun][{$key}]")),
-						'opsi_sasaran' => $this->input->post("create[opsi_sasaran][{$key}]"),
+				
 						'id_kepala' =>$this->session->userdata('SKPD')->ID
 
 					);
 					$this->db->insert('sasaran', $object);
+
+					$get_id_indikator_sasaran = $this->db->insert_id();
+
+					//GENERATE PERMASALAH SASARAN
+					$objectPR = array(
+						'id_sasaran' => $get_id_indikator_sasaran,
+					);
+
+					$this->db->insert('permasalahan_sasaran', $objectPR);
+
 				}
 			}
 		} else {
@@ -50,9 +60,27 @@ class Msasaran extends Skpd_model
 					$object = array(
 						'deskripsi' => $this->input->post("update[deskripsi][{$value}]"),
 						'tahun' => implode(',', $this->input->post("update[tahun][{$value}]")),
-						'opsi_sasaran' => $this->input->post("update[opsi_sasaran][{$value}]"),
+					
 					);
 					$this->db->update('sasaran', $object, array('id_sasaran' => $value));
+
+					$get_id_indikator_sasaran = $value;
+
+					foreach ($this->input->post("update[tahun][{$value}]") as $valuetahun) {
+					
+						$query = $this->db->get_where('permasalahan_sasaran', array(
+							'id_sasaran' => $get_id_indikator_sasaran,
+
+						) );
+
+						if ($query->num_rows()==0) {
+
+							$this->db->insert('permasalahan_sasaran', array(
+								'id_sasaran' => $get_id_indikator_sasaran,
+
+							));
+						}
+					} // enforeach Update table Permasalahan sasaran
 				}
 			}
 		}
@@ -61,6 +89,16 @@ class Msasaran extends Skpd_model
 	public function getTujuanSasaran($misi = 0)
 	{
 		return $this->db->get_where('sasaran', array('id_tujuan' => $misi))->result();
+	}
+
+	public function getpermasalahan($permasalahan = 0)
+	{
+		return $this->db->get_where('permasalahan_sasaran', array('id_sasaran' => $permasalahan))->result();
+	}
+
+	public function getAkarpermasalahan($param)
+	{
+		return $this->db->get_where('akar_permasalahan_sasaran',  array('id_permasalahan' => $param))->result();
 	}
 	
 	public function getMisiLogin()
@@ -191,8 +229,9 @@ class Msasaran extends Skpd_model
 						}
 					}
 
-
 					$this->Insert_to_target($this->input->post("create[tahun][{$key}]"), $get_id_indikator_sasaran);
+
+					$this->insertPKIndikatorKinerjaProgram($this->input->post("create[tahun][{$key}]"), $get_id_indikator_sasaran);
 
 					if($this->db->affected_rows())
 					{
@@ -242,6 +281,10 @@ class Msasaran extends Skpd_model
 							));
 						}
 					} // enforeach Update table sasaran_target
+
+					// GENERATE TARGET INDIKATOR PK TRIWULAN
+					$this->insertPKIndikatorKinerjaProgram($this->input->post("update[tahun][{$value}]"), $value);
+
 				}
 			}
 		}
@@ -312,6 +355,139 @@ class Msasaran extends Skpd_model
 		return $query->num_rows();
 	}
 
+
+	// GENERATE TARGET INDIKATOR PK TRIWULAN
+	public function insertPKIndikatorKinerjaProgram($tahun = FALSE, $indikator = 0)
+	{
+		if( is_array($tahun) )
+		{
+			foreach ($tahun as $key => $item) 
+			{
+				if( $this->checkPKIndikatorProgram($indikator, $item) ) 
+				{
+
+					continue;
+
+				} else {
+
+					$this->db->insert('pk_indikator_target_triwulan', array(
+						'id_indikator_sasaran' => $indikator,
+						'tahun_triwulan' => $item,
+						'triwulan' => null,
+						'nilai_target_triwulan' => null
+					));
+
+				
+						for($i = 1; $i <= 4; $i++) 
+						{
+							if( $this->checkPKIndikatorProgram($indikator, $item, "T".$i) == FALSE )
+							{
+								$this->db->insert('pk_indikator_target_triwulan', array(
+									'id_indikator_sasaran' => $indikator,
+									'tahun_triwulan' => $item,
+									'triwulan' => "T".$i,
+									'nilai_target_triwulan' => null
+								));
+							}
+						}
+					
+				}
+			}
+		}
+	}
+
+	public function checkPKIndikatorProgram($indikator = 0, $tahun = 0, $triwulan = FALSE)
+	{
+		if( $triwulan == FALSE) 
+		{
+			$query = $this->db->get_where('pk_indikator_target_triwulan', array(
+				'id_indikator_sasaran' => $indikator,
+				'tahun_triwulan' => $tahun
+			) );
+		} else {
+			$query = $this->db->get_where('pk_indikator_target_triwulan', array(
+				'id_indikator_sasaran' => $indikator,
+				'tahun_triwulan' => $tahun,
+				'triwulan' => $triwulan
+			) );
+		}
+		return $query->num_rows(); 
+	}
+
+
+	//Permasalahan Sasaran
+
+	public function CreateUpdatemasalah()
+	{
+		if( $this->input->post('updateakar') )
+		{
+			if( is_array($this->input->post('updateakar')) )
+			{
+				foreach($this->input->post('updateakar[ID]') as $key => $value) 
+				{
+					$object = array(
+
+						'deskripsi_akar' => $this->input->post("updateakar[deskripsi][{$value}]"),
+					
+					);
+					$this->db->update('akar_permasalahan_sasaran', $object, array('id' => $value));
+
+				
+
+				}
+			}
+		} else {
+			if( is_array($this->input->post('update')) )
+			{
+				foreach($this->input->post('update[ID]') as $key => $value) 
+				{
+					$object = array(
+
+						'deskripsi_permasalahan' => $this->input->post("update[deskripsi][{$value}]"),
+					
+					);
+					$this->db->update('permasalahan_sasaran', $object, array('id_permasalahan' => $value));
+
+					$get_id_indikator_sasaran = $value;
+
+					for($i=0; $i<=5; $i++ ) {
+					
+						$query = $this->db->get_where('akar_permasalahan_sasaran', array(
+							'id_permasalahan' => $get_id_indikator_sasaran,
+						
+						) );
+
+						if ($query->num_rows()==0) {
+
+							$this->db->insert('akar_permasalahan_sasaran', array(
+								'id_permasalahan' => $get_id_indikator_sasaran,
+							));
+						}
+					}
+
+			
+				}
+			}
+		}
+	}
+
+	public function delete_akar($param)
+	{
+		$this->db->delete('akar_permasalahan_sasaran', array('id' => $param));
+
+					if($this->db->affected_rows())
+					{
+						$this->template->alert(
+							' Data berhasil dihapus.', 
+							array('type' => 'success','icon' => 'check')
+						);
+					} else {
+						$this->template->alert(
+							' Tidak ada data yang terhapus.', 
+							array('type' => 'warning','icon' => 'warning')
+						);
+					} 
+	}
 }
 
 /* End of file Tjuan.php */

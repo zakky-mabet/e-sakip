@@ -65,5 +65,12 @@ class Mpk_indikator_sasaran extends Skpd_model
 		}
 	}
 
+ 	public function getIndikatorSasarantoTargetTriwulan($param = 0 , $tahun='' )
+	{
+		
+		$this->db->join('indikator_sasaran', 'indikator_sasaran.id_indikator_sasaran = pk_indikator_target_triwulan.id_indikator_sasaran', 'left');
+
+		return $this->db->get_where('pk_indikator_target_triwulan', array('id_sasaran'=> $param, 'tahun_triwulan'=> $tahun))->result();
+ 	}
 
  }
