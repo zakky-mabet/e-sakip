@@ -224,7 +224,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </a>
           <ul class="treeview-menu">
             <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
-                <a href=""> Target RKT Idikator Sasaran</a>
+                <a href=""> Rencana Strategis</a>
+            </li>
+            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
+                <a href=""> Rencana Kinerja Tahunan</a>
+            </li>
+            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
+                <a href=""> Indikator Kinerja Utama</a>
+            </li>
+            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
+                <a href=""> Perjanji Kinerja</a>
+            </li>
+            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
+                <a href=""> Perjanji Kinerja Perubahan</a>
             </li>
           </ul>
         </li>

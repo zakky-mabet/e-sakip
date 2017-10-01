@@ -36,7 +36,7 @@ class Rktprogram extends Skpd
 	public function saveindikatorprogram()
 	{
 		$this->mprogram->SaveRktIndikatorProgram();
-
+		
 		redirect('skpd/rktprogram');
 	}
 

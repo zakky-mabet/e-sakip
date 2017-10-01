@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-        <div class="modal animated fadeIn modal-danger" id="keluar" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal animated fadeIn modal-danger" id="log-off" tabindex="-1" data-backdrop="static" data-keyboard="false">
           <div class="modal-dialog modal-sm">
             <div class="modal-content">
               <div class="modal-header">
@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak</button>
-                <a href="<?php echo site_url("administrator/login/signout") ?>" type="button" class="btn btn-outline"> Iya </a>
+                <a href="<?php echo base_url("login/signout") ?>" type="button" class="btn btn-outline"> Iya </a>
               </div>
             </div>
           </div>

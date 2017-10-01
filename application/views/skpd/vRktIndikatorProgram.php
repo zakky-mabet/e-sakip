@@ -54,10 +54,10 @@
 								<td class="text-center"><?php echo $indikator->satuan ?></td>
 								<td class="text-center"><?php echo $nilaitarget ?></td>
 								<td>
-									<input type="text"  name="target[<?php echo $rkt->rkt_id_indikator_program ?>]" value="<?php echo $rkt->nilai_target_rkt ?>" class="form-control">
+									<input type="text"  name="target[<?php echo @$rkt->rkt_id_indikator_program ?>]" value="<?php echo @$rkt->nilai_target_rkt ?>" class="form-control">
 								</td>
 								<td>
-									<textarea name="sebab[<?php echo $rkt->rkt_id_indikator_program ?>]" rows="2" class="form-control"><?php echo $rkt->sebab ?></textarea>
+									<textarea name="sebab[<?php echo @$rkt->rkt_id_indikator_program ?>]" rows="2" class="form-control"><?php echo @$rkt->sebab ?></textarea>
 								</td>
 							</tr>
 						<?php  

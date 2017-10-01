@@ -577,7 +577,7 @@ class Mprogram extends Skpd_model
 					'nilai_target_rkt' => $value,
 					'sebab' => $this->input->post("sebab[{$key}]")
 				), array(
-					'id_indikator_kinerja_program' => $key,
+					'rkt_id_indikator_program' => $key,
 				));
 			 }
 
