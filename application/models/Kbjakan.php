@@ -3,10 +3,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Kbjakan extends Skpd_model 
 {
+	protected $CI;
+
 	public function __construct()
 	{
 		parent::__construct();
-		//Do your magic here
+
+		$this->CI =& get_instance();
+
+		$this->CI->load->model('tjuan','mstrategi');
+	}
+
+	public function getKebijakanByLogin()
+	{
+		$strategi = array();
+		foreach ($this->CI->mstrategi->getStrategiByLogin() as $row) 
+			$strategi[] = $row->id_strategi;
+
+		$this->db->where_in('id_strategi', $strategi);
+
+		return $this->db->get('kebijakan')->result();
 	}
 	
 	public function CreateUpdate()

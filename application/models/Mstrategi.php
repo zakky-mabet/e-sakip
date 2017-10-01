@@ -3,10 +3,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Mstrategi extends Skpd_model 
 {
+	protected $CI;
+
 	public function __construct()
 	{
 		parent::__construct();
-		//Do your magic here
+
+		$this->CI =& get_instance();
+
+		$this->CI->load->model('tjuan','mprogram');
+	}
+
+	public function getStrategiByLogin()
+	{
+		$sasaran = array();
+		foreach ($this->CI->mprogram->getSasaranByLogin() as $row) 
+			$sasaran[] = $row->id_sasaran;
+
+		$this->db->where_in('id_sasaran', $sasaran);
+
+		return $this->db->get('strategi')->result();
 	}
 
 	public function CreateUpdate()

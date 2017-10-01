@@ -214,7 +214,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
           </ul>
         </li>
-        <li class="treeview <?php  echo active_link_multiple(array('pka')); ?>">
+        <li class="treeview <?php  echo active_link_multiple(array('renstra')); ?>">
           <a href="#">
             <i class="fa fa-line-chart"></i>
             <span>Laporan</span>
@@ -223,8 +223,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
-                <a href=""> Rencana Strategis</a>
+            <li class="<?php echo active_link_method('index','renstra'); ?>">
+                <a href="<?php echo base_url("skpd/report/renstra"); ?>"> Rencana Strategis</a>
             </li>
             <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
                 <a href=""> Rencana Kinerja Tahunan</a>
