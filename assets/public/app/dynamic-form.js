@@ -1,3 +1,5 @@
+var NO = 0;
+
 $(document).ready( function() 
 {
 	/* ADD FORM TUJUAN */
@@ -61,13 +63,14 @@ $(document).ready( function()
 	});
 
 	/* ADD PROGRAM */
-	$('button#btn-add-kegiatan').on('click', function() 
+	$('button#btn-add-kegiatan').on('click', function(e) 
 	{
-		var key = $(this).data('key');
+		 e.preventDefault();
+
 		var ID = $(this).data('id');
 		var nomor = $('tbody#data-'+ ID ).children().length;
 
-		add_form_kegiatan(ID, key, nomor, $(this).data('parent') );
+		add_form_kegiatan(ID, NO++);
 	});
 
 	/* DELETE FUNGSI */
@@ -252,26 +255,30 @@ $(document).ready( function()
 
 		return true;
 	});
-
 });
+var NO = 0;
 
-function add_form_kegiatan(data, key, nomor, parent) {
-	console.log(data+','+ key+','+ nomor+','+ parent);
-	var html = '<tr id="baris-'+data+'-'+nomor+'"><td>'+ nomor +'</td>';
+function add_form_kegiatan(data, nomor) 
+{
+
+	var html = '<tr id="baris-'+data+'-'+nomor+'"><td></td>';
 		html += '<td>';
+
 	for( var tahun = $('tbody#data-' + data).data('tahun-awal'); tahun <= $('tbody#data-' + data).data('tahun-akhir'); tahun++)
 	{
 		html += '<div class="col-md-6"><label>';
-		html += '<input type="checkbox" name="create[tahun]['+data+']['+tahun+']" value="'+tahun+'" checked> ' + tahun;
-		html += '</label></div>'
+		html += '<input type="checkbox" name="create[tahun]['+data+']['+ nomor +'][]" value="'+tahun+'" checked> ' + tahun;
+		html += '</label></div>';
 	}
 		html += '</td><td>';
-		html += '<textarea name="create[deskripsi]['+data+']" class="form-control" rows="4"></textarea>';
+		html += '<textarea name="create[deskripsi]['+data+'][]" class="form-control" rows="4"></textarea>';
 		html += '</td>';
 		html += '<td class="text-center">',
 		html += '<a href="javascript:void(0)" id="delete-form" data-delete="tr#baris-'+data+'-'+nomor+'" title="Hapus tujuan ini?" class="btn btn-default"><i class="fa fa-times"></i></a>';
 	    html += '</td>';
 	    html += '</tr>';
+
+	console.log('create[tahun]['+data+']['+ nomor +']');
 
 	$(html).appendTo('tbody#data-' + data).hide().fadeIn(500).addClass('bg-silver');	
 	
@@ -281,7 +288,7 @@ function add_form_kegiatan(data, key, nomor, parent) {
 
 	$('a#delete-form').on('click', function()
 	{
-		key--;
+		NO--;
 		nomor--;
 		$($(this).data('delete')).addClass('bg-red').fadeOut(300, function() {
 			$(this).remove();
@@ -337,11 +344,6 @@ function add_form_program(data, key, nomor, parent) {
 		html += '</label></div>'
 	}
 		html += '</td><td>';
-/*		html += '<div class="form-group">';
-		html += '<select name="create[indikator]['+data+']" id="indikator-'+data+'-'+nomor+'" class="form-control" required="required">';
-
-		html +=	'</select>';
-	    html += '</div>';*/
 		html += '<textarea name="create[deskripsi]['+data+']" class="form-control" rows="4"></textarea>';
 		html += '</td>';
 		html += '<td class="text-center">',
@@ -350,8 +352,6 @@ function add_form_program(data, key, nomor, parent) {
 	    html += '</tr>';
 
 	$(html).appendTo('tbody#data-' + data).hide().fadeIn(500).addClass('bg-silver');	
-
-	get_indikator_program_json('select#indikator-' + data + '-' + nomor);
 	
 	setInterval(function() {
 		$('tr#baris-'+data+'-'+nomor).fadeIn(500).removeClass('bg-silver');
@@ -469,21 +469,22 @@ function add_form_indikator_tujuan(data, key, nomor, parent) {
 }
 
 function add_form_tujuan(data, key, nomor, parent) {
-
-	var html = '<tr id="baris-'+data+'-'+nomor+'"><td>'+ nomor +'</td>';
+	var table_nomor = nomor;
+	var html = '<tr id="baris-'+data+'-'+nomor+'"><td>'+ --table_nomor +'</td>';
 		html += '<td>';
 	for( var tahun = $('tbody#data-' + data).data('tahun-awal'); tahun <= $('tbody#data-' + data).data('tahun-akhir'); tahun++)
 	{
 		html += '<div class="col-md-6"><label>';
-		html += '<input type="checkbox" name="create[tahun]['+data+']['+tahun+']" value="'+tahun+'"> ' + tahun;
+		html += '<input type="checkbox" name="create[tahun]['+data+']['+key+'][]" value="'+tahun+'"> ' + tahun;
 		html += '</label></div>'
 	}
 		html += '</td><td>';
-		html += '<textarea name="create[deskripsi]['+data+']" class="form-control" rows="4"></textarea>';
+		html += '<textarea name="create[deskripsi]['+data+'][]" class="form-control" rows="4"></textarea>';
 		html += '</td><td class="text-center">',
 		html += '<a href="javascript:void(0)" id="delete-form" data-delete="tr#baris-'+data+'-'+nomor+'" title="Hapus tujuan ini?" class="btn btn-default"><i class="fa fa-times"></i></a>';
 	    html += '</td>';
 	    html += '</tr>';
+
 
 	$(html).appendTo('tbody#data-' + data).hide().fadeIn(500).addClass('bg-silver');
 

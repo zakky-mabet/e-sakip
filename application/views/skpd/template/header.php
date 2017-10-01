@@ -14,10 +14,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <link rel="stylesheet" href="<?php echo base_url("assets/public/font-awesome/css/font-awesome.min.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/ionicons/css/ionicons.min.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/plugins/select2/select2.min.css"); ?>">
-  <link rel="stylesheet" href="<?php echo base_url("assets/skpd/css/style-admin.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/dist/css/AdminLTE.min.css"); ?>">
-  <link rel="stylesheet" href="<?php echo base_url("assets/public/dist/css/skins/skin-blue-light.css"); ?>">
+  <link rel="stylesheet" href="<?php echo base_url("assets/skpd/css/style-admin.css"); ?>">
+  <link rel="stylesheet" href="<?php echo base_url("assets/public/dist/css/skins/skin-sakip.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/dist/css/animate.css"); ?>">  
+  <link  rel="stylesheet" href="<?php echo base_url("assets/public/dist/css/hover-min.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/plugins/bootstrap-checkbox/awesome-bootstrap-checkbox.min.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/plugins/datepicker/datepicker3.min.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/summernote/summernote.css"); ?>">
@@ -37,6 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <script src="<?php echo base_url("assets/public/plugins/datepicker/bootstrap-datepicker.min.js"); ?>"></script>
   <script src="<?php echo base_url("assets/public/summernote/summernote.min.js"); ?>"></script>
   <script src="<?php echo base_url("assets/public/plugins/mask-money/jquery.maskMoney.min.js"); ?>"></script>
+<!--   <script src="https://rubyrainbows.github.io/dynamic-forms/dynamic_forms.min.js"></script> -->
   <script type="text/javascript"> 
       var base_url   = '<?php echo site_url("skpd"); ?>';
       var base_path  = '<?php echo base_url('assets/public'); ?>';

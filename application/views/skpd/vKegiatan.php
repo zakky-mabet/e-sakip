@@ -64,9 +64,10 @@
 	                        <tbody id="data-<?php echo $program->id_program ?>" data-id="<?php echo $program->id_program ?>" data-tahun-awal="<?php echo $this->tjuan->periode_awal ?>" data-tahun-akhir="<?php echo $this->tjuan->periode_akhir ?>">
 								<!-- UPDATE -->
 					            <?php 
+					            $NO = 1;
+					            $cekLoop = true;
 					            if( $this->kgiatan->getKegiatanProgramByProgram($program->id_program) ) :
 					            /* Loop kegiatan terisi */
-					            $cekLoop = true;
 					            foreach( $this->kgiatan->getKegiatanProgramByProgram($program->id_program) as $keyKegiatan => $kegiatan) :
 					            	echo form_hidden("update[ID][]", $kegiatan->id_kegiatan);
 					            ?>
@@ -92,50 +93,28 @@
 										data-remove="tr.dt-<?php echo $kegiatan->id_kegiatan; ?>">
 											<i class="fa fa-times"></i>
 										</a>
-										<?php if( $cekLoop) : 
-										$cekLoop = false;
-										?>
-										<button id="btn-add-kegiatan" type="button" class="btn btn-default" 
-										data-id="<?php echo $program->id_program ?>" 
-										data-parent="<?php echo $key ?>"
-										data-key="1"
-										title="Tambah Form">
-											<i class="fa fa-plus"></i>
-										</button>
-									<?php endif; ?>
 	                        		</td>
 	                        	</tr>
 					            <?php
 					        	endforeach;
-					        	else :
+					        	endif;
 					            ?>
 								<!-- End Update -->
+	                        </tbody>
+	                        <tfoot>
 	                        	<tr>
-	                        		<td>1.</td>
-	                        		<td>
-	                        		<?php for($tahun = $this->tjuan->periode_awal; $tahun <= $this->tjuan->periode_akhir; $tahun++) : ?>
-	                        			<div class="col-md-6">
-		                        			<label>
-		                        				<input type="checkbox" name="create[tahun][<?php echo $program->id_program ?>][]" value="<?php echo $tahun ?>" <?php if(in_array($tahun, explode(',', $program->tahun))) echo 'checked'; ?>> <?php echo $tahun ?>
-		                        			</label>
-										</div>
-	                        		<?php endfor; ?>
-	                        		</td>
-	                        		<td>
-	                        			<textarea name="create[deskripsi][<?php echo $program->id_program ?>]" class="form-control" rows="4" required="required"></textarea>
-	                        		</td>
-	                        		<td class="text-center">
-										<button id="btn-add-kegiatan" type="button" class="btn btn-default" 
+	                        		<td colspan="4">
+										<button id="btn-add-kegiatan" type="button" class="btn btn-default pull-right" 
 										data-id="<?php echo $program->id_program ?>" 
 										data-parent="<?php echo $key ?>"
-										data-key="1"
+										data-key="<?php echo $NO; ?>"
+										data-create="yes"
 										title="Tambah Form">
-											<i class="fa fa-plus"></i>
+											<i class="fa fa-plus"></i> Tambah Form
 										</button>
 	                        		</td>
 	                        	</tr>
-	                        	<?php endif; ?>
-	                        </tbody>
+	                        </tfoot>
 	                    </table>
 	                </div>
                 </div>
@@ -156,6 +135,7 @@
    			<button class="btn bg-blue btn-app"><i class="fa fa-save"></i> Simpan</button>
    		</div>
    	</div>
+
    	</form>
 </div>
 

@@ -85,13 +85,13 @@
 	                        		<?php for($tahun = $this->tjuan->periode_awal; $tahun <= $this->tjuan->periode_akhir; $tahun++) : ?>
 	                        			<div class="col-md-6">
 		                        			<label>
-		                        				<input type="checkbox" name="create[tahun][<?php echo $misi->id_misi ?>][]" value="<?php echo $tahun ?>"> <?php echo $tahun ?>
+		                        				<input type="checkbox" name="create[tahun][<?php echo $misi->id_misi ?>][0][]" value="<?php echo $tahun ?>"> <?php echo $tahun ?>
 		                        			</label>
 										</div>
 	                        		<?php endfor; ?>
 	                        		</td>
 	                        		<td>
-	                        			<textarea name="create[deskripsi][<?php echo $misi->id_misi ?>]" class="form-control" rows="4" required="required"></textarea>
+	                        			<textarea name="create[deskripsi][<?php echo $misi->id_misi ?>][]" class="form-control" rows="4" required="required"></textarea>
 	                        		</td>
 	                        		<td class="text-center">
 										<button id="btn-add-tujuan" type="button" class="btn btn-default" 

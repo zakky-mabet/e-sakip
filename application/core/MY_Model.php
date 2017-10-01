@@ -41,7 +41,17 @@ class Skpd_model extends MY_Model
 		return $this->db->get('master_satuan')->result();
 	}
 
-	
+	public function getPeriode()
+	{
+		$periode = array();
+
+		for($tahun = $this->tjuan->periode_awal; $tahun <= $this->tjuan->periode_akhir; $tahun++)
+		{
+			$periode[] = $tahun;
+		}
+
+		return $periode;
+	}
 
 	
 }

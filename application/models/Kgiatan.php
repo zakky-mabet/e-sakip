@@ -20,6 +20,7 @@ class Kgiatan extends Skpd_model
 		{
 			if( is_array($this->input->post('create')) )
 			{
+				$th = 1;
 				foreach($this->input->post('create[deskripsi]') as $key => $value) 
 				{
 					if( $value == FALSE ) 
@@ -34,21 +35,10 @@ class Kgiatan extends Skpd_model
 					$object = array(
 						'id_program' => $key,
 						'deskripsi' => $value,
-						'tahun' => implode(',', $this->input->post("create[tahun][{$key}]"))
+						'tahun' => $this->input->post("create[tahun]")
 					);
 
-					$this->db->insert('kegiatan_program', $object);
-
-					$kegiatan = $this->db->insert_id();
-
-					if( is_array($this->input->post("create[tahun][{$key}]")) )
-					{
-						foreach ($this->input->post("create[tahun][{$key}]") as $item => $tahun) 
-						{
-							$this->insertAnggaranKegiatan($kegiatan, $tahun);
-							$this->insertPenanggungJawabKegiatan($kegiatan, $tahun);
-						}
-					}
+					$this->insertKegiatanProgram($key, $object);
 
 					$this->template->alert(
 						' Data berhasil disimpan.', 
@@ -82,6 +72,36 @@ class Kgiatan extends Skpd_model
 						array('type' => 'success','icon' => 'check')
 					);
 				}
+			}
+		}
+	}
+
+	public function insertKegiatanProgram( $program = 0, $data = FALSE)
+	{
+		if( is_array($data) )
+		{
+			$no = 0;
+			foreach ($data['deskripsi'] as $key => $deskripsi) 
+			{
+				$object = array(
+					'id_program' => $program,
+					'deskripsi' => $deskripsi,
+					'tahun' => @implode(',', $this->getPeriode())
+				);
+
+				$this->db->insert('kegiatan_program', $object);
+
+				$kegiatan = $this->db->insert_id(); 
+
+				if( @is_array(  $this->getPeriode() ) )
+				{
+
+					foreach ($this->getPeriode() as $item => $tahun) 
+					{
+						$this->insertAnggaranKegiatan($kegiatan, $tahun);
+						$this->insertPenanggungJawabKegiatan($kegiatan, $tahun);
+					}
+				}	
 			}
 		}
 	}
