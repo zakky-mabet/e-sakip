@@ -337,11 +337,11 @@ function add_form_program(data, key, nomor, parent) {
 		html += '</label></div>'
 	}
 		html += '</td><td>';
-		html += '<div class="form-group">';
+/*		html += '<div class="form-group">';
 		html += '<select name="create[indikator]['+data+']" id="indikator-'+data+'-'+nomor+'" class="form-control" required="required">';
 
 		html +=	'</select>';
-	    html += '</div>';
+	    html += '</div>';*/
 		html += '<textarea name="create[deskripsi]['+data+']" class="form-control" rows="4"></textarea>';
 		html += '</td>';
 		html += '<td class="text-center">',

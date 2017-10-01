@@ -41,8 +41,8 @@
 								<td><?php echo ++$keyInd ?>.</td>
 								<td><?php echo $indikator->deskripsi; ?></td>
 								<td class="text-center"><?php echo $indikator->satuan ?></td>
-								<td class="text-center"><?php echo $nilaitarget ?></td>
-								<td class="text-center"><?php echo $rkt->nilai_target_rkt ?></td>
+								<td class="text-center"><?php echo @$nilaitarget ?></td>
+								<td class="text-center"><?php echo @$rkt->nilai_target_rkt ?></td>
 								<td>
 									<input type="text" name="target[<?php echo @$PKtahun->id_pk_program ?>]" class="form-control input-sm" value="<?php echo @$PKtahun->nilai_target ?>">
 								</td>

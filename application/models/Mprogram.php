@@ -69,7 +69,7 @@ class Mprogram extends Skpd_model
 					}
 
 					$object = array(
-						'id_indikator_sasaran' =>$this->input->post("create[indikator][{$key}]"),
+						'id_indikator_sasaran' =>null,
 						'deskripsi' => $value,
 						'tahun' => implode(',', $this->input->post("create[tahun][{$key}]")),
 						'id_sasaran' => $key
@@ -82,6 +82,8 @@ class Mprogram extends Skpd_model
 					$this->insertSumberAnggaranProgram($this->input->post("create[tahun][{$key}]"), $program);
 
 					$this->insertRktAnggaranKegiatan($this->input->post("create[tahun][{$key}]"), $program);
+
+					$this->insertPKAnggaranProgram($this->input->post("create[tahun][{$key}]"), $program);
 				}
 			}
 		} else {
@@ -92,16 +94,74 @@ class Mprogram extends Skpd_model
 					$object = array(
 						'deskripsi' => $this->input->post("update[deskripsi][{$value}]"),
 						'tahun' => implode(',', $this->input->post("update[tahun][{$value}]")),
-						'id_indikator_sasaran' => $this->input->post("update[indikator][{$value}]")
+						/*'id_indikator_sasaran' => $this->input->post("update[indikator][{$value}]")*/
 					);
 
 					$this->db->update('program', $object, array('id_program' => $value));
 
-					$this->insertSumberAnggaranProgram($this->input->post("update[tahun][{$key}]"), $value);
+					$this->insertSumberAnggaranProgram($this->input->post("update[tahun][{$value}]"), $value);
 
-					$this->insertRktAnggaranKegiatan($this->input->post("update[tahun][{$key}]"), $value);
+					$this->insertRktAnggaranKegiatan($this->input->post("update[tahun][{$value}]"), $value);
+
+					$this->insertPKAnggaranProgram($this->input->post("update[tahun][{$value}]"), $value);
 				}
 			}
+		}
+	}
+
+	public function getPKAnggaranProgram($program = 0, $tahun = 0)
+	{
+		$query = $this->db->get_where('pk_anggaran_kegiatan', array(
+			'id_program' => $program,
+			'tahun' => $tahun
+		) );
+		return $query->row();
+	}
+
+	public function insertPKAnggaranProgram($tahun = FALSE, $program = 0)
+	{
+		if( is_array($tahun) )
+		{
+			foreach ($tahun as $key => $item) 
+			{
+				if( $this->getPKAnggaranProgram($program, $item) ) 
+				{
+					continue;
+				} else {
+					$this->db->insert('pk_anggaran_kegiatan', array(
+						'id_program' => $program,
+						'nilai_anggaran' => null,
+						'sebab'=> null,
+						'tahun' => $item
+					));
+				}
+			}
+
+			$this->template->alert(
+				' Tersimpan! Data berhasil tersimpan.', 
+				array('type' => 'success','icon' => 'check')
+			);
+		}
+	}
+
+	public function UpdateAnggaranKegiatanPK()
+	{
+		if( is_array($this->input->post('anggaran')) )
+		{
+			foreach ($this->input->post('anggaran') as $key => $value) 
+			{
+				$this->db->update('pk_anggaran_kegiatan', array(
+					'nilai_anggaran' => str_replace(',', '', $value),
+					'sebab' => $this->input->post("sebab[{$key}]")
+				), array(
+					'id_pk_anggaran_kegiatan' => $key
+				));
+			}
+
+			$this->template->alert(
+				' Tersimpan! Data berhasil tersimpan.', 
+				array('type' => 'success','icon' => 'check')
+			);
 		}
 	}
 

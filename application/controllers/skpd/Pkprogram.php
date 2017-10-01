@@ -9,6 +9,8 @@ class Pkprogram extends Skpd
 		$this->breadcrumbs->unshift(1, 'Program Kerja',  'skpd/pkprogram');
 
 		$this->load->model(array('mprogram','mstrategi','tjuan','kgiatan'));
+
+		$this->load->js(base_url("assets/public/app/dynamic-form.js"));
 	}
 
 	public function index()
@@ -55,6 +57,47 @@ class Pkprogram extends Skpd
 		} else {
 			redirect('skpd/pkprogram');
 		}
+	}
+
+	public function anggaranprogram()
+	{
+		$this->page_title->push('Program Kerja', ' Program dan Anggaran Penetapan Kinerja');
+
+		$this->breadcrumbs->unshift(2, ' Program dan Anggaran Penetapan Kinerja',  'skpd/rktprogram');
+
+		$this->tahun = $this->periode_awal;
+
+		$this->data = array(
+			'title' => "Program dan Anggaran Penetapan Kinerja", 
+			'breadcrumbs' => $this->breadcrumbs->show(),
+			'page_title' => $this->page_title->show(),
+		);
+
+		$this->template->view('skpd/vPKAnggaranProgram', $this->data);
+	}
+
+	public function anggarankegiatan()
+	{
+		$this->page_title->push('Program Kerja', ' Anggaran Kegiatan Penetapan Kinerja');
+
+		$this->breadcrumbs->unshift(2, ' Anggaran Kegiatan Penetapan Kinerja',  'skpd/rktprogram');
+
+		$this->tahun = $this->periode_awal;
+
+		$this->data = array(
+			'title' => "Anggaran Kegiatan Penetapan Kinerja", 
+			'breadcrumbs' => $this->breadcrumbs->show(),
+			'page_title' => $this->page_title->show(),
+		);
+
+		$this->template->view('skpd/vPKAnggaranKegiatan', $this->data);
+	}
+
+	public function savepkanggaran()
+	{
+		$this->mprogram->UpdateAnggaranKegiatanPK();
+
+		redirect('skpd/pkprogram/anggarankegiatan');
 	}
 
 }
