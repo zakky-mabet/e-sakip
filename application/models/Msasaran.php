@@ -224,16 +224,24 @@ class Msasaran extends Skpd_model
 
 					//fungsi ci ambil id saat insert
 
-					$get_id_indikator_sasaran = $this->db->insert_id();
+					$get_id_indikator_sasaran = $value;
 
-					if( is_array($this->input->post("update[tahun][{$key}]")) )
-					{
-						foreach ($this->input->post("update[tahun][{$key}]") as $item => $tahun) 
-						{
-							$this->Insert_id_ke_formulasi($get_id_indikator_sasaran, $tahun);
+					foreach ($this->input->post("update[tahun][{$value}]") as $valuetahun) {
+					
+						$query = $this->db->get_where('target_sasaran', array(
+							'id_indikator_sasaran' => $get_id_indikator_sasaran,
+							'tahunan' => $valuetahun,
+						) );
+
+						if ($query->num_rows()==0) {
+
+							$this->db->insert('target_sasaran', array(
+								'id_indikator_sasaran' => $get_id_indikator_sasaran,
+								'nilai_target' => NULL,
+								'tahunan' => $valuetahun
+							));
 						}
-					}
-					$this->Insert_to_target($this->input->post("update[tahun][{$key}]"), $get_id_indikator_sasaran);
+					} // enforeach Update table sasaran_target
 				}
 			}
 		}

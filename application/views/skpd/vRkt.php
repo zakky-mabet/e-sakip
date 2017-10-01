@@ -1,5 +1,8 @@
 <div class="row">
 	<?php echo form_open(base_url("skpd/rkt/save")); ?>
+	<div class="col-md-6 col-md-offset-3">
+		<?php echo $this->session->flashdata('alert'); ?>
+	</div>
 	<div class="col-md-10">
 
 		<div class="nav-tabs-custom">
@@ -38,9 +41,9 @@
 								<th style="vertical-align: middle;" class="text-center" width="300">Indikator</th>
 								<th style="vertical-align: middle;" class="text-center" width="20">Satuan</th>
 								<th style="vertical-align: middle;" class="text-center" width="20">IKU</th>
-								<th style="vertical-align: middle;" class="text-center" width="10">Target Renstra <?php echo $tahun; ?> </th>
-								<th style="vertical-align: middle;" class="text-center" width="50">Target RKT <?php echo $tahun; ?> </th>
-								<th style="vertical-align: middle;" class="text-center" width="100">Sebab Perubahan </th>
+								<th style="vertical-align: middle;" class="text-center" width="10"><small>Target Renstra <?php echo $tahun; ?> </small></th>
+								<th style="vertical-align: middle;" class="text-center" width="50"> <small>Target RKT <?php echo $tahun; ?></small> </th>
+								<th style="vertical-align: middle;" class="text-center" width="100"><small>Sebab Perubahan</small> </th>
 							</tr>
 						</thead>
 						<tbody>
@@ -54,8 +57,8 @@
 
 			            	?>
 							<tr>
-								<td class="text-center"><?php echo ++$key ?></td>
-								<td><?php echo $indikator->deskripsi.$indikator->tahunan?></td>
+								<td style="vertical-align: middle;" class="text-center"><?php echo ++$key ?></td>
+								<td style="vertical-align: middle;" ><?php echo $indikator->deskripsi ?></td>
 								<td  style="vertical-align: middle;"  class="text-center"><?php echo $this->mrkt->getsatuan($indikator->id_satuan)->nama ?></td>
 								<td  style="vertical-align: middle;"  class="text-center"> <?php if ($indikator->IKU=='yes'):  ?> <i class="fa fa-check "></i>	<?php endif ?>  </td>
 								<td  style="vertical-align: middle;" class="text-center" ><?php  echo $indikator->nilai_target  ?></td>

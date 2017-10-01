@@ -1,10 +1,13 @@
 <div class="row">
-	<?php echo form_open(base_url("skpd/rkt/save")); ?>
+	<?php echo form_open(base_url("skpd/pk_indikator_sasaran/save")); ?>
+	<div class="col-md-6 col-md-offset-3">
+		<?php echo $this->session->flashdata('alert'); ?>
+	</div>
 	<div class="col-md-10">
 
 		<div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-            <?php for($tahun = $this->mrkt->periode_awal; $tahun <= $this->mrkt->periode_akhir; $tahun++) : ?>
+            <?php for($tahun = $this->mpk_indikator_sasaran->periode_awal; $tahun <= $this->mpk_indikator_sasaran->periode_akhir; $tahun++) : ?>
 				<li class="<?php if(date('Y')==$tahun) echo 'active'; ?>">
 					<a href="#tab-<?php echo $tahun; ?>" data-toggle="tab"><strong><?php echo $tahun ?></strong></a>
 				</li>
@@ -12,12 +15,12 @@
 				
             </ul>
             <div class="tab-content">
-            <?php for($tahun = $this->mrkt->periode_awal; $tahun <= $this->mrkt->periode_akhir; $tahun++) : ?>
+            <?php for($tahun = $this->mpk_indikator_sasaran->periode_awal; $tahun <= $this->mpk_indikator_sasaran->periode_akhir; $tahun++) : ?>
 				<div class="tab-pane <?php if(date('Y')==$tahun) echo 'active'; ?>" id="tab-<?php echo $tahun; ?>">
 			        <ul class="timeline">
 			          
 			            <li class="time-label">
-			                  <span class="bg-blue">Entri Target Indikator Rencana Kinerja Tahunan </span>
+			                  <span class="bg-blue">Entri Target Indikator Penetapan Kinerja Tahunan </span>
 			            </li>
 			            <?php 
 			            /**
@@ -25,22 +28,23 @@
 			             *
 			             * @var string
 			             **/
-			            foreach(  $this->mrkt->getAllSasaran( ) as $key => $sasaran) : ?>
+			            foreach(  $this->mpk_indikator_sasaran->getAllSasaran( ) as $key => $sasaran) : ?>
 			            <li>
 					<table class="table table-bordered bg-white">
 						<thead class="bg-blue">
 							<tr>
 								<th rowspan="1" width="50" class="text-center"><?php echo $tahun ?></th>
-								<td colspan="6" width="100" valign="middle" class="bg-silver" style="color: black"><strong>Sasaran :</strong> <?php echo $sasaran->deskripsi ?></td>
+								<td colspan="7" width="100" valign="middle" class="bg-silver" style="color: black"><strong>Sasaran :</strong> <?php echo $sasaran->deskripsi ?></td>
 							</tr>
 							<tr>
 								<th style="vertical-align: middle;" class="text-center" width="10">No.</th>
 								<th style="vertical-align: middle;" class="text-center" width="300">Indikator</th>
 								<th style="vertical-align: middle;" class="text-center" width="20">Satuan</th>
 								<th style="vertical-align: middle;" class="text-center" width="20">IKU</th>
-								<th style="vertical-align: middle;" class="text-center" width="10">Target Renstra <?php echo $tahun; ?> </th>
-								<th style="vertical-align: middle;" class="text-center" width="50">Target RKT <?php echo $tahun; ?> </th>
-								<th style="vertical-align: middle;" class="text-center" width="100">Sebab Perubahan </th>
+								<th style="vertical-align: middle;" class="text-center" width="10"><small>Target Renstra <?php echo $tahun; ?></small> </th>
+								<th style="vertical-align: middle;" class="text-center" width="50"> <small>Target RKT <?php echo $tahun; ?> </small> </th>
+								<th style="vertical-align: middle;" class="text-center" width="50"> <small>Target PK <?php echo $tahun; ?></small> </th>
+								<th style="vertical-align: middle;" class="text-center" width="100"><small>Sebab Perubahan</small> </th>
 							</tr>
 						</thead>
 						<tbody>
@@ -50,20 +54,25 @@
 			             *
 			             * @var string
 			             **/
-			            foreach ($this->mrkt->getIndikatorSasarantoTarget($sasaran->id_sasaran, $tahun ) as $key => $indikator) : 
+			            foreach ($this->mpk_indikator_sasaran->getIndikatorSasarantoTarget($sasaran->id_sasaran, $tahun ) as $key => $indikator) : 
 
 			            	?>
+			        
 							<tr>
-								<td class="text-center"><?php echo ++$key ?></td>
-								<td><?php echo $indikator->deskripsi.$indikator->tahunan?></td>
-								<td  style="vertical-align: middle;"  class="text-center"><?php echo $this->mrkt->getsatuan($indikator->id_satuan)->nama ?></td>
+								<td style="vertical-align: middle;" class="text-center"><?php echo ++$key ?></td>
+
+								<td style="vertical-align: middle;"><?php echo $indikator->deskripsi ?></td>
+								<td  style="vertical-align: middle;"  class="text-center"><?php echo $this->mpk_indikator_sasaran->getsatuan($indikator->id_satuan)->nama ?></td>
 								<td  style="vertical-align: middle;"  class="text-center"> <?php if ($indikator->IKU=='yes'):  ?> <i class="fa fa-check "></i>	<?php endif ?>  </td>
+								
 								<td  style="vertical-align: middle;" class="text-center" ><?php  echo $indikator->nilai_target  ?></td>
+								<td  style="vertical-align: middle;" class="text-center" ><?php  echo $indikator->nilai_target_rkt  ?></td>
 								<td>
-								<input type="text" name="update[nilai_target_rkt][<?php echo $indikator->rkt_id_target ?>]" value="<?php echo $indikator->nilai_target_rkt  ?>" class="form-control"></td>
-								<td  style="vertical-align: middle;" >
-								<?php echo form_hidden("update[ID][]", $indikator->rkt_id_target);?>
-								<input type="text" name="update[sebab][<?php echo $indikator->rkt_id_target ?>]" value="<?php echo $indikator->sebab  ?>" class="form-control"></td>
+								
+								<input type="text" name="update[nilai_target_pk][<?php echo $indikator->id_pk_target ?>]" value="<?php echo $indikator->nilai_target_pk  ?>" class="form-control"></td>
+								<td>
+								<?php echo form_hidden("update[ID][]", $indikator->id_pk_target);?>
+								<input type="text" name="update[sebab_pk][<?php echo $indikator->id_pk_target ?>]" value="<?php echo $indikator->sebab_pk  ?>" class="form-control"></td>
 							</tr>
 					<?php endforeach ?>
 						</tbody>

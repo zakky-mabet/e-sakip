@@ -48,15 +48,22 @@ class Mtarget extends Skpd_model
 					);
 					$this->db->update('target_sasaran', $object, array('id_target_sasaran' => $value));
 					
+					$this->template->alert(
+							' Data berhasil disimpan.', 
+							array('type' => 'success','icon' => 'check')
+						);
 				}
 
-				$this->SelectIdTargetSasaran();
+				$this->SelectIdTargetSasarandanpkindikator();
+				
+				$this->SelectIdTargetSasarandanpkindikatorPK();
+
 			}
 		}
 	}
 
 	//fungsi untuk select id target sasaran jika tidak ada maka inser ke rkt target indikator
-	public function SelectIdTargetSasaran()
+	public function SelectIdTargetSasarandanpkindikator()
 	{
 		foreach ($this->input->post('update[ID]') as $key => $value) 
 		{
@@ -65,12 +72,32 @@ class Mtarget extends Skpd_model
 		) );
 		 if ($query->num_rows()==0) 
 		 {
-
 		 	$object = array(
 				'id_target_sasaran' => $value,
 			);
+			
 		  	$this->db->insert('rkt_target_indikator', $object);
 		  } 
 		}
 	}
+
+	//fungsi untuk select id target sasaran jika tidak ada maka inser ke pk target indikator
+	public function SelectIdTargetSasarandanpkindikatorPK()
+	{
+		foreach ($this->input->post('update[ID]') as $key => $value) 
+		{
+			$query = $this->db->get_where('pk_indikator_target', array(
+			'id_indikator_target' => $value,
+		) );
+		 if ($query->num_rows()==0) 
+		 {
+		 	$object_pk = array(
+				'id_indikator_target' => $value,
+			);
+			$this->db->insert('pk_indikator_target', $object_pk);
+		  } 
+		}
+	}
  }
+
+ 

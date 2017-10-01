@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
 class Mpk_indikator_sasaran extends Skpd_model 
 {
 	public function __construct()
@@ -23,6 +24,8 @@ class Mpk_indikator_sasaran extends Skpd_model
 		$this->db->join('indikator_sasaran', 'indikator_sasaran.id_indikator_sasaran = target_sasaran.id_indikator_sasaran', 'left');
 
 		$this->db->join('rkt_target_indikator', 'rkt_target_indikator.id_target_sasaran = target_sasaran.id_target_sasaran', 'left');
+
+		$this->db->join('pk_indikator_target', 'pk_indikator_target.id_indikator_target = target_sasaran.id_target_sasaran', 'left');
 		
 		return $this->db->get_where('target_sasaran', array('id_sasaran'=> $param, 'tahunan'=> $tahun))->result();
  	}
@@ -46,11 +49,15 @@ class Mpk_indikator_sasaran extends Skpd_model
 				foreach($this->input->post('update[ID]') as $key => $value) 
 				{
 					$object = array(
-						'nilai_target_rkt' => $this->input->post("update[nilai_target_rkt][{$value}]"),
-						'sebab' => $this->input->post("update[sebab][{$value}]"),
+						'nilai_target_pk' => $this->input->post("update[nilai_target_pk][{$value}]"),
+						'sebab_pk' => $this->input->post("update[sebab_pk][{$value}]"),
 					);
-					$this->db->update('rkt_target_indikator', $object, array('rkt_id_target' => $value));
+					$this->db->update('pk_indikator_target', $object, array('id_pk_target' => $value));
 					
+					$this->template->alert(
+							' Data berhasil disimpan.', 
+							array('type' => 'success','icon' => 'check')
+						);
 				}
 
 				

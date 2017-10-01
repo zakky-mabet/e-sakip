@@ -33,7 +33,7 @@ class Target extends Skpd
 
 	public function save()
 	{
-		$this->mtarget->SelectIdTargetSasaran();
+		$this->mtarget->Update_nilai_target();
 
 		redirect("skpd/target");
 	}
