@@ -7,7 +7,7 @@ class Pk_indikator_sasaran extends Skpd
 	{
 		parent::__construct();
 
-		$this->breadcrumbs->unshift(1, 'Rencana Kinerja Tahunan',  $this->uri->uri_string());
+		$this->breadcrumbs->unshift(1, 'Penetapan Kinerja Tahunan',  $this->uri->uri_string());
 
 		$this->load->model(array('mpk_indikator_sasaran','msasaran'));
 
@@ -16,14 +16,14 @@ class Pk_indikator_sasaran extends Skpd
 
 	public function index()
 	{
-		$this->breadcrumbs->unshift(2, 'Target Indikator Rencana Kinerja Tahunan ',  $this->uri->uri_string());
+		$this->breadcrumbs->unshift(2, 'Target Indikator Penetapan Kinerja Tahunan ',  $this->uri->uri_string());
 
-		$this->page_title->push('RKT', 'Target Indikator Rencana Kinerja Tahunan ');
+		$this->page_title->push('PK', 'Target Indikator Penetapan Kinerja Tahunan ');
 
 		$this->tahun = $this->uri->segment(4);
 
 		$this->data = array(
-			'title' => "Target Indikator Rencana Kinerja Tahunan ", 
+			'title' => "Target Indikator Penetapan Kinerja Tahunan ", 
 			'breadcrumbs' => $this->breadcrumbs->show(),
 			'page_title' => $this->page_title->show(),
 		);

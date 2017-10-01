@@ -1,5 +1,8 @@
 <div class="row">
 	<?php echo form_open(base_url("skpd/target/save")); ?>
+	<div class="col-md-6 col-md-offset-3">
+		<?php echo $this->session->flashdata('alert'); ?>
+	</div>
 	<div class="col-md-10">
 
 		<div class="nav-tabs-custom">
@@ -52,13 +55,13 @@
 
 			            	?>
 							<tr>
-								<td class="text-center"><?php echo ++$key ?></td>
-								<td><?php echo $indikator->deskripsi.$indikator->tahunan?></td>
-								<td class="text-center"><?php echo $this->mtarget->getsatuan($indikator->id_satuan)->nama ?></td>
-								<td class="text-center"> <?php if ($indikator->IKU=='yes'):  ?> <i class="fa fa-check "></i>	<?php endif ?>  </td>
-								<td>
+								<td style="vertical-align: middle;" class="text-center"><?php echo ++$key ?></td>
+								<td style="vertical-align: middle;"><?php echo $indikator->deskripsi ?></td>
+								<td style="vertical-align: middle;" class="text-center"><?php echo $this->mtarget->getsatuan($indikator->id_satuan)->nama ?></td>
+								<td style="vertical-align: middle;" class="text-center"> <?php if ($indikator->IKU=='yes'):  ?> <i class="fa fa-check "></i>	<?php endif ?>  </td>
+								<td style="vertical-align: middle;">
 								<?php echo form_hidden("update[ID][]", $indikator->id_target_sasaran);?>
-								<input type="text" name="update[nilai_target][<?php echo $indikator->id_target_sasaran ?>]" value="<?php echo $indikator->nilai_target  ?>" class="form-control"></td>
+								<input type="text" name="update[nilai_target][<?php echo $indikator->id_target_sasaran ?>]" value="<?php echo $indikator->nilai_target  ?>" class="form-control"> </td>
 							</tr>
 					<?php endforeach ?>
 						</tbody>

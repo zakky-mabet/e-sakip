@@ -54,16 +54,14 @@
 				                       <?php for($tahun = $this->msasaran->periode_awal; $tahun <= $this->msasaran->periode_akhir; $tahun++) : ?>
 	                        			<div class="col-md-6">
 		                        			<label>
-		                        				<input type="checkbox" <?php if (date('Y')==$tahun): ?>
-		                        					checked
-		                        				<?php endif ?> name="update[tahun][<?php echo $indikator->id_indikator_sasaran ?>][]" value="<?php echo $tahun ?>" <?php if(in_array($tahun, explode(',', $indikator->tahun))) echo 'checked'; ?>> <?php echo $tahun ?>
+		                        				<input type="checkbox" name="update[tahun][<?php echo $indikator->id_indikator_sasaran ?>][]" value="<?php echo $tahun ?>" <?php if(in_array($tahun, explode(',', $indikator->tahun))) echo 'checked'; ?>> <?php echo $tahun ?>
 		                        			</label>
 										</div>
 	                        		<?php endfor; ?>
 	                        		</td>
 	                        		<td>
 	                        		
-	                        			<textarea required="required" name="update[deskripsi][<?php echo $indikator->id_indikator_sasaran ?>]" class="form-control" rows="" ><?php echo $indikator->deskripsi ?></textarea>
+	                        			<textarea required="required" name="update[deskripsi][<?php echo $indikator->id_indikator_sasaran ?>]" class="form-control" rows="4" ><?php echo $indikator->deskripsi ?></textarea>
 	                        		</td>
 	                        		<td class="text-center">
 	                        			<select required="required" name="update[id_satuan][<?php echo $indikator->id_indikator_sasaran ?>]" class="form-control " data-placeholder="" style="width: 100%;">
