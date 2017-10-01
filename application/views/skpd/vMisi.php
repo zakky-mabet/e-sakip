@@ -17,10 +17,10 @@
                     <table class="table table-bordered ">
                         <thead class="bg-blue">
                             <tr>
-                                <th width="5" class="text-center">No</th>
-                                <th width="100" class="text-center">Tahun Aktif</th>
-                                <th width="430" class="text-center"> Misi</th>
-                                <th width="10" class="text-center">Aksi</th>
+                                <th width="5" class="text-center">NO</th>
+                                <th width="100" class="text-center">TAHUN AKTIF</th>
+                                <th width="320" class="text-center"> MISI</th>
+                                <th width="60" class="text-center">KELOLA</th>
                             </tr>
                         </thead>
 
@@ -88,10 +88,11 @@
                         <tfoot>
                             <tr>
                                 <td colspan="3"></td>
-                                <td width="10px">
-                                    <button class="btn btn-small btn-default" onclick="additem(); return false">
-                                    <i class="fa fa-plus"></i></button>
-                                    <button class="btn btn-small btn-success"><i class="fa fa-save"></i> Simpan</button>
+                                <td >
+                                    <button class="btn btn-small btn-default" onclick="additem(); hide('param'); return false; " id="param" style="" data-toggle="tooltip" data-placement="top" title="Tambah Misi"><i class="fa fa-plus"></i></button>
+
+                                    <button  class="btn btn-small btn-success"><i class="fa fa-save"></i> Simpan</button>
+
                                 </td>
                             </tr>
                         </tfoot>
@@ -140,7 +141,7 @@
                 jumlah.appendChild(input_misi);
                 aksi.appendChild(hapus);
 
-                hapus.innerHTML = '<button class="btn btn-small btn-danger"><i class="fa fa-trash"></i></button>';
+                // hapus.innerHTML = '<button class="btn btn-small btn-danger"><i class="fa fa-trash"></i></button>';
 
            
 
@@ -200,3 +201,12 @@
         </div>
     </div>
 </div>
+
+
+<script>
+        function hide(param) {
+
+        document.getElementById(param).style.display = 'none';
+
+        }
+</script>

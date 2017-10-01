@@ -19,15 +19,18 @@
 
 	});
 
+
+
      /*!
     * Modal Masalah 
     */
     $('.get-modal-masalah').click( function() 
     {
-        $('#modal-masalah').modal('show');
+        $('#modal-masalah'+$(this).data('id-sasaran')).modal('show');
 
-        $(this).data('id-sasaran');
-        //console.log($(this).data('id-sasaran'));
+        //$('#tampildata').html( $(this).data('id-sasaran') );
+        //console.log($('#modal-masalahtampildata').modal('show'));
+       // console.log($(this).data('id-sasaran'));
     });
 
 
@@ -85,10 +88,21 @@
 					});
 				});
 			break;
+
+
 		}
 
 		return true;
 	});
+
+
+	//DELETE
+	 $('.get-delete-akar').click( function() 
+    {
+        $('#modal-delete').modal('show');
+
+        $('a#btn-yes').attr('href', base_url + '/sasaran/delete_akar/' + $(this).data('id'));
+    });
 
 	
 	});
@@ -132,7 +146,7 @@
 	
 	function add_form_sasaran(data, key, nomor, parent) {
 
-	var html = '<tr id="baris-'+data+'-'+nomor+'"><td>'+ nomor +'</td>';
+	var html = '<tr id="baris-'+data+'-'+nomor+'"><td>'+'</td>';
 	html += '<td>';
 
 	for( var tahun = $('tbody#data-' + data).data('tahun-awal'); tahun <= $('tbody#data-' + data).data('tahun-akhir'); tahun++)
@@ -142,9 +156,7 @@
 		html += '</label></div>'
 	}
 		html += '</td><td>';
-		html += '<select name="create[opsi_sasaran]['+data+']" id="select-'+data+'-'+nomor+'" class="form-control input-sm" required="required">';
 
-	    html +=	'</select><br>';
 		html += '<textarea name="create[deskripsi]['+data+']" class="form-control" rows="4"></textarea>';
 		html += '</td><td class="text-center">',
 		html += '<a href="javascript:void(0)" id="delete-form" data-delete="tr#baris-'+data+'-'+nomor+'" title="Hapus sasaran ini?" class="btn btn-default"><i class="fa fa-times"></i></a>';
@@ -214,4 +226,5 @@ function add_form_indikator_sasaran(data, key, nomor, parent) {
 		});
 	});
 }
+
 

@@ -31,6 +31,23 @@ class Pk_indikator_sasaran extends Skpd
 		$this->template->view('skpd/vPk_indikator_sasaran', $this->data);
 	}
 
+	public function triwulan()
+	{
+		$this->breadcrumbs->unshift(2, 'Target Indikator Penetapan Kinerja Triwulan ',  $this->uri->uri_string());
+
+		$this->page_title->push('PK', 'Target Indikator Penetapan Kinerja Triwulan ');
+
+		$this->tahun = $this->uri->segment(4);
+
+		$this->data = array(
+			'title' => "Target Indikator Penetapan Kinerja Triwulan ", 
+			'breadcrumbs' => $this->breadcrumbs->show(),
+			'page_title' => $this->page_title->show(),
+		);
+
+		$this->template->view('skpd/vPk_indikator_sasaran_Triwulan', $this->data);
+	}
+
 	public function save()
 	{
 		$this->mpk_indikator_sasaran->Update();
