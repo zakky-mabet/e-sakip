@@ -186,7 +186,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
           </ul>
         </li>
-         <li class="treeview <?php  echo active_link_multiple(array('pkperubahanprogram','pkperubahankegiatan')); ?>">
+         <li class="treeview <?php  echo active_link_multiple(array('pkperubahanprogram','pkperubahankegiatan','pk_indikator_sasaran_perubahan')); ?>">
           <a href="#">
             <i class="fa fa-file-o"></i>
             <span>PK Perubahan</span>
@@ -195,8 +195,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="<?php echo active_link_method('indi','fe'); ?>">
-                <a href=""> Target RKT Idikator Sasaran</a>
+            <li class="<?php echo active_link_method('index','pk_indikator_sasaran_perubahan'); ?>">
+                <a href="<?php echo base_url("skpd/pk_indikator_sasaran_perubahan"); ?>"> Target RKT Idikator Sasaran</a>
             </li>
             <li class="<?php echo active_link_method('index','pkperubahanprogram').active_link_method('triwulan','pkperubahanprogram'); ?>">
                 <a href="<?php echo base_url("skpd/pkperubahanprogram"); ?>"><small>Target PK Perubahan Indikator Program</small></a>
@@ -221,8 +221,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
-                <a href=""> Target RKT Idikator Sasaran</a>
+            <li class="<?php echo active_link_method('index','df'); ?>">
+                <a href=""> Realisasi Indikator Sasaran</a>
+            </li>
+            <li class="<?php echo active_link_method('index','df'); ?>">
+                <a href=""> Realisasi Indikator Program</a>
+            </li>
+            <li class="<?php echo active_link_method('index','df'); ?>">
+                <a href=""> Realisasi Output Kegiatan</a>
+            </li>
+            <li class="<?php echo active_link_method('index','df'); ?>">
+                <a href=""> Peneyerapan Anggaran</a>
+            </li>
+            <li class="<?php echo active_link_method('index','df'); ?>">
+                <a href=""> Prestasi</a>
             </li>
           </ul>
         </li>
@@ -245,10 +257,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <a href=""> Indikator Kinerja Utama</a>
             </li>
             <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
-                <a href=""> Perjanji Kinerja</a>
+                <a href=""> Perjanjian Kinerja</a>
             </li>
             <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
-                <a href=""> Perjanji Kinerja Perubahan</a>
+                <a href=""> Perjanjian Kinerja Perubahan</a>
             </li>
           </ul>
         </li>

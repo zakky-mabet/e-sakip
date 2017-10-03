@@ -64,30 +64,80 @@
 						</tr>
 					</tbody>
 				</table>
-				<table class="table mini-font table-bordered table table-condensed">
+				<table class="mini-font table table-responsive table-bordered">
 					<thead class="bg-blue">
 						<tr>
-							<th rowspan="2" class="text-center">No.</th>
-							<th rowspan="2" class="text-center">Tujuan</th>
-							<th rowspan="2" class="text-center"></th>
-							<th rowspan="2" class="text-center">Sasaran</th>
-							<th rowspan="2" class="text-center"></th>
-							<th rowspan="2" class="text-center">Indikator Kinerja</th>
+							<th rowspan="2" class="text-center" valign="top">No.</th>
+							<th rowspan="2" class="text-center" valign="top">Tujuan</th>
+							<th rowspan="2" colspan="2" class="text-center" valign="top">Sasaran</th>
+							<th rowspan="2" class="text-center" colspan="2">Indikator Kinerja</th>
 							<th rowspan="2" class="text-center">Satuan</th>
 							<th colspan="5" class="text-center">Target Per Tahun</th>
 						</tr>
 						<tr>
-							<th class="text-center">2016</th>
-							<th class="text-center">2017</th>
-							<th class="text-center">2018</th>
-							<th class="text-center">2019</th>
-							<th class="text-center">2020</th>
+						<?php  
+						foreach(range($this->periode_awal, $this->periode_akhir) as $tahun) 
+							echo '<th class="text-center">'.$tahun.'</th>';
+						?>
 						</tr>
 					</thead>
 					<tbody>
+			            <?php 
+			            /**
+			             * Loop Tujuan
+			             *
+			             * @var string
+			             **/
+			            foreach(  $this->tjuan->getTujuanLogin() as $keyTujuan => $tujuan) : 
+			            	$DSasaran = $this->tjuan->getSasaranByTujuan($tujuan->id_tujuan);
+			            	$DIndikator = $this->tjuan->getInodikatorSasaranBySasaran($DSasaran[0]->id_sasaran);
+
+			            $col2 = (count($DIndikator)+1);
+			            $col1 = (count($DSasaran)+1) + $col2;
+			            ?>
 						<tr>
-							<td></td>
+							<td rowspan="<?php echo $col1 ?>"><?php echo ++$keyTujuan; ?>.</td>
+							<td rowspan="<?php echo $col1 ?>"><?php echo $tujuan->deskripsi; ?></td>
 						</tr>
+			            <?php 
+			            /**
+			             * Loop Sasaran
+			             *
+			             * @var string
+			             **/
+			            foreach(  $DSasaran as $keySasaran => $sasaran) : 
+			            ?>
+						<tr>
+							<td rowspan="<?php echo $col2 ?>"><?php echo $keyTujuan.".".++$keySasaran ?></td>
+							<td rowspan="<?php echo $col2 ?>"><?php echo $sasaran->deskripsi ?></td>
+						</tr>
+			            <?php 
+			            /**
+			             * Loop Program
+			             *
+			             * @var string
+			             **/
+			            foreach(  $DIndikator as $keyIndikator => $indikator) : 
+			            ?>
+						<tr>
+							<td><?php echo $keyTujuan.".".$keySasaran.".".++$keyIndikator; ?>.</td>
+							<td><?php echo $indikator->deskripsi ?></td>
+							<td class="text-center"><?php echo $indikator->nama_satuan ?></td>
+						<?php  
+						foreach(range($this->periode_awal, $this->periode_akhir) as $tahun) :
+							$target = $this->tjuan->getTargetSasaranBySasaranTahun($indikator->id_indikator_sasaran, $tahun);
+						?>
+							<td class="text-center"><?php echo @$target->nilai_target ?></td>
+						<?php endforeach; ?>
+						</tr>
+			            <?php  
+			            // end indikator
+			        	endforeach;
+			        	// end sasaran
+						endforeach;
+						// end tujuan 
+						endforeach;
+						?>
 					</tbody>
 				</table>
 			</div>
