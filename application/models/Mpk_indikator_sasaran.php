@@ -10,7 +10,7 @@ class Mpk_indikator_sasaran extends Skpd_model
 	
 	public function getAllSasaran()
 	{
-		return $this->db->get('sasaran')->result();
+		return $this->db->get_where('sasaran',array('id_kepala' => $this->session->userdata('SKPD')->ID))->result();
 	}
 
 	public function get_periode()
@@ -71,9 +71,50 @@ class Mpk_indikator_sasaran extends Skpd_model
  	public function getIndikatorSasarantoTargetTriwulan($param = 0 , $tahun='' )
 	{
 		
-		$this->db->join('indikator_sasaran', 'indikator_sasaran.id_indikator_sasaran = pk_indikator_target_triwulan.id_indikator_sasaran', 'left');
+		$this->db->join('indikator_sasaran', 'indikator_sasaran.id_indikator_sasaran = target_sasaran.id_indikator_sasaran', 'left');
 
-		return $this->db->get_where('pk_indikator_target_triwulan', array('id_sasaran'=> $param, 'tahun_triwulan'=> $tahun))->result();
+		$this->db->join('rkt_target_indikator', 'rkt_target_indikator.id_target_sasaran = target_sasaran.id_target_sasaran', 'left');
+
+		$this->db->join('pk_indikator_target', 'pk_indikator_target.id_indikator_target = target_sasaran.id_target_sasaran', 'left');
+
+		$this->db->join('pk_indikator_target_triwulan', 'pk_indikator_target_triwulan.id_indikator_sasaran = target_sasaran.id_target_sasaran', 'left');
+		
+		return $this->db->get_where('target_sasaran', array('id_sasaran'=> $param, 'tahunan'=> $tahun))->result();
  	}
+
+ 	public function UpdateTriwulan()
+	{
+		if( $this->input->post('create') )
+		{
+			if( is_array($this->input->post('create')) )
+			{
+				echo 'Kesalahan Dalam Menyimpan Data ! Silahkan Ulangi';
+			}
+		} else {
+			if( is_array($this->input->post('update')) )
+			{
+				foreach($this->input->post('update[ID]') as $key => $value) 
+				{
+
+					if ($value == NULL) {
+						
+					} else {
+					$object = array(
+						'nilai_target_triwulan1' => $this->input->post("update[nilai_target_triwulan1][{$value}]"),
+						'nilai_target_triwulan2' => $this->input->post("update[nilai_target_triwulan2][{$value}]"),
+						'nilai_target_triwulan3' => $this->input->post("update[nilai_target_triwulan3][{$value}]"),
+						'nilai_target_triwulan4' => $this->input->post("update[nilai_target_triwulan4][{$value}]"),						
+					);
+					$this->db->update('pk_indikator_target_triwulan', $object, array('id_pk_indikator_target_triwulan' => $value));
+					
+					$this->template->alert(
+						'Data berhasil disimpan.', 
+						array('type' => 'success','icon' => 'check')
+						);
+					}
+				}
+			}
+		}
+	}
 
  }

@@ -10,7 +10,7 @@ class Mpk_indikator_sasaran_perubahan extends Skpd_model
 	
 	public function getAllSasaran()
 	{
-		return $this->db->get('sasaran')->result();
+		return $this->db->get_where('sasaran',array('id_kepala' => $this->session->userdata('SKPD')->ID))->result();
 	}
 
 	public function get_periode()

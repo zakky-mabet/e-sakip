@@ -53,6 +53,17 @@ class Pk_indikator_sasaran extends Skpd
 		$this->mpk_indikator_sasaran->Update();
 
 		redirect("skpd/pk_indikator_sasaran");
+		// echo '<pre>';
+		//  print_r($this->input->post());
+	}
+
+	public function savetriwulan()
+	{
+		$this->mpk_indikator_sasaran->UpdateTriwulan();
+
+		redirect("skpd/pk_indikator_sasaran/triwulan");
+		// echo '<pre>';
+		// print_r($this->input->post());
 	}
 
 	

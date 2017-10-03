@@ -140,10 +140,7 @@
 <?php  foreach( $this->msasaran->getTujuanSasaran($misi->id_tujuan) as $keyTjuan => $permasalahan) : ?>
 		
 	<?php foreach ($this->msasaran->getpermasalahan($permasalahan->id_sasaran) as $value) : ?>
-		
-	
-
-		
+				
 	
 <div class="modal" id="modal-masalah<?php echo $permasalahan->id_sasaran ?>">
 	<div class="modal-dialog modal-lg modal-default">
