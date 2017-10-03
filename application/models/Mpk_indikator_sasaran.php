@@ -48,6 +48,10 @@ class Mpk_indikator_sasaran extends Skpd_model
 			{
 				foreach($this->input->post('update[ID]') as $key => $value) 
 				{
+
+					if ($value == NULL) {
+						
+					} else {
 					$object = array(
 						'nilai_target_pk' => $this->input->post("update[nilai_target_pk][{$value}]"),
 						'sebab_pk' => $this->input->post("update[sebab_pk][{$value}]"),
@@ -55,12 +59,11 @@ class Mpk_indikator_sasaran extends Skpd_model
 					$this->db->update('pk_indikator_target', $object, array('id_pk_target' => $value));
 					
 					$this->template->alert(
-							' Data berhasil disimpan.', 
-							array('type' => 'success','icon' => 'check')
+						'Data berhasil disimpan.', 
+						array('type' => 'success','icon' => 'check')
 						);
+					}
 				}
-
-				
 			}
 		}
 	}
