@@ -49,7 +49,7 @@ class Pkperubahanprogram extends Skpd
 
 	public function savetargetindikatorprogram()
 	{
-		$this->mprogram->UpdateTargePKPerubahantTargetIndikatorProgram();
+		$this->mprogram->UpdateTargePKtTargetIndikatorProgram();
 
 		if( $this->input->post('type')=='triwulan') 
 		{
@@ -57,6 +57,47 @@ class Pkperubahanprogram extends Skpd
 		} else {
 			redirect('skpd/pkperubahanprogram');
 		}
+	}
+
+	public function anggaranprogram()
+	{
+		$this->page_title->push('PK Perubahan', ' Program dan Anggaran Penetapan Kinerja');
+
+		$this->breadcrumbs->unshift(2, ' Program dan Anggaran Penetapan Kinerja',  'skpd/pkperubahanprogram/anggaranprogram');
+
+		$this->tahun = $this->periode_awal;
+
+		$this->data = array(
+			'title' => "Perubahan Program dan Anggaran Penetapan Kinerja", 
+			'breadcrumbs' => $this->breadcrumbs->show(),
+			'page_title' => $this->page_title->show(),
+		);
+
+		$this->template->view('skpd/vPKPerubahanAnggaranProgram', $this->data);
+	}
+
+	public function anggarankegiatan()
+	{
+		$this->page_title->push('PK Perubahan', ' Anggaran Kegiatan Rencana Kinerja Tahunan');
+
+		$this->breadcrumbs->unshift(2, ' Anggaran Kegiatan Rencana Kinerja Tahunan',  'skpd/pkperubahanprogram/anggarankegiatan');
+
+		$this->tahun = $this->periode_awal;
+
+		$this->data = array(
+			'title' => "Anggaran Kegiatan Rencana Kinerja Tahunan", 
+			'breadcrumbs' => $this->breadcrumbs->show(),
+			'page_title' => $this->page_title->show(),
+		);
+
+		$this->template->view('skpd/vPKPerubahanAnggaranKegiatan', $this->data);
+	}
+
+	public function savepkanggaran()
+	{
+		$this->mprogram->UpdateAnggaranKegiatanPKPerubahan();
+
+		redirect('skpd/pkperubahanprogram/anggarankegiatan');
 	}
 }
 

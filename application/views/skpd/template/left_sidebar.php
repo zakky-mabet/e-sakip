@@ -204,11 +204,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li class="<?php echo active_link_method('index','pkperubahankegiatan').active_link_method('triwulan','pkperubahankegiatan'); ?>">
                 <a href="<?php echo base_url("skpd/pkperubahankegiatan"); ?>"> Target PK  Perubahan Output Kegiatan </a>
             </li>
-            <li class="<?php echo active_link_method('anggadgf','dfg'); ?>">
-                <a href=""> Anggaran Program PK Perubahan </a>
+            <li class="<?php echo active_link_method('anggaranprogram','pkperubahanprogram'); ?>">
+                <a href="<?php echo base_url("skpd/pkperubahanprogram/anggaranprogram"); ?>"> Anggaran Program PK Perubahan </a>
             </li>
-            <li class="<?php echo active_link_method('anggardgf','dfg'); ?>">
-                <a href=">"> Anggaran Kegiatan PK Perubahan </a>
+            <li class="<?php echo active_link_method('anggarankegiatan','pkperubahanprogram'); ?>">
+                <a href="<?php echo base_url("skpd/pkperubahanprogram/anggarankegiatan"); ?>"> Anggaran Kegiatan PK Perubahan </a>
             </li>
           </ul>
         </li>

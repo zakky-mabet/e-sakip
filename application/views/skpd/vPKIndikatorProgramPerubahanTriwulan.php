@@ -56,10 +56,10 @@
 								</td>
 								<td>
 									<small>Triwulan <?php echo $triwulan ?></small>
-									<input type="text" name="target[<?php echo @$PKtahun->id_pk_program ?>]" class="form-control input-sm" value="<?php echo (@$PKPerubahan->nilai_target != '') ? @$PKPerubahan->nilai_target : @$PKtahun->nilai_target ?>">
+									<input type="text" name="target[<?php echo @$PKPerubahan->id_pk_program_perubahan ?>]" class="form-control input-sm" value="<?php echo (@$PKPerubahan->nilai_target != '') ? @$PKPerubahan->nilai_target : @$PKtahun->nilai_target ?>">
 								</td>
 								<td class="text-center">
-									<textarea name="sebab[<?php echo @$PKtahun->id_pk_program ?>]" rows="2" class="form-control"><?php echo @$PKtahun->sebab ?></textarea>
+									<textarea name="sebab[<?php echo @$PKPerubahan->id_pk_program_perubahan ?>]" rows="2" class="form-control"><?php echo @$PKtahun->sebab ?></textarea>
 								</td>
 							</tr>
 							<?php endfor; ?>
