@@ -22,34 +22,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link rel="stylesheet" href="<?php echo base_url("assets/skpd/css/style-login.css"); ?>">
 	<link rel="stylesheet" href="<?php echo base_url("assets/public/dist/css/animate.css"); ?>">
 	<style type="text/css" media="screen">
-		.bg {
-			background: #4b7aea; /* Old browsers */
-background: -moz-radial-gradient(center, ellipse cover, #4b7aea 18%, #467fdb 55%, #0956b5 91%, #06108b 100%); /* FF3.6+ */
-background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(18%,#4b7aea), color-stop(55%,#467fdb), color-stop(91%,#0956b5), color-stop(100%,#06108b)); /* Chrome,Safari4+ */
-background: -webkit-radial-gradient(center, ellipse cover, #4b7aea 18%,#467fdb 55%,#0956b5 91%,#06108b 100%); /* Chrome10+,Safari5.1+ */
-background: -o-radial-gradient(center, ellipse cover, #4b7aea 18%,#467fdb 55%,#0956b5 91%,#06108b 100%); /* Opera 12+ */
-background: -ms-radial-gradient(center, ellipse cover, #4b7aea 18%,#467fdb 55%,#0956b5 91%,#06108b 100%); /* IE10+ */
-background: radial-gradient(ellipse at center, #4b7aea 18%,#467fdb 55%,#0956b5 91%,#06108b 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b7aea', endColorstr='#06108b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-		}
+		
 
 		body {
-			 background-image: url('http://localhost/kiss/assets/img/bg-big.jpg') ;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-
+			 background-image: url('<?php echo base_url('assets/images/BG.jpg') ?>') ;
+		    background-attachment: fixed;
+		    background-repeat: no-repeat;
+		    -webkit-background-size: cover;
+		    -moz-background-size: cover;
+		    -o-background-size: cover;
+		    background-size: cover;
+		}
+		.arial {
+			font-family: arial;
+			font-weight: normal;
 		}
 	</style>
 </head>
-<body class="bg">
-	<div class="container " style="border: 1pt solid black; padding-bottom: 300px">
+<body class="">
+	<div class="container ">
 		<div class="col-md-4 col-md-offset-4 box-login ">
-			<div class="box-logo">
-	      		<img src="<?php echo base_url("assets/images/logo-login.png"); ?>" alt="">
+			<div class="box-logo" style="margin-top: -30px;">
+	      		<img src="<?php echo base_url("assets/images/logo.png"); ?>" alt="">
 	      	</div>
 	      	<?php  
 	      	/**
@@ -62,21 +56,30 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b7aea', end
 	      	<div class="box-alert">
 	      		<?php echo $this->session->flashdata('alert'); ?>
 	      	</div>
-	      	<div class="box-body animated <?php if($this->session->flashdata('alert')) echo "shake"; ?>">
+	      	
+	      	<div  style="padding-bottom: 29px" class="box-body animated <?php if($this->session->flashdata('alert')) echo "shake"; ?>">
+	      	<h4 class="text-center arial" style="padding-bottom: 10px">Silahkan Login</h4>
 	      		<form action="<?php echo current_url(); ?>" method="POST" role="form">
+
 	      			<div class="form-group">
-	      				<label for="">Username / E-Mail :</label>
-	      				<input type="text" name="username" value="<?php echo set_value('username'); ?>" class="form-control input-lg" autofocus="true">
+	      				<label for="username" class="arial">Username / E-Mail :</label>
+	      				<input type="text" name="username" value="<?php echo set_value('username'); ?>" class="form-control input-md" autofocus="true" placeholder="Username / E-Mail">
 	      				<p class="help-block"><?php echo form_error('username', '<small class="text-danger">', '</small>'); ?></p>
 	      			</div>
 	      			<div class="form-group">
-	      				<label for="">Password :</label>
-	      				<input type="password" name="password" value="<?php echo set_value('password'); ?>" class="form-control input-lg">
+	      				<label for="password" class="arial">Password :</label>
+	      				<input type="password" name="password" value="<?php echo set_value('password'); ?>" class="form-control input-md" placeholder="Password">
 	      				<p class="help-block"><?php echo form_error('password', '<small class="text-danger">', '</small>'); ?></p>
 	      			</div>
-	      			<button type="submit" class="btn btn-primary btn-block">Masuk</button>
+	      			<button type="submit" class="btn btn-warning btn-block">Masuk</button>
+	      			<br>
 	      		</form>
+
+	      		<div class="social-auth-links text-left">
+	      			<a href="#" class="arial">Lupa password !</a>
+	      		</div>
 	      	</div>
+	      
 	      	<?php else : ?>
 	      	<div class="box-alert">
 	      		<div class="alert alert-info">
