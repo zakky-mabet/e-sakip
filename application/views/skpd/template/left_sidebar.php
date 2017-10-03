@@ -168,7 +168,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   Target PK Indikator Sasaran
                 </a>
             </li>
-            <li class="<?php echo active_link_method('index','pkprogram'); ?>">
+            <li class="<?php echo active_link_method('index','pkprogram').active_link_method('triwulan','pkprogram'); ?>">
                 <a href="<?php echo base_url("skpd/pkprogram"); ?>">
                   Target PK Indikator Program
                 </a>
@@ -186,7 +186,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
           </ul>
         </li>
-         <li class="treeview <?php  echo active_link_multiple(array('pk')); ?>">
+         <li class="treeview <?php  echo active_link_multiple(array('pkperubahanprogram','pkperubahankegiatan')); ?>">
           <a href="#">
             <i class="fa fa-file-o"></i>
             <span>PK Perubahan</span>
@@ -195,8 +195,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
+            <li class="<?php echo active_link_method('indi','fe'); ?>">
                 <a href=""> Target RKT Idikator Sasaran</a>
+            </li>
+            <li class="<?php echo active_link_method('index','pkperubahanprogram').active_link_method('triwulan','pkperubahanprogram'); ?>">
+                <a href="<?php echo base_url("skpd/pkperubahanprogram"); ?>"><small>Target PK Perubahan Indikator Program</small></a>
+            </li>
+            <li class="<?php echo active_link_method('index','pkperubahankegiatan').active_link_method('triwulan','pkperubahankegiatan'); ?>">
+                <a href="<?php echo base_url("skpd/pkperubahankegiatan"); ?>"> Target PK  Perubahan Output Kegiatan </a>
+            </li>
+            <li class="<?php echo active_link_method('anggadgf','dfg'); ?>">
+                <a href=""> Anggaran Program PK Perubahan </a>
+            </li>
+            <li class="<?php echo active_link_method('anggardgf','dfg'); ?>">
+                <a href=">"> Anggaran Kegiatan PK Perubahan </a>
             </li>
           </ul>
         </li>

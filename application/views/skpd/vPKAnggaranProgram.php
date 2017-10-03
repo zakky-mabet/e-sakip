@@ -3,7 +3,7 @@
 		<?php echo $this->session->flashdata('alert'); ?>
 	</div>
 	<?php echo form_open(current_url()); ?>
-	<div class="col-md-10">
+	<div class="col-md-12">
 		<div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
             <?php for($tahun = $this->tjuan->periode_awal; $tahun <= $this->tjuan->periode_akhir; $tahun++) : ?>
@@ -88,10 +88,5 @@
             </div>
 		</div>
 	</div>
-   	<div class="col-md-2 top50x">
-   		<div id="stickerButton100x">
-   			<button class="btn bg-blue btn-app"><i class="fa fa-save"></i> Simpan</button>
-   		</div>
-   	</div>
    <?php echo form_close(); ?>
 </div>
