@@ -1,42 +1,7 @@
 <div class="row">
-<style type="text/css" media="screen">
-	.anic {
-		  -webkit-animation: fade-in 0.27s linear infinite alternate;
-		  -moz-animation: fade-in 0.27s linear infinite alternate;
-		  animation: fade-in 0.27s linear infinite alternate;
-		}
-		@-moz-keyframes fade-in {
-		  0% {
-		    opacity: 0;
-		  }
-		  65% {
-		    opacity: 1;
-		  }
-		}
-		@-webkit-keyframes fade-in {
-		  0% {
-		    opacity: 0;
-		  }
-		  65% {
-		    opacity: 1;
-		  }
-		}
-		@keyframes fade-in {
-		  0% {
-		    opacity: 0;
-		  }
-		  65% {
-		    opacity: 1;
-		  }
-}
-
-</style>
-	<?php echo form_open(base_url("skpd/pk_indikator_sasaran/save")); ?>
-	<div style="font-size: 5em; color: red" class="col-md-6 col-md-offset-3 text-center anic">
-			ON PROGRESS !!!
-	</div>
-
-	<!-- <div class="col-md-6 col-md-offset-3">
+	<?php echo form_open(base_url("skpd/pk_indikator_sasaran/savetriwulan")); ?>
+	
+	<div class="col-md-6 col-md-offset-3">
 		<?php echo $this->session->flashdata('alert'); ?>
 	</div>
 	<div class="col-md-10">
@@ -90,9 +55,12 @@
 								<th style="vertical-align: middle;" class="text-center" width="20">Satuan</th>
 								<th style="vertical-align: middle;" class="text-center" width="20">IKU</th>
 								
-								<th style="vertical-align: middle;" class="text-center" width="50"> <small>Target PK <?php echo $tahun; ?></small> </th>
-								<th style="vertical-align: middle;" class="text-center" width="50"> <small>Target PK Tahun <?php echo $tahun; ?> </small> </th>
+								<th style="vertical-align: middle;" class="text-center" width="60"> <small>Target PK Tahun <?php echo $tahun; ?></small> </th>
+								<th colspan="2" style="vertical-align: middle;" class="text-center" > <small>Target PK  Triwulan Tahun <?php echo $tahun; ?></small> </th>
 								
+						
+							
+										
 							</tr>
 						</thead>
 						<tbody>
@@ -102,27 +70,61 @@
 			             *
 			             * @var string
 			             **/
-			            foreach ($this->mpk_indikator_sasaran->getIndikatorSasarantoTarget($sasaran->id_sasaran, $tahun ) as $key => $indikator) : 
+			            foreach ($this->mpk_indikator_sasaran->getIndikatorSasarantoTargetTriwulan($sasaran->id_sasaran, $tahun ) as $key => $indikator) : 
 
 			            	?>
-			        
+			            
 							<tr>
-								<td style="vertical-align: middle;" class="text-center"><?php echo ++$key ?></td>
 
-								<td style="vertical-align: middle;"><?php echo $indikator->deskripsi ?></td>
-								<td  style="vertical-align: middle;"  class="text-center"><?php echo $this->mpk_indikator_sasaran->getsatuan($indikator->id_satuan)->nama ?></td>
-								<td  style="vertical-align: middle;"  class="text-center"> <?php if ($indikator->IKU=='yes'):  ?> <i class="fa fa-check "></i>	<?php endif ?>  </td>
+								<td rowspan="5" style="vertical-align: middle;" class="text-center"><?php echo ++$key ?></td>
 
-								<td  style="vertical-align: middle;"  class="text-center"> <?php echo $indikator->nilai_target_pk  ?></td>
-							<?php foreach ($this->mpk_indikator_sasaran->getIndikatorSasarantoTargetTriwulan($sasaran->id_sasaran, $tahun ) as $key => $indikatortriwulan) :  ?>
-								
+								<td rowspan="5" style="vertical-align: middle;"><?php echo $indikator->deskripsi ?></td>
+								<td rowspan="5" style="vertical-align: middle;"  class="text-center"><?php echo $this->mpk_indikator_sasaran->getsatuan($indikator->id_satuan)->nama ?></td>
+								<td rowspan="5"  style="vertical-align: middle;"  class="text-center"> <?php if ($indikator->IKU=='yes') :  ?> <i class="fa fa-check "></i>	<?php endif ?>  </td>
 
-							
-								<td>		
-								<?php echo $indikatortriwulan->tahun_triwulan.'<br>'.$indikatortriwulan->id_indikator_sasaran ?>					
-								<input type="text" name="update[nilai_target_pk][<?php echo $indikator->id_pk_target ?>]" value="" class="form-control"></td>
-								<?php endforeach ?>
+								<td rowspan="5" style="vertical-align: middle;"  class="text-center"> <?php echo $indikator->nilai_target_pk  ?></td>							
+								<td class="text-center"><b>Triwulan</b></td>
+								<td class="text-center"><b>Target PK</b></td>
 							</tr>
+
+						 	<tr>
+
+								<td width="30" style="vertical-align: middle;" class="text-center" >		
+									Triwulan 1
+								</td>					
+								<td width="80">
+								<?php echo form_hidden("update[ID][]", $indikator->id_pk_indikator_target_triwulan); ?>		
+									<input type="text" name="update[nilai_target_triwulan1][<?php echo $indikator->id_pk_indikator_target_triwulan ?>]" value="<?php echo $indikator->nilai_target_triwulan1 ?>" class="form-control" placeholder="Triwulan 1">
+								</td>
+							</tr>
+							<tr>
+							
+								<td width="30" style="vertical-align: middle;" class="text-center" >		
+									Triwulan 2
+								</td>					
+								<td width="80">		
+									<input type="text" name="update[nilai_target_triwulan2][<?php echo $indikator->id_pk_indikator_target_triwulan ?>]" value="<?php echo $indikator->nilai_target_triwulan2 ?>" class="form-control" placeholder="Triwulan 2">
+								</td>
+							</tr>
+							<tr>
+								
+								<td width="30" style="vertical-align: middle;" class="text-center" >		
+									Triwulan 3
+								</td>					
+								<td width="80">		
+									<input type="text" name="update[nilai_target_triwulan3][<?php echo $indikator->id_pk_indikator_target_triwulan ?>]" value="<?php echo $indikator->nilai_target_triwulan3 ?>" class="form-control" placeholder="Triwulan 3">
+								</td>
+							</tr>
+							<tr>
+							
+								<td width="30" style="vertical-align: middle;" class="text-center" >		
+									Triwulan 4
+								</td>					
+								<td width="80">		
+									<input type="text" name="update[nilai_target_triwulan4][<?php echo $indikator->id_pk_indikator_target_triwulan ?>]" value="<?php echo $indikator->nilai_target_triwulan4 ?>" class="form-control" placeholder="Triwulan 4">
+								</td>
+							</tr>
+					
 					<?php endforeach ?>
 						</tbody>
 					</table>
@@ -141,6 +143,6 @@
    		<div id="stickerButton100x">
    			<button class="btn bg-blue btn-app"><i class="fa fa-save"></i> Simpan</button>
    		</div>
-   	</div> -->
+   	</div>
    <?php echo form_close(); ?>
 </div>

@@ -372,45 +372,20 @@ class Msasaran extends Skpd_model
 
 					$this->db->insert('pk_indikator_target_triwulan', array(
 						'id_indikator_sasaran' => $indikator,
-						'tahun_triwulan' => $item,
-						'triwulan' => null,
-						'nilai_target_triwulan' => null
 					));
-
-				
-						for($i = 1; $i <= 4; $i++) 
-						{
-							if( $this->checkPKIndikatorProgram($indikator, $item, "T".$i) == FALSE )
-							{
-								$this->db->insert('pk_indikator_target_triwulan', array(
-									'id_indikator_sasaran' => $indikator,
-									'tahun_triwulan' => $item,
-									'triwulan' => "T".$i,
-									'nilai_target_triwulan' => null
-								));
-							}
-						}
-					
 				}
 			}
 		}
 	}
 
-	public function checkPKIndikatorProgram($indikator = 0, $tahun = 0, $triwulan = FALSE)
+	public function checkPKIndikatorProgram($indikator = 0, $tahun = 0)
 	{
-		if( $triwulan == FALSE) 
-		{
+		
 			$query = $this->db->get_where('pk_indikator_target_triwulan', array(
 				'id_indikator_sasaran' => $indikator,
-				'tahun_triwulan' => $tahun
+		
 			) );
-		} else {
-			$query = $this->db->get_where('pk_indikator_target_triwulan', array(
-				'id_indikator_sasaran' => $indikator,
-				'tahun_triwulan' => $tahun,
-				'triwulan' => $triwulan
-			) );
-		}
+		 
 		return $query->num_rows(); 
 	}
 
