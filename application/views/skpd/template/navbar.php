@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed'); 
 ?>
 <body class="hold-transition skin-sakip sidebar-mini fixed">
+   <div id="load"></div>
    <div class="wrapper">
       <header class="main-header">
          <a href="<?php echo site_url('skpd/home') ?>" class="logo">
