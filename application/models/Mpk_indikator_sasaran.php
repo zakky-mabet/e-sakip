@@ -68,18 +68,19 @@ class Mpk_indikator_sasaran extends Skpd_model
 		}
 	}
 
- 	public function getIndikatorSasarantoTargetTriwulan($param = 0 , $tahun='' )
+	public function getIndikatorSasaran($param = 0)
 	{
+
+		return $this->db->get_where('indikator_sasaran', array('id_sasaran'=> $param))->result();
+ 	}
+
+ 	public function getIndikatorSasarantoTargetTriwulan($param = 0, $tahun = 0 )
+	{	
+
+		$this->db->join('pk_indikator_target', 'pk_indikator_target.id_indikator_target = pk_indikator_target_triwulan.id_indikator_sasaran', 'left');
+
+		return $this->db->get_where('pk_indikator_target_triwulan', array('pk_indikator_target_triwulan.id_indikator_sasaran'=> $param, 'tahun_triwulan'=> $tahun))->result();	
 		
-		$this->db->join('indikator_sasaran', 'indikator_sasaran.id_indikator_sasaran = target_sasaran.id_indikator_sasaran', 'left');
-
-		$this->db->join('rkt_target_indikator', 'rkt_target_indikator.id_target_sasaran = target_sasaran.id_target_sasaran', 'left');
-
-		$this->db->join('pk_indikator_target', 'pk_indikator_target.id_indikator_target = target_sasaran.id_target_sasaran', 'left');
-
-		$this->db->join('pk_indikator_target_triwulan', 'pk_indikator_target_triwulan.id_indikator_sasaran = target_sasaran.id_target_sasaran', 'left');
-		
-		return $this->db->get_where('target_sasaran', array('id_sasaran'=> $param, 'tahunan'=> $tahun))->result();
  	}
 
  	public function UpdateTriwulan()
@@ -115,6 +116,11 @@ class Mpk_indikator_sasaran extends Skpd_model
 				}
 			}
 		}
+	}
+
+	public function get_pk_triwulan($param)
+	{
+		return $this->db->get_where('pk_indikator_target_triwulan',array('id_pk_indikator_target_triwulan' => $param ))->result();
 	}
 
  }

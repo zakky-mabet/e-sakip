@@ -213,6 +213,7 @@ class Msasaran extends Skpd_model
 						'id_satuan' => $this->input->post("create[id_satuan][{$key}]"),
 						'PK' => $this->input->post("create[pk][{$key}]"),
 						'IKU' => $this->input->post("create[iku][{$key}]"),
+						
 					);
 
 					$this->db->insert('indikator_sasaran', $object);
@@ -258,6 +259,7 @@ class Msasaran extends Skpd_model
 						'id_satuan' => $this->input->post("update[id_satuan][{$value}]"),
 						'PK' => $this->input->post("update[pk][{$value}]"),
 						'IKU' => $this->input->post("update[iku][{$value}]"),
+
 					);
 					$this->db->update('indikator_sasaran', $object, array('id_indikator_sasaran' => $value));
 
@@ -357,7 +359,7 @@ class Msasaran extends Skpd_model
 
 
 	// GENERATE TARGET INDIKATOR PK TRIWULAN
-	public function insertPKIndikatorKinerjaProgram($tahun = FALSE, $indikator = 0)
+	public function insertPKIndikatorKinerjaProgram($tahun = 0, $indikator = 0)
 	{
 		if( is_array($tahun) )
 		{
@@ -372,6 +374,7 @@ class Msasaran extends Skpd_model
 
 					$this->db->insert('pk_indikator_target_triwulan', array(
 						'id_indikator_sasaran' => $indikator,
+						'tahun_triwulan' => $item,
 					));
 				}
 			}
@@ -383,7 +386,7 @@ class Msasaran extends Skpd_model
 		
 			$query = $this->db->get_where('pk_indikator_target_triwulan', array(
 				'id_indikator_sasaran' => $indikator,
-		
+				'tahun_triwulan' => $tahun,
 			) );
 		 
 		return $query->num_rows(); 

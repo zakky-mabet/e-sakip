@@ -45,14 +45,14 @@ class Pk_indikator_sasaran_perubahan extends Skpd
 			'page_title' => $this->page_title->show(),
 		);
 
-		$this->template->view('skpd/vPk_indikator_sasaran_Triwulan', $this->data);
+		$this->template->view('skpd/vPk_indikator_sasaran_Triwulan_Perubahan', $this->data);
 	}
 
 	public function save()
 	{
-		$this->mpk_indikator_sasaran_perubahan->Update();
+		$this->mpk_indikator_sasaran_perubahan->UpdateTriwulan();
 	
-		redirect("skpd/Pk_indikator_sasaran_perubahan");
+		redirect("skpd/Pk_indikator_sasaran_perubahan/triwulan");
 	}
 
 	
