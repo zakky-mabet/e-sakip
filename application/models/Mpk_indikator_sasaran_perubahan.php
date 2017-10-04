@@ -35,7 +35,55 @@ class Mpk_indikator_sasaran_perubahan extends Skpd_model
 		return $this->db->get_where('master_satuan', array('id'=> $param))->row();
 	}
 
-	public function Update()
+	// public function Update()
+	// {
+	// 	if( $this->input->post('create') )
+	// 	{
+	// 		if( is_array($this->input->post('create')) )
+	// 		{
+	// 			echo 'Kesalahan Dalam Menyimpan Data ! Silahkan Ulangi';
+	// 		}
+	// 	} else {
+	// 		if( is_array($this->input->post('update')) )
+	// 		{
+	// 			foreach($this->input->post('update[ID]') as $key => $value) 
+	// 			{
+
+	// 				if ($value == NULL) {
+						
+	// 				} else {
+	// 				$object = array(
+	// 					'nilai_target_pk' => $this->input->post("update[nilai_target_pk][{$value}]"),
+	// 					'sebab_pk' => $this->input->post("update[sebab_pk][{$value}]"),
+	// 				);
+	// 				$this->db->update('pk_indikator_target', $object, array('id_pk_target' => $value));
+					
+	// 				$this->template->alert(
+	// 					'Data berhasil disimpan.', 
+	// 					array('type' => 'success','icon' => 'check')
+	// 					);
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// }
+
+	public function getIndikatorSasaran($param = 0)
+	{
+
+		return $this->db->get_where('indikator_sasaran', array('id_sasaran'=> $param))->result();
+ 	}
+
+ 	public function getIndikatorSasarantoTargetTriwulan($param = 0, $tahun = 0 )
+	{	
+
+		$this->db->join('pk_indikator_target', 'pk_indikator_target.id_indikator_target = pk_indikator_target_triwulan.id_indikator_sasaran', 'left');
+
+		return $this->db->get_where('pk_indikator_target_triwulan', array('pk_indikator_target_triwulan.id_indikator_sasaran'=> $param, 'tahun_triwulan'=> $tahun))->result();	
+		
+ 	}
+
+ 	public function UpdateTriwulan()
 	{
 		if( $this->input->post('create') )
 		{
@@ -51,29 +99,32 @@ class Mpk_indikator_sasaran_perubahan extends Skpd_model
 
 					if ($value == NULL) {
 						
-					}else{
+					} else {
 					$object = array(
-						'pk_sebab_perubahan' => $this->input->post("update[pk_sebab_perubahan][{$value}]"),
-						'pk_perubahan_nilai_target' => $this->input->post("update[pk_perubahan_nilai_target][{$value}]"),
+						'nilai_target_triwulan_perubahan1' => $this->input->post("update[nilai_target_triwulan_perubahan1][{$value}]"),
+						'nilai_target_triwulan_perubahan2' => $this->input->post("update[nilai_target_triwulan_perubahan2][{$value}]"),
+						'nilai_target_triwulan_perubahan3' => $this->input->post("update[nilai_target_triwulan_perubahan3][{$value}]"),
+						'nilai_target_triwulan_perubahan4' => $this->input->post("update[nilai_target_triwulan_perubahan4][{$value}]"),
+						'sebab_perubahan1' => $this->input->post("update[sebab_perubahan1][{$value}]"),
+						'sebab_perubahan2' => $this->input->post("update[sebab_perubahan2][{$value}]"),
+						'sebab_perubahan3' => $this->input->post("update[sebab_perubahan3][{$value}]"),
+						'sebab_perubahan4' => $this->input->post("update[sebab_perubahan4][{$value}]"),						
 					);
-					$this->db->update('pk_indikator_target', $object, array('id_pk_target' => $value));
+					$this->db->update('pk_indikator_target_triwulan', $object, array('id_pk_indikator_target_triwulan' => $value));
 					
 					$this->template->alert(
-						' Data berhasil disimpan.', 
-					array('type' => 'success','icon' => 'check')
+						'Data berhasil disimpan.', 
+						array('type' => 'success','icon' => 'check')
 						);
 					}
-				}	
+				}
 			}
 		}
 	}
 
- 	public function getIndikatorSasarantoTargetTriwulan($param = 0 , $tahun='' )
+	public function get_pk_triwulan($param)
 	{
-		
-		$this->db->join('indikator_sasaran', 'indikator_sasaran.id_indikator_sasaran = pk_indikator_target_triwulan.id_indikator_sasaran', 'left');
-
-		return $this->db->get_where('pk_indikator_target_triwulan', array('id_sasaran'=> $param, 'tahun_triwulan'=> $tahun))->result();
- 	}
+		return $this->db->get_where('pk_indikator_target_triwulan',array('id_pk_indikator_target_triwulan' => $param ))->result();
+	}
 
  }

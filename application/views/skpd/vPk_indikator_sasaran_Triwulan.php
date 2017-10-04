@@ -70,31 +70,34 @@
 			             *
 			             * @var string
 			             **/
-			            foreach ($this->mpk_indikator_sasaran->getIndikatorSasarantoTargetTriwulan($sasaran->id_sasaran, $tahun ) as $key => $indikator) : 
+			            foreach ($this->mpk_indikator_sasaran->getIndikatorSasarantoTarget($sasaran->id_sasaran, $tahun ) as $key => $indikator) : 
 
 			            	?>
-			            
-							<tr>
-
-								<td rowspan="5" style="vertical-align: middle;" class="text-center"><?php echo ++$key ?></td>
-
+			        
+							<tr>      
+								<td rowspan="5" style="vertical-align: middle;" class="text-center"> 
+								
+								<?php echo ++$key ?></td>
 								<td rowspan="5" style="vertical-align: middle;"><?php echo $indikator->deskripsi ?></td>
 								<td rowspan="5" style="vertical-align: middle;"  class="text-center"><?php echo $this->mpk_indikator_sasaran->getsatuan($indikator->id_satuan)->nama ?></td>
 								<td rowspan="5"  style="vertical-align: middle;"  class="text-center"> <?php if ($indikator->IKU=='yes') :  ?> <i class="fa fa-check "></i>	<?php endif ?>  </td>
 
-								<td rowspan="5" style="vertical-align: middle;"  class="text-center"> <?php echo $indikator->nilai_target_pk  ?></td>							
-								<td class="text-center"><b>Triwulan</b></td>
-								<td class="text-center"><b>Target PK</b></td>
+								<td rowspan="5" style="vertical-align: middle;"  class="text-center"> <?php echo $indikator->nilai_target_pk; ?> </td>							
+								<td class="text-center" style="vertical-align: middle;"><b><small>Triwulan Tahun <?php echo $tahun ?></small></b></td>
+								<td class="text-center" style="vertical-align: middle;"><b><small>Target PK</small></b></td>
 							</tr>
+			            	
+							
 
-						 	<tr>
-
+							<?php foreach ($this->mpk_indikator_sasaran->getIndikatorSasarantoTargetTriwulan($indikator->id_indikator_sasaran, $tahun) as $value ): ?>
+								
+						<tr>
 								<td width="30" style="vertical-align: middle;" class="text-center" >		
 									Triwulan 1
 								</td>					
 								<td width="80">
-								<?php echo form_hidden("update[ID][]", $indikator->id_pk_indikator_target_triwulan); ?>		
-									<input type="text" name="update[nilai_target_triwulan1][<?php echo $indikator->id_pk_indikator_target_triwulan ?>]" value="<?php echo $indikator->nilai_target_triwulan1 ?>" class="form-control" placeholder="Triwulan 1">
+								<?php echo form_hidden("update[ID][]", $value->id_pk_indikator_target_triwulan); ?>		
+									<input type="text" name="update[nilai_target_triwulan1][<?php echo $value->id_pk_indikator_target_triwulan ?>]" value="<?php echo $value->nilai_target_triwulan1 ?>" class="form-control" placeholder="Triwulan 1">
 								</td>
 							</tr>
 							<tr>
@@ -103,7 +106,7 @@
 									Triwulan 2
 								</td>					
 								<td width="80">		
-									<input type="text" name="update[nilai_target_triwulan2][<?php echo $indikator->id_pk_indikator_target_triwulan ?>]" value="<?php echo $indikator->nilai_target_triwulan2 ?>" class="form-control" placeholder="Triwulan 2">
+									<input type="text" name="update[nilai_target_triwulan2][<?php echo $value->id_pk_indikator_target_triwulan ?>]" value="<?php echo $value->nilai_target_triwulan2 ?>" class="form-control" placeholder="Triwulan 2">
 								</td>
 							</tr>
 							<tr>
@@ -112,7 +115,7 @@
 									Triwulan 3
 								</td>					
 								<td width="80">		
-									<input type="text" name="update[nilai_target_triwulan3][<?php echo $indikator->id_pk_indikator_target_triwulan ?>]" value="<?php echo $indikator->nilai_target_triwulan3 ?>" class="form-control" placeholder="Triwulan 3">
+									<input type="text" name="update[nilai_target_triwulan3][<?php echo $value->id_pk_indikator_target_triwulan ?>]" value="<?php echo $value->nilai_target_triwulan3 ?>" class="form-control" placeholder="Triwulan 3">
 								</td>
 							</tr>
 							<tr>
@@ -121,10 +124,10 @@
 									Triwulan 4
 								</td>					
 								<td width="80">		
-									<input type="text" name="update[nilai_target_triwulan4][<?php echo $indikator->id_pk_indikator_target_triwulan ?>]" value="<?php echo $indikator->nilai_target_triwulan4 ?>" class="form-control" placeholder="Triwulan 4">
+									<input type="text" name="update[nilai_target_triwulan4][<?php echo $value->id_pk_indikator_target_triwulan ?>]" value="<?php echo $value->nilai_target_triwulan4 ?>" class="form-control" placeholder="Triwulan 4">
 								</td>
-							</tr>
-					
+							</tr> 
+							<!-- 	<?php endforeach ?> -->
 					<?php endforeach ?>
 						</tbody>
 					</table>
