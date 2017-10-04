@@ -138,10 +138,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </a>
           <ul class="treeview-menu">
             <li class="<?php echo active_link_method('index','rkt'); ?>">
-                <a href="<?php echo base_url("skpd/rkt"); ?>"> Target RKT Idikator Sasaran</a>
+                <a href="<?php echo base_url("skpd/rkt"); ?>"> Target RKT Indikator Sasaran</a>
             </li>
             <li class="<?php echo active_link_method('index','rktprogram'); ?>">
-                <a href="<?php echo base_url("skpd/rktprogram") ?>"> Target RKT Idikator Program</a>
+                <a href="<?php echo base_url("skpd/rktprogram") ?>"> Target RKT Indikator Program</a>
             </li>
             <li class="<?php echo active_link_method('rktoutputkegiatan','rktprogram'); ?>">
                 <a href="<?php echo base_url("skpd/rktprogram/rktoutputkegiatan"); ?>"> Target RKT Ouput Kegiatan</a>
@@ -212,7 +212,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
           </ul>
         </li>
-        <li class="treeview <?php  echo active_link_multiple(array('pka')); ?>">
+        <li class="treeview <?php  echo active_link_multiple(array('reindikatorprogram','rekegiatan')); ?>">
           <a href="#">
             <i class="fa fa-trophy"></i>
             <span>Kinerja</span>
@@ -224,11 +224,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li class="<?php echo active_link_method('index','df'); ?>">
                 <a href=""> Realisasi Indikator Sasaran</a>
             </li>
-            <li class="<?php echo active_link_method('index','df'); ?>">
-                <a href=""> Realisasi Indikator Program</a>
+            <li class="<?php echo active_link_method('index','reindikatorprogram').active_link_method('triwulan','reindikatorprogram'); ?>">
+                <a href="<?php echo base_url('skpd/reindikatorprogram'); ?>"> Realisasi Indikator Program</a>
             </li>
-            <li class="<?php echo active_link_method('index','df'); ?>">
-                <a href=""> Realisasi Output Kegiatan</a>
+            <li class="<?php echo active_link_method('index','rekegiatan').active_link_method('triwulan','rekegiatan'); ?>">
+                <a href="<?php echo base_url("skpd/rekegiatan") ?>"> Realisasi Output Kegiatan</a>
             </li>
             <li class="<?php echo active_link_method('index','df'); ?>">
                 <a href=""> Peneyerapan Anggaran</a>

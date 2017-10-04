@@ -87,6 +87,9 @@ class Tjuan extends Skpd_model
 
 	public function getTujuanLogin()
 	{
+		if( ! $this->getMisiLogin() )
+			return array();
+
 		$misi = array();
 		foreach ($this->getMisiLogin() as $row) 
 			$misi[] = $row->id_misi;

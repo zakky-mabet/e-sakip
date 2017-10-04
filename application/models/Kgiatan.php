@@ -257,6 +257,8 @@ class Kgiatan extends Skpd_model
 
 					$this->insertPKPerubahanOutputKegiatan($this->input->post("create[tahun][{$key}]"), $output);
 
+					$this->insertReOutputKegiatan($this->input->post("create[tahun][{$key}]"), $output);
+
 					$this->template->alert(
 						' Data berhasil ditambahkan.', 
 						array('type' => 'success','icon' => 'check')
@@ -282,6 +284,8 @@ class Kgiatan extends Skpd_model
 
 					$this->insertPKPerubahanOutputKegiatan($this->input->post("update[tahun][{$value}]"), $value);
 
+					$this->insertReOutputKegiatan($this->input->post("update[tahun][{$value}]"), $value);
+
 					$this->db->update('output_kegiatan_program', $object, array('id_output_kegiatan_program' => $value));
 				}
 
@@ -289,6 +293,103 @@ class Kgiatan extends Skpd_model
 					' Data berhasil diubah.', 
 					array('type' => 'success','icon' => 'check')
 				);
+			}
+		}
+	}
+
+	public function UpdateReOutputKegiatan()
+	{
+		if( is_array($this->input->post('realisasi')) )
+		{
+			foreach ($this->input->post('realisasi') as $key => $value) 
+			{
+				if( $key == FALSE)
+					continue;
+				
+				$this->db->update('realisasi_output_kegiatan', array(
+					'realisasi' => $value,
+					'capaian' => $this->input->post("capaian[{$key}]"),
+					'keterangan' => $this->input->post("ket[{$key}]")
+				), array(
+					'id_reoutput_kegiatan' => $key
+				));
+			}
+
+			$this->template->alert(
+				' Tersimpan! Data berhasil tersimpan.', 
+				array('type' => 'success','icon' => 'check')
+			);
+		}
+	}
+
+	public function getReOutputKegiatanTriwulan($pk_induk = 0)
+	{
+		$query = $this->db->get_where('realisasi_output_kegiatan', array(
+			'pk_induk' => $pk_induk
+		) );
+
+		return $query->result();
+	}
+
+	public function getReOutputKegiatan($output = 0, $tahun = 0, $triwulan = FALSE)
+	{
+		if( $triwulan == FALSE) 
+		{
+			$query = $this->db->get_where('realisasi_output_kegiatan', array(
+				'id_output_kegiatan_program' => $output,
+				'tahun' => $tahun
+			) );
+		} else {
+			$query = $this->db->get_where('realisasi_output_kegiatan', array(
+				'id_output_kegiatan_program' => $output,
+				'tahun' => $tahun,
+				'triwulan' => $triwulan
+			) );
+		}
+		return $query->row(); 
+	}
+
+	public function insertReOutputKegiatan($tahun = FALSE, $output = 0)
+	{
+		if( is_array($tahun) )
+		{
+			foreach ($tahun as $key => $item) 
+			{
+				if( $this->getReOutputKegiatan($output, $item) ) 
+				{
+					continue;
+				} else {
+					$this->db->insert('realisasi_output_kegiatan', array(
+						'id_output_kegiatan_program' => $output,
+						'tahun' => $item,
+						'pk_induk' => 0,
+						'triwulan' => null,
+						'realisasi' => null,
+						'capaian' => null,
+						'keterangan' => null
+					));
+
+					$induk = $this->db->insert_id();
+
+					if( $induk ) 
+					{
+						for($i = 1; $i <= 4; $i++) 
+						{
+							if( $this->getReOutputKegiatan($output, $item, "T".$i) == FALSE )
+							{
+								$this->db->insert('realisasi_output_kegiatan', array(
+									'id_output_kegiatan_program' => $output,
+									'tahun' => $item,
+									'pk_induk' => $induk,
+									'triwulan' => "T".$i,
+									'realisasi' => null,
+									'capaian' => null,
+									'keterangan' => null
+								));
+							}
+						}
+					}
+				}
 			}
 		}
 	}
