@@ -65,12 +65,68 @@ class Kgiatan extends Skpd_model
 							$this->insertAnggaranKegiatan($value, $tahun);
 							$this->insertPenanggungJawabKegiatan($value, $tahun);
 						}
+
+						$this->insertReanggaranKegiatan($this->input->post("update[tahun][{$value}]"), $value);
 					}
 
 					$this->template->alert(
 						' Data berhasil disimpan.', 
 						array('type' => 'success','icon' => 'check')
 					);
+				}
+			}
+		}
+	}
+
+	public function updatePAnggaranKegiatan($param = 0)
+	{
+		$this->db->update('realisasi_anggaran_kegiatan', array(
+			'nilai_anggaran' => str_replace(',', '', $this->input->post('nilai'))
+		), array(
+			'id_reanggaran_kegiatan' => $param
+		));
+	}
+
+	public function getReAnggaranKegiatan($kegiatan = 0, $tahun = 0, $triwulan = FALSE)
+	{
+		if( $triwulan == FALSE) 
+		{
+			$query = $this->db->get_where('realisasi_anggaran_kegiatan', array(
+				'id_kegiatan' => $kegiatan,
+				'tahun' => $tahun
+			) );
+		} else {
+			$query = $this->db->get_where('realisasi_anggaran_kegiatan', array(
+				'id_kegiatan' => $kegiatan,
+				'tahun' => $tahun,
+				'triwulan' => $triwulan
+			) );
+		}
+		return $query->row(); 
+	}
+
+	public function insertReanggaranKegiatan($tahun = 0, $kegiatan = 0)
+	{
+		if( is_array($tahun) )
+		{
+			foreach ($tahun as $key => $item) 
+			{
+				if( $this->getReAnggaranKegiatan($kegiatan, $item) ) 
+				{
+					continue;
+				} else {
+					for($i = 1; $i <= 4; $i++) 
+					{
+						if( $this->getReAnggaranKegiatan($kegiatan, $item, "T".$i) == FALSE )
+						{
+							$this->db->insert('realisasi_anggaran_kegiatan', array(
+								'id_kegiatan' => $kegiatan,
+								'tahun' => $item,
+								'triwulan' => "T".$i,
+								'nilai_anggaran' => null
+							));
+						}
+					}
 				}
 			}
 		}
@@ -95,6 +151,7 @@ class Kgiatan extends Skpd_model
 
 				if( @is_array(  $this->getPeriode() ) )
 				{
+					$this->insertReanggaranKegiatan($this->getPeriode(), $tahun);
 
 					foreach ($this->getPeriode() as $item => $tahun) 
 					{

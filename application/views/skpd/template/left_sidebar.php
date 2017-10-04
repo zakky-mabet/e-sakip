@@ -212,7 +212,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
           </ul>
         </li>
-        <li class="treeview <?php  echo active_link_multiple(array('reindikatorprogram','rekegiatan','prestasi')); ?>">
+        <li class="treeview <?php  echo active_link_multiple(array('reindikatorprogram','rekegiatan','prestasi','panggarankegiatan')); ?>">
           <a href="#">
             <i class="fa fa-trophy"></i>
             <span>Kinerja</span>
@@ -230,8 +230,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li class="<?php echo active_link_method('index','rekegiatan').active_link_method('triwulan','rekegiatan'); ?>">
                 <a href="<?php echo base_url("skpd/rekegiatan") ?>"> Realisasi Output Kegiatan</a>
             </li>
-            <li class="<?php echo active_link_method('index','df'); ?>">
-                <a href=""> Peneyerapan Anggaran</a>
+            <li class="<?php echo active_link_method('index','panggarankegiatan'); ?>">
+                <a href="<?php echo base_url("skpd/panggarankegiatan") ?>"> Peneyerapan Anggaran</a>
             </li>
             <li class="<?php echo active_link_controller('prestasi'); ?>">
                 <a href="<?php echo base_url("skpd/prestasi"); ?>"> Prestasi</a>

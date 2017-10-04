@@ -4,7 +4,8 @@
  *
  * @author Vicky Nitinegoro [http://vicky.work]
  * @since 1.0 2017
- */
+ * 
+ */ 
 $(function() 
 {
 	$("#stickerButton100x").sticky({topSpacing:100});

@@ -13,7 +13,7 @@ class Prestasi extends Skpd
 	{
 		parent::__construct();
 
-		$this->breadcrumbs->unshift(1, 'Prestasi',  $this->uri->uri_string());
+		$this->breadcrumbs->unshift(1, 'Kinerja',  $this->uri->uri_string());
 
 		$this->load->model(array('mprogram','mstrategi','tjuan','mprestasi'));
 
@@ -26,6 +26,8 @@ class Prestasi extends Skpd
 
 	public function index()
 	{
+		$this->breadcrumbs->unshift(2, 'Prestasi',  $this->uri->uri_string());
+
 		$this->page_title->push('Prestasi', 'Organisasi Perangkat Daerah');
 
 		$this->form_validation->set_rules('prestasi', 'Prestasi', 'trim|required');
