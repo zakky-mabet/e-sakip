@@ -49,7 +49,7 @@
 	                        		echo form_hidden("update[ID][]", $indikator->id_indikator_sasaran);
 	                        	?>
 	                        	<tr class="dt-<?php echo $indikator->id_indikator_sasaran; ?>">
-	                        		<td class="text-center"><?php echo $key+1 ?></td>
+	                        		<td class="text-center"><?php echo ++$key ?></td>
 	                        		<td>               
 				                       <?php for($tahun = $this->msasaran->periode_awal; $tahun <= $this->msasaran->periode_akhir; $tahun++) : ?>
 	                        			<div class="col-md-6">

@@ -30,11 +30,22 @@
 
         //$('#tampildata').html( $(this).data('id-sasaran') );
         //console.log($('#modal-masalahtampildata').modal('show'));
-       // console.log($(this).data('id-sasaran'));
+        //console.log( $('#modal-masalah'+$(this).data('id-sasaran')));
     });
 
+    $('.get-modal-analisis').click( function() 
+    {
+        $('#modal-analisis'+$(this).data('id-sasaran')+$(this).data('tahun-sasaran')).modal('show');
+        
+        //$('#tampildata').html( $(this).data('id-sasaran') );
+        //console.log($('#modal-masalahtampildata').modal('show'));
+        //console.log($('#modal-analisis'+$(this).data('id-sasaran')+$(this).data('tahun-sasaran')));
+    });
 
-
+     /*!
+    * Modal Analisis
+    */
+   
 	/* DELETE FUNGSI */
 	$('a#btn-delete').on('click', function()
 	{

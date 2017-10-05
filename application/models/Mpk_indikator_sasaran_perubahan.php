@@ -35,38 +35,38 @@ class Mpk_indikator_sasaran_perubahan extends Skpd_model
 		return $this->db->get_where('master_satuan', array('id'=> $param))->row();
 	}
 
-	// public function Update()
-	// {
-	// 	if( $this->input->post('create') )
-	// 	{
-	// 		if( is_array($this->input->post('create')) )
-	// 		{
-	// 			echo 'Kesalahan Dalam Menyimpan Data ! Silahkan Ulangi';
-	// 		}
-	// 	} else {
-	// 		if( is_array($this->input->post('update')) )
-	// 		{
-	// 			foreach($this->input->post('update[ID]') as $key => $value) 
-	// 			{
+	public function Update()
+	{
+		if( $this->input->post('create') )
+		{
+			if( is_array($this->input->post('create')) )
+			{
+				echo 'Kesalahan Dalam Menyimpan Data ! Silahkan Ulangi';
+			}
+		} else {
+			if( is_array($this->input->post('update')) )
+			{
+				foreach($this->input->post('update[ID]') as $key => $value) 
+				{
 
-	// 				if ($value == NULL) {
+					if ($value == NULL) {
 						
-	// 				} else {
-	// 				$object = array(
-	// 					'nilai_target_pk' => $this->input->post("update[nilai_target_pk][{$value}]"),
-	// 					'sebab_pk' => $this->input->post("update[sebab_pk][{$value}]"),
-	// 				);
-	// 				$this->db->update('pk_indikator_target', $object, array('id_pk_target' => $value));
+					} else {
+					$object = array(
+						'pk_perubahan_nilai_target' => $this->input->post("update[pk_perubahan_nilai_target][{$value}]"),
+						'pk_sebab_perubahan' => $this->input->post("update[pk_sebab_perubahan][{$value}]"),
+					);
+					$this->db->update('pk_indikator_target', $object, array('id_pk_target' => $value));
 					
-	// 				$this->template->alert(
-	// 					'Data berhasil disimpan.', 
-	// 					array('type' => 'success','icon' => 'check')
-	// 					);
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// }
+					$this->template->alert(
+						'Data berhasil disimpan.', 
+						array('type' => 'success','icon' => 'check')
+						);
+					}
+				}
+			}
+		}
+	}
 
 	public function getIndikatorSasaran($param = 0)
 	{
