@@ -94,6 +94,8 @@
 
 			            $col2 = (count($DIndikator)+1);
 			            $col1 = (count($DSasaran)+1) + $col2;
+			            if( $col2 >= 2 )
+			            	$col1--;
 			            ?>
 						<tr>
 							<td rowspan="<?php echo $col1 ?>"><?php echo ++$keyTujuan; ?>.</td>
@@ -108,8 +110,8 @@
 			            foreach(  $DSasaran as $keySasaran => $sasaran) : 
 			            ?>
 						<tr>
-							<td rowspan="<?php echo $col2 ?>"><?php echo $keyTujuan.".".++$keySasaran ?></td>
-							<td rowspan="<?php echo $col2 ?>"><?php echo $sasaran->deskripsi ?></td>
+							<td rowspan="<?php echo $col2; ?>"><?php echo $keyTujuan.".".++$keySasaran ?></td>
+							<td rowspan="<?php echo $col2; ?>"><?php echo $sasaran->deskripsi ?></td>
 						</tr>
 			            <?php 
 			            /**

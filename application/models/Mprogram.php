@@ -28,6 +28,21 @@ class Mprogram extends Skpd_model
 		return $this->db->get('sasaran')->result();
 	}
 
+	public function getIndikatorSasaranByLogin()
+	{
+		if( $this->getSasaranByLogin() == false )
+			return array();
+
+		$sasaran = array();
+		foreach ($this->getSasaranByLogin() as $row) 
+			$sasaran[] = $row->id_sasaran;
+
+		$this->db->select('indikator_sasaran.*, master_satuan.nama as nama_satuan');
+		$this->db->join('master_satuan', 'master_satuan.id = indikator_sasaran.id_satuan', 'left');
+		$this->db->where_in('id_sasaran' , $sasaran);
+		return $this->db->get('indikator_sasaran')->result();
+	}
+
 	public function getIndikatorProgram()
 	{
 		return $this->db->get_where('master_indikator_sasaran', array('id_skpd' => $this->SKPD))->result();

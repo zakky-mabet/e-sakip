@@ -21,12 +21,19 @@ table.mini-font tfoot td {
    vertical-align: middle;
 }
 
-table.mini-font tbody tr:nth-child(2) td,
+/* table.mini-font tbody tr:nth-child(2) td,
 table.mini-font tbody tr:nth-child(3) td,
 table.mini-font tbody tr:nth-child(4) td{
   border-top: 0; 
 }
-
+table.tb-gabungan tbody tr:nth-child(1) td,
+table.tb-gabungan tbody tr:nth-child(2) td,
+table.tb-gabungan tbody tr:nth-child(3) td,
+table.tb-gabungan tbody tr:nth-child(4) td,
+table.tb-gabungan tbody tr:nth-child(5) td,
+table.tb-gabungan tbody tr:nth-child(6) td{
+  border-top: 0; 
+} */
 
 /*  ADMIN LTE */
     .content-wrapper { background: #F4F5F7 }

@@ -61,6 +61,12 @@ class Skpd_model extends MY_Model
 		return $this->db->get('indikator_sasaran')->result();
 	}
 
+	public function getFormulasiByIndikatorSasaran($indikator = 0)
+	{
+		$this->db->where('id_indikator_sasaran' , $indikator);
+		return $this->db->get('formulasi_sasaran')->row();
+	}
+
 	public function getTargetSasaranBySasaranTahun($indikator = 0, $tahun)
 	{
 		return $this->db->get_where('target_sasaran', array(

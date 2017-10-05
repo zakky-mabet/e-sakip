@@ -238,7 +238,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
           </ul>
         </li>
-        <li class="treeview <?php  echo active_link_multiple(array('renstra')); ?>">
+        <li class="treeview <?php  echo active_link_multiple(array('renstra','rrkt','iku')); ?>">
           <a href="#">
             <i class="fa fa-line-chart"></i>
             <span>Laporan</span>
@@ -250,17 +250,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li class="<?php echo active_link_method('index','renstra'); ?>">
                 <a href="<?php echo base_url("skpd/report/renstra"); ?>"> Rencana Strategis</a>
             </li>
-            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
-                <a href=""> Rencana Kinerja Tahunan</a>
+            <li class="<?php echo active_link_method('index','rrkt'); ?>">
+                <a href="<?php echo base_url("skpd/report/rrkt"); ?>"> Rencana Kinerja Tahunan</a>
             </li>
-            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
-                <a href=""> Indikator Kinerja Utama</a>
+            <li class="<?php echo active_link_method('index','iku'); ?>">
+                <a href="<?php echo base_url("skpd/report/iku"); ?>"> Indikator Kinerja Utama</a>
             </li>
             <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
                 <a href=""> Perjanjian Kinerja</a>
             </li>
             <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
                 <a href=""> Perjanjian Kinerja Perubahan</a>
+            </li>
+            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
+                <a href=""> Capaian Indikator Kinerja Utama</a>
+            </li>
+            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
+                <a href=""> Capaian Indikator Kinerja Strategis</a>
+            </li>
+            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
+                <a href=""> Pagu dan Realisasi Anggaran</a>
             </li>
           </ul>
         </li>
