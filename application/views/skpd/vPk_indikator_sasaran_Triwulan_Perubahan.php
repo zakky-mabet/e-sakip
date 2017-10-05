@@ -15,7 +15,7 @@
             <?php endfor; ?>
             <li class="dropdown pull-right">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                  		PERIODE <span class="caret"></span>
+                  		PERIODE <span class="caret" ></span>
 					</a>
 					<ul class="dropdown-menu">
 	                  <li class="<?php echo active_link_method('index','pk_indikator_sasaran_perubahan'); ?>">
