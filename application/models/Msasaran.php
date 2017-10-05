@@ -35,7 +35,6 @@ class Msasaran extends Skpd_model
 						'id_tujuan' => $key,
 						'deskripsi' => $value,
 						'tahun' => implode(',', $this->input->post("create[tahun][{$key}]")),
-				
 						'id_kepala' =>$this->session->userdata('SKPD')->ID
 
 					);
@@ -49,6 +48,8 @@ class Msasaran extends Skpd_model
 					);
 
 					$this->db->insert('permasalahan_sasaran', $objectPR);
+
+					$this->Insert_Analisis_Sasaran($this->input->post("create[tahun][{$key}]"), $get_id_indikator_sasaran);
 
 				}
 			}
@@ -65,6 +66,8 @@ class Msasaran extends Skpd_model
 					$this->db->update('sasaran', $object, array('id_sasaran' => $value));
 
 					$get_id_indikator_sasaran = $value;
+
+					$this->Insert_Analisis_Sasaran($this->input->post("update[tahun][{$key}]"), $get_id_indikator_sasaran);
 
 					foreach ($this->input->post("update[tahun][{$value}]") as $valuetahun) {
 					
@@ -84,6 +87,41 @@ class Msasaran extends Skpd_model
 				}
 			}
 		}
+	}
+
+	//GENERATE REALISASI ANALISI SASARAN
+	public function Insert_Analisis_Sasaran($tahun = 0, $get_id_indikator_sasaran = 0)
+	{
+		if( is_array($tahun) )
+		{
+			foreach ($tahun as $key => $item) 
+			{
+				if( $this->checktable_realisasi_analisi($get_id_indikator_sasaran, $item) ) 
+				{
+					continue;
+				} else {
+					$this->db->insert('realisasi_analisis_sasaran_tahunan', array(
+						'id_sasaran' => $get_id_indikator_sasaran,
+						'deskripsi' => NULL,
+						'tahun_analisis' => $item
+					));
+				}
+			}
+
+			$this->template->alert(
+				' Tersimpan! Data berhasil tersimpan.', 
+				array('type' => 'success','icon' => 'check')
+			);
+		}
+	}
+
+	public function checktable_realisasi_analisi($get_id_indikator_sasaran = 0, $tahun = 0)
+	{
+		$query = $this->db->get_where('realisasi_analisis_sasaran_tahunan', array(
+			'id_sasaran' => $get_id_indikator_sasaran,
+			'tahun_analisis' => $tahun
+		) );
+		return $query->num_rows();
 	}
 
 	public function getTujuanSasaran($misi = 0)
@@ -220,19 +258,13 @@ class Msasaran extends Skpd_model
 
 					//fungsi ci ambil id saat insert
 					$get_id_indikator_sasaran = $this->db->insert_id();
-
-					if( is_array($this->input->post("create[tahun][{$key}]")) )
-					{
-						foreach ($this->input->post("create[tahun][{$key}]") as $item => $tahun) 
-						{
-							$this->Insert_id_ke_formulasi($get_id_indikator_sasaran, $tahun);
-
-						}
-					}
+					
+					$this->Insert_to_formulasi($this->input->post("create[tahun][{$key}]"), $get_id_indikator_sasaran);
 
 					$this->Insert_to_target($this->input->post("create[tahun][{$key}]"), $get_id_indikator_sasaran);
 
 					$this->insertPKIndikatorKinerjaProgram($this->input->post("create[tahun][{$key}]"), $get_id_indikator_sasaran);
+
 
 					if($this->db->affected_rows())
 					{
@@ -284,36 +316,53 @@ class Msasaran extends Skpd_model
 						}
 					} // enforeach Update table sasaran_target
 
+					$this->Insert_to_formulasi($this->input->post("update[tahun][{$key}]"), $value);
+
 					// GENERATE TARGET INDIKATOR PK TRIWULAN
 					$this->insertPKIndikatorKinerjaProgram($this->input->post("update[tahun][{$value}]"), $value);
+					
+					// GENERATE REALISASI INDIKATOR SASARAN PERTAHUN
+					
 
 				}
 			}
 		}
 	}
-	//ini adalah fungsi get id dari indikator saat inser indikator sasaran
-	public function Insert_id_ke_formulasi($get_id_indikator_sasaran = 0, $tahun = 0)
+	
+	public function Insert_to_formulasi($tahun = 0, $get_id_indikator_sasaran = 0)
 	{
-		
-			
-		if( $this->cek_id_indikator_sasaran($get_id_indikator_sasaran, $tahun) == FALSE)
+		if( is_array($tahun) )
 		{
-			$this->db->insert('formulasi_sasaran', array(
-				'id_indikator_sasaran' => $get_id_indikator_sasaran,
-				'alasan' => NULL,
-				'cara_pengukuran' => NULL,
-				'keterangan' => NULL
-			));
+			foreach ($tahun as $key => $item) 
+			{
+				if( $this->cekformulasi($get_id_indikator_sasaran, $item) ) 
+				{
+					continue;
+				} else {
+					$this->db->insert('formulasi_sasaran', array(
+						'id_indikator_sasaran' => $get_id_indikator_sasaran,
+						'alasan' => NULL,
+						'cara_pengukuran' => NULL,
+						'keterangan' => NULL,
+						
+					));
+				}
+			}
+
+			$this->template->alert(
+				' Tersimpan! Data berhasil tersimpan.', 
+				array('type' => 'success','icon' => 'check')
+			);
 		}
-		
 	}
-	//ini adalah fungsi get id dari indikator saat inser indikator sasaran
-	public function cek_id_indikator_sasaran($get_id_indikator_sasaran = 0, $tahun = 0)
+
+	public function cekformulasi($get_id_indikator_sasaran = 0, $tahun = 0)
 	{
 		$query = $this->db->get_where('formulasi_sasaran', array(
 			'id_indikator_sasaran' => $get_id_indikator_sasaran,
+			
 		) );
-		return $query->num_rows(); 
+		return $query->num_rows();
 	}
 
 	/* Sasaran get_id_indikator_sasaran */
@@ -466,6 +515,10 @@ class Msasaran extends Skpd_model
 						);
 					} 
 	}
+
+	//GENERATE REALISASI INDIKATOR SASARAN
+	
+
 }
 
 /* End of file Tjuan.php */

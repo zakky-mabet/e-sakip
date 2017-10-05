@@ -1,5 +1,5 @@
 <div class="row">
-	<?php echo form_open(base_url("skpd/pk_indikator_sasaran_perubahan/save")); ?>
+	<?php echo form_open(base_url("skpd/pk_indikator_sasaran_perubahan/savetriwulan")); ?>
 	
 	<div class="col-md-6 col-md-offset-3">
 		<?php echo $this->session->flashdata('alert'); ?>

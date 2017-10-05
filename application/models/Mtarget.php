@@ -58,6 +58,8 @@ class Mtarget extends Skpd_model
 				
 				$this->SelectIdTargetSasarandanpkindikatorPK();
 
+				$this->SelectIdTargetSasarandanpkindikatorTarget();
+
 			}
 		}
 	}
@@ -98,6 +100,28 @@ class Mtarget extends Skpd_model
 		  } 
 		}
 	}
+
+	// GENERATE REALISASI
+	public function SelectIdTargetSasarandanpkindikatorTarget()
+	{
+		foreach ($this->input->post('update[ID]') as $key => $value) 
+		{
+			$query = $this->db->get_where('realisasi_indikator_sasaran', array(
+			'id_target_sasaran' => $value,
+		) );
+		 if ($query->num_rows()== 0) 
+		 {
+		 	$object_realisasi = array(
+				'id_target_sasaran' => $value,
+				'nilai_realisasi' => NULL,
+				'nilai_capaian' => NULL,
+				'keterangan'	=> NULL,
+			);
+			$this->db->insert('realisasi_indikator_sasaran', $object_realisasi);
+		  } 
+		}
+	}
+		
  }
 
  
