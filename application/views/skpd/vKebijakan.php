@@ -65,7 +65,7 @@
 								<!-- UPDATE -->
 					            <?php 
 					            if( $this->kbjakan->getKebijakanByStrategi($strategi->id_strategi) ) :
-					            /* Loop Indikator terisi */
+					            /* Loop kegiatan terisi */
 					            $cekLoop = true;
 					            foreach( $this->kbjakan->getKebijakanByStrategi($strategi->id_strategi) as $keyKebijakan => $kebijakan) :
 					            	echo form_hidden("update[ID][]", $kebijakan->id_kebijakan);
@@ -96,7 +96,7 @@
 										$cekLoop = false;
 										?>
 										<button id="btn-add-kebijakan" type="button" class="btn btn-default" 
-										data-id="<?php echo $kebijakan->id_kebijakan ?>" 
+										data-id="<?php echo $strategi->id_strategi ?>" 
 										data-parent="<?php echo $key ?>"
 										data-key="1"
 										title="Tambah Form">

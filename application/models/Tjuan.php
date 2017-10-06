@@ -17,7 +17,7 @@ class Tjuan extends Skpd_model
 			{
 				foreach($this->input->post('create[deskripsi]') as $key => $value) 
 				{
-					if( $value == FALSE OR $this->input->post("create[tahun][{$key}]") == FALSE) 
+					if( $value == FALSE) 
 					{
 						$this->template->alert(
 							' Maaf! tahun aktif dan tujuan tidak boleh kosong.', 
@@ -29,11 +29,16 @@ class Tjuan extends Skpd_model
 					$object = array(
 						'id_misi' => $key,
 						'deskripsi' => $value,
-						'tahun' => implode(',', $this->input->post("create[tahun][{$key}]")),
+						'tahun' => $this->input->post("create[tahun]"),
 						'id_kepala' => $this->kepala
 					);
 
-					$this->db->insert('tujuan', $object);
+					$this->insertTujuan($key, $object);
+
+					$this->template->alert(
+						' Data berhasil disimpan.', 
+						array('type' => 'success','icon' => 'warning')
+					);
 				}
 			}
 		} else {
@@ -52,6 +57,24 @@ class Tjuan extends Skpd_model
 		}
 	}
 
+	public function insertTujuan( $misi = 0, $data = FALSE)
+	{
+		if( is_array($data) )
+		{
+			foreach ($data['deskripsi'] as $key => $deskripsi) 
+			{
+				$object = array(
+					'id_misi' => $misi,
+					'deskripsi' => $deskripsi,
+					'tahun' => @implode(',', $data['tahun'][$misi]),
+					'id_kepala' => $this->kepala
+				);
+
+				$this->db->insert('tujuan', $object);
+			}
+		}
+	}
+
 	public function getTujuanByMisi($misi = 0)
 	{
 		return $this->db->get_where('tujuan', array('id_misi' => $misi))->result();
@@ -64,6 +87,9 @@ class Tjuan extends Skpd_model
 
 	public function getTujuanLogin()
 	{
+		if( ! $this->getMisiLogin() )
+			return array();
+
 		$misi = array();
 		foreach ($this->getMisiLogin() as $row) 
 			$misi[] = $row->id_misi;

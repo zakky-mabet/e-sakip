@@ -15,12 +15,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <link rel="stylesheet" href="<?php echo base_url("assets/public/ionicons/css/ionicons.min.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/plugins/select2/select2.min.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/dist/css/AdminLTE.min.css"); ?>">
-  <link rel="stylesheet" href="<?php echo base_url("assets/public/dist/css/skins/skin-blue-light.css"); ?>">
+  <link rel="stylesheet" href="<?php echo base_url("assets/public/dist/css/skins/skin-sakip.css"); ?>">
+  <link rel="stylesheet" href="<?php echo base_url("assets/skpd/css/style-admin.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/dist/css/animate.css"); ?>">  
+  <link  rel="stylesheet" href="<?php echo base_url("assets/public/dist/css/hover-min.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/plugins/bootstrap-checkbox/awesome-bootstrap-checkbox.min.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/plugins/datepicker/datepicker3.min.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/public/summernote/summernote.css"); ?>">
-  <link rel="stylesheet" href="<?php echo base_url("assets/skpd/css/style-admin.css"); ?>">
   <link rel="shortcut icon" type="image/png" href="<?php echo base_url('assets/public/image/favicon-title.png') ?>"/>
 
   <script src="<?php echo base_url("assets/public/plugins/jQuery/jquery-2.2.3.min.js"); ?>"></script>
@@ -36,56 +37,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <script src="<?php echo base_url("assets/public/dist/js/moment.min.js"); ?>"></script>
   <script src="<?php echo base_url("assets/public/plugins/datepicker/bootstrap-datepicker.min.js"); ?>"></script>
   <script src="<?php echo base_url("assets/public/summernote/summernote.min.js"); ?>"></script>
+  <script src="<?php echo base_url("assets/public/plugins/mask-money/jquery.maskMoney.min.js"); ?>"></script>
+<!--   <script src="https://rubyrainbows.github.io/dynamic-forms/dynamic_forms.min.js"></script> -->
   <script type="text/javascript"> 
       var base_url   = '<?php echo site_url("skpd"); ?>';
       var base_path  = '<?php echo base_url('assets/public'); ?>';
       var current_url = '<?php echo current_url(); ?>';
   </script>
-  <style>
-    .content-wrapper { background: #F4F5F7 }
-    * { font-family: 'Arial', sans-serif; font-size: 13px; }
-    li > a > i.ion { font-size: 18px; }
-    a.link { color:blue; }
-    a.link:hover { color:#00C0EF; } 
-    .mini-font { font-size:0.9em; }
-    a.active { font-weight: bold; }
-    a { cursor: pointer; }
-    div.checkbox, label.checkbox { padding-top:0px; padding-bottom: 0px; }
-    .bg-silver { background:rgb(249,250,252); border:#444; }
-    .icon-button { font-size: 1.1em; margin: 5px 6px 0px 0px; }
-    .text-line { text-decoration: line-through; color: rgb(173,0,0); }
-    dt { text-align: left; }
-    .top { margin-top: 20px; }
-    div.kisaran > .ticks_labels { padding: 10px; }
-    .bigger-font { font-size: 15px; }
-     label.control-label { font-size: 12px !important; } 
-     div.icon > i.ion  { font-size: 80px; }
-     div.icon > i.fa { font-size: 60px; }
-    .block-no-surat > strong { font-size: 16px; }
-     input.no_surat { padding: 0px 0px 0px 0px; width:42px;   border-bottom: none;  border-top: none; border-right: none; border-left: none; text-align:center; font-size: 16px; font-weight: bold;
-       position: inline; color:orange;
-     }
-    input.no_surat:focus { outline:none !important; }
-    div.modal-sm {
-      top:30%;
-    }
-    small > a { font-size:inherit; }
-    iframe { width: 100%; min-height:530px;  }
-    .bg-1 { background-color: #FB8C00 }
-    .bg-2 { background-color: #FF9800 }
-    .bg-3 { background-color: #FFA726 }
-    .right2x { margin-right: 20px; }
-    .top50x { margin-top: 50px; }
-    .text-white { color: white }
-    .tinymce-300 { height: 200px !important;}
-    li.time-label > span:first-child {
-      border-radius: 5px 0px 0px 5px;
-      padding-right: 10px;
-    }
-    li.time-label > span:last-child {
-      border-radius: 0px 5px 5px 0px;
-    }
-  </style>
 </head>
 <?php
 /* End of file header.php */

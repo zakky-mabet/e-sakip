@@ -1,13 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed'); 
 ?>
-<body class="hold-transition skin-blue-light sidebar-mini fixed">
+<body class="hold-transition skin-sakip sidebar-mini fixed">
+   <div id="load"></div>
    <div class="wrapper">
       <header class="main-header">
          <a href="<?php echo site_url('skpd/home') ?>" class="logo">
             <img src="<?php echo base_url("assets/public/image/logo.png"); ?>" class="logo-head" alt="Logo">
          </a>
          <nav class="navbar navbar-static-top">
+<!--          <a href="<?php echo site_url('skpd/home') ?>" class="logo">
+   <img src="<?php echo base_url("assets/public/image/logo.png"); ?>" class="logo-head" alt="Logo">
+</a> -->
          <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
            
@@ -18,7 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                </li>
                
                <li>
-                  <a href="<?php echo site_url("login/signout") ?>" style="font-size: 20px;" data-toggle="tooltip" data-toggle="modal" data-target="#keluar" data-placement="bottom" title="Keluar dari Sistem">
+                  <a href="#" style="font-size: 20px;" data-toggle="modal" data-target="#log-off" data-placement="bottom" title="Keluar dari Sistem">
                      <i class="fa fa-power-off"></i>
                   </a>
                </li>
@@ -26,8 +30,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
          </div>
        </nav>
       </header>
+
 <?php  
 /* End of file navbar.php */
 /* Location: ./application/modules/Akademik/views/template/navbar.php */
 ?>
-

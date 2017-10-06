@@ -52,14 +52,6 @@
 	                        		<?php endfor; ?>
 	                        		</td>
 	                        		<td>
-	                        			<div class="form-group">
-	                        				<select name="update[indikator][<?php echo $program->id_program ?>]" class="form-control" required="required">
-	                        					<option value="">-- PILIH --</option>
-	                        				<?php foreach($this->mprogram->getIndikatorProgram() as $row) : ?>
-	                        					<option value="<?php echo $row->id ?>" <?php if($row->id==$program->id_indikator_sasaran) echo 'selected'; ?>><?php echo $row->deskripsi ?></option>
-	                        				<?php endforeach; ?>
-	                        				</select>
-	                        			</div>
 	                        			<textarea name="update[deskripsi][<?php echo $program->id_program ?>]" class="form-control" rows="3" required="required"><?php echo $program->deskripsi ?></textarea>
 	                        		</td>
 	                        		<td class="text-center">
@@ -100,14 +92,6 @@
 	                        		<?php endfor; ?>
 	                        		</td>
 	                        		<td>
-	                        			<div class="form-group">
-	                        				<select name="create[indikator][<?php echo $sasaran->id_sasaran ?>]" id="inputCreate[Indikator][]" class="form-control" required="required">
-	                        					<option value="">-- PILIH --</option>
-	                        				<?php foreach($this->mprogram->getIndikatorProgram() as $row) : ?>
-	                        					<option value="<?php echo $row->id ?>"><?php echo $row->deskripsi ?></option>
-	                        				<?php endforeach; ?>
-	                        				</select>
-	                        			</div>
 	                        			<textarea name="create[deskripsi][<?php echo $sasaran->id_sasaran ?>]" class="form-control" rows="3" required="required"></textarea>
 	                        		</td>
 	                        		<td class="text-center">
