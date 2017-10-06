@@ -12,6 +12,22 @@
 					<a href="#tab-<?php echo $tahun; ?>" data-toggle="tab"><strong><?php echo $tahun ?></strong></a>
 				</li>
             <?php endfor; ?>
+            	<li class="dropdown pull-right">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  		PERIODE <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+	                  <li class="<?php echo active_link_method('index','realisasi_sasaran'); ?>">
+	                    <a href="<?php echo base_url("skpd/realisasi_sasaran/") ?>"> Tahunan</a>
+	                  </li>
+	                  <li class="<?php echo active_link_method('realisasi_sasaran','triwulan'); ?>">
+	                    <a href="<?php echo base_url("skpd/realisasi_sasaran/triwulan") ?>">Triwulan</a>
+	                  </li>
+	                   <li class="<?php echo active_link_method('realisasi_sasaran','bulanan'); ?>">
+	                    <a href="<?php echo base_url("skpd/realisasi_sasaran/bulanan") ?>">Bulanan</a>
+	                  </li>
+					</ul>
+              	</li>
 				
             </ul>
             <div class="tab-content">
@@ -20,33 +36,26 @@
 			        <ul class="timeline">
 			          
 			            <li class="time-label">
-			                  <span class="bg-blue">Entri Capaian Kinerja Indikator Sasaran Per Tahun</span>
+			                  <span class="bg-blue">Entri Capaian Kinerja Indikator Sasaran Per Triwulan</span>
 			            </li>
 			            <?php 
 			        
-			            foreach($this->mrealisasi_sasaran->getAllSasaran( ) as $key => $sasaran) : ?>
+			            foreach($this->mrealisasi_sasaran->getAllSasaran() as $key => $sasaran) : ?>
 			            <li>
 					<table class="table table-bordered bg-white">
 						<thead class="bg-blue">
 							<tr>
 								<th style="vertical-align: middle;" rowspan="1" width="50" class="text-center"><?php echo $tahun ?></th>
-								<td colspan="5" width="100" style="vertical-align: middle; color: black" class="bg-silver" ><strong>Sasaran :</strong> <?php echo $sasaran->deskripsi ?></td>
-								<td  colspan="2" class="bg-silver text-right">
-
-									<button data-toggle="tooltip" data-placement="top" title="Analisis" class="btn btn-sm btn-danger get-modal-analisis" data-id-sasaran="<?php echo $sasaran->id_sasaran ?>"  data-tahun-sasaran="<?php echo $tahun ?>" type="button"><i class="fa fa-pencil"></i> Analisis </button>
-
-									
-								</td>
+								<td colspan="8" width="100" style="vertical-align: middle; color: black" class="bg-silver" ><strong>Sasaran :</strong> <?php echo $sasaran->deskripsi ?></td>
+							
 							</tr>
 							<tr>
 								<th style="vertical-align: middle;" class="text-center" width="10">No.</th>
 								<th style="vertical-align: middle;" class="text-center" width="300">Indikator</th>
 								<th style="vertical-align: middle;" class="text-center" width="20">Satuan</th>
 								<th style="vertical-align: middle;" class="text-center" width="20">IKU</th>
-								<th style="vertical-align: middle;" class="text-center" width="10"><small>Target Renstra <?php echo $tahun; ?> </small></th>
-								<th style="vertical-align: middle;" class="text-center" width="30"> <small>Realisasi <?php echo $tahun; ?></small> </th>
-								<th style="vertical-align: middle;" class="text-center" width="30"><small>Capaian (%)</small> </th>
-								<th style="vertical-align: middle;" class="text-center" width="100"><small>Keterangan</small> </th>
+								<th colspan="5" style="vertical-align: middle;" class="text-center" > Target, Realisasi dan Capaian Tahun <?php echo $tahun; ?></th>
+								
 							</tr>
 						</thead>
 						<tbody>
@@ -60,22 +69,96 @@
 
 			            	?>
 							<tr>
-								<td style="vertical-align: middle;" class="text-center">						
+								<td rowspan="5"  style="vertical-align: middle;" class="text-center">
 								<?php echo ++$key ?></td>
-								<td style="vertical-align: middle;" ><?php echo $indikator->deskripsi ?></td>
-								<td  style="vertical-align: middle;"  class="text-center"><?php echo $this->mrealisasi_sasaran->getsatuan($indikator->id_satuan)->nama ?></td>
-								<td  style="vertical-align: middle;"  class="text-center"> <?php if ($indikator->IKU=='yes'):  ?> <i class="fa fa-check "></i>	<?php endif ?>  </td>
-								<td  style="vertical-align: middle;" class="text-center" ><?php echo $indikator->nilai_target  ?></td>
-								<td>
-								<?php echo form_hidden("update[ID][]", $indikator->id_realisasi_indikator_sasaran);?>
-								<input style="vertical-align: middle;" type="text" name="update[nilai_realisasi][<?php echo $indikator->id_realisasi_indikator_sasaran ?>]" value="<?php echo $indikator->nilai_realisasi  ?>" class="form-control"></td>
-								<td  style="vertical-align: middle;" >
+								<td rowspan="5"  style="vertical-align: middle;" ><?php echo $indikator->deskripsi ?></td>
+								<td rowspan="5"   style="vertical-align: middle;"  class="text-center"><?php echo $this->mrealisasi_sasaran->getsatuan($indikator->id_satuan)->nama ?></td>
+								<td rowspan="5"   style="vertical-align: middle;"  class="text-center"> <?php if ($indikator->IKU=='yes'):  ?> <i class="fa fa-check "></i>	<?php endif ?>  </td>
 								
-								<input type="text" name="update[nilai_capaian][<?php echo $indikator->id_realisasi_indikator_sasaran ?>]" value="<?php echo $indikator->nilai_capaian  ?>" class="form-control"></td>
-								<td  style="vertical-align: middle;" >
-							
-								<input type="text" name="update[keterangan][<?php echo $indikator->id_realisasi_indikator_sasaran ?>]" value="<?php echo $indikator->keterangan  ?>" class="form-control" data-toggle="tooltip" data-placement="top" title="<?php echo $indikator->keterangan  ?>"></td>
+								<td class="text-center" width="10" style="vertical-align: middle;"><b><small>Triwulan Tahun <?php echo $tahun ?></small></b></td>
+								<td class="text-center" width="15" style="vertical-align: middle;"><b><small>Target Triwulan </small></b></td>
+								<td class="text-center" width="40" style="vertical-align: middle;"><b><small>Realisasi Triwulan Tahun <?php echo $tahun ?> </small></b></td>
+								<td class="text-center" width="50" style="vertical-align: middle;"><b><small>Capaian % (Realisasi/Target) x 100</small></b></td>
+								<td class="text-center" width="50" style="vertical-align: middle;"><b><small>Analisis Sasaran Tahun <?php echo $tahun ?> Triwulan</small></b></td>
+									
 							</tr>
+
+							<?php foreach ($this->mrealisasi_sasaran->getIndikatorSasarantoTargetTriwulan($indikator->id_indikator_sasaran, $tahun) as $value ): ?>
+								
+							<tr>
+								<td  style="vertical-align: middle;" class="text-center" >		
+									Triwulan 1
+								</td>					
+								<td style="vertical-align: middle;"  class="text-center">
+								
+									<?php echo $value->nilai_target_triwulan1.'?' ?>
+								</td>
+								<td >
+								<?php echo form_hidden("update[ID][]", $value->id_pk_indikator_target_triwulan); ?>		
+									<input type="text" name="update[realisasi_triwulan1][<?php echo $value->id_pk_indikator_target_triwulan ?>]" value="<?php echo $value->realisasi_triwulan1 ?>" class="form-control" placeholder="Realisasi Triwulan 1">
+								</td>
+								<td >
+									<input type="text" name="update[capaian1][<?php echo $value->id_pk_indikator_target_triwulan ?>]" value="<?php echo $value->capaian1 ?>" class="form-control" placeholder="Capaian Triwulan 1">
+								</td>
+								<td>
+									<button data-toggle="tooltip" data-placement="top" title="Analisis Pencapaian Sasaran Tahun <?php $value->tahun_triwulan ?> Triwulan 1" class="btn btn-sm btn-danger get-modal-analisis-capaian" data-id-sasaran="" data-tahun-sasaran=" " type="button"><i class="fa fa-pencil"></i> Analisis </button>
+								</td>
+							</tr>
+
+							<tr>
+								<td  style="vertical-align: middle;" class="text-center" >		
+									Triwulan 2
+								</td>					
+								<td  style="vertical-align: middle;" class="text-center">		
+									<?php echo $value->nilai_target_triwulan2.'?' ?>
+								</td>
+								<td >		
+									<input type="text" name="update[realisasi_triwulan2][<?php echo $value->id_pk_indikator_target_triwulan ?>]" value="<?php echo $value->realisasi_triwulan2 ?>" class="form-control" placeholder=" Realisasi Triwulan 2">
+								</td>
+								<td >		
+									<input type="text" name="update[capaian2][<?php echo $value->id_pk_indikator_target_triwulan ?>]" value="<?php echo $value->capaian2 ?>" class="form-control" placeholder="Capaian Triwulan 2">
+								</td>
+								<td>
+									<button data-toggle="tooltip" data-placement="top" title="Analisis Pencapaian Sasaran Tahun <?php $value->tahun_triwulan ?> Triwulan 2" class="btn btn-sm btn-danger get-modal-analisis-capaian" data-id-sasaran="" data-tahun-sasaran=" " type="button"><i class="fa fa-pencil"></i> Analisis </button>
+								</td>
+							</tr>
+
+							<tr>
+								<td  style="vertical-align: middle;" class="text-center" >		
+									Triwulan 3
+								</td>					
+								<td style="vertical-align: middle;" class="text-center"><?php echo $value->nilai_target_triwulan3.'?' ?></td>
+								<td >		
+									<input type="text" name="update[realisasi_triwulan3][<?php echo $value->id_pk_indikator_target_triwulan ?>]" value="<?php echo $value->realisasi_triwulan3 ?>" class="form-control" placeholder="Realisasi Triwulan 3">
+								</td>
+								<td >		
+									<input type="text" name="update[capaian3][<?php echo $value->id_pk_indikator_target_triwulan ?>]" value="<?php echo $value->capaian3 ?>" class="form-control" placeholder="Capaian Triwulan 3">
+								</td>
+								<td>
+									<button data-toggle="tooltip" data-placement="top" title="Analisis Pencapaian Sasaran Tahun <?php $value->tahun_triwulan ?> Triwulan 3" class="btn btn-sm btn-danger get-modal-analisis-capaian" data-id-sasaran="" data-tahun-sasaran=" " type="button"><i class="fa fa-pencil"></i> Analisis </button>
+								</td>
+							</tr>
+
+							<tr>
+								<td  style="vertical-align: middle;" class="text-center" >		
+									Triwulan 4
+								</td>					
+								<td style="vertical-align: middle;"  class="text-center">		
+									<?php echo $value->nilai_target_triwulan4.'?' ?>
+								</td>
+								<td >		
+									<input type="text" name="update[realisasi_triwulan4][<?php echo $value->id_pk_indikator_target_triwulan ?>]" value="<?php echo $value->realisasi_triwulan4 ?>" class="form-control" placeholder="Realisasi Triwulan 4">
+								</td>
+								<td >		
+									<input type="text" name="update[capaian4][<?php echo $value->id_pk_indikator_target_triwulan ?>]" value="<?php echo $value->capaian4 ?>" class="form-control" placeholder="Capaian Triwulan 4">
+								</td>
+								<td>
+									<button data-toggle="tooltip" data-placement="top" title="Analisis Pencapaian Sasaran Tahun <?php $value->tahun_triwulan ?> Triwulan 4" class="btn btn-sm btn-danger get-modal-analisis-capaian" data-id-sasaran="" data-tahun-sasaran=" " type="button"><i class="fa fa-pencil"></i> Analisis </button>
+								</td>
+							</tr> 
+
+
+							 	<?php endforeach ?> 
 						<?php endforeach ?>
 
 						</tbody>

@@ -1,5 +1,8 @@
 	$(document).ready( function() 
 	{
+
+
+
 	$('button#btn-add-sasaran').on('click', function()
 	{
 		var key = $(this).data('key');
@@ -36,19 +39,18 @@
     $('.get-modal-analisis').click( function() 
     {
         $('#modal-analisis'+$(this).data('id-sasaran')+$(this).data('tahun-sasaran')).modal('show');
-        
-        //$('#tampildata').html( $(this).data('id-sasaran') );
-        //console.log($('#modal-masalahtampildata').modal('show'));
-        //console.log($('#modal-analisis'+$(this).data('id-sasaran')+$(this).data('tahun-sasaran')));
     });
 
     $('.get-modal-kegiatan').click( function() 
     {
         $('#modal-kegiatan'+$(this).data('id-sasaran')+$(this).data('tahun-sasaran')).modal('show');
         
-        //$('#tampildata').html( $(this).data('id-sasaran') );
-        //console.log($('#modal-masalahtampildata').modal('show'));
-        //console.log($('#modal-analisis'+$(this).data('id-sasaran')+$(this).data('tahun-sasaran')));
+    });
+
+     $('.get-modal-bulanan').click( function() 
+    {
+        $('#modal-bulan'+$(this).data('id-sasaran')+$(this).data('tahun-sasaran')+$(this).data('bulan')).modal('show');
+        
     });
 
    
@@ -245,3 +247,242 @@ function add_form_indikator_sasaran(data, key, nomor, parent) {
 }
 
 
+$('a[data-key="bulan"]').on('click', function() 
+	{
+		var ID = $(this).data('id-sasaran');
+
+		var tahun = $(this).data('tahun-sasaran');
+
+		var bulan = $(this).data('bulan');
+
+		var sasaran = $(this).data('sasaran');		
+		
+		$.get(base_url + '/realisasi_sasaran/get_json/'+ID , function(result) 
+		{
+
+			switch(bulan){
+
+				case 'januari':
+					$('textarea').attr('name', bulan);
+
+					$('input').attr('name', 'ID');
+
+					$('input').attr('value', ID);
+
+					$('form#form-update').attr('action',base_url+'/realisasi_sasaran/update_realisasi/'+ID+'/'+bulan);
+
+					$('#tampildata').val(result.januari);
+
+					$('.modal-title').html('Analisis Sasaran Bulan '+bulan+' Tahun ' + tahun);
+
+					$('span.sasaran').html(sasaran);	
+
+					$('div#realisasi').modal('show');	
+				break;
+
+				case 'februari':
+					$('textarea').attr('name', bulan);
+
+					$('input').attr('name', 'ID');
+
+					$('input').attr('value', ID);
+
+					$('form#form-update').attr('action',base_url+'/realisasi_sasaran/update_realisasi/'+ID+'/'+bulan);
+
+					$('#tampildata').val(result.februari);
+
+					$('.modal-title').html('Analisis Sasaran Bulan '+bulan+' Tahun ' + tahun);
+
+					$('span.sasaran').html(sasaran);	
+
+					$('div#realisasi').modal('show');	
+				break;
+
+				case 'maret':
+					$('textarea').attr('name', bulan);
+
+					$('input').attr('name', 'ID');
+
+					$('input').attr('value', ID);
+
+					$('form#form-update').attr('action',base_url+'/realisasi_sasaran/update_realisasi/'+ID+'/'+bulan);
+
+					$('#tampildata').val(result.maret);
+
+					$('.modal-title').html('Analisis Sasaran Bulan '+bulan+' Tahun ' + tahun);
+
+					$('span.sasaran').html(sasaran);	
+
+					$('div#realisasi').modal('show');	
+				break;
+
+				case 'april':
+					$('textarea').attr('name', bulan);
+
+					$('input').attr('name', 'ID');
+
+					$('input').attr('value', ID);
+
+					$('form#form-update').attr('action',base_url+'/realisasi_sasaran/update_realisasi/'+ID+'/'+bulan);
+
+					$('#tampildata').val(result.april);
+
+					$('.modal-title').html('Analisis Sasaran Bulan '+bulan+' Tahun ' + tahun);
+
+					$('span.sasaran').html(sasaran);	
+
+					$('div#realisasi').modal('show');	
+				break;
+
+				case 'mei':
+					$('textarea').attr('name', bulan);
+
+					$('input').attr('name', 'ID');
+
+					$('input').attr('value', ID);
+
+					$('form#form-update').attr('action',base_url+'/realisasi_sasaran/update_realisasi/'+ID+'/'+bulan);
+
+					$('#tampildata').val(result.mei);
+
+					$('.modal-title').html('Analisis Sasaran Bulan '+bulan+' Tahun ' + tahun);
+
+					$('span.sasaran').html(sasaran);	
+
+					$('div#realisasi').modal('show');	
+				break;
+
+				case 'juni':
+					$('textarea').attr('name', bulan);
+
+					$('input').attr('name', 'ID');
+
+					$('input').attr('value', ID);
+
+					$('form#form-update').attr('action',base_url+'/realisasi_sasaran/update_realisasi/'+ID+'/'+bulan);
+
+					$('#tampildata').val(result.juni);
+
+					$('.modal-title').html('Analisis Sasaran Bulan '+bulan+' Tahun ' + tahun);
+
+					$('span.sasaran').html(sasaran);	
+
+					$('div#realisasi').modal('show');	
+				break;
+
+				case 'juli':
+					$('textarea').attr('name', bulan);
+
+					$('input').attr('name', 'ID');
+
+					$('input').attr('value', ID);
+
+					$('form#form-update').attr('action',base_url+'/realisasi_sasaran/update_realisasi/'+ID+'/'+bulan);
+
+					$('#tampildata').val(result.juli);
+
+					$('.modal-title').html('Analisis Sasaran Bulan '+bulan+' Tahun ' + tahun);
+
+					$('span.sasaran').html(sasaran);	
+
+					$('div#realisasi').modal('show');	
+				break;
+
+				case 'agustus':
+					$('textarea').attr('name', bulan);
+
+					$('input').attr('name', 'ID');
+
+					$('input').attr('value', ID);
+
+					$('form#form-update').attr('action',base_url+'/realisasi_sasaran/update_realisasi/'+ID+'/'+bulan);
+
+					$('#tampildata').val(result.agustus);
+
+					$('.modal-title').html('Analisis Sasaran Bulan '+bulan+' Tahun ' + tahun);
+
+					$('span.sasaran').html(sasaran);	
+
+					$('div#realisasi').modal('show');	
+				break;
+
+				case 'september':
+					$('textarea').attr('name', bulan);
+
+					$('input').attr('name', 'ID');
+
+					$('input').attr('value', ID);
+
+					$('form#form-update').attr('action',base_url+'/realisasi_sasaran/update_realisasi/'+ID+'/'+bulan);
+
+					$('#tampildata').val(result.september);
+
+					$('.modal-title').html('Analisis Sasaran Bulan '+bulan+' Tahun ' + tahun);
+
+					$('span.sasaran').html(sasaran);	
+
+					$('div#realisasi').modal('show');	
+				break;
+
+				case 'oktober':
+					$('textarea').attr('name', bulan);
+
+					$('input').attr('name', 'ID');
+
+					$('input').attr('value', ID);
+
+					$('form#form-update').attr('action',base_url+'/realisasi_sasaran/update_realisasi/'+ID+'/'+bulan);
+
+					$('#tampildata').val(result.oktober);
+
+					$('.modal-title').html('Analisis Sasaran Bulan '+bulan+' Tahun ' + tahun);
+
+					$('span.sasaran').html(sasaran);	
+
+					$('div#realisasi').modal('show');	
+				break;
+
+				case 'november':
+					$('textarea').attr('name', bulan);
+
+					$('input').attr('name', 'ID');
+
+					$('input').attr('value', ID);
+
+					$('form#form-update').attr('action',base_url+'/realisasi_sasaran/update_realisasi/'+ID+'/'+bulan);
+
+					$('#tampildata').val(result.november);
+
+					$('.modal-title').html('Analisis Sasaran Bulan '+bulan+' Tahun ' + tahun);
+
+					$('span.sasaran').html(sasaran);	
+
+					$('div#realisasi').modal('show');	
+				break;
+
+				case 'desember':
+					$('textarea').attr('name', bulan);
+
+					$('input').attr('name', 'ID');
+
+					$('input').attr('value', ID);
+
+					$('form#form-update').attr('action',base_url+'/realisasi_sasaran/update_realisasi/'+ID+'/'+bulan);
+
+					$('#tampildata').val(result.desember);
+
+					$('.modal-title').html('Analisis Sasaran Bulan '+bulan+' Tahun ' + tahun);
+
+					$('span.sasaran').html(sasaran);	
+
+					$('div#realisasi').modal('show');	
+				break;
+
+			}
+
+			
+			
+		});
+			
+					
+});

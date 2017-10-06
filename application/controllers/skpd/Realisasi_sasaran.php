@@ -37,7 +37,7 @@ class Realisasi_sasaran extends Skpd
 	{
 		$this->breadcrumbs->unshift(2, 'Target Indikator Penetapan Kinerja Triwulan ',  $this->uri->uri_string());
 
-		$this->page_title->push('PK', 'Target Indikator Penetapan Kinerja Triwulan ');
+		$this->page_title->push('Kinerja', 'Target Indikator Penetapan Kinerja Triwulan ');
 
 		$this->tahun = $this->uri->segment(4);
 
@@ -50,13 +50,37 @@ class Realisasi_sasaran extends Skpd
 		$this->template->view('skpd/vRealisasi_sasaran_triwulan', $this->data);
 	}
 
+
+	Public function bulanan()
+	{
+		$this->breadcrumbs->unshift(2, 'Target Indikator Penetapan Kinerja bulanan ',  $this->uri->uri_string());
+
+		$this->page_title->push('Kinerja', 'Target Indikator Penetapan Kinerja bulanan ');
+
+		$this->tahun = $this->uri->segment(4);
+
+		$this->data = array(
+			'title' => "Target Indikator Penetapan Kinerja bulanan ", 
+			'breadcrumbs' => $this->breadcrumbs->show(),
+			'page_title' => $this->page_title->show(),
+		);
+
+		$this->template->view('skpd/vRealisasi_sasaran_bulanan', $this->data);
+	}
+
 	public function save()
 	{
 		$this->mrealisasi_sasaran->Update();
 		
 		redirect("skpd/realisasi_sasaran");
-		// echo '<pre>';
-		// print_r($this->input->post());
+
+	}
+
+	public function savetriwulan()
+	{
+		$this->mrealisasi_sasaran->UpdateTriwulan();
+		
+		redirect("skpd/realisasi_sasaran/triwulan");
 	}
 
 
@@ -67,6 +91,17 @@ class Realisasi_sasaran extends Skpd
 		redirect("skpd/realisasi_sasaran");
 	}
 
+	public function get_json($param = 0 )
+	{
+		$this->output->set_content_type('application/json')->set_output(json_encode($this->mrealisasi_sasaran->get_realisasi($param)));
+	}
+
+	public function update_realisasi($param = 0,  $bulan = '')
+	{
+		$this->mrealisasi_sasaran->update_realisasi($param,$bulan);
+			
+		redirect("skpd/realisasi_sasaran/bulanan");
+	}
 	
 
 }
