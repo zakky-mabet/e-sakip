@@ -33,9 +33,13 @@ class Renstra extends Skpd
 				$this->load->view('skpd/report/print/renstra', $this->data);
 				break;
 			case 'pdf':
-			    $this->pdf->setPaper('A4', 'landscape');
+			    $this->pdf->setPaper('legal', 'landscape');
 			    $this->pdf->filename = strtoupper($this->data['title']).".pdf";
 			    $this->pdf->load_view('skpd/report/print/renstra', $this->data);
+				break;
+			case 'excel':
+				show_error('On Progress!');
+				
 				break;
 			default:
 				$this->template->view('skpd/report/IndexRenstra', $this->data);

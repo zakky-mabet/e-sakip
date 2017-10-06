@@ -13,7 +13,7 @@
 					<a href="<?php echo current_url().'?output=pdf'; ?>" target="_blank" class="btn btn-default">
 						<i class="fa fa-file-pdf-o"></i> PDF
 					</a>
-					<a href="" class="btn btn-default">
+					<a href="<?php echo current_url().'?output=excel'; ?>" target="_blank" class="btn btn-default">
 						<i class="fa fa-file-excel-o"></i> Excel
 					</a>
 				</div>

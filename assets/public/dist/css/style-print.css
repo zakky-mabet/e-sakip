@@ -2,7 +2,7 @@
    font-size: 10pt;
 }
 body { 
-   font-family:Arial, Helvetica, sans-serif; 
+   font-family:'Arial', 'Helvetica', sans-serif; 
    margin-left:3%; 
    margin-right: 3%;   
    margin-top: 3%;
@@ -20,7 +20,19 @@ h5.upper { margin: 2px; }
    font-weight:500; 
    margin-bottom: 3%;  
 }
-
+table.mini-font { 
+  vertical-align:center;
+   font-size: 8pt;
+}
+table.mini-font thead th,
+table.mini-font tbody td,
+table.mini-font tbody th,
+table.mini-font tbody td span,
+table.mini-font tbody td strong,
+table.mini-font tfoot td {  
+   font-size: 8pt;
+   vertical-align: middle;
+}
 table.kop {
    position: center;
    width: 100%;
@@ -75,21 +87,23 @@ table.table-bordered {
    border-collapse: collapse; 
    margin-top: 30px;
 }
-table.table-bordered th {  
+table.table-bordered tr th,
+table.table-bordered thead tr th {  
    border-width: 0.1px; 
    padding: 3px; 
    border-style: solid; 
-   border-color: #757572; 
+   border-color: black; 
    text-transform: none; 
    vertical-align: middle;
 }
-table.table-bordered td { 
+table.table-bordered td,
+table.table-bordered tr td,
+table.table-bordered tbody tr td { 
    border-width: 0.1px; 
    border-top: 0px; 
    padding: 3px 3px 10px 3px; 
    border-style: solid; 
-   border-color: #757572; 
-   vertical-align: middle;
+   border-color: black; 
 }
 
 .content { 
@@ -175,36 +189,48 @@ div.mail-footer > table {
 }
 
 
+#header,
+#footer {
+  position: fixed;
+  left: 0;
+   right: 0;
+   color: #aaa;
+   font-size: 0.9em;
+}
 
-        .wrapper {
-            background-image: url(<?php echo base_url("assets/img/logo_watermark.png"); ?>);
-            background-repeat: no-repeat;
-           /*  background-attachment: fixed; */
-            background-position: center; 
-            page-break-inside: avoid;
-            min-height: 1130px;
-        }
-         @media all {
-         .watermark {
-         display: none;
-         background-image: url(<?php echo base_url("assets/img/logo_kop.png"); ?>);
-         float: right;
-         }
-         .pagebreak {
-         display: none;
-         }
-         }
-         @media print {
-         .watermark {
-         display: block;
-         }
-         .pagebreak {
-            display: block;
-            page-break-after: always;
-         }
-         }
-        /*  @page { size: 'A4'; } */
-         @media print {
-         table {page-break-inside: avoid;}
-         div.wrapper {page-break-inside: avoid;}
-         }
+#header {
+  top: 0;
+   border-bottom: 0.1pt solid #aaa;
+}
+
+#footer {
+  bottom: 0;
+  border-top: 0.1pt solid #aaa;
+}
+
+#header table,
+#footer table {
+   width: 100%;
+   border-collapse: collapse;
+   border: none;
+}
+
+#header td,
+#footer td {
+  padding: 0;
+   width: 50%;
+}
+
+.page-number {
+  text-align: center;
+}
+
+.page-number:before {
+  content: "Page " counter(page);
+}
+
+hr {
+  page-break-after: always;
+  border: 0;
+}
+

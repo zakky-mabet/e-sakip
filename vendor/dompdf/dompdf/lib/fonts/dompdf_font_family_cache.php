@@ -83,4 +83,7 @@
   'ionicons' => array(
     'normal' => $fontDir . '\905c103571b2ea44e35c69204a0f3611',
   ),
+  'glyphicons halflings' => array(
+    'normal' => $fontDir . '\50e3be2098001b6f0e629d4dad2872ad',
+  ),
 ) ?>

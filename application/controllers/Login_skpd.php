@@ -45,7 +45,7 @@ class Login_skpd extends CI_Controller
 
 			        $this->session->set_userdata( $user_session );
 
-					if( $this->input->get('back-to') != '' )
+					if( $this->input->get('from_url') != '' )
 					{
 						redirect($this->input->get('back-to'));
 					} else {

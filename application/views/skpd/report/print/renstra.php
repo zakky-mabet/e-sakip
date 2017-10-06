@@ -8,7 +8,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  **/
 $this->load->view('skpd/report/print/layout/header');
 ?>
-<table>
+
+<table style="<?php if($this->input->get('output') == 'pdf') echo 'padding-top: 10px;' ?>">
 	<tbody>
 		<tr>
 			<td width="60"><strong>Visi</strong></td>
@@ -50,8 +51,9 @@ $this->load->view('skpd/report/print/layout/header');
 		</tr>
 	</tbody>
 </table>
+<hr>
 				<table class="mini-font table table-bordered">
-					<thead class="bg-blue">
+
 						<tr>
 							<th rowspan="2" class="text-center" valign="top">No.</th>
 							<th rowspan="2" class="text-center" valign="top">Tujuan</th>
@@ -66,8 +68,7 @@ $this->load->view('skpd/report/print/layout/header');
 							echo '<th class="text-center">'.$tahun.'</th>';
 						?>
 						</tr>
-					</thead>
-					<tbody>
+
 			            <?php 
 			            /**
 			             * Loop Tujuan
@@ -126,8 +127,9 @@ $this->load->view('skpd/report/print/layout/header');
 						// end tujuan 
 						endforeach;
 						?>
-					</tbody>
+
 				</table>
+
 <?php
 $this->load->view('skpd/report/print/layout/footer');
 

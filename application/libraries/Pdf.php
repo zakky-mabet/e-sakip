@@ -12,6 +12,7 @@
  * @link		https://github.com/ardianta/codeigniter-dompdf
  */
 use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class Pdf extends Dompdf
 {
