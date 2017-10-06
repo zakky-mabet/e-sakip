@@ -238,7 +238,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
           </ul>
         </li>
-        <li class="treeview <?php  echo active_link_multiple(array('renstra','rrkt','iku','reanggaran','reaksi')); ?>">
+        <li class="treeview <?php  echo active_link_multiple(array('renstra','rrkt','iku','reanggaran','reaksi','efisiensi_kinerja')); ?>">
           <a href="#">
             <i class="fa fa-line-chart"></i>
             <span>Laporan</span>
@@ -299,8 +299,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li class="<?php echo active_link_method('index','reaksi'); ?>">
                 <a href="<?php echo base_url("skpd/report/reaksi") ?>"> Rencana Aksi</a>
             </li>
-            <li class="<?php echo active_link_method('index','sd'); ?>">
-                <a href=""> Efisiensi dan Efektifitas Kinerja</a>
+            <li class="<?php echo active_link_method('index','efisiensi_kinerja'); ?>">
+                <a href="<?php echo base_url("skpd/report/efisiensi_kinerja") ?>"> Efisiensi dan Efektifitas Kinerja</a>
             </li>
           </ul>
         </li>

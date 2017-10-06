@@ -720,6 +720,16 @@ class Mprogram extends Skpd_model
 		return $this->db->get('kegiatan_program')->num_rows();
 	}
 
+	public function getProgramBySasaranMultiple($sasaran = 0)
+	{
+		if(!$sasaran)
+			return array();
+
+		$this->db->where_in('id_sasaran', $sasaran);
+
+		return $this->db->get('program')->num_rows();
+	}
+
 	public function getPKIndikatorTargetTriwulan($indikator = 0, $tahun = 0)
 	{
 		$query = $this->db->get_where('pk_indikator_target_triwulan', array(

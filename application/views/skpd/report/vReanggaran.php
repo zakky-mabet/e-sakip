@@ -41,7 +41,7 @@
 				<div class="col-md-12 text-center">
 					<p><strong>Target Indikator Kinerja Utama (Tahun <?php echo $this->tahun ?>)</strong></p>
 				</div>
-				<table class="mini-font table table-bordered">
+				<table class=" table table-bordered">
 					<thead class="bg-blue">
 						<tr>
 							<th rowspan="2" class="text-center" width="70" valign="top">No.</th>	
