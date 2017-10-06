@@ -265,9 +265,12 @@ class Msasaran extends Skpd_model
 
 					$this->insertPKIndikatorKinerjaProgram($this->input->post("create[tahun][{$key}]"), $get_id_indikator_sasaran);
 
+					$this->insertPKIndikatorKinerjaRealisasi($this->input->post("create[tahun][{$key}]"), $get_id_indikator_sasaran);
+
 
 					if($this->db->affected_rows())
 					{
+
 						$this->template->alert(
 							' Data berhasil disimpan.', 
 							array('type' => 'success','icon' => 'check')
@@ -321,9 +324,9 @@ class Msasaran extends Skpd_model
 					// GENERATE TARGET INDIKATOR PK TRIWULAN
 					$this->insertPKIndikatorKinerjaProgram($this->input->post("update[tahun][{$value}]"), $value);
 					
-					// GENERATE REALISASI INDIKATOR SASARAN PERTAHUN
+					// GENERATE REALISASI INDIKATOR SASARAN TRIWULAN
+					$this->insertPKIndikatorKinerjaRealisasi($this->input->post("update[tahun][{$value}]"), $value);
 					
-
 				}
 			}
 		}
@@ -440,6 +443,43 @@ class Msasaran extends Skpd_model
 		 
 		return $query->num_rows(); 
 	}
+
+
+	// GENERATE REALISASI TRIWULAN
+	public function insertPKIndikatorKinerjaRealisasi($tahun = 0, $indikator = 0)
+	{
+		if( is_array($tahun) )
+		{
+			foreach ($tahun as $key => $item) 
+			{
+				if( $this->checkPKIndikatorRealisasi($indikator, $item) ) 
+				{
+
+					continue;
+
+				} else {
+
+					$this->db->insert('realisasi_indikator_sasaran_triwulan', array(
+						'id_indikator_sasaran' => $indikator,
+						'tahun_realisasi_triwulan' => $item,
+					));
+				}
+			}
+		}
+	}
+
+	public function checkPKIndikatorRealisasi($indikator = 0, $tahun = 0)
+	{
+		
+			$query = $this->db->get_where('realisasi_indikator_sasaran_triwulan', array(
+				'id_indikator_sasaran' => $indikator,
+				'tahun_realisasi_triwulan' => $tahun,
+			) );
+		 
+		return $query->num_rows(); 
+	}
+
+
 
 
 	//Permasalahan Sasaran

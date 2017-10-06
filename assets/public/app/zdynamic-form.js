@@ -42,9 +42,15 @@
         //console.log($('#modal-analisis'+$(this).data('id-sasaran')+$(this).data('tahun-sasaran')));
     });
 
-     /*!
-    * Modal Analisis
-    */
+    $('.get-modal-kegiatan').click( function() 
+    {
+        $('#modal-kegiatan'+$(this).data('id-sasaran')+$(this).data('tahun-sasaran')).modal('show');
+        
+        //$('#tampildata').html( $(this).data('id-sasaran') );
+        //console.log($('#modal-masalahtampildata').modal('show'));
+        //console.log($('#modal-analisis'+$(this).data('id-sasaran')+$(this).data('tahun-sasaran')));
+    });
+
    
 	/* DELETE FUNGSI */
 	$('a#btn-delete').on('click', function()

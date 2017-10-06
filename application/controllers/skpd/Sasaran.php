@@ -46,6 +46,7 @@ class Sasaran extends Skpd
 
 	public function indikatorcreateupdate()
 	{
+		
 		$this->msasaran->IndikatorCreateUpdate();
 
 		redirect("skpd/sasaran/indikator_sasaran");
@@ -83,13 +84,6 @@ class Sasaran extends Skpd
 
 	
 
-	public function post()
-	{
-		echo '<pre>';
-		print_r($this->input->post());
-		//$this->msasaran->CreateUpdate();
-	}
-
 	public function createmasalah()
 	{
 
@@ -100,13 +94,7 @@ class Sasaran extends Skpd
 		redirect("skpd/sasaran");
 	}
 
-	public function id($param)
-	{
-
-		print_r(array($this->db->insert_id()));
-		
-	}
-
+	
 
 }
 
