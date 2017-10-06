@@ -62,14 +62,13 @@ class Mrealisasi_sasaran extends Skpd_model
 	{
 		
 		$object = array(
-
 			'deskripsi' => $this->input->post("deskripsi"),
-
 		);
+
 		$this->db->update('realisasi_analisis_sasaran_tahunan', $object, array(' id_realisasi_analisis_sasaran_tahunan' => $this->input->post("ID")));
 		
 		$this->template->alert(
-				'Analisis Sasaran berhasi disimpan', 
+				'Analisis Sasaran berhasil disimpan', 
 				array('type' => 'success','icon' => 'success')
 			);
 	}
@@ -77,6 +76,34 @@ class Mrealisasi_sasaran extends Skpd_model
 	public function Get_realisasi_analisis($param = 0, $tahun = 0)
 	{	
 		return $this->db->get_where('realisasi_analisis_sasaran_tahunan', array('id_sasaran'=> $param, 'tahun_analisis'=> $tahun))->result();
+	}
+
+	
+	public function getTotalAnggaranKegiatanByProgramTahun($program = 0, $tahun = 0)
+	{
+		$program = $this->db->query(
+			"SELECT kegiatan_program.id_kegiatan FROM kegiatan_program
+			WHERE kegiatan_program.id_program IN(SELECT program.id_program FROM program WHERE program.id_program = '{$program}')
+		");
+		
+		$kegiatan = array();
+		foreach ($program->result() as $key => $value) {
+			$kegiatan[] = $value->id_kegiatan;
+		}
+
+		if( $kegiatan )
+		{
+			$IDKegiatan = join(",", $kegiatan);
+
+			$anggaran = $this->db->query("
+				SELECT SUM(anggaran_kegiatan.nilai_anggaran) AS anggaran FROM anggaran_kegiatan 
+				WHERE id_kegiatan IN ({$IDKegiatan}) AND tahun = '{$tahun}'
+			")->row('anggaran');
+		} else {
+			return 0;
+		}
+
+	 	return $anggaran;
 	}
 
  }

@@ -1,5 +1,5 @@
 <div class="row">
-	<?php echo form_open(base_url("skpd/realisasi_sasaran/save")); ?>
+	<?php echo form_open(base_url("skpd/realisasi_sasaran/savetriwulan")); ?>
 	<div class="col-md-6 col-md-offset-3">
 		<?php echo $this->session->flashdata('alert'); ?>
 	</div>
@@ -33,9 +33,9 @@
 								<td colspan="5" width="100" style="vertical-align: middle; color: black" class="bg-silver" ><strong>Sasaran :</strong> <?php echo $sasaran->deskripsi ?></td>
 								<td  colspan="2" class="bg-silver text-right">
 
-									<button data-toggle="tooltip" data-placement="top" title="Analisis" class="btn btn-sm btn-warning get-modal-analisis" data-id-sasaran="<?php echo $sasaran->id_sasaran ?>"  data-tahun-sasaran="<?php echo $tahun ?>" type="button"><i class="fa fa-pencil"></i> Analisis </button>
+									<button data-toggle="tooltip" data-placement="top" title="Analisis" class="btn btn-sm btn-danger get-modal-analisis" data-id-sasaran="<?php echo $sasaran->id_sasaran ?>"  data-tahun-sasaran="<?php echo $tahun ?>" type="button"><i class="fa fa-pencil"></i> Analisis </button>
 
-									<button type="button" data-id-sasaran="<?php echo $sasaran->id_sasaran ?>"  data-tahun-sasaran="<?php echo $tahun ?>" class="btn btn-sm btn-success get-modal-kegiatan"><i class="fa fa-navicon"></i> Kegiatan</button>
+									
 								</td>
 							</tr>
 							<tr>
@@ -106,7 +106,7 @@
 		 foreach($this->mrealisasi_sasaran->getAllSasaran() as $key => $sasaran) : 
  foreach ($this->mrealisasi_sasaran->Get_realisasi_analisis($sasaran->id_sasaran, $tahun) as $key => $value): ?>
 										
-							<div class="modal" id="modal-analisis<?php echo $value->id_sasaran.$tahun ?>">
+							<!-- <div class="modal" id="modal-analisis<?php echo $value->id_sasaran.$tahun ?>">
 						<div class="modal-dialog modal-lg modal-default">
 						<form action="<?php echo base_url("skpd/realisasi_sasaran/updateanalisis") ?>" method="POST" >
 							<div class="modal-content">
@@ -127,80 +127,8 @@
 							</div>
 						</form>	
 						</div>
-					</div>					
+					</div>			 -->		
 
 <?php endforeach; endforeach; ?>
 <?php endfor; ?>
 
-
- <?php for($tahun = $this->mrealisasi_sasaran->periode_awal; $tahun <= $this->mrealisasi_sasaran->periode_akhir; $tahun++) : ?>
-<?php
-		 foreach($this->mrealisasi_sasaran->getAllSasaran() as $key => $sasaran) : 
- foreach ($this->mrealisasi_sasaran->Get_realisasi_analisis($sasaran->id_sasaran, $tahun) as $key => $value): ?>
-										
-					<div class="modal" id="modal-kegiatan<?php echo $value->id_sasaran.$tahun ?>">
-						<div class="modal-dialog modal-lg modal-default" >
-						<form action="<?php echo base_url("skpd/realisasi_sasaran/updatekegiatan") ?>" method="POST" >
-							<div class="modal-content">
-
-								<div class="modal-header bg-primary">
-									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-									<h4 class="modal-title"><i class="fa fa-navicon"></i> Program / Kegiatan Tahun <?php echo $value->tahun_analisis ?></h4>
-									<span> <b>Sasaran</b> : <?php echo $sasaran->deskripsi ?></span>
-								</div>
-								<div class="modal-body bg-silver">
-
-									<table class="table table-bordered bg-white">
-										<thead class="bg-blue">
-										  <tr>
-										    <th class="text-center">No</th>
-										    <th class="text-center" colspan="2">Program</th>
-										    <th class="text-center">Anggaran</th>
-										    <th class="text-center">Penyerapan</th>
-										  </tr>
-										</thead>
-										<tbody>
-
-										  <tr>
-										    <td style="vertical-align: middle;" class="text-center">1</td>
-										    <td colspan="2">Program Rehabilitasi hutan dan lahan</td>
-										    <td style="vertical-align: middle;" class="text-center">123456787654324567876</td>
-										    <td style="vertical-align: middle;" class="text-center">3</td>
-										  </tr>
-
-										  <tr style="font-weight: 600;">
-										    <td rowspan="3"></td>
-										    <td style="vertical-align: middle; " class="text-center bg-orange">No</td>
-										    <td style="vertical-align: middle;" class="text-center bg-orange">Kegiatan</td>
-										    <td style="vertical-align: middle;" class="text-center bg-orange">Anggaran</td>
-										    <td style="vertical-align: middle;" class="text-center bg-orange">Penyerapan</td>
-										  </tr>
-
-										  <tr>
-										    <td class="text-center" style="vertical-align: middle;">1</td>
-										    <td style="vertical-align: middle;">Pemeliharaan Hutan kota</td>
-										    <td class="text-center" style="vertical-align: middle;">2323</td>
-										    <td class="text-center" style="vertical-align: middle;">4</td>
-										  </tr>
-										  <tr>
-										    <td class="text-center" style="vertical-align: middle;">Output</td>
-										    <td colspan="3">
-										    	<textarea class="form-control" name=""></textarea>
-										    </td>
-										  </tr>
-										</tbody>
-									</table>	
-
-									
-								</div>
-								<div class="modal-footer bg-primary">
-									<button type="button" class="btn btn-warning pull-left" data-dismiss="modal"> <i class="fa fa-repeat"></i> Batal</button>
-									<button type="input" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
-								</div>
-							</div>
-						</form>	
-						</div>
-					</div>					
-
-<?php endforeach; endforeach; ?>
-<?php endfor; ?>
