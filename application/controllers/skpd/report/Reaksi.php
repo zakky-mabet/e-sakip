@@ -6,8 +6,6 @@ class Reaksi extends Skpd
 	public function __construct()
 	{
 		parent::__construct();
-
-		$this->load->library(array('trow'));
 		
 		$this->breadcrumbs->unshift(1, 'Laporan',  'skpd/report/renstra');
 

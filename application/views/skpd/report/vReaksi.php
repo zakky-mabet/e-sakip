@@ -45,15 +45,15 @@
 					<thead class="bg-blue">
 						<tr>
 							<th class="text-center" width="30" valign="top">No.</th>	
-							<th class="text-center">Indikator Kinerja</th>
+							<th class="text-center" width="180">Indikator Kinerja</th>
 							<th class="text-center">Satuan</th>
-							<th class="text-center" width="100">Target</th>
-							<th class="text-center">Program</th>
+							<th class="text-center" width="70">Target</th>
+							<th class="text-center" width="180">Program</th>
 							<th class="text-center">Anggaran</th>
-							<th class="text-center">Kegiatan</th>
+							<th class="text-center" width="180">Kegiatan</th>
 							<th class="text-center">Anggaran</th>
 							<th class="text-center">Output Kegiatan</th>
-							<th class="text-center">Target</th>
+							<th class="text-center" width="70">Target</th>
 							<th class="text-center">Penanggung Jawab</th>
 						</tr>
 					</thead>
@@ -79,18 +79,25 @@
 			         **/
 			        foreach(  $DIndikator as $keyIndikator => $indikator) : 
 			        	$Dporgram =$this->mprogram->getProgramBySasaran( $indikator->id_sasaran);
-			        	$col2 = (count($Dporgram) + 1);
+			        	$PK = $this->mprogram->getPKIndikatorTargetTriwulan($indikator->id_indikator_sasaran, $this->tahun);
+
+			        	$multipleProgram = array();
+			        	foreach($Dporgram as $row)
+			        		$multipleProgram[] = $row->id_program;
+
+			        	$col1 = (count($Dporgram) + 1) + $this->mprogram->getKegiatanProgramByMultipleProgram($multipleProgram);
+
+						$col2 = ($this->mprogram->getKegiatanProgramByMultipleProgram($multipleProgram));
 			       ?>
  					<tr>
-						<td rowspan="<?php echo $col2 ?>"><?php echo $col2 ?></td>
-						<td rowspan="<?php echo $col2 ?>"><?php echo $indikator->deskripsi ?></td>
-						<td rowspan="<?php echo $col2 ?>" class="text-center"><?php echo $indikator->nama_satuan ?></td>
-						<td rowspan="<?php echo $col2 ?>">
-						<?php for($triwulan = 1; $triwulan <=4; $triwulan++) : 
-						$PKtahun = $this->mprogram->getPKIndikatorProgram($indikator->id_indikator_sasaran, $this->tahun, "T".$triwulan);
-						?>
-							Triwulan : <?php echo @$target->nilai_target ?><br>
-						<?php endfor; ?>
+						<td rowspan="<?php echo $col1 ?>"><?php   ?></td>
+						<td rowspan="<?php echo $col1 ?>"><?php echo $indikator->deskripsi ?></td>
+						<td rowspan="<?php echo $col1 ?>" class="text-center"><?php echo $indikator->nama_satuan ?></td>
+						<td rowspan="<?php echo $col1 ?>">
+							T1 = <strong><?php echo @$PK->nilai_target_triwulan1 ?></strong><br>
+							T2 = <strong><?php echo @$PK->nilai_target_triwulan2 ?></strong><br>
+							T3 = <strong><?php echo @$PK->nilai_target_triwulan3 ?></strong><br>
+							T4 = <strong><?php echo @$PK->nilai_target_triwulan4 ?></strong>
 						</td>
 					</tr>
 			        <?php  
@@ -99,21 +106,46 @@
 					 *
 					 * @var string
 					 **/
-					$totalPAngg = 0;
+					if(($col1-$col2) == 2)
+						$col1 += 1;
 					foreach($Dporgram as $keyProgram => $program) :
+						$DKegiatan = $this->kgiatan->getKegiatanProgramByProgram($program->id_program);
 						$anggaran = $this->mprogram->getTotalAnggaranKegiatanByProgramTahun($program->id_program, $this->tahun);
 					?>
+					<tr style="<?php if($keyProgram==0) echo 'border-top: 0px !important;'; ?>">
+						<td rowspan="<?php echo ($col1-$col2) ?>"><?php echo $program->deskripsi ?></td>
+						<td rowspan="<?php echo ($col1-$col2) ?>"><?php echo @number_format($anggaran) ?></td>
+					</tr>
+					<?php
+					foreach( $DKegiatan as $keyKegiatan => $kegiatan) :
+						$anggKegiatan = $this->kgiatan->getAnggaranKegiatan($kegiatan->id_kegiatan, $this->tahun);
+						$pjk = $this->kgiatan->getPenanggungJawabKegiatanByKegiatanTahun($kegiatan->id_kegiatan, $this->tahun);
+					?>
 					<tr>
-						<td><?php echo $program->deskripsi ?></td>
-						<td><?php echo @number_format(@$anggaran) ?></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td><?php echo $kegiatan->deskripsi ?></td>
+						<td><?php echo @number_format(@$anggKegiatan->nilai_anggaran) ?></td>
+						<td>
+							<?php 
+							$outputID = 0;
+							foreach( $this->kgiatan->getOutputByKegiatanProgram($kegiatan->id_kegiatan) as $keyOutput => $output) 
+							{
+								echo $output->deskripsi."<br>";
+								$outputID = $output->id_output_kegiatan_program;
+							}
+							?>
+						</td>
+						<td>
+							<?php for($triwulan = 1; $triwulan <=4; $triwulan++) 
+							{
+								$PKOT = $this->kgiatan->getPKOutputKegiatan($outputID, $this->tahun, "T".$triwulan);
+								echo 'T'.@$triwulan.' = <strong>'.@$PKOT->nilai_target.'</strong><br>';
+							}
+							?>
+						</td>
+						<td><?php echo @$pjk->penanggung_jawab ?></td>
 					</tr>
 					<?php  
-					$totalPAngg += $anggaran;
+					endforeach;
 					endforeach;
 					endforeach;
 					endforeach;

@@ -710,6 +710,25 @@ class Mprogram extends Skpd_model
 			}
 		}
 	}
+	public function getKegiatanProgramByMultipleProgram($program = NULL)
+	{
+		if(!$program)
+			return array();
+
+		$this->db->where_in('id_program', $program);
+
+		return $this->db->get('kegiatan_program')->num_rows();
+	}
+
+	public function getPKIndikatorTargetTriwulan($indikator = 0, $tahun = 0)
+	{
+		$query = $this->db->get_where('pk_indikator_target_triwulan', array(
+			'id_indikator_sasaran' => $indikator,
+			'tahun_triwulan' => $tahun,
+		) );
+
+		return $query->row();
+	}
 
 	public function getPKIndikatorProgram($indikator = 0, $tahun = 0, $triwulan = FALSE)
 	{
