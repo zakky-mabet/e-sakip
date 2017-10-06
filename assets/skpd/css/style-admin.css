@@ -16,6 +16,9 @@ table.mini-font {
 }
 table.mini-font thead th,
 table.mini-font tbody td,
+table.mini-font tbody th,
+table.mini-font tbody td span,
+table.mini-font tbody td strong,
 table.mini-font tfoot td {  
    font-size: 8pt;
    vertical-align: middle;

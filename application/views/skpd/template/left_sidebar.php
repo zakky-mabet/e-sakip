@@ -212,7 +212,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
           </ul>
         </li>
-        <li class="treeview <?php  echo active_link_multiple(array('reindikatorprogram','rekegiatan','prestasi','panggarankegiatan')); ?>">
+        <li class="treeview <?php  echo active_link_multiple(array('reindikatorprogram','rekegiatan','prestasi','panggarankegiatan','realisasi_sasaran')); ?>">
           <a href="#">
             <i class="fa fa-trophy"></i>
             <span>Kinerja</span>
@@ -221,8 +221,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="<?php echo active_link_method('index','df'); ?>">
-                <a href=""> Realisasi Indikator Sasaran</a>
+            <li class="<?php echo active_link_method('index','realisasi_sasaran'); ?>">
+                <a href="<?php echo base_url("skpd/realisasi_sasaran"); ?>"> Realisasi Indikator Sasaran</a>
             </li>
             <li class="<?php echo active_link_method('index','reindikatorprogram').active_link_method('triwulan','reindikatorprogram'); ?>">
                 <a href="<?php echo base_url('skpd/reindikatorprogram'); ?>"> Realisasi Indikator Program</a>
@@ -238,7 +238,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
           </ul>
         </li>
-        <li class="treeview <?php  echo active_link_multiple(array('renstra','rrkt','iku')); ?>">
+        <li class="treeview <?php  echo active_link_multiple(array('renstra','rrkt','iku','reanggaran','reaksi')); ?>">
           <a href="#">
             <i class="fa fa-line-chart"></i>
             <span>Laporan</span>
@@ -262,14 +262,45 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
                 <a href=""> Perjanjian Kinerja Perubahan</a>
             </li>
-            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
-                <a href=""> Capaian Indikator Kinerja Utama</a>
+            <li class="<?php echo active_link_method('capaian','iku'); ?>" style="text-decoration: line-through;">
+                <a href="<?php echo base_url("skpd/report/iku/capaian"); ?>"> Capaian Indikator Kinerja Utama</a>
             </li>
-            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
+            <li class="<?php echo active_link_method('i;ndex','visi'); ?>" style="text-decoration: line-through;">
                 <a href=""> Capaian Indikator Kinerja Strategis</a>
             </li>
-            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
-                <a href=""> Pagu dan Realisasi Anggaran</a>
+            <li class="<?php echo active_link_method('index','reanggaran'); ?>">
+                <a href="<?php echo base_url('skpd/report/reanggaran'); ?>"> Pagu dan Realisasi Anggaran</a>
+            </li>
+            <li class="treeview <?php  echo active_link_multiple(array('sasarsan','forfsmulasi','tafsrget')); ?>" style="text-decoration: line-through;">
+              <a href="#">
+                <span>Analisis Pencapaian Sasaran</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li class="<?php echo active_link_method('index','safsaran'); ?>">
+                  <a href=""> Bulanan</a>
+                </li>
+                <li class="<?php echo active_link_method('indikator_sasfaran','sasarfan'); ?>">
+                  <a href="">Triwulan</a>
+                </li>
+                <li class="<?php echo active_link_method('index','targeft'); ?>">
+                   <a href="">Tahunan</a>
+                </li>
+              </ul>
+            </li>
+            <li class="<?php echo active_link_method('index','sd'); ?>" style="text-decoration: line-through;">
+                <a href=""> Tabulasi</a>
+            </li>
+            <li class="<?php echo active_link_method('index','sd'); ?>" style="text-decoration: line-through;">
+                <a href=""> SK IKU</a>
+            </li>
+            <li class="<?php echo active_link_method('index','reaksi'); ?>">
+                <a href="<?php echo base_url("skpd/report/reaksi") ?>"> Rencana Aksi</a>
+            </li>
+            <li class="<?php echo active_link_method('index','sd'); ?>">
+                <a href=""> Efisiensi dan Efektifitas Kinerja</a>
             </li>
           </ul>
         </li>

@@ -87,7 +87,6 @@ class Mprogram extends Skpd_model
 					}
 
 					$object = array(
-						'id_indikator_sasaran' =>null,
 						'deskripsi' => $value,
 						'tahun' => implode(',', $this->input->post("create[tahun][{$key}]")),
 						'id_sasaran' => $key

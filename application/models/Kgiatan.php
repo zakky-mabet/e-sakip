@@ -105,6 +105,62 @@ class Kgiatan extends Skpd_model
 		return $query->row(); 
 	}
 
+	public function getTotalReAnggaranKegiatan($program = 0, $tahun = 0, $triwulan = FALSE)
+	{
+		$kegiatanProgram = $this->db->get_where('kegiatan_program', array('id_program' => $program))->result();
+
+		if(!$kegiatanProgram)
+			return array();
+
+		$kegiatan = array();
+		foreach ($kegiatanProgram as $row) 
+			$kegiatan[] = $row->id_kegiatan;
+
+		$this->db->select('SUM(nilai_anggaran) as realisasi');
+
+		$this->db->where_in('id_kegiatan', $kegiatan);
+
+		$this->db->where('tahun', $tahun);
+
+		$this->db->where('triwulan', $triwulan);
+
+		$query = $this->db->get('realisasi_anggaran_kegiatan');
+		
+		return $query->row('realisasi');
+	}
+
+	public function getSumTotalReAnggaranKegiatan($sasaran = 0, $tahun = 0, $triwulan = FALSE)
+	{
+		$program = array();
+		foreach ($this->CI->mprogram->getProgramBySasaran($sasaran) as $row) 
+			$program[] = $row->id_program;
+
+		if(! $this->CI->mprogram->getProgramBySasaran($sasaran) )
+			return array();
+
+		$kegiatanProgram = $this->db->where_in('id_program', $program)
+				 					->get('kegiatan_program')->result();
+
+		if(!$kegiatanProgram)
+			return array();
+
+		$kegiatan = array();
+		foreach ($kegiatanProgram as $row) 
+			$kegiatan[] = $row->id_kegiatan;
+
+		$this->db->select('SUM(nilai_anggaran) as realisasi');
+
+		$this->db->where_in('id_kegiatan', $kegiatan);
+
+		$this->db->where('tahun', $tahun);
+
+		$this->db->where('triwulan', $triwulan);
+
+		$query = $this->db->get('realisasi_anggaran_kegiatan');
+		
+		return $query->row('realisasi');
+	}
+
 	public function insertReanggaranKegiatan($tahun = 0, $kegiatan = 0)
 	{
 		if( is_array($tahun) )
@@ -142,7 +198,8 @@ class Kgiatan extends Skpd_model
 				$object = array(
 					'id_program' => $program,
 					'deskripsi' => $deskripsi,
-					'tahun' => @implode(',', $this->getPeriode())
+					'tahun' => @implode(',', $this->getPeriode()),
+					'output' => null
 				);
 
 				$this->db->insert('kegiatan_program', $object);
@@ -151,7 +208,7 @@ class Kgiatan extends Skpd_model
 
 				if( @is_array(  $this->getPeriode() ) )
 				{
-					$this->insertReanggaranKegiatan($this->getPeriode(), $tahun);
+					$this->insertReanggaranKegiatan($this->getPeriode(), $kegiatan);
 
 					foreach ($this->getPeriode() as $item => $tahun) 
 					{

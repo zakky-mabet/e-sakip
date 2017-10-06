@@ -32,6 +32,24 @@ class Iku extends Skpd
 		$this->template->view('skpd/report/IndexIKU', $this->data);	
 	}
 
+	public function capaian()
+	{
+		$this->page_title->push('Laporan', 'Capaian Indikator Kinerja Utama');
+
+		$this->breadcrumbs->unshift(2, 'Capaian Indikator Kinerja Utama',  $this->uri->uri_string());
+
+		$this->tahun = ($this->input->get('thn')=='') ? $this->periode_awal : $this->input->get('thn');
+
+		$this->data = array(
+			'title' => "Capaian Indikator Kinerja Utama", 
+			'breadcrumbs' => $this->breadcrumbs->show(),
+			'page_title' => $this->page_title->show(),
+			'visi' => $this->mvisi->getByLogin(),
+		);
+
+		$this->template->view('skpd/report/CapaianIKU', $this->data);	
+	}
+
 }
 
 /* End of file Iku.php */
