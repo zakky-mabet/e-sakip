@@ -1,70 +1,56 @@
-<div class="row">
-	<div class="col-md-12">
-		<div class="box" id="stickerButton100x">
-			<div class="box-header">
-				<div class="col-md-6">
-					<h4 class="box-heading"> <i class="fa fa-files-o"></i> Rencana Strategis  </h4>
-					<p style="margin-left: 23px;">Periode <?php echo $this->periode_awal.'-'.$this->periode_akhir ?></p>
-				</div>
-				<div class="col-md-3 pull-right">
-					<a href="<?php echo current_url().'?output=print'; ?>" target="_blank" class="btn btn-default btn-print">
-						<i class="fa fa-print"></i> Cetak
-					</a>
-					<a href="<?php echo current_url().'?output=pdf'; ?>" target="_blank" class="btn btn-default">
-						<i class="fa fa-file-pdf-o"></i> PDF
-					</a>
-					<a href="" class="btn btn-default">
-						<i class="fa fa-file-excel-o"></i> Excel
-					</a>
-				</div>
-			</div>
-			<div class="clearfix"></div>
-		</div>
-		<div class="box no-border">
-			<div class="box-body no-padding">
-				<table class="table">
-					<tbody>
-						<tr>
-							<td><strong>Visi</strong></td>
-							<td width="50" class="text-center">:</td>
-							<td><strong>"<?php echo $visi->deskripsi ?>"</strong></td>
-						</tr>
-						<tr>
-							<td><strong>Misi</strong></td>
-							<td class="text-center">:</td>
-							<td>
-								<ol class="minleft20x">
-								<?php foreach($this->tjuan->getMisiLogin() as $key => $misi)
-									echo '<li>'.$misi->deskripsi.'</li>';
-								?>
-								</ol>
-							</td>
-						</tr>
-						<tr>
-							<td><strong>Strategi</strong></td>
-							<td class="text-center">:</td>
-							<td>
-								<ol class="minleft20x">
-								<?php foreach($this->mstrategi->getStrategiByLogin() as $key => $strategi)
-									echo '<li>'.$strategi->deskripsi.'</li>';
-								?>
-								</ol>
-							</td>
-						</tr>
-						<tr>
-							<td><strong>Kebijakan</strong></td>
-							<td class="text-center">:</td>
-							<td>
-								<ol class="minleft20x">
-								<?php foreach($this->kbjakan->getKebijakanByLogin() as $key => $kebijakan)
-									echo '<li>'.$kebijakan->deskripsi.'</li>';
-								?>
-								</ol>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				<table class="mini-font table table-responsive table-bordered">
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+/**
+ * Call Header Print (KOP)
+ *
+ * @author Vicky Nitinegoro http://vicky.work
+ **/
+$this->load->view('skpd/report/print/layout/header');
+?>
+<table>
+	<tbody>
+		<tr>
+			<td width="60"><strong>Visi</strong></td>
+			<td width="30" class="text-center">:</td>
+			<td><strong>"<?php echo $visi->deskripsi ?>"</strong></td>
+		</tr>
+		<tr>
+			<td><strong>Misi</strong></td>
+			<td class="text-center">:</td>
+			<td style="vertical-align: top">
+				<ol class="minleft20x">
+				<?php foreach($this->tjuan->getMisiLogin() as $key => $misi)
+					echo '<li>'.$misi->deskripsi.'</li>';
+				?>
+				</ol>
+			</td>
+		</tr>
+		<tr>
+			<td><strong>Strategi</strong></td>
+			<td class="text-center">:</td>
+			<td style="vertical-align: top">
+				<ol class="minleft20x">
+				<?php foreach($this->mstrategi->getStrategiByLogin() as $key => $strategi)
+					echo '<li>'.$strategi->deskripsi.'</li>';
+				?>
+				</ol>
+			</td>
+		</tr>
+		<tr>
+			<td><strong>Kebijakan</strong></td>
+			<td class="text-center">:</td>
+			<td>
+				<ol class="minleft20x">
+				<?php foreach($this->kbjakan->getKebijakanByLogin() as $key => $kebijakan)
+					echo '<li>'.$kebijakan->deskripsi.'</li>';
+				?>
+				</ol>
+			</td>
+		</tr>
+	</tbody>
+</table>
+				<table class="mini-font table table-bordered">
 					<thead class="bg-blue">
 						<tr>
 							<th rowspan="2" class="text-center" valign="top">No.</th>
@@ -142,7 +128,8 @@
 						?>
 					</tbody>
 				</table>
-			</div>
-		</div>
-	</div>
-</div>
+<?php
+$this->load->view('skpd/report/print/layout/footer');
+
+/* End of file print-people.php */
+/* Location: ./application/views/people/print-people.php */

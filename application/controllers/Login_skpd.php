@@ -35,6 +35,7 @@ class Login_skpd extends CI_Controller
 			        		'nama' => $user->nama,
 			        		'telepon' => $user->no_telp,
 			        		'email' => $user->email,
+			        		'alamat' => $user->alamat,
 			        		'username' => $user->username,
 			        		'kepala' => $user->id_kepala,
 			        		'periode_awal' => $user->periode_awal,

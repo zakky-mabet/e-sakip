@@ -27,7 +27,20 @@ class Renstra extends Skpd
 			'visi' => $this->mvisi->getByLogin(),
 		);
 
-		$this->template->view('skpd/report/IndexRenstra', $this->data);
+		switch ( $this->input->get('output') ) 
+		{
+			case 'print':
+				$this->load->view('skpd/report/print/renstra', $this->data);
+				break;
+			case 'pdf':
+			    $this->pdf->setPaper('A4', 'landscape');
+			    $this->pdf->filename = strtoupper($this->data['title']).".pdf";
+			    $this->pdf->load_view('skpd/report/print/renstra', $this->data);
+				break;
+			default:
+				$this->template->view('skpd/report/IndexRenstra', $this->data);
+				break;
+		}
 	}
 	public function laporan_pdf()
 	{
@@ -39,7 +52,6 @@ class Renstra extends Skpd
 	        )
 	    );
 
-	    $this->load->library('pdf');
 
 	    $this->pdf->setPaper('A4', 'potrait');
 	    $this->pdf->filename = "laporan-petanikode.pdf";
@@ -56,7 +68,16 @@ class Renstra extends Skpd
 			'visi' => $this->mvisi->getByLogin(),
 		);
 
-		$this->pdf->load_view('skpd/report/IndexRenstra', $this->data);
+		switch ( $this->input->get('output') ) 
+		{
+			case 'print':
+				# code...
+				break;
+			
+			default:
+				$this->pdf->load_view('skpd/report/IndexRenstra', $this->data);
+				break;
+		}
 
 	}
 }
