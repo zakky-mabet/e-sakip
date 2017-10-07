@@ -20,13 +20,13 @@
 						</select>
 					</div>
 					<div class="col-md-6 pull-right top2x">
-						<a href="" class="btn btn-default">
+						<a href="<?php echo current_url().'?output=print&thn='.$this->input->get('thn') ?>" target="_blank" class="btn btn-default btn-print">
 							<i class="fa fa-print"></i> Cetak
 						</a>
-						<a href="" class="btn btn-default">
+						<a href="<?php echo current_url().'?output=pdf&thn='.$this->input->get('thn') ?>" target="_blank" class="btn btn-default">
 							<i class="fa fa-file-pdf-o"></i> PDF
 						</a>
-						<a href="" class="btn btn-default">
+						<a href="<?php echo current_url().'?output=excel&thn='.$this->input->get('thn') ?>" target="_blank" class="btn btn-default">
 							<i class="fa fa-file-excel-o"></i> Excel
 						</a>
 					</div>
@@ -41,7 +41,7 @@
 				<div class="col-md-12 text-center">
 					<p><strong>Target Indikator Kinerja Utama (Tahun <?php echo $this->tahun ?>)</strong></p>
 				</div>
-				<table class="mini-font table table-bordered">
+				<table class=" table table-bordered">
 					<thead class="bg-blue">
 						<tr>
 							<th rowspan="2" class="text-center" width="70" valign="top">No.</th>	

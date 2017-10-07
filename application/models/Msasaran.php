@@ -304,6 +304,7 @@ class Msasaran extends Skpd_model
 
 					$this->insertPKIndikatorKinerjaProgram($this->input->post("create[tahun][{$key}]"), $get_id_indikator_sasaran);
 
+
 					// $this->insertPKIndikatorKinerjaRealisasi($this->input->post("create[tahun][{$key}]"), $get_id_indikator_sasaran);
 
 
@@ -363,8 +364,10 @@ class Msasaran extends Skpd_model
 					// GENERATE TARGET INDIKATOR PK TRIWULAN
 					$this->insertPKIndikatorKinerjaProgram($this->input->post("update[tahun][{$value}]"), $value);
 					
+
 					// GENERATE REALISASI INDIKATOR SASARAN TRIWULAN
 					// $this->insertPKIndikatorKinerjaRealisasi($this->input->post("update[tahun][{$value}]"), $value);
+
 					
 				}
 			}

@@ -35,6 +35,7 @@ class Login_skpd extends CI_Controller
 			        		'nama' => $user->nama,
 			        		'telepon' => $user->no_telp,
 			        		'email' => $user->email,
+			        		'alamat' => $user->alamat,
 			        		'username' => $user->username,
 			        		'kepala' => $user->id_kepala,
 			        		'periode_awal' => $user->periode_awal,
@@ -44,7 +45,7 @@ class Login_skpd extends CI_Controller
 
 			        $this->session->set_userdata( $user_session );
 
-					if( $this->input->get('back-to') != '' )
+					if( $this->input->get('from_url') != '' )
 					{
 						redirect($this->input->get('back-to'));
 					} else {
