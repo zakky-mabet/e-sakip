@@ -33,7 +33,7 @@
 			        <ul class="timeline">
 			          
 			            <li class="time-label">
-			                  <span class="bg-blue">Entri Target Indikator Penetapan Kinerja Tahunan </span>
+			                  <span class="bg-blue">Entri Target Indikator Penetapan Kinerja Triwulan </span>
 			            </li>
 			            <?php 
 			            /**

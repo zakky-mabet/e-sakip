@@ -53,6 +53,11 @@ class Mrealisasi_sasaran extends Skpd_model
 						'keterangan' => $this->input->post("update[keterangan][{$value}]"),
 					);
 					$this->db->update('realisasi_indikator_sasaran', $object, array('id_realisasi_indikator_sasaran' => $value));
+
+					$this->template->alert(
+						' Tersimpan! Data berhasil tersimpan.', 
+						array('type' => 'success','icon' => 'check')
+					);
 				}
 			}
 		}
@@ -104,6 +109,192 @@ class Mrealisasi_sasaran extends Skpd_model
 		}
 
 	 	return $anggaran;
+	}
+
+	public function getIndikatorSasarantoTargetTriwulan($param = 0, $tahun = 0 )
+	{	
+
+		$this->db->join('pk_indikator_target', 'pk_indikator_target.id_indikator_target = pk_indikator_target_triwulan.id_indikator_sasaran', 'left');
+
+		return $this->db->get_where('pk_indikator_target_triwulan', array('pk_indikator_target_triwulan.id_indikator_sasaran'=> $param, 'tahun_triwulan'=> $tahun))->result();	
+		
+ 	}
+
+ 	// UPDATE TO TABLE  pk_indikator_target_triwulan karena realisasi dan capaian tergabung dengan target
+ 	public function UpdateTriwulan()
+	{
+		if( $this->input->post('create') )
+		{
+			if( is_array($this->input->post('create')) )
+			{
+				echo 'Kesalahan Dalam Menyimpan Data ! Silahkan Ulangi';
+			}
+		} else {
+			if( is_array($this->input->post('update')) )
+			{
+				foreach($this->input->post('update[ID]') as $key => $value) 
+				{
+					$object = array(
+						'realisasi_triwulan1' => $this->input->post("update[realisasi_triwulan1][{$value}]"),
+						'realisasi_triwulan2' => $this->input->post("update[realisasi_triwulan2][{$value}]"),
+						'realisasi_triwulan3' => $this->input->post("update[realisasi_triwulan3][{$value}]"),
+						'realisasi_triwulan4' => $this->input->post("update[realisasi_triwulan4][{$value}]"),
+
+						'capaian1' => $this->input->post("update[capaian1][{$value}]"),
+						'capaian2' => $this->input->post("update[capaian2][{$value}]"),
+						'capaian3' => $this->input->post("update[capaian3][{$value}]"),
+						'capaian4' => $this->input->post("update[capaian4][{$value}]"),
+					
+					);
+					$this->db->update('pk_indikator_target_triwulan', $object, array('id_pk_indikator_target_triwulan' => $value));
+
+					$this->template->alert(
+						' Tersimpan! Data berhasil tersimpan.', 
+						array('type' => 'success','icon' => 'check')
+					);
+				}
+			}
+		}
+	}
+
+
+	public function get_realisasi_bulanan($param = 0 , $tahun = 0)
+
+	{
+		return $this->db->get_where('realisasi_analisis_sasaran_bulanan', array('id_sasaran'=> $param, 'tahun_analisis_bulanan'=> $tahun))->result();	
+
+	}
+
+	public function get_realisasi($param = 0 )
+	{
+		return $this->db->get_where('realisasi_analisis_sasaran_bulanan',array('id_realisasi_analisis_sasaran_bulanan' => $param))->row();
+	}
+
+	public function update_realisasi($param = 0, $bulan = '')
+	{
+		$object = array(
+
+			$bulan => $this->input->post($bulan),
+
+		);
+		$this->db->update('realisasi_analisis_sasaran_bulanan', $object, array('id_realisasi_analisis_sasaran_bulanan' => $param));
+
+		$this->template->alert(
+			'Tersimpan! Data berhasil tersimpan.', 
+			array('type' => 'success','icon' => 'check')
+		);
+	}
+
+
+	public function create()
+	{
+
+		if (isset($_FILES['foto'])) 
+	   {
+	     	$create_tgl = date('Y-m-d H:i:s'); 
+		    $this->load->library('upload');
+		    $nmfile = date('YmdHis'); 
+		    $config['upload_path'] = './assets/lampiran/';
+		    $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp|doc|docx|xls|xlsx|ppt|pptx|'; 
+		    $config['max_size'] = '40480';
+		    $config['max_width']  = '12880';
+		    $config['max_height']  = '7680';
+		    $config['file_name'] = $nmfile; 
+	     	$this->upload->initialize($config);
+	     	if ($this->upload->do_upload('foto'))
+			{ 
+		       	$foto = $this->upload->data();
+	     	}
+        }
+
+		$object = array(
+			'id_kepala' => $this->kepala,
+			'keterangan' => $this->input->post('keterangan'),
+			'tahun' => $this->input->post('tahun'),
+			'bulan' => $this->input->post('bulan'),
+			'kategori' => $this->input->post('kategori'),
+			'file' =>  $foto['file_name'],
+			'dates' => date('Y-m-d H:i:s'),
+		);
+
+		$this->db->insert('lampiran', $object);
+	}
+
+	public function getAll($limit = 20, $offset = 0, $type = 'result')
+	{
+		if($this->input->get('tahun') !='')
+			$this->db->where('tahun', $this->input->get('tahun'));
+
+		if( $this->input->get('query') != '')
+			$this->db->like('keterangan', $this->input->get('query'));
+
+		if( $this->input->get('bulan') != '')
+			$this->db->where('bulan', $this->input->get('bulan'));
+
+		if( $this->input->get('kategori') != '')
+			$this->db->where('kategori', $this->input->get('kategori'));
+
+		$this->db->where('id_kepala', $this->kepala);
+
+		if($type == 'result')
+		{
+			return $this->db->get('lampiran', $limit, $offset)->result();
+		} else {
+			return $this->db->get('lampiran')->num_rows();
+		}
+	}
+
+	public function get($param = 0)
+	{
+		return $this->db->get_where('lampiran',array('id' => $param))->row();
+	}
+	
+	public function update_lampiran($param = 0, $unlink = '')
+	{
+		
+	     	$create_tgl = date('Y-m-d H:i:s'); 
+		    $this->load->library('upload');
+		    $nmfile = date('YmdHis'); 
+		    $config['upload_path'] = './assets/lampiran/';
+		    $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp|doc|docx|xls|xlsx|ppt|pptx|'; 
+		    $config['max_size'] = '40480';
+		    $config['max_width']  = '12880';
+		    $config['max_height']  = '7680';
+		    $config['file_name'] = $nmfile; 
+	     	$this->upload->initialize($config);
+	     	$foto = array();
+	     	if ($this->upload->do_upload('foto'))
+			{ 
+		       	$foto = $this->upload->data();
+	     	}
+        
+		$object = array(
+			'keterangan' => $this->input->post('keterangan'),
+			'tahun' => $this->input->post('tahun'),
+			'bulan' => $this->input->post('bulan'),
+			'kategori' => $this->input->post('kategori'),
+			'file' =>  $this->upload->file_name,
+			'dates' => date('Y-m-d H:i:s'),
+		);
+
+		@unlink("assets/lampiran/".$unlink);
+
+		$this->db->update('lampiran', $object, array('id' => $param));
+
+		$this->template->alert(
+			'Tersimpan! Data berhasil diubah.', 
+			array('type' => 'success','icon' => 'check')
+		);
+	}
+
+	public function delete($param  = 0)
+	{
+		$this->db->delete('lampiran', array('id' => $param));
+	}
+
+	public function get_lampiran($param = 0 )
+	{
+		return $this->db->get_where('lampiran',array('id' => $param))->row();
 	}
 
  }

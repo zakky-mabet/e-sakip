@@ -12,7 +12,25 @@
 					<a href="#tab-<?php echo $tahun; ?>" data-toggle="tab"><strong><?php echo $tahun ?></strong></a>
 				</li>
             <?php endfor; ?>
-				
+				<li class="dropdown pull-right">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  		PERIODE <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+	                  <li class="<?php echo active_link_method('index','realisasi_sasaran'); ?>">
+	                    <a href="<?php echo base_url("skpd/realisasi_sasaran/") ?>"> Tahunan</a>
+	                  </li>
+	                  <li class="<?php echo active_link_method('realisasi_sasaran','triwulan'); ?>">
+	                    <a href="<?php echo base_url("skpd/realisasi_sasaran/triwulan") ?>">Triwulan</a>
+	                  </li>
+	                  <li class="<?php echo active_link_method('realisasi_sasaran','bulanan'); ?>">
+	                    <a href="<?php echo base_url("skpd/realisasi_sasaran/bulanan") ?>">Bulanan</a>
+	                  </li>
+	                  <li class="<?php echo active_link_method('realisasi_sasaran','lampiran'); ?>">
+	                    <a href="<?php echo base_url("skpd/realisasi_sasaran/lampiran") ?>">Lampiran dan Foto</a>
+	                  </li>
+					</ul>
+              	</li>
             </ul>
             <div class="tab-content">
             <?php for($tahun = $this->mrealisasi_sasaran->periode_awal; $tahun <= $this->mrealisasi_sasaran->periode_akhir; $tahun++) : ?>

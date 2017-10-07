@@ -8,7 +8,18 @@
    	
 	
         <ul class="timeline">
-            <li class="time-label">
+           
+            <?php if (count($this->msasaran->getMisiLogin())==0): ?>
+			
+            	<div style="padding-top: 50px" class="col-md-8 col-md-offset-3">
+	            	<div class="alert alert-danger">
+	            		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	            		<strong>Maaf!</strong> Silahkan Entri Tujuan Rencana Strategis terdahulu.
+	            	</div>
+            	</div>
+
+           	<?php else: ?>
+             <li class="time-label">
                   <span class="bg-default">Entry Sasaran</span>
             </li>
             <?php 
@@ -218,6 +229,7 @@
 		<?php endforeach ?>
 	<?php endforeach ?>
 
+<?php endif ?>
 	<div class="modal" id="modal-delete">
 	<div class="modal-dialog modal-sm modal-danger">
 		<div class="modal-content">

@@ -59,7 +59,9 @@
 							<td class="td-action">
 								<?php echo $row->deskripsi; ?>
 								<div class="button-action">
-									<a href="javascript:void(0)" data-action="update" data-key="prestasi" data-id="<?php echo $row->id_prestasi ?>"><i class="fa fa-pencil"></i> Ubah</a>  |
+									
+									<a href="javascript:void(0)" data-action="update" data-key="prestasi" data-id="<?php echo $row->id_prestasi ?>"><i class="fa fa-pencil"></i> Ubah</a> 
+									 |
 									<a href="javascript:void(0)" data-action="delete" data-key="prestasi" data-id="<?php echo $row->id_prestasi ?>" class="red"> <i class="fa fa-trash-o"></i> Hapus</a>
 								</div>
 							</td>
