@@ -26,6 +26,9 @@
 	                  <li class="<?php echo active_link_method('realisasi_sasaran','bulanan'); ?>">
 	                    <a href="<?php echo base_url("skpd/realisasi_sasaran/bulanan") ?>">Bulanan</a>
 	                  </li>
+	                  <li class="<?php echo active_link_method('realisasi_sasaran','lampiran'); ?>">
+	                    <a href="<?php echo base_url("skpd/realisasi_sasaran/lampiran") ?>">Lampiran dan Foto</a>
+	                  </li>
 					</ul>
               	</li>
             </ul>

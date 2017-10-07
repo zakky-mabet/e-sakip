@@ -482,7 +482,58 @@ $('a[data-key="bulan"]').on('click', function()
 
 			
 			
-		});
-			
+		});		
 					
 });
+
+$('a[data-key="lampiran"]').on('click', function() 
+	{
+		var ID = $(this).data('id');
+
+		switch($(this).data('action')) 
+		{
+			case 'update':
+				$.get(base_url + '/realisasi_sasaran/get_lampiran/' + ID, function(result) 
+				{
+					$('#update-keterangan').val(result.keterangan);					
+
+					$('input#ID').attr('name', 'ID');
+
+					$('input#ID').attr('value', ID);
+
+					$('input#unlink_file').attr('name', 'unlink_file');
+
+					$('input#unlink_file').attr('value', result.file);
+					
+
+					$('action#update-action').val(result.base_url+'/realisasi_sasaran/update_lampiran/');
+
+					$('#update-bulan option').filter(function() 
+			        {
+			            return this.textContent == result.bulan;
+			        }).prop('selected', true);
+
+
+			        $('#update-tahun option').filter(function() 
+			        {
+			            return this.textContent == result.tahun;
+			        }).prop('selected', true);
+
+
+			        $('#update-kategori option').filter(function() 
+			        {
+			            return this.textContent == result.kategori;
+			        }).prop('selected', true);
+
+					$('div#modal-update').modal('show');
+
+					console.log(ID);
+
+				});
+			break;
+			case 'delete':
+			$('#modal-delete').modal('show');
+			$('a#btn-yes').attr('href', base_url + '/realisasi_sasaran/delete/' + $(this).data('id'));
+			break;
+		}
+	});
