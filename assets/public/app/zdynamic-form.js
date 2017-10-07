@@ -505,7 +505,6 @@ $('a[data-key="lampiran"]').on('click', function()
 
 					$('input#unlink_file').attr('value', result.file);
 					
-
 					$('action#update-action').val(result.base_url+'/realisasi_sasaran/update_lampiran/');
 
 					$('#update-bulan option').filter(function() 
@@ -536,5 +535,4 @@ $('a[data-key="lampiran"]').on('click', function()
 			$('a#btn-yes').attr('href', base_url + '/realisasi_sasaran/delete/' + $(this).data('id'));
 			break;
 		}
-		
 	});
