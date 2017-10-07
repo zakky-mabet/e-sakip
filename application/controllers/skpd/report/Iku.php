@@ -27,9 +27,25 @@ class Iku extends Skpd
 			'breadcrumbs' => $this->breadcrumbs->show(),
 			'page_title' => $this->page_title->show(),
 			'visi' => $this->mvisi->getByLogin(),
-		);
+		);	
 
-		$this->template->view('skpd/report/IndexIKU', $this->data);	
+		switch ( $this->input->get('output') ) 
+		{
+			case 'print':
+				$this->load->view('skpd/report/print/indexiku', $this->data);
+				break;
+			case 'pdf':
+			    $this->pdf->setPaper('legal', 'potrait');
+			    $this->pdf->filename = strtoupper($this->data['title']).".pdf";
+			    $this->pdf->load_view('skpd/report/print/indexiku', $this->data);
+				break;
+			case 'excel':
+				show_error('On Progress!');
+				break;
+			default:
+				$this->template->view('skpd/report/IndexIKU', $this->data);
+				break;
+		}
 	}
 
 	public function capaian()

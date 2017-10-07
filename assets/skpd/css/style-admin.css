@@ -88,6 +88,10 @@ table.tb-gabungan tbody tr:nth-child(6) td{
   background: #000D8D !important;
   color: white;
 }
+input[type="password"] {
+  font-size: 20pt;
+  padding: 0px;
+}
 /* TABLE */
 div.button-action {
     display: none;

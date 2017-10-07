@@ -4,33 +4,30 @@
             <span class="info-box-icon"><i class="fa fa-files-o"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">Misi</span>
-                <span class="info-box-number">3</span>
+                <span class="info-box-number"><?php echo $this->db->get_where('misi', array('id_kepala' => $this->kepala))->num_rows(); ?></span>
                 <div class="progress">
                     <div class="progress-bar" style="width: 50%"></div>
                 </div>
-                <span class="progress-description"> 50% Terisi </span>
             </div>
         </div>
         <div class="info-box bg-blue">
             <span class="info-box-icon"><i class="fa fa-files-o"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">Tujuan</span>
-                <span class="info-box-number">4</span>
+                <span class="info-box-number"><?php echo $this->db->get_where('tujuan', array('id_kepala' => $this->kepala))->num_rows(); ?></span>
                 <div class="progress">
                     <div class="progress-bar" style="width: 50%"></div>
                 </div>
-                <span class="progress-description"> 50% Terisi </span>
             </div>
         </div>
         <div class="info-box bg-red">
             <span class="info-box-icon"><i class="fa fa-files-o"></i></span>
             <div class="info-box-content">
                 <span class="info-box-text">Sasaran</span>
-                <span class="info-box-number">5</span>
+                <span class="info-box-number"><?php echo $this->db->get_where('sasaran', array('id_kepala' => $this->kepala))->num_rows(); ?></span>
                 <div class="progress">
                     <div class="progress-bar" style="width: 50%"></div>
                 </div>
-                <span class="progress-description"> 50% Terisi </span>
             </div>
         </div>
         <div class="info-box bg-green">
@@ -41,7 +38,6 @@
                 <div class="progress">
                     <div class="progress-bar" style="width: 50%"></div>
                 </div>
-                <span class="progress-description"> 50% Terisi </span>
             </div>
         </div>
         <div class="info-box bg-aqua">
@@ -52,7 +48,6 @@
                 <div class="progress">
                     <div class="progress-bar" style="width: 50%"></div>
                 </div>
-                <span class="progress-description"> 50% Terisi </span>
             </div>
         </div>
     </div>

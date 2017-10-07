@@ -31,11 +31,11 @@ class Skpd extends MY_Controller
 	{
 		parent::__construct();
 
-		$this->load->library( array('session', 'form_validation', 'session','template','pagination', 'page_title', 'breadcrumbs'));
+		$this->load->library( array('session', 'form_validation', 'session','template','pagination', 'page_title', 'breadcrumbs','pdf'));
 
 		$this->load->helper(array('url','menus'));
 		
-		$this->breadcrumbs->unshift(0, 'Home', "home");
+		$this->breadcrumbs->unshift(0, 'Home', "skpd/home");
 
 		if($this->session->has_userdata('SKPD')==FALSE) 
 		{	

@@ -27,9 +27,62 @@ class Renstra extends Skpd
 			'visi' => $this->mvisi->getByLogin(),
 		);
 
-		$this->template->view('skpd/report/IndexRenstra', $this->data);
+		switch ( $this->input->get('output') ) 
+		{
+			case 'print':
+				$this->load->view('skpd/report/print/renstra', $this->data);
+				break;
+			case 'pdf':
+			    $this->pdf->setPaper('legal', 'landscape');
+			    $this->pdf->filename = strtoupper($this->data['title']).".pdf";
+			    $this->pdf->load_view('skpd/report/print/renstra', $this->data);
+				break;
+			case 'excel':
+				show_error('On Progress!');
+				break;
+			default:
+				$this->template->view('skpd/report/IndexRenstra', $this->data);
+				break;
+		}
 	}
+	public function laporan_pdf()
+	{
 
+	    $data = array(
+	        "dataku" => array(
+	            "nama" => "Petani Kode",
+	            "url" => "http://petanikode.com"
+	        )
+	    );
+
+
+	    $this->pdf->setPaper('A4', 'potrait');
+	    $this->pdf->filename = "laporan-petanikode.pdf";
+		$this->page_title->push('Laporan', 'Rencanan Strategis');
+
+		$this->breadcrumbs->unshift(2, 'Rencanan Strategis',  $this->uri->uri_string());
+
+		$this->tahun = $this->periode_awal;
+
+		$this->data = array(
+			'title' => "Rencanan Strategis", 
+			'breadcrumbs' => $this->breadcrumbs->show(),
+			'page_title' => $this->page_title->show(),
+			'visi' => $this->mvisi->getByLogin(),
+		);
+
+		switch ( $this->input->get('output') ) 
+		{
+			case 'print':
+				# code...
+				break;
+			
+			default:
+				$this->pdf->load_view('skpd/report/IndexRenstra', $this->data);
+				break;
+		}
+
+	}
 }
 
 /* End of file Renstra.php */

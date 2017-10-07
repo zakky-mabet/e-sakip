@@ -7,13 +7,13 @@
 					<p style="margin-left: 23px;">Periode <?php echo $this->periode_awal.'-'.$this->periode_akhir ?></p>
 				</div>
 				<div class="col-md-3 pull-right">
-					<a href="" class="btn btn-default">
+					<a href="<?php echo current_url().'?output=print'; ?>" target="_blank" class="btn btn-default btn-print">
 						<i class="fa fa-print"></i> Cetak
 					</a>
-					<a href="" class="btn btn-default">
+					<a href="<?php echo current_url().'?output=pdf'; ?>" target="_blank" class="btn btn-default">
 						<i class="fa fa-file-pdf-o"></i> PDF
 					</a>
-					<a href="" class="btn btn-default">
+					<a href="<?php echo current_url().'?output=excel'; ?>" target="_blank" class="btn btn-default">
 						<i class="fa fa-file-excel-o"></i> Excel
 					</a>
 				</div>

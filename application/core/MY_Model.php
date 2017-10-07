@@ -75,7 +75,12 @@ class Skpd_model extends MY_Model
 		))->row();
 	}
 
-	
+	public function getRealisasiIndikatorSasaran($target = 0)
+	{
+		return $this->db->get_where('realisasi_indikator_sasaran', array(
+			'id_target_sasaran' => $target
+		))->row();
+	}
 }
 
 /* End of file MY_Model.php */

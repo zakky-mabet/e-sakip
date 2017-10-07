@@ -238,7 +238,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
           </ul>
         </li>
-        <li class="treeview <?php  echo active_link_multiple(array('renstra','rrkt','iku','reanggaran','reaksi')); ?>">
+        <li class="treeview <?php  echo active_link_multiple(array('renstra','rrkt','iku','reanggaran','reaksi','efisiensi_kinerja')); ?>">
           <a href="#">
             <i class="fa fa-line-chart"></i>
             <span>Laporan</span>
@@ -299,32 +299,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li class="<?php echo active_link_method('index','reaksi'); ?>">
                 <a href="<?php echo base_url("skpd/report/reaksi") ?>"> Rencana Aksi</a>
             </li>
-            <li class="<?php echo active_link_method('index','sd'); ?>">
-                <a href=""> Efisiensi dan Efektifitas Kinerja</a>
+            <li class="<?php echo active_link_method('index','efisiensi_kinerja'); ?>">
+                <a href="<?php echo base_url("skpd/report/efisiensi_kinerja") ?>"> Efisiensi dan Efektifitas Kinerja</a>
             </li>
           </ul>
         </li>
-        <li class="treeview <?php  echo active_link_multiple(array('pka')); ?>">
-          <a href="#">
-            <i class="fa fa-bank"></i>
-            <span>Instansi</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
-                <a href=""> Profil Instansi</a>
-            </li>
-          </ul>
-        </li>
-        <li class="<?php echo active_link_controller('instansi'); ?>">
-            <a href="<?php  echo site_url('skpd/home') ?>">
+        <li class="<?php echo active_link_controller('account'); ?>">
+            <a href="<?php  echo site_url('skpd/account') ?>">
                <i class="fa fa-wrench"></i> <span>Pengaturan Akun</span>
             </a>
         </li>
         <li class="<?php echo active_link_controller('instansi'); ?>">
-            <a href="<?php  echo site_url('skpd/home') ?>">
+            <a href="">
                <i class="fa fa-info-circle"></i> <span>Panduan Pengguna</span>
             </a>
         </li>
