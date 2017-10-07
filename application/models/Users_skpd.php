@@ -57,7 +57,8 @@ class Users_skpd extends CI_Model
      	$string = array(  
          	'token'=> $token,  
          	'user_id'=> $userID,  
-         	'created'=>$date  
+         	'created'=>$date,
+          'role' => 'OPD'
        	);  
      	$query = $this->db->insert_string('passwordtokens',$string);  
 
@@ -72,7 +73,8 @@ class Users_skpd extends CI_Model
      	$uid = substr($token,30);     
        
      	$q = $this->db->get_where('passwordtokens', array(  
-       'passwordtokens.token' => $tkn,   
+       'passwordtokens.token' => $tkn,  
+       'role' => 'OPD' 
        ), 1);               
            
      	if($this->db->affected_rows() > 0)

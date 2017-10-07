@@ -24,20 +24,6 @@ table.mini-font tfoot td {
    vertical-align: middle;
 }
 
-/* table.mini-font tbody tr:nth-child(2) td,
-table.mini-font tbody tr:nth-child(3) td,
-table.mini-font tbody tr:nth-child(4) td{
-  border-top: 0; 
-}
-table.tb-gabungan tbody tr:nth-child(1) td,
-table.tb-gabungan tbody tr:nth-child(2) td,
-table.tb-gabungan tbody tr:nth-child(3) td,
-table.tb-gabungan tbody tr:nth-child(4) td,
-table.tb-gabungan tbody tr:nth-child(5) td,
-table.tb-gabungan tbody tr:nth-child(6) td{
-  border-top: 0; 
-} */
-
 /*  ADMIN LTE */
     .content-wrapper { background: #F4F5F7 }
     * { font-family: 'Arial', sans-serif; font-size: 13px; }
@@ -266,4 +252,17 @@ div.box-select-category {
   width: 20px;
   right: 0;
   clip: rect(-6px, 22px, 14px, 10px);
+}
+
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+  border-right:0; 
+  box-shadow:0 0 0; 
+  border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
 }

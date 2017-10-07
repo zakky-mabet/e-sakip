@@ -8,3 +8,6 @@ $route['translate_uri_dashes'] = FALSE;
 /* SKPD */
 $route['login'] = 'login_skpd';
 $route['login/signout'] = 'login_skpd/signout';
+
+/* ADMIN */
+$route['admin/login'] = 'login_admin';

@@ -152,8 +152,6 @@ class Login_skpd extends CI_Controller
          	redirect(site_url('login'),'refresh');   
        	}    
 
-
-   
        	$data = array(  
          	'title'=> 'Halaman Reset Password',  
          	'nama'=> $user_info->nama,   
