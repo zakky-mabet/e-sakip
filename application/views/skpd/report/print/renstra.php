@@ -127,7 +127,6 @@ $this->load->view('skpd/report/print/layout/header');
 						// end tujuan 
 						endforeach;
 						?>
-
 				</table>
 
 <?php
