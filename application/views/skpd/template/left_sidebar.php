@@ -304,20 +304,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
           </ul>
         </li>
-        <li class="treeview <?php  echo active_link_multiple(array('pka')); ?>">
-          <a href="#">
-            <i class="fa fa-bank"></i>
-            <span>Instansi</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
-                <a href=""> Profil Instansi</a>
-            </li>
-          </ul>
-        </li>
         <li class="<?php echo active_link_controller('account'); ?>">
             <a href="<?php  echo site_url('skpd/account') ?>">
                <i class="fa fa-wrench"></i> <span>Pengaturan Akun</span>
