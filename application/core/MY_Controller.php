@@ -35,7 +35,7 @@ class Skpd extends MY_Controller
 
 		$this->load->helper(array('url','menus'));
 		
-		$this->breadcrumbs->unshift(0, 'Home', "home");
+		$this->breadcrumbs->unshift(0, 'Home', "skpd/home");
 
 		if($this->session->has_userdata('SKPD')==FALSE) 
 		{	

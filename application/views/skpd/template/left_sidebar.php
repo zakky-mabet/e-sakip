@@ -318,13 +318,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
           </ul>
         </li>
-        <li class="<?php echo active_link_controller('instansi'); ?>">
-            <a href="<?php  echo site_url('skpd/home') ?>">
+        <li class="<?php echo active_link_controller('account'); ?>">
+            <a href="<?php  echo site_url('skpd/account') ?>">
                <i class="fa fa-wrench"></i> <span>Pengaturan Akun</span>
             </a>
         </li>
         <li class="<?php echo active_link_controller('instansi'); ?>">
-            <a href="<?php  echo site_url('skpd/home') ?>">
+            <a href="">
                <i class="fa fa-info-circle"></i> <span>Panduan Pengguna</span>
             </a>
         </li>
