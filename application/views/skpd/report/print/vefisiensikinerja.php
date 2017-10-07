@@ -1,46 +1,14 @@
-<div class="row">
-	<div class="col-md-12">
-		<div class="box" id="stickerButton100x">
-			<div class="box-header">
-				<div class="col-md-4">
-					<h4 class="box-heading"> <i class="fa fa-files-o"></i> Tingkat Efisiensi dan Efektifitas Kinerja</h4>
-					<p style="margin-left: 23px;">Periode <?php echo $this->periode_awal.'-'.$this->periode_akhir ?></p>
-				</div>
-				<div class="col-md-7">
-					<div class="col-md-4">
-						<label>Tahun</label>
-						<select name="thn" class="form-control input-sm" onchange="window.location = '<?php echo current_url() ?>?thn=' + this.value">
-						<?php  
-						foreach(range($this->periode_awal, $this->periode_akhir) as $tahun) 
-						{
-							$selected = ($tahun == $this->tahun) ? 'selected' : '';
-							echo '<option value="'.$tahun.'" '.$selected.'>'.$tahun.'</option>';
-						}
-						?>
-						</select>
-					</div>
-					<div class="col-md-6 pull-right top2x">
-						<a href="<?php echo current_url().'?output=print&thn='.$this->input->get('thn') ?>" target="_blank" class="btn btn-default btn-print">
-							<i class="fa fa-print"></i> Cetak
-						</a>
-						<a href="<?php echo current_url().'?output=pdf&thn='.$this->input->get('thn') ?>" target="_blank" class="btn btn-default">
-							<i class="fa fa-file-pdf-o"></i> PDF
-						</a>
-						<a href="<?php echo current_url().'?output=excel&thn='.$this->input->get('thn') ?>" target="_blank" class="btn btn-default">
-							<i class="fa fa-file-excel-o"></i> Excel
-						</a>
-					</div>
-				</div>
-			</div>
-			<div class="clearfix"></div>
-		</div>
-		<div class="box no-border">
-			<div class="box-body no-padding">
-				<div class="clearfix"></div>
-				<hr>
-				<div class="col-md-12 text-center">
-					<p><strong>Tingkat Efisiensi dan Efektifitas Kinerja  (Tahun <?php echo $this->tahun ?>)</strong></p>
-				</div>
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+/**
+ * Call Header Print (KOP)
+ *
+ * @author Vicky Nitinegoro http://vicky.work
+ **/
+$this->load->view('skpd/report/print/layout/header');
+?>
+<p class="text-center"><strong>Tingkat Efisiensi dan Efektifitas Kinerja  (Tahun <?php echo $this->tahun ?>)</strong></p>
 				<table class="mini-font table table-bordered">
 					<thead class="bg-blue">
 						<tr>
@@ -150,7 +118,7 @@
 				    ?>
 					</tbody>
 				</table>
-			</div>
-		</div>
-	</div>
-</div>
+<?php
+$this->load->view('skpd/report/print/layout/footer');
+/* End of file vefisiensikinerja.php */
+/* Location: ./application/views/skpd/report/print/vefisiensikinerja.php */

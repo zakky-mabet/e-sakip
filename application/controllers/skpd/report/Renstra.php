@@ -39,7 +39,6 @@ class Renstra extends Skpd
 				break;
 			case 'excel':
 				show_error('On Progress!');
-				
 				break;
 			default:
 				$this->template->view('skpd/report/IndexRenstra', $this->data);

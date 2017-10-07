@@ -20,13 +20,13 @@
 						</select>
 					</div>
 					<div class="col-md-6 pull-right top2x">
-						<a href="" class="btn btn-default">
+						<a href="<?php echo current_url().'?output=print'; ?>" target="_blank" class="btn btn-default btn-print">
 							<i class="fa fa-print"></i> Cetak
 						</a>
-						<a href="" class="btn btn-default">
+						<a href="<?php echo current_url().'?output=pdf'; ?>" target="_blank" class="btn btn-default">
 							<i class="fa fa-file-pdf-o"></i> PDF
 						</a>
-						<a href="" class="btn btn-default">
+						<a href="<?php echo current_url().'?output=excel'; ?>" target="_blank" class="btn btn-default">
 							<i class="fa fa-file-excel-o"></i> Excel
 						</a>
 					</div>
@@ -44,7 +44,7 @@
 				<table class="table table-responsive table-bordered">
 					<thead class="bg-blue">
 						<tr>
-							<th class="text-center" width="50" valign="top">No.</th>	
+							<th class="text-center" width="30" valign="top">No.</th>	
 							<th class="text-center">Indikator Kinerja Utama</th>
 							<th class="text-center">Formulasi</th>
 						</tr>

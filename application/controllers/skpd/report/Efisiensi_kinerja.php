@@ -27,7 +27,23 @@ class Efisiensi_kinerja extends Skpd
 			'visi' => $this->mvisi->getByLogin(),
 		);
 
-		$this->template->view('skpd/report/vEfisiensiKinerja', $this->data);	
+		switch ( $this->input->get('output') ) 
+		{
+			case 'print':
+				$this->load->view('skpd/report/print/vefisiensikinerja', $this->data);
+				break;
+			case 'pdf':
+			    $this->pdf->setPaper('legal', 'landscape');
+			    $this->pdf->filename = strtoupper($this->data['title']).".pdf";
+			    $this->pdf->load_view('skpd/report/print/vefisiensikinerja', $this->data);
+				break;
+			case 'excel':
+				show_error('On Progress!');
+				break;
+			default:
+				$this->template->view('skpd/report/vEfisiensiKinerja', $this->data);
+				break;
+		}	
 	}
 
 }
