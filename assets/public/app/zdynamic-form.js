@@ -536,4 +536,5 @@ $('a[data-key="lampiran"]').on('click', function()
 			$('a#btn-yes').attr('href', base_url + '/realisasi_sasaran/delete/' + $(this).data('id'));
 			break;
 		}
+		
 	});
