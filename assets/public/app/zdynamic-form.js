@@ -477,13 +477,8 @@ $('a[data-key="bulan"]').on('click', function()
 
 					$('div#realisasi').modal('show');	
 				break;
-
 			}
-
-			
-			
-		});		
-					
+		});						
 });
 
 $('a[data-key="lampiran"]').on('click', function() 
@@ -505,7 +500,6 @@ $('a[data-key="lampiran"]').on('click', function()
 
 					$('input#unlink_file').attr('value', result.file);
 					
-
 					$('action#update-action').val(result.base_url+'/realisasi_sasaran/update_lampiran/');
 
 					$('#update-bulan option').filter(function() 
@@ -527,7 +521,7 @@ $('a[data-key="lampiran"]').on('click', function()
 
 					$('div#modal-update').modal('show');
 
-					console.log(ID);
+					
 
 				});
 			break;
@@ -536,5 +530,5 @@ $('a[data-key="lampiran"]').on('click', function()
 			$('a#btn-yes').attr('href', base_url + '/realisasi_sasaran/delete/' + $(this).data('id'));
 			break;
 		}
-		
 	});
+

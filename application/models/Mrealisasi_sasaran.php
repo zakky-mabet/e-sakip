@@ -84,32 +84,7 @@ class Mrealisasi_sasaran extends Skpd_model
 	}
 
 	
-	public function getTotalAnggaranKegiatanByProgramTahun($program = 0, $tahun = 0)
-	{
-		$program = $this->db->query(
-			"SELECT kegiatan_program.id_kegiatan FROM kegiatan_program
-			WHERE kegiatan_program.id_program IN(SELECT program.id_program FROM program WHERE program.id_program = '{$program}')
-		");
-		
-		$kegiatan = array();
-		foreach ($program->result() as $key => $value) {
-			$kegiatan[] = $value->id_kegiatan;
-		}
-
-		if( $kegiatan )
-		{
-			$IDKegiatan = join(",", $kegiatan);
-
-			$anggaran = $this->db->query("
-				SELECT SUM(anggaran_kegiatan.nilai_anggaran) AS anggaran FROM anggaran_kegiatan 
-				WHERE id_kegiatan IN ({$IDKegiatan}) AND tahun = '{$tahun}'
-			")->row('anggaran');
-		} else {
-			return 0;
-		}
-
-	 	return $anggaran;
-	}
+	
 
 	public function getIndikatorSasarantoTargetTriwulan($param = 0, $tahun = 0 )
 	{	
@@ -295,6 +270,90 @@ class Mrealisasi_sasaran extends Skpd_model
 	public function get_lampiran($param = 0 )
 	{
 		return $this->db->get_where('lampiran',array('id' => $param))->row();
+	}
+
+	public function get_sasaran_program_dan_kegiatan($param=0, $tahun=0)
+	{
+		return $this->db->get_where('sasaran', array('id_kepala' => $this->session->userdata('SKPD')->ID, 'id_sasaran' => $param))->row();
+	}
+
+	public function get_sasaran_program($param=0)
+	{
+		return $this->db->get_where('program', array('id_sasaran' => $param))->result();
+	}
+
+	public function get_sasaran_kegiatan($param=0, $tahun = 0)
+	{
+		$this->db->join('anggaran_kegiatan', 'anggaran_kegiatan.id_kegiatan = kegiatan_program.id_kegiatan', 'left');
+
+		return $this->db->get_where('kegiatan_program', array('kegiatan_program.id_program' => $param, 'anggaran_kegiatan.tahun'=>$tahun))->result();
+	}
+
+	public function getTotalAnggaranKegiatanByProgramTahun($program = 0, $tahun = 0)
+	{
+		$program = $this->db->query(
+			"SELECT kegiatan_program.id_kegiatan FROM kegiatan_program
+			WHERE kegiatan_program.id_program IN(SELECT program.id_program FROM program WHERE program.id_program = '{$program}')
+		");
+		
+		$kegiatan = array();
+		foreach ($program->result() as $key => $value) {
+			$kegiatan[] = $value->id_kegiatan;
+		}
+
+		if( $kegiatan )
+		{
+			$IDKegiatan = join(",", $kegiatan);
+
+			$anggaran = $this->db->query("
+				SELECT SUM(anggaran_kegiatan.nilai_anggaran) AS anggaran FROM anggaran_kegiatan 
+				WHERE id_kegiatan IN ({$IDKegiatan}) AND tahun = '{$tahun}'
+			")->row('anggaran');
+		} else {
+			return 0;
+		}
+
+	 	return $anggaran;
+	}
+
+	public function program_penyerapan_per_kegiatan($program = 0, $tahun = 0)
+	{
+		$program = $this->db->query(
+			"SELECT kegiatan_program.id_kegiatan FROM kegiatan_program
+			WHERE kegiatan_program.id_program IN(SELECT program.id_program FROM program WHERE program.id_program = '{$program}')
+		");
+		
+		$kegiatan = array();
+		foreach ($program->result() as $key => $value) {
+			$kegiatan[] = $value->id_kegiatan;
+		}
+
+		if( $kegiatan )
+		{
+			$IDKegiatan = join(",", $kegiatan);
+
+			$anggaran = $this->db->query("
+				SELECT SUM(realisasi_anggaran_kegiatan.nilai_anggaran) AS anggaran FROM realisasi_anggaran_kegiatan 
+				WHERE id_kegiatan IN ({$IDKegiatan}) AND tahun = '{$tahun}'
+			")->row('anggaran');
+		} else {
+			return 0;
+		}
+
+	 	return $anggaran;
+	}
+
+	public function penyerapan_per_kegiatan($param=0, $tahun=0)
+	{
+		$this->db->join('realisasi_anggaran_kegiatan', 'realisasi_anggaran_kegiatan.id_kegiatan = kegiatan_program.id_kegiatan', 'left');
+
+		$kegiatan_program =  $this->db->get_where('kegiatan_program', array('kegiatan_program.id_kegiatan' => $param, 'realisasi_anggaran_kegiatan.tahun'=>$tahun))->result();
+
+		foreach ($kegiatan_program as $key => $value) {
+			$nilai[] = $value->nilai_anggaran;
+		}
+
+		return array_sum($nilai);
 	}
 
  }
