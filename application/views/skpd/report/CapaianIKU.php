@@ -96,18 +96,26 @@
 			            foreach(  $DIndikator as $keyIndikator => $indikator) : 
 			            	$targetThn = $this->tjuan->getTargetSasaranBySasaranTahun($indikator->id_indikator_sasaran, $this->tahun);
 			            ?>
+
 					<tr>
-						<td class="text-center"><?php echo $key.".".++$keyIndikator ?></td>
-						<td><?php echo $indikator->deskripsi; ?></td>
-						<td class="text-center"><?php echo $indikator->nama_satuan ?></td>
+						<td   class="text-center"><?php echo $key.".".++$keyIndikator ?></td>
+						<td ><?php echo $indikator->deskripsi; ?></td>
+						<td  class="text-center"><?php echo $indikator->nama_satuan ?></td>
 						<td class="text-center"><?php echo @$targetThn->nilai_target ?></td>
+						
 					</tr>
-			        <?php 
-			        endforeach; 
-			    	endforeach;
+					<?php endforeach;
 			        ?>
+			        <?php 
+			        endforeach; ?>
+
+
+			    	
+			        
 					</tbody>
 				</table>
+
+				<
 			</div>
 		</div>
 	</div>

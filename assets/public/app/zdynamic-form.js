@@ -477,13 +477,8 @@ $('a[data-key="bulan"]').on('click', function()
 
 					$('div#realisasi').modal('show');	
 				break;
-
 			}
-
-			
-			
-		});		
-					
+		});						
 });
 
 $('a[data-key="lampiran"]').on('click', function() 
@@ -526,7 +521,7 @@ $('a[data-key="lampiran"]').on('click', function()
 
 					$('div#modal-update').modal('show');
 
-					console.log(ID);
+					
 
 				});
 			break;
@@ -536,3 +531,4 @@ $('a[data-key="lampiran"]').on('click', function()
 			break;
 		}
 	});
+

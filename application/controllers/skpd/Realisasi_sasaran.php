@@ -48,6 +48,30 @@ class Realisasi_sasaran extends Skpd
 	}
 
 
+	public function program_dan_kegiatan($param=0, $tahun=0)
+	{
+		if (!$param AND !$tahun) {
+			redirect('404');
+		}
+		$this->breadcrumbs->unshift(2, 'Realisasi Indikator ',  $this->uri->uri_string());
+
+		$this->page_title->push('Kinerja', 'Capaian Kinerja Indikator Sasaran Per Tahun ');
+
+		$this->tahun = $this->uri->segment(4);
+
+		$this->data = array(
+			'title' => "Capaian Kinerja Indikator Sasaran Per Tahun", 
+			'breadcrumbs' => $this->breadcrumbs->show(),
+			'page_title' => $this->page_title->show(),
+			'get_sasaran_program_dan_kegiatan' => $this->mrealisasi_sasaran->get_sasaran_program_dan_kegiatan($param, $tahun),
+			'tahun' => $tahun,
+			'param' => $param,
+		);
+
+		$this->template->view('skpd/vRealisasi_sasaran_program_dan_kegiatan', $this->data);
+	}
+
+
 	public function triwulan()
 	{
 		$this->breadcrumbs->unshift(2, 'Target Indikator Penetapan Kinerja Triwulan ',  $this->uri->uri_string());
@@ -177,7 +201,7 @@ class Realisasi_sasaran extends Skpd
 		redirect('skpd/realisasi_sasaran/lampiran');
 	}
 	
-
+		
 }
 
 /* End of file Target.php */
