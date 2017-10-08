@@ -43,7 +43,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </script>
   <style>
   .navbar-nav > li a { font-weight: bold; } 
-  .btn-primary {  background: #000D8D !important; }
+  .btn-primary {  background: #000D8D !important; color: white; }
+  .btn-primary:hover {  background: #000D8D !important; color: white; }
   .navbar-nav > li.dropdown .active { background: #000D8D;  }
   </style>
 </head>
