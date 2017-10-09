@@ -312,8 +312,6 @@ class Msasaran extends Skpd_model
 					$this->insertPKIndikatorKinerjaProgram($this->input->post("create[tahun][{$key}]"), $get_id_indikator_sasaran);
 
 
-					// $this->insertPKIndikatorKinerjaRealisasi($this->input->post("create[tahun][{$key}]"), $get_id_indikator_sasaran);
-
 
 					if($this->db->affected_rows())
 					{
@@ -405,7 +403,7 @@ class Msasaran extends Skpd_model
 				' Tersimpan! Data berhasil tersimpan.', 
 				array('type' => 'success','icon' => 'check')
 			);
-			
+
 		}
 	}
 
