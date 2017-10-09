@@ -7,6 +7,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author Vicky Nitinegoro http://vicky.work
  **/
 $this->load->view('skpd/report/print/layout/header');
+
+
+$bupati = $this->bupati->thisBupati();
+
+$kepala = $this->setting->getKepalaOpd();
 ?>
 <style>div.mail-footer > table {  margin-top: 100px; }</style>
     <div class="content">
@@ -21,12 +26,12 @@ $this->load->view('skpd/report/print/layout/header');
                 <tr>
                     <td width="70">Nama</td>
                     <td class="text-center" width="20">:</td>
-                    <td><strong>Lorem ipsum dolor.</strong></td>
+                    <td><strong><?php echo $kepala->nama_kepala ?></strong></td>
                 </tr>
                 <tr>
                     <td>Jabatan</td>
                     <td class="text-center">:</td>
-                    <td>Lorem ipsum dolor.</td>
+                    <td><?php echo $kepala->jabatan ?></td>
                 </tr>
             </table>
             <p>Selanjutnya disebut sebagai PIHAK PERTAMA</p>
@@ -34,12 +39,12 @@ $this->load->view('skpd/report/print/layout/header');
                 <tr>
                     <td width="70">Nama</td>
                     <td class="text-center" width="20">:</td>
-                    <td><strong>Lorem ipsum dolor.</strong></td>
+                    <td><strong><?php echo $bupati->nama_bupati ?></strong></td>
                 </tr>
                 <tr>
                     <td>Jabatan</td>
                     <td class="text-center">:</td>
-                    <td>Lorem ipsum dolor.</td>
+                    <td>BUPATI <?php echo $this->setting->get('kabupaten') ?></td>
                 </tr>
             </table>
             <p class="indent">Pihak pertama berjanji akan mewujudkan target kinerja yang seharusnya sesuai lampiran perjanjian ini, dalam rangka mencapai target kinerja jangka menengah seperti yang telah ditetapkan dalam dokumen perencanaan. Keberhasilan dan kegagalan pencapaian target kinerja tersebut menjadi tanggung jawab kami.</p>
@@ -62,13 +67,13 @@ $this->load->view('skpd/report/print/layout/header');
                 <tr><td colspan="3" style="height: 70px;"></td></tr>
                 <tr>
                     <td style="width: 40%;" class="text-center">
-                        <strong style=" line-height: 2px;">Lorem ipsum dolor sit amet.</strong><br>
-                        <strong>NIP. 4234324324</strong>
+                        <strong style=" line-height: 2px;"><?php echo $bupati->nama_bupati ?></strong><br>
+                        <strong><?php if($bupati->nip_bupati!=FALSE) echo 'NIP. '.$bupati->nip_bupati ?></strong>
                     </td>
                     <td style="width: 20%;"></td>
                     <td style="width: 40%;" class="text-center">
-                        <strong style=" line-height: 2px;">Lorem ipsum dolor sit amet.</strong><br>
-                        <strong>NIP. 4234324324</strong>
+                        <strong style=" line-height: 2px;"><?php echo $kepala->nama_kepala ?></strong><br>
+                        <strong><?php if($kepala->nip_kepala!=FALSE) echo 'NIP. '.$kepala->nip_kepala ?></strong>
                     </td>
                 </tr>
             </table>
@@ -83,7 +88,7 @@ $this->load->view('skpd/report/print/layout/header');
                 <tr>
                     <td width="150"><strong>SKPD</strong></td>
                     <td class="text-center" width="20">:</td>
-                    <td><strong><?php echo strtoupper($this->session->userdata('SKPD')->nama) ?>.</strong></td>
+                    <td><strong><?php echo strtoupper($this->session->userdata('SKPD')->nama) ?></strong></td>
                 </tr>
                 <tr>
                     <td width="150"><strong>TAHUN ANGGARAN</strong></td>
@@ -201,13 +206,13 @@ $this->load->view('skpd/report/print/layout/header');
                 <tr><td colspan="3" style="height: 70px;"></td></tr>
                 <tr>
                     <td style="width: 40%;" class="text-center">
-                        <strong style=" line-height: 2px;">Lorem ipsum dolor sit amet.</strong><br>
-                        <strong>NIP. 4234324324</strong>
+                        <strong style=" line-height: 2px;"><?php echo $bupati->nama_bupati ?></strong><br>
+                        <strong><?php if($bupati->nip_bupati!=FALSE) echo 'NIP. '.$bupati->nip_bupati ?></strong>
                     </td>
                     <td style="width: 20%;"></td>
                     <td style="width: 40%;" class="text-center">
-                        <strong style=" line-height: 2px;">Lorem ipsum dolor sit amet.</strong><br>
-                        <strong>NIP. 4234324324</strong>
+                        <strong style=" line-height: 2px;"><?php echo $kepala->nama_kepala ?></strong><br>
+                        <strong><?php if($kepala->nip_kepala!=FALSE) echo 'NIP. '.$kepala->nip_kepala ?></strong>
                     </td>
                 </tr>
             </table>

@@ -18,7 +18,7 @@
                   <td><img src="assets/images/kop.png" class="logo" alt="Logo Kop"></td>
                   <?php endif; ?>
                   <td>
-                     <span class="kop-heading">PEMERINTAH KABUPATEN BANGKA TENGAH</span> <br>
+                     <span class="kop-heading">PEMERINTAH KABUPATEN <?php echo $this->setting->get('kabupaten') ?></span> <br>
                      <span class="kop-heading-company"><?php echo $this->session->userdata('SKPD')->nama; ?></span> <br>
                      <span class="kop-heading-address">
                         Alamat : <?php echo $this->session->userdata('SKPD')->alamat; ?>. 
