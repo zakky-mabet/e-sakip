@@ -405,6 +405,7 @@ class Msasaran extends Skpd_model
 				' Tersimpan! Data berhasil tersimpan.', 
 				array('type' => 'success','icon' => 'check')
 			);
+			
 		}
 	}
 
@@ -531,7 +532,7 @@ class Msasaran extends Skpd_model
 				}		
 			}
 
-			
+
 		} else {
 			if( is_array($this->input->post('permasalahan')) )
 			{
