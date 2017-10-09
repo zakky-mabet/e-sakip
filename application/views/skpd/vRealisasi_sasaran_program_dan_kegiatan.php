@@ -1,18 +1,19 @@
 <div class="row">
-	<?php echo form_open(base_url("skpd/realisasi_sasaran/save")); ?>
+	<?php echo form_open(base_url("skpd/realisasi_sasaran/save_output/".$param.'/'.$tahun)); ?>
 	<div class="col-md-6 col-md-offset-3">
 		<?php echo $this->session->flashdata('alert'); ?>
 	</div>
-	<div class="col-md-12">
+	<div class="col-md-10">
 		<div class="box">
-			<div class="box-header">
+			<div class="box-header ">
 				<div class="col-md-6">
-					<h4 class="box-heading">Data Program dan Kegiatan Tahun <?php echo $tahun ?></h4>
+					<h4 class="box-heading bold">Data Program dan Kegiatan Tahun <?php echo $tahun ?></h4>
 					<h5 class="box-heading">
 						<b>Sasaran </b> : <?php echo $get_sasaran_program_dan_kegiatan->deskripsi ?>		
 					</h5>
 				</div>
 				<div class="col-md-6 text-right">
+					<br/>	
 					<div class="btn-group">
 	                  <button type="button" class="btn btn-info">Pilih Tahun</button>
 	                  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
@@ -29,7 +30,6 @@
 	                  </ul>
 	                </div>
 				</div>
-              
 			</div>
 			<div class="box-body">
 					<?php
@@ -56,7 +56,7 @@
 
 				 		<tr style="font-weight: 600;">
 							<td rowspan="10000"></td>
-							<td style="vertical-align: middle; " class="text-center bg-yellow">No</td>
+							<td style="vertical-align: middle;" class="text-center bg-yellow">No</td>
 							<td style="vertical-align: middle;" class="text-center bg-yellow">Kegiatan</td>
 							<td style="vertical-align: middle;" class="text-center bg-yellow">Anggaran</td>
 							<td style="vertical-align: middle;" class="text-center bg-yellow">Penyerapan</td>
@@ -75,7 +75,8 @@
 						<tr>
 							<td class="text-center" style="vertical-align: middle;">Output</td>
 							<td colspan="3">
-								<textarea class="form-control" name=""></textarea>
+								<?php echo form_hidden("update[ID][]", $kegiatan->id_anggaran_kegiatan);?>
+								<textarea class="form-control" name="update[output][<?php echo $kegiatan->id_anggaran_kegiatan ?>]" ><?php echo $kegiatan->output ?></textarea>
 							</td>
 				 		</tr>
 
@@ -83,11 +84,15 @@
 					</table>	
 					<?php endforeach ?>
 
-		
-				
 		</div>
 	</div>		
 </div>
+
+<div class="col-md-2 top50x">
+   		<div id="stickerButton100x">
+   			<button class="btn bg-blue btn-app"><i class="fa fa-save"></i> Simpan</button>
+   		</div>
+   	</div>
 	<?php echo form_close(); ?>
 </div>
 

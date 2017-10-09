@@ -118,10 +118,8 @@ class Realisasi_sasaran extends Skpd
 		if ($this->form_validation->run() == TRUE)
 		{
 			$this->mrealisasi_sasaran->create();
-			echo "<pre>";
-			print_r ($this->input->post());
-			echo "</pre>";
-			//redirect(current_url());
+
+			redirect(current_url());
 		}
 
 		$config = $this->template->pagination_list();
@@ -201,6 +199,12 @@ class Realisasi_sasaran extends Skpd
 		redirect('skpd/realisasi_sasaran/lampiran');
 	}
 	
+	public function save_output($param=0, $tahun=0)
+	{
+		$this->mrealisasi_sasaran->update_output();
+		
+		redirect(base_url('skpd/realisasi_sasaran/program_dan_kegiatan/'.$param.'/'.$tahun));
+	}
 		
 }
 
