@@ -69,7 +69,7 @@
 								<td class="text-center"><?php echo @number_format($anggaran) ?></td>
 								<td class="text-center"><?php echo number_format( @$rkt->anggaran_rkt) ?></td>
 								<td>
-									<input type="text" name="anggaran[<?php echo @$PK->nilai_anggaran ?>]" class="form-control input sm" value="<?php echo @number_format(@$PK->nilai_anggaran) ?>" disabled>
+									<input type="text" name="anggaran[<?php echo @$PK->nilai_anggaran ?>]" class="form-control input-sm" value="<?php echo @number_format(@$PK->nilai_anggaran) ?>" disabled>
 								</td>
 							</tr>
 						<?php endforeach; ?>

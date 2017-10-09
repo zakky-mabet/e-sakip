@@ -8,14 +8,14 @@ class Pkkegiatan extends Skpd
 	public function __construct()
 	{
 		parent::__construct();
-		$this->breadcrumbs->unshift(1, 'Program Kerja',  $this->uri->uri_string());
+		$this->breadcrumbs->unshift(1, 'Perjanjian Kinerja',  $this->uri->uri_string());
 
 		$this->load->model(array('mprogram','mstrategi','tjuan','kgiatan'));
 	}
 
 	public function index()
 	{
-		$this->page_title->push('Program Kerja', 'Target PK Output Kegiatan');
+		$this->page_title->push('Perjanjian Kinerja', 'Target PK Output Kegiatan');
 
 		$this->breadcrumbs->unshift(2, 'Target PK Output Kegiatan',  'skpd/rktprogram');
 
@@ -32,7 +32,7 @@ class Pkkegiatan extends Skpd
 
 	public function triwulan()
 	{
-		$this->page_title->push('Program Kerja', 'Target PK Output Kegiatan');
+		$this->page_title->push('Perjanjian Kinerja', 'Target PK Output Kegiatan');
 
 		$this->breadcrumbs->unshift(2, 'Target PK Output Kegiatan',  'skpd/rktprogram');
 

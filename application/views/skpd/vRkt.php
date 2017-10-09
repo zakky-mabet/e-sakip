@@ -66,7 +66,7 @@
 								<input type="text" name="update[nilai_target_rkt][<?php echo $indikator->rkt_id_target ?>]" value="<?php echo $indikator->nilai_target_rkt  ?>" class="form-control"></td>
 								<td  style="vertical-align: middle;" >
 								<?php echo form_hidden("update[ID][]", $indikator->rkt_id_target);?>
-								<input type="text" name="update[sebab][<?php echo $indikator->rkt_id_target ?>]" value="<?php echo $indikator->sebab  ?>" class="form-control"></td>
+								<input type="text" name="update[sebab][<?php echo $indikator->rkt_id_target ?>]" value="<?php echo $indikator->sebab  ?>" class="form-control input-sm"></td>
 							</tr>
 					<?php endforeach ?>
 						</tbody>

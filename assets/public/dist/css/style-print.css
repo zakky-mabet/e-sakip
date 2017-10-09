@@ -130,17 +130,17 @@ small.print-at {
 }
 
 .mail-heading > h5.mail-name {
-   font-size: 13pt;
+   font-size: 10pt;
    line-height: 1px;
-   border-bottom: 1px solid black;
    padding-bottom: 13.5px;
    width: auto;
    display: inherit; 
+   width: 100%;
 }
 
 .mail-heading > h5.mail-number {
    font-size: 9pt;
-   margin-top: 0px;
+   margin-top: 10px;
    display: inherit; 
 }
 

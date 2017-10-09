@@ -157,7 +157,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <li class="treeview <?php  echo active_link_multiple(array('pkprogram','pkkegiatan','pk_indikator_sasaran')); ?>">
           <a href="#">
             <i class="fa fa-file-text-o"></i>
-            <span>Program Kerja</span>
+            <span>Perjanjian Kinerja</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -238,7 +238,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
           </ul>
         </li>
-        <li class="treeview <?php  echo active_link_multiple(array('renstra','rrkt','iku','reanggaran','reaksi','efisiensi_kinerja')); ?>">
+        <li class="treeview <?php  echo active_link_multiple(array('renstra','rrkt','iku','reanggaran','reaksi','efisiensi_kinerja','pk')); ?>">
           <a href="#">
             <i class="fa fa-line-chart"></i>
             <span>Laporan</span>
@@ -256,8 +256,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li class="<?php echo active_link_method('index','iku'); ?>">
                 <a href="<?php echo base_url("skpd/report/iku"); ?>"> Indikator Kinerja Utama</a>
             </li>
-            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
-                <a href=""> Perjanjian Kinerja</a>
+            <li class="<?php echo active_link_method('index','pk'); ?>">
+                <a href="<?php echo base_url('skpd/report/pk') ?>"> Perjanjian Kinerja</a>
             </li>
             <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
                 <a href=""> Perjanjian Kinerja Perubahan</a>

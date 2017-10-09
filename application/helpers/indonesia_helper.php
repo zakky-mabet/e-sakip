@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-if ( ! function_exists('tgl_indo'))
+if ( ! function_exists('date_id'))
 {
 	function date_id($tgl, $format = FALSE)
 	{
@@ -107,31 +107,31 @@ if ( ! function_exists('bulan_english'))
 	{
 		switch ($bln)
 		{
-			case 01:
+			case 1:
 				return "JAN";
 				break;
-			case 02:
+			case 2:
 				return "FEB";
 				break;
-			case 03:
+			case 3:
 				return "MAR";
 				break;
-			case 04:
+			case 4:
 				return "APR";
 				break;
-			case 05:
+			case 5:
 				return "MAY";
 				break;
-			case 06:
+			case 6:
 				return "JUN";
 				break;
-			case 07:
+			case 7:
 				return "JUL";
 				break;
-			case 08:
+			case 8:
 				return "Augt";
 				break;
-			case 09:
+			case 9:
 				return "SEP";
 				break;
 			case 10:

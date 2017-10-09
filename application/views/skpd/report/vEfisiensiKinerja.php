@@ -134,7 +134,7 @@
 					$totalPAngg += $anggaran;
 					$TotalreKeua += $reKeua;
 					endforeach;
-					$TotRTR += @$RTR->nilai_capaian;
+					@$TotRTR += @$RTR->nilai_capaian;
 					endforeach;
 					?>
 					<tr>
