@@ -87,14 +87,44 @@ class Sasaran extends Skpd
 	public function createmasalah()
 	{
 
-		print_r($this->input->post());
 		
 		$this->msasaran->createmasalah();
 
 		redirect("skpd/sasaran");
 	}
 
-	
+
+	public function permasalahan($param=0)
+	{
+		if (!$param) {
+			redirect('404');
+		}
+
+		if (count($this->msasaran->get_sasaran_to_permasalahan_sasaran($param)) == NULL) {
+			redirect('404');
+		}
+
+		$this->page_title->push('Sasaran', 'Permasalahan Sasaran dan Akar Permasalahan');
+
+		$this->breadcrumbs->unshift(2, 'Permasalahan Sasaran',  $this->uri->uri_string());
+
+		$this->data = array(
+			'title' => "Permasalahan Sasaran dan Akar Permasalahan", 
+			'breadcrumbs' => $this->breadcrumbs->show(),
+			'page_title' => $this->page_title->show(),
+			'param' => $param,
+		);
+
+		$this->template->view('skpd/vPermasalahanSasaran', $this->data);			
+	}	
+
+	public function permasalahan_update($param = 0)
+	{	
+		$this->msasaran->permasalahan_update();
+		// echo '<pre>';
+		// print_r($this->input->post());
+		redirect("skpd/sasaran/permasalahan/".$param);	
+	}
 
 }
 

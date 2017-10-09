@@ -165,7 +165,14 @@ class Msasaran extends Skpd_model
 
 	public function getTujuanSasaran($misi = 0)
 	{
+		$this->db->join('permasalahan_sasaran', 'permasalahan_sasaran.id_sasaran = sasaran.id_sasaran', 'left');
+
 		return $this->db->get_where('sasaran', array('id_tujuan' => $misi))->result();
+	}
+
+	public function GET_SASARAN_FOR_PERMASALAHAN($param = 0)
+	{
+		return $this->db->get_where('sasaran', array('id_sasaran' => $param, 'id_kepala'=> $this->kepala))->result();
 	}
 
 	public function getpermasalahan($permasalahan = 0)
@@ -487,118 +494,63 @@ class Msasaran extends Skpd_model
 	}
 
 
-	// GENERATE REALISASI TRIWULAN
-	// public function insertPKIndikatorKinerjaRealisasi($tahun = 0, $indikator = 0)
-	// {
-	// 	if( is_array($tahun) )
-	// 	{
-	// 		foreach ($tahun as $key => $item) 
-	// 		{
-	// 			if( $this->checkPKIndikatorRealisasi($indikator, $item) ) 
-	// 			{
-
-	// 				continue;
-
-	// 			} else {
-
-	// 				$this->db->insert('realisasi_indikator_sasaran_triwulan', array(
-	// 					'id_indikator_sasaran' => $indikator,
-	// 					'tahun_realisasi_triwulan' => $item,
-	// 				));
-	// 			}
-	// 		}
-	// 	}
-	// }
-
-	// public function checkPKIndikatorRealisasi($indikator = 0, $tahun = 0)
-	// {
-		
-	// 		$query = $this->db->get_where('realisasi_indikator_sasaran_triwulan', array(
-	// 			'id_indikator_sasaran' => $indikator,
-	// 			'tahun_realisasi_triwulan' => $tahun,
-	// 		) );
-		 
-	// 	return $query->num_rows(); 
-	// }
-
-
+	
 
 
 	//Permasalahan Sasaran
-
-	public function CreateUpdatemasalah()
+	public function get_sasaran_to_permasalahan_sasaran($param=0)
 	{
-		if( $this->input->post('updateakar') )
+		$this->db->join('permasalahan_sasaran', 'permasalahan_sasaran.id_sasaran = sasaran.id_sasaran', 'left');
+
+		return $this->db->get_where('sasaran', array('sasaran.id_sasaran'=> $param))->row();
+	}
+
+	public function get_akar_permasalahan($param=0)
+	{
+
+		return $this->db->get_where('akar_permasalahan_sasaran', array('id_permasalahan'=> $param))->result();
+	}
+
+	public function permasalahan_update()
+	{
+		if( $this->input->post('akar') )
 		{
-			if( is_array($this->input->post('updateakar')) )
+			if( is_array($this->input->post('akar')) )
 			{
-				foreach($this->input->post('updateakar[ID]') as $key => $value) 
+				foreach($this->input->post('akar[IDA]') as $key => $value) 
 				{
 					$object = array(
-
-						'deskripsi_akar' => $this->input->post("updateakar[deskripsi][{$value}]"),
-					
+						'deskripsi_akar' => $this->input->post("akar[deskripsi_akar][{$value}]"),				
 					);
 					$this->db->update('akar_permasalahan_sasaran', $object, array('id' => $value));
 
-				
-
-				}
+					$object_akar = array(
+						'id_permasalahan' => $this->input->post("akar[id_permasalahan]"),
+					);
+					$this->db->insert('akar_permasalahan_sasaran', $object_akar );
+				}		
 			}
 		} else {
-			if( is_array($this->input->post('update')) )
+			if( is_array($this->input->post('permasalahan')) )
 			{
-				foreach($this->input->post('update[ID]') as $key => $value) 
+				foreach($this->input->post('permasalahan[IDP]') as $key => $value) 
 				{
 					$object = array(
-
-						'deskripsi_permasalahan' => $this->input->post("update[deskripsi][{$value}]"),
-					
+						'deskripsi_permasalahan' => $this->input->post("permasalahan[deskripsi_permasalahan][{$value}]"),				
 					);
 					$this->db->update('permasalahan_sasaran', $object, array('id_permasalahan' => $value));
 
-					$get_id_indikator_sasaran = $value;
+					$get_id_permasalahan = $value;
 
-					for($i=0; $i<=5; $i++ ) {
-					
-						$query = $this->db->get_where('akar_permasalahan_sasaran', array(
-							'id_permasalahan' => $get_id_indikator_sasaran,
-						
-						) );
+					$object_akar = array(
+						'id_permasalahan' => $get_id_permasalahan,
+					);
+					$this->db->insert('akar_permasalahan_sasaran', $object_akar );
 
-						if ($query->num_rows()==0) {
-
-							$this->db->insert('akar_permasalahan_sasaran', array(
-								'id_permasalahan' => $get_id_indikator_sasaran,
-							));
-						}
-					}
-
-			
-				}
+				}	
 			}
 		}
 	}
-
-	public function delete_akar($param)
-	{
-		$this->db->delete('akar_permasalahan_sasaran', array('id' => $param));
-
-					if($this->db->affected_rows())
-					{
-						$this->template->alert(
-							' Data berhasil dihapus.', 
-							array('type' => 'success','icon' => 'check')
-						);
-					} else {
-						$this->template->alert(
-							' Tidak ada data yang terhapus.', 
-							array('type' => 'warning','icon' => 'warning')
-						);
-					} 
-	}
-
-	//GENERATE REALISASI INDIKATOR SASARAN
 	
 
 }

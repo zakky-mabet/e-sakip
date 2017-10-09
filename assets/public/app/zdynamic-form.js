@@ -521,7 +521,6 @@ $('a[data-key="lampiran"]').on('click', function()
 
 					$('div#modal-update').modal('show');
 
-					
 
 				});
 			break;
@@ -531,4 +530,6 @@ $('a[data-key="lampiran"]').on('click', function()
 			break;
 		}
 	});
+
+
 
