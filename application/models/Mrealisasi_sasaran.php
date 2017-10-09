@@ -356,4 +356,36 @@ class Mrealisasi_sasaran extends Skpd_model
 		return array_sum($nilai);
 	}
 
+	public function update_output()
+	{
+		if( $this->input->post('create') )
+		{
+			if( is_array($this->input->post('create')) )
+			{
+				
+					$this->template->alert(
+						'Kesalahan Dalam Menyimpan Data ! Silahkan Ulangi', 
+						array('type' => 'warning','icon' => 'warning')
+					);
+			}
+		} else {
+			if( is_array($this->input->post('update')) )
+			{
+				foreach($this->input->post('update[ID]') as $key => $value) 
+				{
+					$object = array(
+						'output' => $this->input->post("update[output][{$value}]"),
+
+					);
+					$this->db->update('anggaran_kegiatan', $object, array('id_anggaran_kegiatan' => $value));
+
+					$this->template->alert(
+						' Tersimpan! Data berhasil tersimpan.', 
+						array('type' => 'success','icon' => 'check')
+					);
+				}
+			}
+		}
+	}
+
  }
