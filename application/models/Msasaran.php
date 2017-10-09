@@ -530,6 +530,8 @@ class Msasaran extends Skpd_model
 					$this->db->insert('akar_permasalahan_sasaran', $object_akar );
 				}		
 			}
+
+			
 		} else {
 			if( is_array($this->input->post('permasalahan')) )
 			{
