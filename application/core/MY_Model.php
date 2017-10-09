@@ -1,9 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class MY_Model extends CI_Model {
-
-	
+class MY_Model extends CI_Model 
+{
 
 }
 
@@ -80,6 +79,13 @@ class Skpd_model extends MY_Model
 		return $this->db->get_where('realisasi_indikator_sasaran', array(
 			'id_target_sasaran' => $target
 		))->row();
+	}
+
+	public function getIndikatorSasaranPKPerubahan($indikator = 0, $tahun = 0)
+	{
+		$targetSasaran = $this->getTargetSasaranBySasaranTahun($indikator, $tahun);
+
+		return $this->db->get_where('pk_indikator_target', array('id_indikator_target' => $targetSasaran->id_target_sasaran))->row();
 	}
 }
 

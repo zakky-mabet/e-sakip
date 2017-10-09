@@ -26,9 +26,9 @@
 						<a href="<?php echo current_url().'?output=pdf&thn='.$this->input->get('thn') ?>" target="_blank" class="btn btn-default">
 							<i class="fa fa-file-pdf-o"></i> PDF
 						</a>
-						<a href="<?php echo current_url().'?output=excel&thn='.$this->input->get('thn') ?>" target="_blank" class="btn btn-default">
+						<!-- <a href="<?php echo current_url().'?output=excel&thn='.$this->input->get('thn') ?>" target="_blank" class="btn btn-default">
 							<i class="fa fa-file-excel-o"></i> Excel
-						</a>
+						</a> -->
 					</div>
 				</div>
 			</div>

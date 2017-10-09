@@ -26,9 +26,9 @@
 						<a href="" class="btn btn-default">
 							<i class="fa fa-file-pdf-o"></i> PDF
 						</a>
-						<a href="" class="btn btn-default">
+						<!-- <a href="" class="btn btn-default">
 							<i class="fa fa-file-excel-o"></i> Excel
-						</a>
+						</a> -->
 					</div>
 				</div>
 			</div>

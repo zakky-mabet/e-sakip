@@ -3,7 +3,7 @@
 		<div class="box" id="stickerButton100x">
 			<div class="box-header">
 				<div class="col-md-4">
-					<h4 class="box-heading"> <i class="fa fa-files-o"></i> Perjanjian Kinerja  </h4>
+					<h4 class="box-heading"> <i class="fa fa-files-o"></i> Perjanjian Kinerja Perubahan </h4>
 					<p style="margin-left: 23px;">Periode <?php echo $this->periode_awal.'-'.$this->periode_akhir ?></p>
 				</div>
 				<div class="col-md-7">
@@ -39,7 +39,7 @@
 				<div class="clearfix"></div>
 				<hr>
 				<div class="col-md-12">
-					<p class="text-center"><strong>PERJANJIAN KINERJA </strong></p>
+					<p class="text-center"><strong>PERJANJIAN KINERJA PERUBAHAN</strong></p>
 					<table class="bottom2x">
 						<tr>
 							<th>SKPD</th>
@@ -92,12 +92,12 @@
 			         * @var string
 			         **/
 			        foreach(  $DIndikator as $keyIndikator => $indikator) : 
-			        	$target = $this->tjuan->getTargetSasaranBySasaranTahun($indikator->id_indikator_sasaran, $this->tahun);
+			        	$target = @$this->tjuan->getIndikatorSasaranPKPerubahan($indikator->id_indikator_sasaran, $this->tahun);
 			       ?>
 					<tr>
 						<td><?php echo $indikator->deskripsi ?></td>
 						<td class="text-center"><?php echo $indikator->nama_satuan ?></td>
-						<td class="text-center"><?php echo @$target->nilai_target ?></td>
+						<td class="text-center"><?php echo @$target->pk_sebab_perubahan ?></td>
 					</tr>
 			        <?php  
 			    	endforeach;

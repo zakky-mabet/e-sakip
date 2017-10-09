@@ -37,8 +37,6 @@ class Skpd extends MY_Controller
 		
 		$this->breadcrumbs->unshift(0, 'Home', "skpd/home");
 
-		$this->load->model(array('setting','bupati'));
-
 		if($this->session->has_userdata('SKPD')==FALSE) 
 		{	
 			redirect(site_url('login?from_url='.current_url()));
@@ -53,6 +51,8 @@ class Skpd extends MY_Controller
 		$this->SKPD = $this->session->userdata('SKPD')->ID;
 
 		$this->kepala = $this->session->userdata('SKPD')->kepala;
+
+		$this->load->model(array('setting','bupati'));
 	}
 
 	public function get_satuan_json()
@@ -73,6 +73,7 @@ class Skpd extends MY_Controller
 		return $this->output->set_content_type('application/json')->set_output(json_encode($query));
 	}
 }
+
 
 /**
 * Extends Class Admin
