@@ -136,6 +136,17 @@
 					</tbody>
 				</table>
 			</div>
+			<div class="box-body">
+<!-- 				<table class="table table-bordered">
+	<thead>
+		<td>
+			<th>Warna</th>
+			<th></th>
+			<th></th>
+		</td>
+	</thead>
+</table> -->
+			</div>
 		</div>
 	</div>
 </div>

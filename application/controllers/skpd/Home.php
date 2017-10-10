@@ -12,7 +12,6 @@ class Home extends Skpd {
 
 	public function index() 
 	{
-
 		$this->page_title->push('Dashboard', 'Selamat datang di Administrator');
 
 		$this->data = array(
@@ -24,4 +23,16 @@ class Home extends Skpd {
 		$this->template->view('skpd/v_home', $this->data);
 	}
 
+	public function cascading()
+	{
+		$this->page_title->push('Cascading', ' Alur Pengisian Data');
+
+		$this->data = array(
+			'title' => "Main Dashboard", 
+			'breadcrumbs' => $this->breadcrumbs->show(),
+			'page_title' => $this->page_title->show()
+		);
+
+		$this->template->view('skpd/v_home', $this->data);
+	}
 }

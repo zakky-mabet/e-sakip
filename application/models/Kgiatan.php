@@ -198,8 +198,7 @@ class Kgiatan extends Skpd_model
 				$object = array(
 					'id_program' => $program,
 					'deskripsi' => $deskripsi,
-					'tahun' => @implode(',', $this->getPeriode()),
-					'output' => null
+					'tahun' => @implode(',', $this->getPeriode())
 				);
 
 				$this->db->insert('kegiatan_program', $object);

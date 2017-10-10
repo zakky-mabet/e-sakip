@@ -13,9 +13,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
          </div>
       </div>
       <ul class="sidebar-menu">
-        <li class="<?php echo active_link_controller('home'); ?>">
+        <li class="<?php echo active_link_method('index','home'); ?>">
             <a href="<?php  echo site_url('skpd/home') ?>">
                <i class="fa fa-dashboard"></i> <span>Home</span>
+            </a>
+        </li>
+        <li class="<?php echo active_link_method('cascading','home'); ?>">
+            <a href="<?php  echo site_url('skpd/home/cascading') ?>">
+               <i class="fa fa-edit"></i> <span>Cascading</span>
             </a>
         </li>
         <li class="treeview <?php echo active_link_multiple(array('visi','misi','tujuan','strategi', 'sasaran','kebijakan','program','kegiatan', 'formulasi', 'target')); ?>">
