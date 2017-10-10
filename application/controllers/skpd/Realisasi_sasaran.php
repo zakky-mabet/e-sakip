@@ -15,7 +15,7 @@ class Realisasi_sasaran extends Skpd
 
 		$this->breadcrumbs->unshift(1, 'Kinerja',  $this->uri->uri_string());
 
-		$this->load->model(array('mrealisasi_sasaran','msasaran'));
+		$this->load->model(array('mrealisasi_sasaran','msasaran','mrkt'));
 
 		$this->load->js(base_url("assets/public/app/dynamic-form.js"));
 
@@ -89,6 +89,31 @@ class Realisasi_sasaran extends Skpd
 		$this->template->view('skpd/vRealisasi_sasaran_triwulan', $this->data);
 	}
 
+	public function analisis_sasaran_triwulan($id_sasaran = 0, $tahun = 0, $triwulan = '' )
+	{
+		if (!$id_sasaran AND !$tahun AND !$triwulan) {
+
+			redirect('404');
+
+		}
+
+		$this->breadcrumbs->unshift(2, 'Analisis Pencapaian Sasaran',  $this->uri->uri_string());
+
+		$this->page_title->push('Kinerja', 'Analisis Pencapaian Sasaran');
+
+		$this->tahun = $this->uri->segment(4);
+
+		$this->data = array(
+			'title' => "Analisis Pencapaian Sasaran ", 
+			'breadcrumbs' => $this->breadcrumbs->show(),
+			'page_title' => $this->page_title->show(),
+			'id_sasaran' => $id_sasaran,
+			'tahun' => $tahun,
+			'triwulan' => $triwulan,
+		);
+
+		$this->template->view('skpd/vRealisasi_sasaran_analisis_triwulan', $this->data);
+	}
 
 	Public function bulanan()
 	{
@@ -204,6 +229,20 @@ class Realisasi_sasaran extends Skpd
 		$this->mrealisasi_sasaran->update_output();
 		
 		redirect(base_url('skpd/realisasi_sasaran/program_dan_kegiatan/'.$param.'/'.$tahun));
+	}
+
+	public function delete_data_kosong_analisa_sasaran_pertriwulan()
+	{
+		$this->db->delete('analisis_sasaran_pertriwulan',array('pk_induk' => 0));
+
+		redirect('skpd/sasaran');
+	}
+
+	public function save_analisis_triwulan($id_sasaran=0, $tahun=0, $triwulan='')
+	{
+		$this->mrealisasi_sasaran->save_analisis_triwulan();
+
+		redirect('skpd/realisasi_sasaran/analisis_sasaran_triwulan/'.$id_sasaran.'/'.$tahun.'/'.$triwulan);
 	}
 		
 }
