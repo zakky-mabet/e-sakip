@@ -852,9 +852,19 @@ class Kgiatan extends Skpd_model
 				$this->db->delete('kegiatan_program', array('id_kegiatan' => $param));
 				$this->db->delete('anggaran_kegiatan', array('id_kegiatan' => $param));
 				$this->db->delete('penanggung_jawab_kegiatan', array('id_kegiatan' => $param));
+				$this->db->delete('output_kegiatan_program', array('id_kegiatan' => $param));
+				$this->db->delete('realisasi_anggaran_kegiatan', array('id_kegiatan' => $param));
 				$response['status'] ='success';
 				break;
-			
+			case 'output-kegiatan':
+				$this->db->delete('output_kegiatan_program', array('id_output_kegiatan_program' => $param));
+				$this->db->delete('pk_output_kegiatan', array('id_output_kegiatan_program' => $param));
+				$this->db->delete('pk_output_kegiatan_perubahan', array('id_output_kegiatan_program' => $param));
+				$this->db->delete('realisasi_output_kegiatan', array('id_output_kegiatan_program' => $param));
+				$this->db->delete('rkt_output_kegiatan', array('id_output_kegiatan_program' => $param));
+				$this->db->delete('target_output', array('id_output_kegiatan_program' => $param));
+				$response['status'] ='success';
+				break;
 			default:
 				$response['status'] ='failed';
 				break;

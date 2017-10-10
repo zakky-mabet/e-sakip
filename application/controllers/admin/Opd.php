@@ -22,6 +22,8 @@ class Opd extends Admin_panel
 		$this->page = $this->input->get('page');
 
 		$this->load->model(array('mopd'));
+
+		$this->load->js(base_url("assets/admin/appjs/opd.js"));
 	}
 
 	public function index()
@@ -124,6 +126,10 @@ class Opd extends Admin_panel
 		}
 	}
 
+	public function delete($param = 0)
+	{
+		$this->mopd->deleteAll($param);
+	}
 }
 
 /* End of file Opd.php */

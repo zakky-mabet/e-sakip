@@ -952,10 +952,20 @@ class Mprogram extends Skpd_model
 		{
 			case 'program':
 				$this->db->delete('program', array('id_program' => $param));
+				$this->db->delete('kegiatan_program', array('id_program' => $param));
+				$this->db->delete('indikator_kinerja_program', array('id_program' => $param));
+				$this->db->delete('pk_anggaran_kegiatan', array('id_program' => $param));
+				$this->db->delete('pk_anggaran_kegiatan_perubahan', array('id_program' => $param));
+				$this->db->delete('sumber_anggaran_program', array('id_program' => $param));
 				$respon['status'] = 'success';
 				break;
 			case 'indikator':
 				$this->db->delete('indikator_kinerja_program', array('id_indikator_kinerja_program' => $param));
+				$this->db->delete('pk_indikator_program', array('id_indikator_kinerja_program' => $param));
+				$this->db->delete('pk_indikator_program_perubahan', array('id_indikator_kinerja_program' => $param));
+				$this->db->delete('realisasi_indikator_program', array('id_indikator_kinerja_program' => $param));
+				$this->db->delete('rkt_indikator_program', array('id_indikator_kinerja_program' => $param));
+				$this->db->delete('target_indikator_kinerja_program', array('id_indikator_kinerja_program' => $param));
 				$respon['status'] = 'success';
 				break;
 			default:

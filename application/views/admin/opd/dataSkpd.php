@@ -37,7 +37,7 @@
 								<a href="<?php echo site_url("admin/opd/update/{$row->ID}") ?>" class="btn btn-default btn-xs">
 									<i class="fa fa-pencil"></i>
 								</a>
-								<a href="" class="btn btn-danger btn-xs">
+								<a href="javascript:void(0)" data-delete="opd" data-id="<?php echo $row->ID ?>" class="btn btn-danger btn-xs">
 									<i class="fa fa-trash-o"></i>
 								</a>
 							</td>
@@ -51,4 +51,32 @@
 		</div>
 	</div>
 	<?php echo form_close(); ?>
+</div>
+
+
+<div class="modal" id="modal-delete" tabindex="-1" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-sm modal-danger">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title"><i class="fa fa-info-circle"></i> Hapus!</h4>
+				<span>Hapus data ini dari database?</span>
+			</div>
+			<div class="modal-body">
+				<p>Menghapus OPD menyebabkan dokumen lakip akan ikut terhapus!</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Batalkan</button>
+				<a href="#" id="btn-yes" class="btn btn-outline">Tetap Hapus</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="delete-progress" tabindex="-1" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-sm">
+		<h4 class="modal-title text-white">
+			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+			<strong> Sedang Menghapus...</strong>
+		</h4>
+	</div>
 </div>

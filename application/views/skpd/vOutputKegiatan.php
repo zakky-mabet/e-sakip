@@ -41,7 +41,7 @@
 					            foreach( $this->kgiatan->getOutputByKegiatanProgram($kegiatan->id_kegiatan) as $keyOutput => $output) :
 					            	echo form_hidden("update[ID][]", $output->id_output_kegiatan_program);
 					            ?>
-	                        	<tr>
+	                        	<tr class="dt-<?php echo $output->id_output_kegiatan_program; ?>">
 	                        		<td><?php echo ++$keyOutput ?>.</td>
 	                        		<td>
 	                        		<?php for($tahun = $this->tjuan->periode_awal; $tahun <= $this->tjuan->periode_akhir; $tahun++) : ?>
@@ -64,6 +64,16 @@
 	                        			</select>
 	                        		</td>
 	                        		<td class="text-center">
+										<a href="#" class="btn btn-default" title="Hapus kegiatan ini?" 
+										id="btn-delete"
+										data-id="<?php echo $output->id_output_kegiatan_program; ?>"
+										data-key="delete-output-kegiatan"
+										data-remove="tr.dt-<?php echo $output->id_output_kegiatan_program; ?>">
+											<i class="fa fa-times"></i>
+										</a>
+										<?php if( $cekLoop) : 
+										$cekLoop = false;
+										?>
 										<button id="btn-add-indikator-program" type="button" class="btn btn-default" 
 										data-id="<?php echo $kegiatan->id_kegiatan; ?>" 
 										data-parent="<?php echo $key ?>"
@@ -71,6 +81,7 @@
 										title="Tambah Form">
 											<i class="fa fa-plus"></i>
 										</button>
+									<?php endif; ?>
 	                        		</td>
 	                        	</tr>
 					            <?php

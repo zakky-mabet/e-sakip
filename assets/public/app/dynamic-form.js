@@ -230,6 +230,27 @@ $(document).ready( function()
 					});
 				});
 			break;
+			case 'delete-output-kegiatan':
+				$('a#btn-yes').on('click', function() 
+				{
+					$.post(base_url + '/kegiatan/delete/' + ID + '/output-kegiatan', function(result) 
+					{
+						$('#modal-delete').modal('hide');
+							if( result.status === 'success')
+							{
+								$(remove).addClass('bg-red').fadeOut(300, function() {
+									$(this).remove();
+								});
+							} else {
+								alert("Terjadi kesalahan saat menhapus data!");
+							}
+						$(document).ajaxComplete(function(e, xhr, opt)
+						{
+
+						});
+					});
+				});
+			break;
 			case 'delete-sasaran':
 				$('a#btn-yes').on('click', function() 
 				{

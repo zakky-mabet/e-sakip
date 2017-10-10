@@ -84,6 +84,11 @@ class Mopd extends CI_Model
 			);
 		}
 	}
+
+	public function deleteAll($param = 0)
+	{
+		
+	}
 }
 
 /* End of file Mopd.php */
