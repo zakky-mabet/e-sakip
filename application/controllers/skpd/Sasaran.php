@@ -64,7 +64,7 @@ class Sasaran extends Skpd
 	{
 		$this->msasaran->delete_akar($param);
 
-		redirect("skpd/sasaran");
+		redirect("skpd/sasaran/");
 	}
 
 	public function indikator_sasaran()
@@ -121,9 +121,9 @@ class Sasaran extends Skpd
 	public function permasalahan_update($param = 0)
 	{	
 		$this->msasaran->permasalahan_update();
-		// echo '<pre>';
-		// print_r($this->input->post());
-		redirect("skpd/sasaran/permasalahan/".$param);	
+		 echo '<pre>';
+		 print_r($this->input->post());
+		//redirect("skpd/sasaran/permasalahan/".$param);	
 	}
 
 }

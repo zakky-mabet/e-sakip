@@ -76,7 +76,7 @@
 	                        		<td class="text-center">
 
 	                        		<!-- permasalahan -->
-	                        			<a target="_blank" href="<?php echo base_url('skpd/sasaran/permasalahan/'.$tujuan->id_sasaran) ?>" data-toggle="tooltip" data-placement="top" title="Permasalahan" style="margin-top: 40px" class="btn btn-warning" type="button"><i class="fa fa-warning"></i></a>
+	                        			<a href="<?php echo base_url('skpd/sasaran/permasalahan/'.$tujuan->id_sasaran) ?>" data-toggle="tooltip" data-placement="top" title="Permasalahan" style="margin-top: 40px" class="btn btn-warning" type="button"><i class="fa fa-warning"></i></a>
 
 		                        			
 	                        		</td>

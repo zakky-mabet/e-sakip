@@ -1,8 +1,6 @@
 	$(document).ready( function() 
 	{
 
-
-
 	$('button#btn-add-sasaran').on('click', function()
 	{
 		var key = $(this).data('key');
@@ -123,6 +121,7 @@
         $('a#btn-yes').attr('href', base_url + '/sasaran/delete_akar/' + $(this).data('id'));
     });
 
+	 
 	
 	});
 

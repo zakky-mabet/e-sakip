@@ -40,40 +40,34 @@
 					             * @var string
 					             **/
 					            foreach ($this->mformulasi->getIndikatorSasaranDANformulasi($sasaran->id_sasaran) as $key => $indikator) : 
-
 					            	echo form_hidden("update[ID][]", $indikator->id_formulasi_sasaran);?>
-					            
 	                        	<tr>
 	                        		<td  class="text-center" ><?php echo  ++$key ?></td>
 	                        		<td  colspan="6" rowspan="2"><?php echo $indikator->deskripsi ?></td>
 	                        		
 		                        	<td colspan="" class="text-center"><?php echo $this->mformulasi->getsatuan($indikator->id_satuan)->nama ?></td>
-		          
-									<td class="text-center"> <?php if ($indikator->IKU=='yes'):  ?> <i class="fa fa-check "></i><?php endif ?></td>
-									
-	                        	</tr>
-	                        	<tr>
-
-	                        		<td class="text-center" rowspan="4"></td>
-	                        		
-	                        	</tr>
-	                        	<tr>
-	                        		<td   style="margin-top: 300px;  vertical-align:middle; font-weight: 600;" class="text-center bg-red"  ><span >Alasan</span></td>
-	                        		<td colspan="7"><textarea name="update[alasan][<?php echo $indikator->id_formulasi_sasaran ?>]" class="form-control"><?php echo $indikator->alasan ?></textarea></td>
-	                        	
-	                        		
-	                        			                        	
-	                        		
-	                        	</tr>
-	                        	<tr>
-	                        		<td style="margin-top: 300px;  vertical-align:middle;font-weight: 600;" class="text-center bg-yellow" ><b>Pengukuran</b></td>
-		                        	<td colspan="7" > <textarea  name="update[cara_pengukuran][<?php echo $indikator->id_formulasi_sasaran ?>]" class="form-control summernote"><?php echo $indikator->cara_pengukuran ?></textarea></td>
 		                        	
+									<td class="text-center"> <?php if ($indikator->IKU=='yes'):  ?> <i class="fa fa-check "></i><?php endif ?></td>
+	                        	</tr>
+	                        	<tr>
+	                        		<td class="text-center" rowspan="4"></td>
+	                        	</tr>
+	                        	<tr>
+	                        		<td style="margin-top: 300px;  vertical-align:middle; font-weight: 600;" class="text-center bg-red"  ><span >Alasan</span></td>
+	                        		<td colspan="7"><textarea name="update[alasan][<?php echo $indikator->id_formulasi_sasaran ?>]" class="form-control"><?php echo $indikator->alasan ?></textarea>
+	                        	</td>
+	                        	</tr>
+	                        	<tr>
+	                        		<td style="margin-top: 300px;  vertical-align:middle; font-weight: 600;" class="text-center bg-yellow" ><b>Pengukuran</b></td>
+		                        	<td colspan="7"> 
+		                        		<textarea  name="update[cara_pengukuran][<?php echo $indikator->id_formulasi_sasaran ?>]" class="form-control summernote"><?php echo $indikator->cara_pengukuran ?></textarea>
+		                        	</td>
 	                        	</tr>
 	                        	<tr>
 	                        		<td style="margin-top: 300px;  vertical-align:middle;font-weight: 600;" class="text-center bg-green" ><b>Keterangan</b></td>
-		                        	<td colspan="7" class="text-center" colspan="2"> <textarea name="update[keterangan][<?php echo $indikator->id_formulasi_sasaran ?>]" class="form-control"><?php echo $indikator->keterangan ?></textarea></td>
-		                        	
+		                        	<td colspan="7" class="text-center" colspan="2"> 
+		                        		<textarea name="update[keterangan][<?php echo $indikator->id_formulasi_sasaran ?>]" class="form-control"><?php echo $indikator->keterangan ?></textarea>
+		                        	</td>
 	                        	</tr>
 	                        <?php endforeach ?>
 	                        </tbody>

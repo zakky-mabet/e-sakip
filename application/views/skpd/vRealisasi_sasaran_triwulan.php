@@ -50,7 +50,7 @@
 							<tr>
 								<th style="vertical-align: middle;" rowspan="1" width="50" class="text-center"><?php echo $tahun ?></th>
 								<td colspan="8" width="100" style="vertical-align: middle; color: black" class="bg-silver" ><strong>Sasaran :</strong> <?php echo $sasaran->deskripsi ?></td>
-							
+								
 							</tr>
 							<tr>
 								<th style="vertical-align: middle;" class="text-center" width="10">No.</th>
@@ -79,7 +79,7 @@
 								<td rowspan="5"   style="vertical-align: middle;"  class="text-center"> <?php if ($indikator->IKU=='yes'):  ?> <i class="fa fa-check "></i>	<?php endif ?>  </td>
 								
 								<td class="text-center" width="10" style="vertical-align: middle;"><b><small>Triwulan Tahun <?php echo $tahun ?></small></b></td>
-								<td class="text-center" width="15" style="vertical-align: middle;"><b><small>Target Triwulan </small></b></td>
+								<td class="text-center" width="15" style="vertical-align: middle;"><b><small>Target PK Triwulan </small></b></td>
 								<td class="text-center" width="40" style="vertical-align: middle;"><b><small>Realisasi Triwulan Tahun <?php echo $tahun ?> </small></b></td>
 								<td class="text-center" width="50" style="vertical-align: middle;"><b><small>Capaian % (Realisasi/Target) x 100</small></b></td>
 								<td class="text-center" width="50" style="vertical-align: middle;"><b><small>Analisis Sasaran Tahun <?php echo $tahun ?> Triwulan</small></b></td>
@@ -94,7 +94,7 @@
 								</td>					
 								<td style="vertical-align: middle;"  class="text-center">
 								
-									<?php echo $value->nilai_target_triwulan1.'?' ?>
+									<?php echo $value->nilai_target_triwulan1 ?>
 								</td>
 								<td >
 								<?php echo form_hidden("update[ID][]", $value->id_pk_indikator_target_triwulan); ?>		
@@ -104,16 +104,16 @@
 									<input type="text" name="update[capaian1][<?php echo $value->id_pk_indikator_target_triwulan ?>]" value="<?php echo $value->capaian1 ?>" class="form-control" placeholder="Capaian Triwulan 1">
 								</td>
 								<td>
-									<button data-toggle="tooltip" data-placement="top" title="Analisis Pencapaian Sasaran Tahun <?php $value->tahun_triwulan ?> Triwulan 1" class="btn btn-sm btn-danger get-modal-analisis-capaian" data-id-sasaran="" data-tahun-sasaran=" " type="button"><i class="fa fa-pencil"></i> Analisis </button>
+									<a href="<?php echo base_url('skpd/realisasi_sasaran/analisis_sasaran_triwulan/'.$sasaran->id_sasaran.'/'.$tahun.'/T1') ?>" data-toggle="tooltip" data-placement="top" title="Analisis Pencapaian Sasaran Tahun <?php echo $tahun ?> Triwulan 1" class="btn btn-sm btn-danger"  type="button"><i class="fa fa-pencil"></i> Analisis </a>
 								</td>
-							</tr>
+							</tr> 
 
 							<tr>
 								<td  style="vertical-align: middle;" class="text-center" >		
 									Triwulan 2
 								</td>					
 								<td  style="vertical-align: middle;" class="text-center">		
-									<?php echo $value->nilai_target_triwulan2.'?' ?>
+									<?php echo $value->nilai_target_triwulan2 ?>
 								</td>
 								<td >		
 									<input type="text" name="update[realisasi_triwulan2][<?php echo $value->id_pk_indikator_target_triwulan ?>]" value="<?php echo $value->realisasi_triwulan2 ?>" class="form-control" placeholder=" Realisasi Triwulan 2">
@@ -122,7 +122,7 @@
 									<input type="text" name="update[capaian2][<?php echo $value->id_pk_indikator_target_triwulan ?>]" value="<?php echo $value->capaian2 ?>" class="form-control" placeholder="Capaian Triwulan 2">
 								</td>
 								<td>
-									<button data-toggle="tooltip" data-placement="top" title="Analisis Pencapaian Sasaran Tahun <?php $value->tahun_triwulan ?> Triwulan 2" class="btn btn-sm btn-danger get-modal-analisis-capaian" data-id-sasaran="" data-tahun-sasaran=" " type="button"><i class="fa fa-pencil"></i> Analisis </button>
+									<a href="<?php echo base_url('skpd/realisasi_sasaran/analisis_sasaran_triwulan/'.$sasaran->id_sasaran.'/'.$tahun.'/T2') ?>" data-toggle="tooltip" data-placement="top" title="Analisis Pencapaian Sasaran Tahun <?php echo $tahun ?> Triwulan 2" class="btn btn-sm btn-danger"  type="button"><i class="fa fa-pencil"></i> Analisis </a>
 								</td>
 							</tr>
 
@@ -130,7 +130,7 @@
 								<td  style="vertical-align: middle;" class="text-center" >		
 									Triwulan 3
 								</td>					
-								<td style="vertical-align: middle;" class="text-center"><?php echo $value->nilai_target_triwulan3.'?' ?></td>
+								<td style="vertical-align: middle;" class="text-center"><?php echo $value->nilai_target_triwulan3 ?></td>
 								<td >		
 									<input type="text" name="update[realisasi_triwulan3][<?php echo $value->id_pk_indikator_target_triwulan ?>]" value="<?php echo $value->realisasi_triwulan3 ?>" class="form-control" placeholder="Realisasi Triwulan 3">
 								</td>
@@ -138,7 +138,7 @@
 									<input type="text" name="update[capaian3][<?php echo $value->id_pk_indikator_target_triwulan ?>]" value="<?php echo $value->capaian3 ?>" class="form-control" placeholder="Capaian Triwulan 3">
 								</td>
 								<td>
-									<button data-toggle="tooltip" data-placement="top" title="Analisis Pencapaian Sasaran Tahun <?php $value->tahun_triwulan ?> Triwulan 3" class="btn btn-sm btn-danger get-modal-analisis-capaian" data-id-sasaran="" data-tahun-sasaran=" " type="button"><i class="fa fa-pencil"></i> Analisis </button>
+									<a href="<?php echo base_url('skpd/realisasi_sasaran/analisis_sasaran_triwulan/'.$sasaran->id_sasaran.'/'.$tahun.'/T3') ?>" data-toggle="tooltip" data-placement="top" title="Analisis Pencapaian Sasaran Tahun <?php echo $tahun ?> Triwulan 3" class="btn btn-sm btn-danger"  type="button"><i class="fa fa-pencil"></i> Analisis </a>
 								</td>
 							</tr>
 
@@ -147,7 +147,7 @@
 									Triwulan 4
 								</td>					
 								<td style="vertical-align: middle;"  class="text-center">		
-									<?php echo $value->nilai_target_triwulan4.'?' ?>
+									<?php echo $value->nilai_target_triwulan4 ?>
 								</td>
 								<td >		
 									<input type="text" name="update[realisasi_triwulan4][<?php echo $value->id_pk_indikator_target_triwulan ?>]" value="<?php echo $value->realisasi_triwulan4 ?>" class="form-control" placeholder="Realisasi Triwulan 4">
@@ -156,7 +156,7 @@
 									<input type="text" name="update[capaian4][<?php echo $value->id_pk_indikator_target_triwulan ?>]" value="<?php echo $value->capaian4 ?>" class="form-control" placeholder="Capaian Triwulan 4">
 								</td>
 								<td>
-									<button data-toggle="tooltip" data-placement="top" title="Analisis Pencapaian Sasaran Tahun <?php $value->tahun_triwulan ?> Triwulan 4" class="btn btn-sm btn-danger get-modal-analisis-capaian" data-id-sasaran="" data-tahun-sasaran=" " type="button"><i class="fa fa-pencil"></i> Analisis </button>
+									<a href="<?php echo base_url('skpd/realisasi_sasaran/analisis_sasaran_triwulan/'.$sasaran->id_sasaran.'/'.$tahun.'/T4') ?>" data-toggle="tooltip" data-placement="top" title="Analisis Pencapaian Sasaran Tahun <?php echo $tahun ?> Triwulan 4" class="btn btn-sm btn-danger"  type="button"><i class="fa fa-pencil"></i> Analisis </a>
 								</td>
 							</tr> 
 

@@ -63,7 +63,6 @@
 						</tr>
 					<?php foreach ($this->mrealisasi_sasaran->get_sasaran_kegiatan($program->id_program, $tahun) as $key => $kegiatan): 
 					?>			
-							
 						<tr>
 							 <td class="text-center" style="vertical-align: middle;"><?php echo ++$key ?></td>
 							 <td style="vertical-align: middle;"><?php echo $kegiatan->deskripsi ?></td>
@@ -75,8 +74,8 @@
 						<tr>
 							<td class="text-center" style="vertical-align: middle;">Output</td>
 							<td colspan="3">
-								<?php echo form_hidden("update[ID][]", $kegiatan->id_anggaran_kegiatan);?>
-								<textarea class="form-control" name="update[output][<?php echo $kegiatan->id_anggaran_kegiatan ?>]" ><?php echo $kegiatan->output ?></textarea>
+								<?php echo form_hidden("update[ID][]", $kegiatan->id_pk_anggaran_kegiatan_perubahan);?>
+								<textarea class="form-control" name="update[output][<?php echo $kegiatan->id_pk_anggaran_kegiatan_perubahan ?>]" ><?php echo $kegiatan->output ?></textarea>
 							</td>
 				 		</tr>
 
