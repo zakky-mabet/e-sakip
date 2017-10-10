@@ -16,33 +16,23 @@
             <?php for($tahun = $this->tjuan->periode_awal; $tahun <= $this->tjuan->periode_akhir; $tahun++) : ?>
 				<div class="tab-pane <?php if($this->tahun==$tahun) echo 'active'; ?>" id="tab-<?php echo $tahun; ?>">
 			        <ul class="timeline">
-			            <?php 
-			            /**
-			             * Loop Tujuan
-			             *
-			             * @var string
-			             **/
-			            foreach(  $this->tjuan->getTujuanLogin() as $keySasaran => $tujuan) : ?>
-			            <li class="time-label">
-			                  <span class="bg-gray">Tujuan</span><span class="bg-blue"> <small><?php echo $tujuan->deskripsi ?></small></span>
-			            </li>
-			            <?php 
-			            /**
-			             * Loop Program
-			             *
-			             * @var string
-			             **/
-			            foreach(  $this->tjuan->getSasaranByTujuan($tujuan->id_tujuan) as $key => $sasaran) : ?>
+				<?php  
+				/**
+				 * Loop All Program
+				 *
+				 * @var string
+				 **/
+				foreach($this->mprogram->getProgramByLogin() as $keProgram => $program) :
+				?>
 			            <li>
 					<table class="table table-bordered bg-white">
 						<thead class="bg-blue">
-							<tr>
-								<th rowspan="1" width="50"><?php echo $tahun ?></th>
-								<td colspan="4" width="100" valign="middle" class="bg-silver" style="color: black"><strong>Sasaran :</strong> <?php echo $sasaran->deskripsi ?></td>
+							<tr style="color: black" class="bg-silver">
+								<td colspan="6" width="100"><strong>Program :</strong> <?php echo $program->deskripsi ?></td>
 							</tr>
 							<tr>
 								<th class="text-center">No.</th>
-								<th class="text-center">Program</th>
+								<th class="text-center">Kegiatan</th>
 								<th class="text-center" width="180">Anggaran Renstra</th>
 								<th class="text-center" width="180">Anggaran RKT</th>
 								<th class="text-center" width="250">Sebab Perubahan</th>
@@ -55,17 +45,17 @@
 						 *
 						 * @var string
 						 **/
-						foreach( $this->mprogram->getProgramBySasaran($sasaran->id_sasaran) as $keyProgram => $program) :
+						 foreach( $this->kgiatan->getKegiatanProgramByProgram($program->id_program) as $keyKegiatan => $kegiatan) :
 							$anggaran = $this->mprogram->getTotalAnggaranKegiatanByProgramTahun($program->id_program, $tahun);
-							$rkt = $this->mprogram->getRktAnggaranKegiatanByProgramTahun($program->id_program, $tahun);
+							$rkt = $this->mprogram->getRktAnggaranKegiatanByProgramTahun($kegiatan->id_kegiatan, $tahun);
 						?>
 							<tr>
-								<td><?php echo ++$keyProgram ?>.</td>
+								<td><?php echo ++$keyKegiatan ?>.</td>
 								<td><?php echo $program->deskripsi; ?></td>
 								<td class="text-center">Rp. <?php echo @number_format($anggaran) ?></td>
-								<td><input type="text" name="anggaran[<?php echo @$rkt->id_anggaran_kegiatan ?>]" value="<?php echo @number_format(@$rkt->anggaran_rkt) ?>" class="form-control inputmask"></td>
+								<td><input type="text" name="anggaran[<?php echo @$rkt->id_anggaran_kegiatan ?>]" value="<?php echo @number_format(@$rkt->anggaran_rkt) ?>" class="form-control inputmask" <?php if(!$rkt) echo 'disabled' ?>></td>
 								<td>
-									<textarea name="sebab[<?php echo @$rkt->id_anggaran_kegiatan ?>]" rows="2" class="form-control"><?php echo @$rkt->sebab ?></textarea>
+									<textarea name="sebab[<?php echo @$rkt->id_anggaran_kegiatan ?>]" rows="2" class="form-control" <?php if(!$rkt) echo 'disabled' ?>><?php echo @$rkt->sebab ?></textarea>
 								</td>
 							</tr>
 						<?php endforeach; ?>
@@ -74,8 +64,6 @@
 						</li>
 				<?php  
 				/* End Program */
-				endforeach;
-				/* End Tujuan */
 				endforeach;
 				?>
 					</ul>

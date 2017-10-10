@@ -71,105 +71,104 @@
                 </table>
             </div>
         </div>
-        <div class="box box-primary">
-            <div class="box-header with-border bg-blue">
-                <h3 class="box-title">Alur Pengisian Data</h3>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i> </button>
-                </div>
-            </div>
-            <div class="box-body" style="padding-left: 12px;">
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">1</span>
-                    <span>Visi</span>
-                </a>
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">2</span>
-                    <span>Misi</span>
-                </a>
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">3</span>
-                    <span>Tujuan</span>
-                </a>
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">4</span>
-                    <span>Sasaran</span>
-                </a>
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">5</span>
-                    <span>Indikator Kinerja dan Sasaran</span>
-                </a>
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">6</span>
-                    <span>Target</span>
-                </a>
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">7</span>
-                    <span>Program dan Anggaran</span>
-                </a>
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">8</span>
-                    <span>Kegiatan</span>
-                </a>
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">9</span>
-                    <span>Anggaran Kegiatan</span>
-                </a>
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">10</span>
-                    <span>Kegiatan</span>
-                </a>
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">11</span>
-                    <span>Target</span>
-                </a>
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">12</span>
-                    <span>Program dan Anggaran</span>
-                </a>
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">13</span>
-                    <span>Kegiatan</span>
-                </a>
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">14</span>
-                    <span>Anggaran Kegiatan</span>
-                </a>
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">15</span>
-                    <span>Kegiatan</span>
-                </a>
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">16</span>
-                    <span>Anggaran Kegiatan</span>
-                </a>
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">17</span>
-                    <span>Kegiatan</span>
-                </a>
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">18</span>
-                    <span>Target</span>
-                </a>
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">19</span>
-                    <span>Program dan Anggaran</span>
-                </a>
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">20</span>
-                    <span>Kegiatan</span>
-                </a>
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">21</span>
-                    <span>Anggaran Kegiatan</span>
-                </a>
-                <a class="csurat hvr-pulse-grow" href="">
-                    <span class="number">22</span>
-                    <span>Kegiatan</span>
-                </a>
-            </div>
-
+<!--         <div class="box box-primary">
+    <div class="box-header with-border bg-blue">
+        <h3 class="box-title">Alur Pengisian Data</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i> </button>
         </div>
+    </div>
+    <div class="box-body" style="padding-left: 12px;">
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">1</span>
+            <span>Visi</span>
+        </a>
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">2</span>
+            <span>Misi</span>
+        </a>
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">3</span>
+            <span>Tujuan</span>
+        </a>
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">4</span>
+            <span>Sasaran</span>
+        </a>
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">5</span>
+            <span>Indikator Kinerja dan Sasaran</span>
+        </a>
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">6</span>
+            <span>Target</span>
+        </a>
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">7</span>
+            <span>Program dan Anggaran</span>
+        </a>
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">8</span>
+            <span>Kegiatan</span>
+        </a>
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">9</span>
+            <span>Anggaran Kegiatan</span>
+        </a>
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">10</span>
+            <span>Kegiatan</span>
+        </a>
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">11</span>
+            <span>Target</span>
+        </a>
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">12</span>
+            <span>Program dan Anggaran</span>
+        </a>
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">13</span>
+            <span>Kegiatan</span>
+        </a>
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">14</span>
+            <span>Anggaran Kegiatan</span>
+        </a>
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">15</span>
+            <span>Kegiatan</span>
+        </a>
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">16</span>
+            <span>Anggaran Kegiatan</span>
+        </a>
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">17</span>
+            <span>Kegiatan</span>
+        </a>
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">18</span>
+            <span>Target</span>
+        </a>
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">19</span>
+            <span>Program dan Anggaran</span>
+        </a>
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">20</span>
+            <span>Kegiatan</span>
+        </a>
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">21</span>
+            <span>Anggaran Kegiatan</span>
+        </a>
+        <a class="csurat hvr-pulse-grow" href="">
+            <span class="number">22</span>
+            <span>Kegiatan</span>
+        </a>
+    </div>
+</div> -->
     </div>
 
 
