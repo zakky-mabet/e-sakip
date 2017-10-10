@@ -201,7 +201,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </a>
           <ul class="treeview-menu">
             <li class="<?php echo active_link_method('index','pk_indikator_sasaran_perubahan'); ?>">
-                <a href="<?php echo base_url("skpd/pk_indikator_sasaran_perubahan"); ?>"> Target RKT Idikator Sasaran</a>
+                <a href="<?php echo base_url("skpd/pk_indikator_sasaran_perubahan"); ?>"> Target PK Idikator Sasaran</a>
             </li>
             <li class="<?php echo active_link_method('index','pkperubahanprogram').active_link_method('triwulan','pkperubahanprogram'); ?>">
                 <a href="<?php echo base_url("skpd/pkperubahanprogram"); ?>"><small>Target PK Perubahan Indikator Program</small></a>

@@ -7,7 +7,6 @@ class Home extends Skpd {
 	{
 		parent::__construct();
 
-		$this->breadcrumbs->unshift(0, 'Home', "administrator/home");
 	}
 
 	public function index() 
@@ -25,6 +24,8 @@ class Home extends Skpd {
 
 	public function cascading()
 	{
+		$this->breadcrumbs->unshift(2, 'Cascading', "administrator/home");
+
 		$this->page_title->push('Cascading', ' Alur Pengisian Data');
 
 		$this->data = array(
@@ -33,6 +34,6 @@ class Home extends Skpd {
 			'page_title' => $this->page_title->show()
 		);
 
-		$this->template->view('skpd/v_home', $this->data);
+		$this->template->view('skpd/cascading', $this->data);
 	}
 }

@@ -42,7 +42,7 @@
 							</tr>
 							<tr>
 								<th class="text-center">No.</th>
-								<th class="text-center">Kegiatan</th>
+								<th class="text-center">Program</th>
 								<th class="text-center" width="180">Anggaran Renstra</th>
 								<th class="text-center" width="180">Anggaran RKT</th>
 								<th class="text-center" width="250">Sebab Perubahan</th>
