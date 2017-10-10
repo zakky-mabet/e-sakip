@@ -74,10 +74,13 @@ class Skpd_model extends MY_Model
 		))->row();
 	}
 
-	public function getRealisasiIndikatorSasaran($target = 0)
+	public function getRealisasiIndikatorSasaran($target = 0, $tahun = 0)
 	{
+		$this->db->join('target_sasaran', 'target_sasaran.id_target_sasaran = realisasi_indikator_sasaran.id_target_sasaran', 'left');
+
 		return $this->db->get_where('realisasi_indikator_sasaran', array(
-			'id_target_sasaran' => $target
+			'realisasi_indikator_sasaran.id_target_sasaran' => $target,
+			'target_sasaran.tahunan' => $tahun
 		))->row();
 	}
 
@@ -86,6 +89,14 @@ class Skpd_model extends MY_Model
 		$targetSasaran = $this->getTargetSasaranBySasaranTahun($indikator, $tahun);
 
 		return $this->db->get_where('pk_indikator_target', array('id_indikator_target' => $targetSasaran->id_target_sasaran))->row();
+	}
+
+	public function getIndikatorTargetTriwulanByIndikatorSasaran($indikator = 0, $tahun = 0)
+	{
+		return 	$this->db->get_where('pk_indikator_target_triwulan', array(
+					'id_indikator_sasaran' => $indikator,
+					'tahun_triwulan' => $tahun
+				))->row();
 	}
 }
 

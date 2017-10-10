@@ -41,7 +41,7 @@
 				<div class="col-md-12 text-center">
 					<p><strong>Rencana Kinerja Tahunan (Tahun <?php echo $this->tahun ?>)</strong></p>
 				</div>
-				<table class="mini-font table table-responsive table-bordered">
+				<table class="table table-responsive table-bordered">
 					<thead class="bg-blue">
 						<tr>
 							<th class="text-center" width="50" valign="top">No.</th>

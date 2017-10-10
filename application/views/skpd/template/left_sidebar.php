@@ -262,7 +262,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li class="<?php echo active_link_method('perubahan','pk'); ?>">
                 <a href="<?php echo base_url('skpd/report/pk/perubahan'); ?>"> Perjanjian Kinerja Perubahan</a>
             </li>
-            <li class="<?php echo active_link_method('capaian','iku'); ?>" style="text-decoration: line-through;">
+            <li class="<?php echo active_link_method('capaian','iku'); ?>">
                 <a href="<?php echo base_url("skpd/report/iku/capaian"); ?>"> Capaian Indikator Kinerja Utama</a>
             </li>
             <li class="<?php echo active_link_method('i;ndex','visi'); ?>" style="text-decoration: line-through;">
