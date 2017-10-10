@@ -37,7 +37,7 @@ class Tjuan extends Skpd_model
 
 					$this->template->alert(
 						' Data berhasil disimpan.', 
-						array('type' => 'success','icon' => 'warning')
+						array('type' => 'success','icon' => 'check')
 					);
 				}
 			}

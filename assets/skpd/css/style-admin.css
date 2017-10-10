@@ -24,20 +24,6 @@ table.mini-font tfoot td {
    vertical-align: middle;
 }
 
-/* table.mini-font tbody tr:nth-child(2) td,
-table.mini-font tbody tr:nth-child(3) td,
-table.mini-font tbody tr:nth-child(4) td{
-  border-top: 0; 
-}
-table.tb-gabungan tbody tr:nth-child(1) td,
-table.tb-gabungan tbody tr:nth-child(2) td,
-table.tb-gabungan tbody tr:nth-child(3) td,
-table.tb-gabungan tbody tr:nth-child(4) td,
-table.tb-gabungan tbody tr:nth-child(5) td,
-table.tb-gabungan tbody tr:nth-child(6) td{
-  border-top: 0; 
-} */
-
 /*  ADMIN LTE */
     .content-wrapper { background: #F4F5F7 }
     * { font-family: 'Arial', sans-serif; font-size: 13px; }
@@ -267,3 +253,165 @@ div.box-select-category {
   right: 0;
   clip: rect(-6px, 22px, 14px, 10px);
 }
+
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+  border-right:0; 
+  box-shadow:0 0 0; 
+  border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+
+    /* CASCADING */
+    .wrap_dashboard {
+      float:left;
+    }
+    .flow-wrapper {
+      width: 100%;
+      float:left;
+      min-height:42px;
+      margin-bottom:20px;
+    }
+
+    div.flow > a {
+      font-size: 7pt;
+      font-weight: bold;
+    }
+    #row1 > .flow + .flow, 
+    #row3 > .flow + .flow, 
+    #row5 > .flow + .flow{
+      margin-left:45px;
+    }
+    #row2 {
+      margin-right:0px;
+    }
+    #row1  > .flow.center:after, 
+    #row3  > .flow.center:after,
+    #row5  > .flow.center:after {
+      content:"";
+      width:80%;
+      height:100%;
+      background:url(../img/dash-img-link-arrow.png) no-repeat;
+      position:absolute;
+      top:6px;
+      right:-65px;
+    }
+    #row2  > .flow.center:after,
+    #row4  > .flow.center:after {
+      content:"";
+      width:80%;
+      height:100%;
+      background:url(../img/dash-img-link-arrow-left.png) no-repeat;
+      position:absolute;
+      top:6px;
+      left:-32px;
+    }
+    #row2  > .flow.last:after,
+    #row4  > .flow.last:after {
+      content:"";
+      position:absolute;
+      width:80% !important;
+      height:100%  !important;
+      background:url(../img/dash-img-link-arrow-left-last.png) no-repeat  !important;
+      bottom:-45px;
+      left:-10px;
+/*       -ms-transform: rotate(0deg); 
+-webkit-transform: rotate(0deg); 
+transform: rotate(0deg); */
+    }
+    #row1  > .flow.last:after,
+    #row3  > .flow.last:after {
+      content:"";
+      position:absolute;
+      width:80% !important;
+      height:100%  !important;
+      background:url(../img/dash-img-link-arrow-right-last.png) no-repeat  !important;
+      bottom:-45px;
+      right:-24px;
+    }
+    
+    #row1 .flow,
+    #row3 .flow,
+    #row5 .flow {
+      float:left;
+    } 
+    #row2 .flow,
+    #row4 .flow {
+      float:right;
+      margin-left:45px;
+    }
+    .flow {
+      position:relative;
+      font-family:Geneva, Arial, Helvetica, sans-serif;
+      text-align:center;
+    }
+    .flow.renstra a {
+      background:#3C8DBC !important;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+    .flow.renstra a:hover {
+      background:#0a93d0 !important;
+    }
+    .flow.rkt a  {
+      background:#D94A38 !important;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+    .flow.rkt a:hover  {
+      background:#cf0343 !important;
+    }
+    .flow.pk a{
+      background:#DB8B0B !important;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+    .flow.pk a:hover{
+      background:#E3A541 !important;
+    }
+    .flow.kinerja a{
+      background:#347a31 !important;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+    .flow.kinerja a:hover{
+      background:#33902f !important;
+    }
+    .flow.pk a, .flow.pk span {
+      color:#ffffff !important;
+    } 
+    .flow span {
+      color: #fff;
+      font-weight: bold;
+      left: 32%;
+      position: absolute;
+      top: 10px;
+      font-size:24px;
+      font-family: 'Archivo Black', sans-serif;
+    } 
+    .flow a {
+      border-radius:50%;
+      -moz-border-radius:50%;
+      -webkit-border-radius:50%;
+      width:95px;
+      height:95px;
+      color:#FFFFFF;
+      font-weight:bold;
+      display:block;
+      padding:40px 10px;
+      text-decoration:none !important;
+    }
+    .flow a:hover {
+      color:#fff;
+    }
+
+    .nopadding{
+    padding-left: 0px;
+    padding-right: 0px;
+    }
+    #footer{
+    background: #1f618d;
+    min-height: 30px;
+    margin-left: 0px;
+    }

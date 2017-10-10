@@ -60,7 +60,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	      	<div  style="padding-bottom: 29px" class="box-body animated <?php if($this->session->flashdata('alert')) echo "shake"; ?>">
 	      	<h4 class="text-center arial" style="padding-bottom: 10px">Silahkan Login</h4>
 	      		<form action="<?php echo current_url(); ?>" method="POST" role="form">
-
+					<?php echo form_hidden('from_url', $this->input->get('from_url')); ?>
 	      			<div class="form-group">
 	      				<label for="username" class="arial">Username / E-Mail :</label>
 	      				<input type="text" name="username" value="<?php echo set_value('username'); ?>" class="form-control input-md" autofocus="true" placeholder="Username / E-Mail">
@@ -74,25 +74,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	      			<button type="submit" class="btn btn-warning btn-block">Masuk</button>
 	      			<br>
 	      		</form>
-
 	      		<div class="social-auth-links text-left">
-	      			<a href="#" class="arial">Lupa password !</a>
+	      			<a href="<?php echo current_url()."?action=lostpassword"; ?>" class="arial">Lupa password !</a>
 	      		</div>
 	      	</div>
 	      
 	      	<?php else : ?>
 	      	<div class="box-alert">
+	      		<?php if($this->session->flashdata('alert') == FALSE) : ?>
 	      		<div class="alert alert-info">
 	      			Silahkan masukkan namaalamat email Anda. Anda akan menerima sebuah tautan untuk membuat password baru melalui email.
 	      		</div>
+	      		<?php else : 
+	      			echo $this->session->flashdata('alert');
+	      		endif;
+	      		?>
 	      	</div>
 	      	<div class="box-body animated ">
-	      		<form action="<?php echo base_url("administrator/auth/forgot"); ?>" method="POST" role="form">
+	      		<form action="<?php echo base_url("login_skpd/forgot"); ?>" method="POST" role="form">
 	      			<div class="form-group">
 	      				<label for="">E-Mail :</label>
-	      				<input type="email" name="email" class="form-control input-lg" autofocus="true">
+	      				<input type="email" name="email" class="form-control input-lg" autofocus="true" required="required">
 	      			</div>
 	      			<button type="submit" class="btn btn-primary btn-block">Dapatkan password baru</button>
+		      		<div class="social-auth-links text-left" style="margin-top: 20px;">
+		      			<a href="<?php echo current_url(); ?>" class="arial">Kembali ke login</a>
+		      		</div>
 	      		</form>
 	      	</div>
 	      	

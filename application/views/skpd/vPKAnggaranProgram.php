@@ -60,16 +60,16 @@
 						 **/
 						foreach( $this->mprogram->getProgramBySasaran($sasaran->id_sasaran) as $keyProgram => $program) :
 							$anggaran = $this->mprogram->getTotalAnggaranKegiatanByProgramTahun($program->id_program, $tahun);
-							$rkt = $this->mprogram->getRktAnggaranKegiatanByProgramTahun($program->id_program, $tahun);
-							$PK = $this->mprogram->getPKAnggaranProgram($program->id_program, $tahun);
+							$rkt = $this->kgiatan->getTotalRktAnggaranKegiatanByProgramTahun($program->id_program, $tahun);
+							$PK = @$this->kgiatan->getTotalPKAnggaranKegiatanByProgramTahun($program->id_program, $tahun);
 						?>
 							<tr>
 								<td><?php echo ++$keyProgram ?>.</td>
 								<td><?php echo $program->deskripsi; ?></td>
 								<td class="text-center"><?php echo @number_format($anggaran) ?></td>
-								<td class="text-center"><?php echo number_format( @$rkt->anggaran_rkt) ?></td>
+								<td class="text-center"><?php echo @number_format(@$rkt) ?></td>
 								<td>
-									<input type="text" name="anggaran[<?php echo @$PK->nilai_anggaran ?>]" class="form-control input sm" value="<?php echo @number_format(@$PK->nilai_anggaran) ?>" disabled>
+									<input type="text" class="form-control input-sm" value="<?php echo @number_format(@$PK); ?>" disabled>
 								</td>
 							</tr>
 						<?php endforeach; ?>

@@ -42,7 +42,7 @@ class Kgiatan extends Skpd_model
 
 					$this->template->alert(
 						' Data berhasil disimpan.', 
-						array('type' => 'success','icon' => 'warning')
+						array('type' => 'success','icon' => 'check')
 					);
 				}
 			}
@@ -60,6 +60,12 @@ class Kgiatan extends Skpd_model
 
 					if( is_array($this->input->post("update[tahun][{$value}]")) )
 					{
+						$this->insertRktAnggaranKegiatan($this->input->post("update[tahun][{$value}]"), $value);
+
+						$this->insertPKAnggaranProgram($this->input->post("update[tahun][{$value}]"), $value);
+
+						$this->insertPKPerubahanAnggaranProgram($this->input->post("update[tahun][{$value}]"), $value);
+
 						foreach ($this->input->post("update[tahun][{$value}]") as $item => $tahun) 
 						{
 							$this->insertAnggaranKegiatan($value, $tahun);
@@ -75,6 +81,42 @@ class Kgiatan extends Skpd_model
 					);
 				}
 			}
+		}
+	}
+
+
+	public function getPKAnggaranProgram($kegiatan = 0, $tahun = 0)
+	{
+		$query = $this->db->get_where('pk_anggaran_kegiatan', array(
+			'id_kegiatan' => $kegiatan,
+			'tahun' => $tahun
+		) );
+		return $query->row();
+	}
+
+	public function insertPKAnggaranProgram($tahun = FALSE, $kegiatan = 0)
+	{
+		if( is_array($tahun) )
+		{
+			foreach ($tahun as $key => $item) 
+			{
+				if( $this->getPKAnggaranProgram($kegiatan, $item) ) 
+				{
+					continue;
+				} else {
+					$this->db->insert('pk_anggaran_kegiatan', array(
+						'id_kegiatan' => $kegiatan,
+						'nilai_anggaran' => null,
+						'sebab'=> null,
+						'tahun' => $item
+					));
+				}
+			}
+
+			$this->template->alert(
+				' Tersimpan! Data berhasil tersimpan.', 
+				array('type' => 'success','icon' => 'check')
+			);
 		}
 	}
 
@@ -198,8 +240,9 @@ class Kgiatan extends Skpd_model
 				$object = array(
 					'id_program' => $program,
 					'deskripsi' => $deskripsi,
+
 					'tahun' => @implode(',', $this->getPeriode()),
-				
+
 				);
 
 				$this->db->insert('kegiatan_program', $object);
@@ -210,6 +253,12 @@ class Kgiatan extends Skpd_model
 				{
 					$this->insertReanggaranKegiatan($this->getPeriode(), $kegiatan);
 
+					$this->insertRktAnggaranKegiatan($this->getPeriode(), $kegiatan);
+
+					$this->insertPKAnggaranProgram($this->getPeriode(), $kegiatan);
+
+					$this->insertPKPerubahanAnggaranProgram($this->getPeriode(), $kegiatan);
+
 					foreach ($this->getPeriode() as $item => $tahun) 
 					{
 						$this->insertAnggaranKegiatan($kegiatan, $tahun);
@@ -217,6 +266,130 @@ class Kgiatan extends Skpd_model
 					}
 				}	
 			}
+		}
+	}
+
+	public function getTotalRktAnggaranKegiatanByProgramTahun($program = 0, $tahun = 0)
+	{
+		$id_kegiatan = array();
+		foreach ($this->getKegiatanProgramByProgram($program) as $key => $value) 
+			$id_kegiatan[] = $value->id_kegiatan;
+
+		if(!$id_kegiatan)
+			return 0;
+
+		$this->db->select('SUM(anggaran_rkt) AS totalanggaran');
+
+		$this->db->where_in('id_kegiatan', $id_kegiatan);
+
+		$this->db->where('tahun', $tahun);
+
+		return $this->db->get('rkt_anggaran_kegiatan')->row('totalanggaran');
+	}
+
+	public function getTotalPKAnggaranKegiatanByProgramTahun($program = 0, $tahun = 0)
+	{
+		$id_kegiatan = array();
+		foreach ($this->getKegiatanProgramByProgram($program) as $key => $value) 
+			$id_kegiatan[] = $value->id_kegiatan;
+
+		if(!$id_kegiatan)
+			return 0;
+
+		$this->db->select('SUM(nilai_anggaran) AS totalanggaran');
+
+		$this->db->where_in('id_kegiatan', $id_kegiatan);
+
+		$this->db->where('tahun', $tahun);
+
+		return $this->db->get('pk_anggaran_kegiatan')->row('totalanggaran');
+	}
+
+	public function getTotalPKPerubahanAnggaranProgram($program = 0, $tahun = 0)
+	{
+		$id_kegiatan = array();
+		foreach ($this->getKegiatanProgramByProgram($program) as $key => $value) 
+			$id_kegiatan[] = $value->id_kegiatan;
+
+		if(!$id_kegiatan)
+			return 0;
+
+		$this->db->select('SUM(nilai_anggaran) AS totalanggaran');
+
+		$this->db->where_in('id_kegiatan', $id_kegiatan);
+
+		$this->db->where('tahun', $tahun);
+
+		return $this->db->get('pk_anggaran_kegiatan_perubahan')->row('totalanggaran');
+	}
+
+	public function checkRktAnggaranKegiatan($program = 0, $tahun = 0)
+	{
+		$query = $this->db->get_where('rkt_anggaran_kegiatan', array(
+			'id_kegiatan' => $program,
+			'tahun' => $tahun
+		) );
+		return $query->num_rows();
+	}
+
+	public function insertRktAnggaranKegiatan($tahun = FALSE, $program = 0)
+	{
+		if( is_array($tahun) )
+		{
+			foreach ($tahun as $key => $item) 
+			{
+				if( $this->checkRktAnggaranKegiatan($program, $item) ) 
+				{
+					continue;
+				} else {
+					$this->db->insert('rkt_anggaran_kegiatan', array(
+						'id_kegiatan' => $program,
+						'anggaran_rkt' => null,
+						'sebab'=> null,
+						'tahun' => $item
+					));
+				}
+			}
+
+			$this->template->alert(
+				' Tersimpan! Data berhasil tersimpan.', 
+				array('type' => 'success','icon' => 'check')
+			);
+		}
+	}
+
+	public function getPKPerubahanAnggaranProgram($kegiatan = 0, $tahun = 0)
+	{
+		$query = $this->db->get_where('pk_anggaran_kegiatan_perubahan', array(
+			'id_kegiatan' => $kegiatan,
+			'tahun' => $tahun
+		) );
+		return $query->row();
+	}
+
+	public function insertPKPerubahanAnggaranProgram($tahun = FALSE, $program = 0)
+	{
+		if( is_array($tahun) )
+		{
+			foreach ($tahun as $key => $item) 
+			{
+				if( $this->getPKPerubahanAnggaranProgram($program, $item) ) 
+				{
+					continue;
+				} else {
+					$this->db->insert('pk_anggaran_kegiatan_perubahan', array(
+						'id_kegiatan' => $program,
+						'nilai_anggaran' => null,
+						'sebab'=> null,
+						'tahun' => $item
+					));
+				}
+			}
+
+			$this->template->alert(
+				' Tersimpan! Data berhasil tersimpan.', 
+				array('type' => 'success','icon' => 'check')
+			);
 		}
 	}
 
@@ -852,9 +1025,21 @@ class Kgiatan extends Skpd_model
 				$this->db->delete('kegiatan_program', array('id_kegiatan' => $param));
 				$this->db->delete('anggaran_kegiatan', array('id_kegiatan' => $param));
 				$this->db->delete('penanggung_jawab_kegiatan', array('id_kegiatan' => $param));
+				$this->db->delete('output_kegiatan_program', array('id_kegiatan' => $param));
+				$this->db->delete('realisasi_anggaran_kegiatan', array('id_kegiatan' => $param));
+				$this->db->delete('rkt_anggaran_kegiatan', array('id_kegiatan' => $param));
+				$this->db->delete('pk_anggaran_kegiatan', array('id_kegiatan' => $param));
 				$response['status'] ='success';
 				break;
-			
+			case 'output-kegiatan':
+				$this->db->delete('output_kegiatan_program', array('id_output_kegiatan_program' => $param));
+				$this->db->delete('pk_output_kegiatan', array('id_output_kegiatan_program' => $param));
+				$this->db->delete('pk_output_kegiatan_perubahan', array('id_output_kegiatan_program' => $param));
+				$this->db->delete('realisasi_output_kegiatan', array('id_output_kegiatan_program' => $param));
+				$this->db->delete('rkt_output_kegiatan', array('id_output_kegiatan_program' => $param));
+				$this->db->delete('target_output', array('id_output_kegiatan_program' => $param));
+				$response['status'] ='success';
+				break;
 			default:
 				$response['status'] ='failed';
 				break;

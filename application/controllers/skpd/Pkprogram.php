@@ -6,7 +6,7 @@ class Pkprogram extends Skpd
 	public function __construct()
 	{
 		parent::__construct();
-		$this->breadcrumbs->unshift(1, 'Program Kerja',  'skpd/pkprogram');
+		$this->breadcrumbs->unshift(1, 'Perjanjian Kinerja',  'skpd/pkprogram');
 
 		$this->load->model(array('mprogram','mstrategi','tjuan','kgiatan'));
 
@@ -15,7 +15,7 @@ class Pkprogram extends Skpd
 
 	public function index()
 	{
-		$this->page_title->push('Program Kerja', 'Target PK Indikator Program');
+		$this->page_title->push('Perjanjian Kinerja', 'Target PK Indikator Program');
 
 		$this->breadcrumbs->unshift(2, 'Target PK Indikator Program',  'skpd/rktprogram');
 
@@ -32,7 +32,7 @@ class Pkprogram extends Skpd
 
 	public function triwulan()
 	{
-		$this->page_title->push('Program Kerja', 'Target PK Triwulan Indikator Program');
+		$this->page_title->push('Perjanjian Kinerja', 'Target PK Triwulan Indikator Program');
 
 		$this->breadcrumbs->unshift(2, 'Triwulan',  'skpd/rktprogram');
 
@@ -61,7 +61,7 @@ class Pkprogram extends Skpd
 
 	public function anggaranprogram()
 	{
-		$this->page_title->push('Program Kerja', ' Program dan Anggaran Penetapan Kinerja');
+		$this->page_title->push('Perjanjian Kinerja', ' Program dan Anggaran Penetapan Kinerja');
 
 		$this->breadcrumbs->unshift(2, ' Program dan Anggaran Penetapan Kinerja',  'skpd/rktprogram');
 
@@ -78,7 +78,7 @@ class Pkprogram extends Skpd
 
 	public function anggarankegiatan()
 	{
-		$this->page_title->push('Program Kerja', ' Anggaran Kegiatan Penetapan Kinerja');
+		$this->page_title->push('Perjanjian Kinerja', ' Anggaran Kegiatan Penetapan Kinerja');
 
 		$this->breadcrumbs->unshift(2, ' Anggaran Kegiatan Penetapan Kinerja',  'skpd/rktprogram');
 

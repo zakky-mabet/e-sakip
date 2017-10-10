@@ -38,7 +38,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <script src="<?php echo base_url("assets/public/plugins/datepicker/bootstrap-datepicker.min.js"); ?>"></script>
   <script src="<?php echo base_url("assets/public/summernote/summernote.min.js"); ?>"></script>
   <script src="<?php echo base_url("assets/public/plugins/mask-money/jquery.maskMoney.min.js"); ?>"></script>
-<!--   <script src="https://rubyrainbows.github.io/dynamic-forms/dynamic_forms.min.js"></script> -->
   <script type="text/javascript"> 
       var base_url   = '<?php echo site_url("skpd"); ?>';
       var base_path  = '<?php echo base_url('assets/public'); ?>';

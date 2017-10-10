@@ -51,6 +51,8 @@ class Skpd extends MY_Controller
 		$this->SKPD = $this->session->userdata('SKPD')->ID;
 
 		$this->kepala = $this->session->userdata('SKPD')->kepala;
+
+		$this->load->model(array('setting','bupati'));
 	}
 
 	public function get_satuan_json()
@@ -72,22 +74,35 @@ class Skpd extends MY_Controller
 	}
 }
 
+
 /**
 * Extends Class Admin
 *
 * @version 1.0.0
 * @author Vicky Nitinegoro <pkpvicky@gmail.com>
 */
-class Admin extends MY_Controller
+class Admin_panel extends MY_Controller
 {
 	public $data = array();
+
+	public $ID;
 
 	public function __construct()
 	{
 		parent::__construct();
 
-		$this->breadcrumbs->unshift(0, 'Home', 'main');
+		$this->load->library( array('session', 'form_validation', 'session','template','pagination', 'page_title', 'breadcrumbs','pdf'));
 
+		$this->load->helper(array('url','menus'));
+		
+		$this->breadcrumbs->unshift(0, 'Home', "admin/main");
+
+		if($this->session->has_userdata('ADM')==FALSE) 
+		{	
+			redirect(site_url('admin/login?from_url='.current_url()));
+		}
+
+		$this->ID = $this->session->userdata('ADM')->ID;
 	}
 }
 

@@ -17,10 +17,13 @@
 				<?php echo form_open(current_url(), array('method' => 'get')); ?>
 					<div class="col-md-2">
 						<label for="">Tahun</label>
-						<select name="tingkat" class="form-control input-sm">
+						<select name="thn" class="form-control input-sm">
 							<option value="">-- PILIH --</option>
 						<?php foreach( range($this->periode_awal, $this->periode_akhir) as $tahun) 
-						echo '<option value="'.$tahun.'">'.$tahun.'</option>';
+						{
+							$selected = ($this->input->get('thn') == $tahun) ? 'selected' : '';
+							echo '<option value="'.$tahun.'" '.$selected.'>'.$tahun.'</option>';
+						}
 						?>
 						</select>
 					</div>
@@ -28,9 +31,10 @@
 						<label for="">Tingkat</label>
 						<select name="tingkat" class="form-control input-sm">
 							<option value="">-- PILIH --</option>
-							<option value="internasional">internasional</option>
-							<option value="nasional">nasional</option>
-							<option value="regional">regional</option>
+							<option value="internasional" <?php if($this->input->get('tingkat')=='internasional') echo 'selected' ?>>internasional</option>
+							<option value="nasional" <?php if($this->input->get('tingkat')=='nasional') echo 'selected' ?>>nasional</option>
+							<option value="provinsi" <?php if($this->input->get('tingkat')=='provinsi') echo 'selected' ?>>provinsi</option>
+							<option value="kota/kabupaten" <?php if($this->input->get('tingkat')=='kota/kabupaten') echo 'selected' ?>>kota/kabupaten</option>
 						</select>
 					</div>
 					<div class="col-md-3">
@@ -112,9 +116,10 @@
 				<div class="form-group">
 					<label for="">Tingkat Prestasi :</label>
 					<select name="tingkat" class="form-control" required="required">
-						<option value="internasional">internasional</option>
-						<option value="nasional">nasional</option>
-						<option value="regional">regional</option>
+							<option value="internasional">internasional</option>
+							<option value="nasional">nasional</option>
+							<option value="provinsi">provinsi</option>
+							<option value="kota/kabupaten">kota/kabupaten</option>
 					</select>
 				</div>
 			</div>
@@ -151,9 +156,10 @@
 				<div class="form-group">
 					<label for="">Tingkat Prestasi :</label>
 					<select name="tingkat" id="update-tingkat" class="form-control" required="required">
-						<option value="internasional">internasional</option>
-						<option value="nasional">nasional</option>
-						<option value="regional">regional</option>
+							<option value="internasional">internasional</option>
+							<option value="nasional">nasional</option>
+							<option value="provinsi">provinsi</option>
+							<option value="kota/kabupaten">kota/kabupaten</option>
 					</select>
 				</div>
 			</div>

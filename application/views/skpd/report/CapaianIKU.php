@@ -20,15 +20,15 @@
 						</select>
 					</div>
 					<div class="col-md-6 pull-right top2x">
-						<a href="" class="btn btn-default">
+						<a href="<?php echo current_url(); ?>?output=print" target="_blank" class="btn btn-default btn-print">
 							<i class="fa fa-print"></i> Cetak
 						</a>
-						<a href="" class="btn btn-default">
+						<a href="<?php echo current_url(); ?>?output=pdf" target="_blank" class="btn btn-default">
 							<i class="fa fa-file-pdf-o"></i> PDF
 						</a>
-						<a href="" class="btn btn-default">
+						<!-- <a href="" class="btn btn-default">
 							<i class="fa fa-file-excel-o"></i> Excel
-						</a>
+						</a> -->
 					</div>
 				</div>
 			</div>
@@ -53,7 +53,6 @@
 							<th class="text-center">Target</th>
 							<th class="text-center">Realisasi</th>
 							<th class="text-center">Capaian (%)</th>
-							<th class="text-center">Keterangan</th>
 						</tr>
 						<tr>
 							<th class="text-center">a</th>
@@ -66,7 +65,6 @@
 							<th class="text-center">h</th>
 							<th class="text-center">i</th>
 							<th class="text-center">j</th>
-							<th class="text-center">k</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -78,10 +76,7 @@
 			         **/
 			        foreach(  $this->mprogram->getSasaranByLogin() as $key => $sasaran) : 
 			        	$DIndikator = $this->tjuan->getInodikatorSasaranBySasaran($sasaran->id_sasaran);
-			        	$col1 = (count($DIndikator) + 1);
-
-			            //if( $col1 >= 2 )
-			            //	$col1;
+			        	$col1 = (count($DIndikator) + 1) + (count($DIndikator)*5);
 			        ?>
 					<tr>
 						<td rowspan="<?php echo $col1 ?>"><?php echo ++$key; ?>.</td>
@@ -95,27 +90,62 @@
 			             **/
 			            foreach(  $DIndikator as $keyIndikator => $indikator) : 
 			            	$targetThn = $this->tjuan->getTargetSasaranBySasaranTahun($indikator->id_indikator_sasaran, $this->tahun);
-			            ?>
+			            	$col2 = (count($DIndikator)*5);
 
+			            	$targetTri = $this->tjuan->getIndikatorTargetTriwulanByIndikatorSasaran($indikator->id_indikator_sasaran, $this->tahun);
+
+			            	$realisasi = @$this->tjuan->getRealisasiIndikatorSasaran($targetThn->id_target_sasaran, $this->tahun);
+
+			            if( $col1 >= 2 )
+			            	$col2--;
+			            ?>
 					<tr>
-						<td   class="text-center"><?php echo $key.".".++$keyIndikator ?></td>
-						<td ><?php echo $indikator->deskripsi; ?></td>
-						<td  class="text-center"><?php echo $indikator->nama_satuan ?></td>
-						<td class="text-center"><?php echo @$targetThn->nilai_target ?></td>
-						
+						<td rowspan="6" class="text-center"><?php echo $key.".".++$keyIndikator ?></td>
+						<td rowspan="6"><?php echo $indikator->deskripsi; ?></td>
+						<td rowspan="6" class="text-center"><?php echo $indikator->nama_satuan ?></td>
+						<td rowspan="6" class="text-center"><?php echo @$targetThn->nilai_target ?></td>	
 					</tr>
+			            <?php 
+			            /**
+			             * Loop Program
+			             *
+			             * @var string
+			             **/
+			            foreach(range(1, 4) as $tri) : 
+			            	$nilaiTri = 'nilai_target_triwulan'.$tri;
+			            	$reaTri = 'realisasi_triwulan'.$tri;
+			            	$capTri = 'capaian'.$tri;
+			            ?>
+						<tr>
+							<td class="text-center" width="80">Triwulan <?php echo $tri ?> :</td>
+							<td class="text-center"><?php echo @$targetTri->$nilaiTri; ?></td>
+							<td class="text-center"><?php echo @$targetTri->$reaTri; ?></td>
+							<td class="text-center"><?php echo @$targetTri->$capTri ?></td>
+						</tr>
+						<?php  
+						endforeach;
+						?>
+						<tr>
+							<th colspan="2" class="text-center">Kondisi Akhir (F)</th>
+							<td class="text-center"><?php echo @$realisasi->nilai_realisasi ?></td>
+							<td class="text-center"><?php echo @$realisasi->nilai_capaian ?></td>
+						</tr>
 					<?php endforeach;
 			        ?>
-			        <?php 
-			        endforeach; ?>
-
-
-			    	
-			        
+			        <?php endforeach; ?>
 					</tbody>
 				</table>
-
-				<
+			</div>
+			<div class="box-body">
+<!-- 				<table class="table table-bordered">
+	<thead>
+		<td>
+			<th>Warna</th>
+			<th></th>
+			<th></th>
+		</td>
+	</thead>
+</table> -->
 			</div>
 		</div>
 	</div>

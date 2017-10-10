@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak</button>
-                <a href="<?php echo base_url("login/signout") ?>" type="button" class="btn btn-outline"> Iya </a>
+                <a href="<?php echo base_url("login/signout?from_url=".current_url()) ?>" type="button" class="btn btn-outline"> Iya </a>
               </div>
             </div>
           </div>

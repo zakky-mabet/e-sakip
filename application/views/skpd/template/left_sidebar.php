@@ -13,9 +13,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
          </div>
       </div>
       <ul class="sidebar-menu">
-        <li class="<?php echo active_link_controller('home'); ?>">
+        <li class="<?php echo active_link_method('index','home'); ?>">
             <a href="<?php  echo site_url('skpd/home') ?>">
                <i class="fa fa-dashboard"></i> <span>Home</span>
+            </a>
+        </li>
+        <li class="<?php echo active_link_method('cascading','home'); ?>">
+            <a href="<?php  echo site_url('skpd/home/cascading') ?>">
+               <i class="fa fa-edit"></i> <span>Cascading</span>
             </a>
         </li>
         <li class="treeview <?php echo active_link_multiple(array('visi','misi','tujuan','strategi', 'sasaran','kebijakan','program','kegiatan', 'formulasi', 'target')); ?>">
@@ -157,7 +162,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <li class="treeview <?php  echo active_link_multiple(array('pkprogram','pkkegiatan','pk_indikator_sasaran')); ?>">
           <a href="#">
             <i class="fa fa-file-text-o"></i>
-            <span>Program Kerja</span>
+            <span>Perjanjian Kinerja</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -196,7 +201,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </a>
           <ul class="treeview-menu">
             <li class="<?php echo active_link_method('index','pk_indikator_sasaran_perubahan'); ?>">
-                <a href="<?php echo base_url("skpd/pk_indikator_sasaran_perubahan"); ?>"> Target RKT Idikator Sasaran</a>
+                <a href="<?php echo base_url("skpd/pk_indikator_sasaran_perubahan"); ?>"> Target PK Idikator Sasaran</a>
             </li>
             <li class="<?php echo active_link_method('index','pkperubahanprogram').active_link_method('triwulan','pkperubahanprogram'); ?>">
                 <a href="<?php echo base_url("skpd/pkperubahanprogram"); ?>"><small>Target PK Perubahan Indikator Program</small></a>
@@ -238,7 +243,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
           </ul>
         </li>
-        <li class="treeview <?php  echo active_link_multiple(array('renstra','rrkt','iku','reanggaran','reaksi','efisiensi_kinerja')); ?>">
+        <li class="treeview <?php  echo active_link_multiple(array('renstra','rrkt','iku','reanggaran','reaksi','efisiensi_kinerja','pk')); ?>">
           <a href="#">
             <i class="fa fa-line-chart"></i>
             <span>Laporan</span>
@@ -256,13 +261,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li class="<?php echo active_link_method('index','iku'); ?>">
                 <a href="<?php echo base_url("skpd/report/iku"); ?>"> Indikator Kinerja Utama</a>
             </li>
-            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
-                <a href=""> Perjanjian Kinerja</a>
+            <li class="<?php echo active_link_method('index','pk'); ?>">
+                <a href="<?php echo base_url('skpd/report/pk') ?>"> Perjanjian Kinerja</a>
             </li>
-            <li class="<?php echo active_link_method('i;ndex','visi'); ?>">
-                <a href=""> Perjanjian Kinerja Perubahan</a>
+            <li class="<?php echo active_link_method('perubahan','pk'); ?>">
+                <a href="<?php echo base_url('skpd/report/pk/perubahan'); ?>"> Perjanjian Kinerja Perubahan</a>
             </li>
-            <li class="<?php echo active_link_method('capaian','iku'); ?>" style="text-decoration: line-through;">
+            <li class="<?php echo active_link_method('capaian','iku'); ?>">
                 <a href="<?php echo base_url("skpd/report/iku/capaian"); ?>"> Capaian Indikator Kinerja Utama</a>
             </li>
             <li class="<?php echo active_link_method('i;ndex','visi'); ?>" style="text-decoration: line-through;">

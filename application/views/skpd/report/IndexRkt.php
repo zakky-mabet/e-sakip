@@ -26,9 +26,9 @@
 						<a href="<?php echo current_url().'?output=pdf' ?>" target="_blank" class="btn btn-default">
 							<i class="fa fa-file-pdf-o"></i> PDF
 						</a>
-						<a href="<?php echo current_url().'?output=excel' ?>" target="_blank" class="btn btn-default">
+						<!-- <a href="<?php echo current_url().'?output=excel' ?>" target="_blank" class="btn btn-default">
 							<i class="fa fa-file-excel-o"></i> Excel
-						</a>
+						</a> -->
 					</div>
 				</div>
 			</div>
@@ -41,7 +41,7 @@
 				<div class="col-md-12 text-center">
 					<p><strong>Rencana Kinerja Tahunan (Tahun <?php echo $this->tahun ?>)</strong></p>
 				</div>
-				<table class="mini-font table table-responsive table-bordered">
+				<table class="table table-responsive table-bordered">
 					<thead class="bg-blue">
 						<tr>
 							<th class="text-center" width="50" valign="top">No.</th>
