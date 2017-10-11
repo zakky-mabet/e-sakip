@@ -97,8 +97,6 @@ class Mprogram extends Skpd_model
 					$program = $this->db->insert_id();
 
 					$this->insertSumberAnggaranProgram($this->input->post("create[tahun][{$key}]"), $program);
-
-					//$this->insertPKPerubahanAnggaranProgram($this->input->post("create[tahun][{$key}]"), $program);
 				}
 			}
 		} else {
@@ -114,8 +112,6 @@ class Mprogram extends Skpd_model
 					$this->db->update('program', $object, array('id_program' => $value));
 
 					$this->insertSumberAnggaranProgram($this->input->post("update[tahun][{$value}]"), $value);
-
-					//$this->insertPKPerubahanAnggaranProgram($this->input->post("update[tahun][{$value}]"), $value);
 				}
 			}
 		}
@@ -689,7 +685,7 @@ class Mprogram extends Skpd_model
 					'id_reindikator_program' => $key,
 				));
 
-				echo $this->db->last_query()."<br>";
+				//echo $this->db->last_query()."<br>";
 			}
 
 			$this->template->alert(

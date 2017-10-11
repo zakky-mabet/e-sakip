@@ -76,7 +76,7 @@
 							</tr>
 					        <?php 
 					        foreach( $this->kgiatan->getKegiatanProgramByProgram($program->id_program) as $keyKegiatan => $kegiatan) :
-					        	$PK = $this->mprogram->getPKAnggaranProgram($program->id_program, $tahun);
+					        	$PK = @$this->kgiatan->getPKAnggaranProgram($kegiatan->id_kegiatan, $tahun);
 					        ?>
 							<tr>
 								<td></td>

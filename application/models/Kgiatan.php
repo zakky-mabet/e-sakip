@@ -1027,6 +1027,7 @@ class Kgiatan extends Skpd_model
 				$this->db->delete('realisasi_anggaran_kegiatan', array('id_kegiatan' => $param));
 				$this->db->delete('rkt_anggaran_kegiatan', array('id_kegiatan' => $param));
 				$this->db->delete('pk_anggaran_kegiatan', array('id_kegiatan' => $param));
+				$this->db->delete('pk_anggaran_kegiatan_perubahan', array('id_kegiatan' => $param));
 				$response['status'] ='success';
 				break;
 			case 'output-kegiatan':
