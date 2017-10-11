@@ -281,7 +281,7 @@ class Mrealisasi_sasaran extends Skpd_model
 
 	public function get_sasaran_kegiatan($param=0, $tahun = 0)
 	{
-		$this->db->join('pk_anggaran_kegiatan_perubahan', 'pk_anggaran_kegiatan_perubahan.id_program = kegiatan_program.id_program', 'left');
+		$this->db->join('pk_anggaran_kegiatan_perubahan', 'pk_anggaran_kegiatan_perubahan.id_kegiatan = kegiatan_program.id_program', 'left');
 
 		return $this->db->get_where('kegiatan_program', array('kegiatan_program.id_program' => $param, 'pk_anggaran_kegiatan_perubahan.tahun'=>$tahun))->result();
 	}
