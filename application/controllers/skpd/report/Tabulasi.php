@@ -9,13 +9,15 @@ class Tabulasi extends Skpd
 
 	public $jenisTabulasi;
 
+	public $kategoriCapaian;
+
 	public function __construct()
 	{
 		parent::__construct();
 
 		$this->breadcrumbs->unshift(1, 'Laporan',  'skpd/report/renstra');
 
-		$this->load->model(array('mprogram','mstrategi','tjuan','kgiatan','mvisi','kbjakan'));
+		$this->load->model(array('mprogram','mstrategi','tjuan','kgiatan','mvisi','kbjakan','mprestasi'));
 
 		$this->jenisTabulasi = array(
 			'capaian_kinerja_sasaran' => 'Capaian kinerja Sasaran',
@@ -29,6 +31,8 @@ class Tabulasi extends Skpd
 			'prestasi_tingkat_provinsi' => 'Prestasi Tingkat Provinsi', 
 			'prestasi_tingkat_kabupaten' => 'Prestasi Tingkat Kota/Kabupaten'
 		);
+
+		$this->kategoriCapaian = array('Sangat Baik', 'Baik', 'Cukup', 'Kurang', 'Sangat Kurang');
 	}
 
 	public function index()
@@ -48,7 +52,36 @@ class Tabulasi extends Skpd
 			'page_title' => $this->page_title->show()
 		);	
 
-		$this->template->view('skpd/report/IndexTabulasi', $this->data);
+		switch ( $this->input->get('output') ) 
+		{
+			case 'print':
+				if( $this->jenis != FALSE)
+					$this->load->view("skpd/report/print/indextabulasi");
+				break;
+			case 'pdf':
+			    $this->pdf->filename = strtoupper($this->jenisTabulasi[$this->jenis].'&nbsp;'.$this->session->userdata('SKPD')->nama).".pdf";
+			    switch ($this->jenis) 
+			    {
+			    	case 'prestasi_tingkat_internasional':
+			    	case 'prestasi_tingkat_nasional':
+			    	case 'prestasi_tingkat_provinsi':
+			    	case 'prestasi_tingkat_kabupaten':
+			    		$this->pdf->setPaper('legal', 'potrait');
+			    		break;
+			    	default:
+			    		$this->pdf->setPaper('legal', 'landscape');
+			    		break;
+			    }
+			    if( $this->jenis != FALSE)
+			    	$this->pdf->load_view('skpd/report/print/indextabulasi', $this->data);
+				break;
+			case 'excel':
+				show_error('On Progress!');
+				break;
+			default:
+				$this->template->view('skpd/report/IndexTabulasi', $this->data);
+				break;
+		}
 	}
 
 }

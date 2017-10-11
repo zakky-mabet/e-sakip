@@ -100,6 +100,21 @@ class Skpd_model extends MY_Model
 					'tahun_triwulan' => $tahun
 				))->row();
 	}
+
+	public function getSasaranByMisi($misi = 0)
+	{
+		$tujuan = $this->db->get_where('tujuan', array('id_misi'))->result();
+
+		if( ! $tujuan )
+			return array();
+
+		$IDTujuan = array();
+		foreach ($tujuan as $key => $value) 
+			$IDTujuan[] = $value->id_tujuan;
+
+		$this->db->where_in('id_tujuan', $IDTujuan);
+		return $this->db->get('sasaran')->result();
+	}
 }
 
 /* End of file MY_Model.php */

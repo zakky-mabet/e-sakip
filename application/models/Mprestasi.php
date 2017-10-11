@@ -42,6 +42,11 @@ class Mprestasi extends Skpd_model
 		}
 	}
 
+	public function getFilter($tingkat = '', $tahun = 0)
+	{
+		return $this->db->get_where('prestasi', array('tingkat' => $tingkat, 'tahun' => $tahun))->result();
+	}
+
 	public function get($param = 0)
 	{
 		return $this->db->get_where('prestasi',array('id_prestasi' => $param))->row();

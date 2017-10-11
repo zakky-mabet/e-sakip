@@ -33,13 +33,13 @@
 						<button type="submit" class="btn btn-default">
 							<i class="fa fa-search"></i> Lihat Data
 						</button>
-						<a href="<?php echo current_url().'?output=print&thn='.$this->tahun ?>" target="_blank" class="btn btn-default btn-print">
+						<a href="<?php echo current_url().'?output=print&jenis='.$this->jenis.'&thn='.$this->tahun ?>" target="_blank" class="btn btn-default btn-print">
 							<i class="fa fa-print"></i> Cetak
 						</a>
-						<a href="<?php echo current_url().'?output=pdf&thn='.$this->tahun ?>" target="_blank" class="btn btn-default">
+						<a href="<?php echo current_url().'?output=pdf&jenis='.$this->jenis.'&thn='.$this->tahun ?>" target="_blank" class="btn btn-default">
 							<i class="fa fa-file-pdf-o"></i> PDF
 						</a>
-						<!-- <a href="<?php echo current_url().'?output=excel&thn='.$this->tahun ?>" target="_blank" class="btn btn-default">
+						<!-- <a href="<?php echo current_url().'?output=excel&jenis='.$this->jenis.'&thn='.$this->tahun ?>" target="_blank" class="btn btn-default">
 							<i class="fa fa-file-excel-o"></i> Excel
 						</a> -->
 					</div>
