@@ -82,6 +82,40 @@ class Iku extends Skpd
 		}
 	}
 
+	public function capaian_strategis()
+	{
+		$this->page_title->push('Laporan', 'Capaian Indikator Kinerja Strategis');
+
+		$this->breadcrumbs->unshift(2, 'Capaian Indikator Kinerja Strategis',  $this->uri->uri_string());
+
+		$this->tahun = ($this->input->get('thn')=='') ? $this->periode_awal : $this->input->get('thn');
+
+		$this->data = array(
+			'title' => "Capaian Indikator Kinerja Strategis", 
+			'breadcrumbs' => $this->breadcrumbs->show(),
+			'page_title' => $this->page_title->show(),
+			'visi' => $this->mvisi->getByLogin(),
+		);
+
+		switch ( $this->input->get('output') ) 
+		{
+			case 'print':
+				$this->load->view('skpd/report/print/capaianstrg', $this->data);
+				break;
+			case 'pdf':
+			    $this->pdf->setPaper('legal', 'landscape');
+			    $this->pdf->filename = strtoupper($this->data['title']).".pdf";
+			    $this->pdf->load_view('skpd/report/print/capaianstrg', $this->data);
+				break;
+			case 'excel':
+				show_error('On Progress!');
+				break;
+			default:
+				$this->template->view('skpd/report/CapaianSTRG', $this->data);	
+				break;
+		}
+	}
+
 }
 
 /* End of file Iku.php */

@@ -28,7 +28,7 @@ class Prestasi extends Skpd
 	{
 		$this->breadcrumbs->unshift(2, 'Prestasi',  $this->uri->uri_string());
 
-		$this->page_title->push('Prestasi', 'Organisasi Perangkat Daerah');
+		$this->page_title->push('Prestasi', 'Prestasi Organisasi Perangkat Daerah');
 
 		$this->form_validation->set_rules('prestasi', 'Prestasi', 'trim|required');
 

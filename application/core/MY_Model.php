@@ -52,11 +52,13 @@ class Skpd_model extends MY_Model
 		return $periode;
 	}
 
-	public function getInodikatorSasaranBySasaran($sasaran = 0)
+	public function getInodikatorSasaranBySasaran($sasaran = 0, $IKU = FALSE)
 	{
 		$this->db->select('indikator_sasaran.*, master_satuan.nama as nama_satuan');
 		$this->db->join('master_satuan', 'master_satuan.id = indikator_sasaran.id_satuan', 'left');
 		$this->db->where('id_sasaran' , $sasaran);
+		if($IKU)
+			$this->db->where('indikator_sasaran.IKU', $IKU);
 		return $this->db->get('indikator_sasaran')->result();
 	}
 

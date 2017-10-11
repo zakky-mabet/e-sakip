@@ -39,7 +39,7 @@
 				<div class="clearfix"></div>
 				<hr>
 				<div class="col-md-12 text-center">
-					<p><strong>Target Indikator Kinerja Utama (Tahun <?php echo $this->tahun ?>)</strong></p>
+					<p><strong>Pagu dan Realisasi Anggaran (Tahun <?php echo $this->tahun ?>)</strong></p>
 				</div>
 				<table class=" table table-bordered">
 					<thead class="bg-blue">
@@ -105,9 +105,12 @@
 							<td class="text-center"><?php echo ++$keyProgram; ?></td>
 							<td><?php echo $program->deskripsi; ?></td>
 							<td class="text-center"><?php echo @number_format($anggaran) ?></td>
-							<?php foreach(range(1, 4) as $tri => $tTahun) : ?>
-							<td class="text-center"><?php echo @number_format(@$this->kgiatan->getTotalReAnggaranKegiatan($program->id_program, $this->tahun, "T".++$tri)) ?></td>
-							<td class="text-center">-</td>
+							<?php foreach(range(1, 4) as $tri => $tTahun) : 
+							$REA = @$this->kgiatan->getTotalReAnggaranKegiatan($program->id_program, $this->tahun, "T".++$tri);
+							@$percentage = (@$REA / $anggaran) * 100;
+							?>
+							<td class="text-center"><?php echo @number_format(@$REA) ?></td>
+							<td class="text-center"><?php if($anggaran) echo @round($percentage, 2); ?></td>
 							<?php endforeach; ?>
 						</tr>
 						<?php  
@@ -117,9 +120,12 @@
 						<tr>
 							<td colspan="2"><strong class="pull-right">Total :</strong></td>
 							<th class="text-center"><?php echo number_format($totalPAngg) ?></th>
-							<?php foreach(range(1, 4) as $tri => $tTahun) : ?>
-							<th class="text-center"><?php echo @number_format(@$this->kgiatan->getSumTotalReAnggaranKegiatan($sasaran->id_sasaran, $this->tahun, "T".++$tri)) ?></th>
-							<td class="text-center"><i class="fa fa-question"></i></td>
+							<?php foreach(range(1, 4) as $tri => $tTahun) : 
+							$TOTREA = @$this->kgiatan->getSumTotalReAnggaranKegiatan($sasaran->id_sasaran, $this->tahun, "T".++$tri);
+							$totalPercentage = @($TOTREA / $totalPAngg) * 100;
+							?>
+							<th class="text-center"><?php echo @number_format(@$TOTREA); ?></th>
+							<td class="text-center"><?php if($totalPAngg) echo @round($totalPercentage, 2); ?></td>
 							<?php endforeach; ?>
 						</tr>
 						<?php

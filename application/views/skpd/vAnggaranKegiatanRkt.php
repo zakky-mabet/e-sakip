@@ -51,7 +51,7 @@
 						?>
 							<tr>
 								<td><?php echo ++$keyKegiatan ?>.</td>
-								<td><?php echo $program->deskripsi; ?></td>
+								<td><?php echo $kegiatan->deskripsi; ?></td>
 								<td class="text-center">Rp. <?php echo @number_format($anggaran) ?></td>
 								<td><input type="text" name="anggaran[<?php echo @$rkt->id_anggaran_kegiatan ?>]" value="<?php echo @number_format(@$rkt->anggaran_rkt) ?>" class="form-control inputmask" <?php if(!$rkt) echo 'disabled' ?>></td>
 								<td>

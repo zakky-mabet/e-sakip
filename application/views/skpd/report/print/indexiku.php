@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $this->load->view('skpd/report/print/layout/header');
 ?>
 <p class="text-center"><strong>Target Indikator Kinerja Utama (Tahun <?php echo $this->tahun ?>)</strong></p>
-				<table class="table mini-font table-responsive table-bordered">
+				<table class="table mini-font table-responsive table-bordered" width="100%">
 					<thead class="bg-blue">
 						<tr>
 							<th class="text-center" width="50" valign="top">No.</th>	

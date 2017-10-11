@@ -92,7 +92,7 @@
 			        	$col1 = (count($Dporgram) + 1);
 
 			        	$TR = $this->mprogram->getTargetSasaranBySasaranTahun($indikator->id_indikator_sasaran, $this->tahun);
-			        	$RTR = @$this->mprogram->getRealisasiIndikatorSasaran($TR->id_target_sasaran);
+			        	$RTR = @$this->mprogram->getRealisasiIndikatorSasaran($TR->id_target_sasaran, $this->tahun);
 			       ?>
  					<tr>
  						<td rowspan="<?php echo $col1 ?>"></td>
@@ -100,7 +100,7 @@
 						<td rowspan="<?php echo $col1 ?>"><?php echo $indikator->deskripsi ?></td>
 						<td rowspan="<?php echo $col1 ?>" class="text-center"><?php echo $indikator->nama_satuan ?></td>
 						<td rowspan="<?php echo $col1 ?>" class="text-center"><?php echo @$TR->nilai_target; ?></td>
-						<td rowspan="<?php echo $col1 ?>"><?php echo @$RTR->nilai_realisasi ?></td>
+						<td rowspan="<?php echo $col1 ?>" class="text-center"><?php echo @$RTR->nilai_realisasi ?></td>
 						<td rowspan="<?php echo $col1 ?>" class="bg-red"><?php echo @$RTR->nilai_capaian ?></td>
 					</tr>
 			        <?php  
@@ -124,11 +124,11 @@
 							$reKeua = 0;
 							foreach(range(1, 4) as $tri => $tTahun)
 								$reKeua += $this->kgiatan->getTotalReAnggaranKegiatan($program->id_program, $this->tahun, "T".++$tri);
-
+								@$percentage = (@$reKeua / $anggaran) * 100;
 							echo number_format($reKeua);
 							?>
 						</td>
-						<td>-</td>
+						<td class="text-center"><?php if($anggaran) echo @round($percentage, 2); ?></td>
 					</tr>
 					<?php  
 					$totalPAngg += $anggaran;
@@ -136,6 +136,7 @@
 					endforeach;
 					@$TotRTR += @$RTR->nilai_capaian;
 					endforeach;
+					$totalPercentage = @($TotalreKeua / $totalPAngg) * 100;
 					?>
 					<tr>
 						<th colspan="6" class="text-center">RATA-RATA CAPAIAN DARI <?php echo count($DIndikator) ?> INDIKATOR</th>
@@ -143,7 +144,7 @@
 						<th class="text-center" colspan="2">TOTAL PER SASARAN</th>
 						<th><?php echo number_format($totalPAngg) ?></th>
 						<th><?php echo @number_format(@$TotalreKeua) ?></th>
-						<th><i class="fa fa-question"></i></th>
+						<th class="text-center"><?php if($totalPAngg) echo @round($totalPercentage, 2); ?></th>
 					</tr>
 					<?php
 					endforeach;

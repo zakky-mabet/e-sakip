@@ -58,7 +58,7 @@
 						?>
 							<tr>
 								<td><?php echo ++$keyKegiatan ?>.</td>
-								<td><?php echo $program->deskripsi; ?></td>
+								<td><?php echo $kegiatan->deskripsi; ?></td>
 								<td class="text-center"><?php echo @number_format(@$anggaran) ?></td>
 								<td class="text-center"><?php echo @number_format( @$rkt) ?></td>
 								<td class="text-center"><?php echo @number_format(@$PK) ?></td>

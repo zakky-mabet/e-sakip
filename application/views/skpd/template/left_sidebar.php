@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <li class="treeview <?php echo active_link_multiple(array('visi','misi','tujuan','strategi', 'sasaran','kebijakan','program','kegiatan', 'formulasi', 'target')); ?>">
           <a href="#">
             <i class="fa fa-files-o"></i>
-            <span>Rencanan Strategis</span>
+            <span>Rencana Strategis</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -243,7 +243,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
           </ul>
         </li>
-        <li class="treeview <?php  echo active_link_multiple(array('renstra','rrkt','iku','reanggaran','reaksi','efisiensi_kinerja','pk')); ?>">
+        <li class="treeview <?php  echo active_link_multiple(array('renstra','rrkt','iku','reanggaran','reaksi','efisiensi_kinerja','pk','tabulasi')); ?>">
           <a href="#">
             <i class="fa fa-line-chart"></i>
             <span>Laporan</span>
@@ -270,8 +270,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li class="<?php echo active_link_method('capaian','iku'); ?>">
                 <a href="<?php echo base_url("skpd/report/iku/capaian"); ?>"> Capaian Indikator Kinerja Utama</a>
             </li>
-            <li class="<?php echo active_link_method('i;ndex','visi'); ?>" style="text-decoration: line-through;">
-                <a href=""> Capaian Indikator Kinerja Strategis</a>
+            <li class="<?php echo active_link_method('capaian_strategis','iku'); ?>">
+                <a href="<?php echo base_url("skpd/report/iku/capaian_strategis"); ?>"> Capaian Indikator Kinerja Strategis</a>
             </li>
             <li class="<?php echo active_link_method('index','reanggaran'); ?>">
                 <a href="<?php echo base_url('skpd/report/reanggaran'); ?>"> Pagu dan Realisasi Anggaran</a>
@@ -295,8 +295,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </li>
               </ul>
             </li>
-            <li class="<?php echo active_link_method('index','sd'); ?>" style="text-decoration: line-through;">
-                <a href=""> Tabulasi</a>
+            <li class="<?php echo active_link_method('index','tabulasi'); ?>">
+                <a href="<?php echo base_url('skpd/report/tabulasi'); ?>"> Tabulasi</a>
             </li>
             <li class="<?php echo active_link_method('index','sd'); ?>" style="text-decoration: line-through;">
                 <a href=""> SK IKU</a>

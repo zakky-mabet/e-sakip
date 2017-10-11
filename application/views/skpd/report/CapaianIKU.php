@@ -20,10 +20,10 @@
 						</select>
 					</div>
 					<div class="col-md-6 pull-right top2x">
-						<a href="<?php echo current_url(); ?>?output=print" target="_blank" class="btn btn-default btn-print">
+						<a href="<?php echo current_url(); ?>?output=print&thn=<?php echo $this->tahun ?>" target="_blank" class="btn btn-default btn-print">
 							<i class="fa fa-print"></i> Cetak
 						</a>
-						<a href="<?php echo current_url(); ?>?output=pdf" target="_blank" class="btn btn-default">
+						<a href="<?php echo current_url(); ?>?output=pdf&thn=<?php echo $this->tahun ?>" target="_blank" class="btn btn-default">
 							<i class="fa fa-file-pdf-o"></i> PDF
 						</a>
 						<!-- <a href="" class="btn btn-default">
@@ -75,7 +75,7 @@
 			         * @var string
 			         **/
 			        foreach(  $this->mprogram->getSasaranByLogin() as $key => $sasaran) : 
-			        	$DIndikator = $this->tjuan->getInodikatorSasaranBySasaran($sasaran->id_sasaran);
+			        	$DIndikator = $this->tjuan->getInodikatorSasaranBySasaran($sasaran->id_sasaran, 'yes');
 			        	$col1 = (count($DIndikator) + 1) + (count($DIndikator)*5);
 			        ?>
 					<tr>
