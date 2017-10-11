@@ -41,7 +41,7 @@
 			                  <span class="bg-blue">Entri Capaian Kinerja Indikator Sasaran Per Tahun</span>
 			            </li>
 			            <?php 
-			        
+			            
 			            foreach($this->mrealisasi_sasaran->getAllSasaran( ) as $key => $sasaran) : ?>
 			            <li>
 					<table class="table table-bordered bg-white">
