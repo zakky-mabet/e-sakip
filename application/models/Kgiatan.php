@@ -9,7 +9,7 @@ class Kgiatan extends Skpd_model
 	{
 		parent::__construct();
 
-		$this->CI =& get_instance();
+		$this->CI =& get_instance(); 
 		
 		$this->CI->load->model(array('tjuan','mprogram'));
 	}
@@ -240,7 +240,9 @@ class Kgiatan extends Skpd_model
 				$object = array(
 					'id_program' => $program,
 					'deskripsi' => $deskripsi,
-					'tahun' => @implode(',', $this->getPeriode())
+
+					'tahun' => @implode(',', $this->getPeriode()),
+
 				);
 
 				$this->db->insert('kegiatan_program', $object);

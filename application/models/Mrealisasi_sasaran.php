@@ -83,9 +83,6 @@ class Mrealisasi_sasaran extends Skpd_model
 		return $this->db->get_where('realisasi_analisis_sasaran_tahunan', array('id_sasaran'=> $param, 'tahun_analisis'=> $tahun))->result();
 	}
 
-	
-	
-
 	public function getIndikatorSasarantoTargetTriwulan($param = 0, $tahun = 0 )
 	{	
 
@@ -284,9 +281,9 @@ class Mrealisasi_sasaran extends Skpd_model
 
 	public function get_sasaran_kegiatan($param=0, $tahun = 0)
 	{
-		$this->db->join('anggaran_kegiatan', 'anggaran_kegiatan.id_kegiatan = kegiatan_program.id_kegiatan', 'left');
+		$this->db->join('pk_anggaran_kegiatan_perubahan', 'pk_anggaran_kegiatan_perubahan.id_kegiatan = kegiatan_program.id_program', 'left');
 
-		return $this->db->get_where('kegiatan_program', array('kegiatan_program.id_program' => $param, 'anggaran_kegiatan.tahun'=>$tahun))->result();
+		return $this->db->get_where('kegiatan_program', array('kegiatan_program.id_program' => $param, 'pk_anggaran_kegiatan_perubahan.tahun'=>$tahun))->result();
 	}
 
 	public function getTotalAnggaranKegiatanByProgramTahun($program = 0, $tahun = 0)
@@ -377,7 +374,7 @@ class Mrealisasi_sasaran extends Skpd_model
 						'output' => $this->input->post("update[output][{$value}]"),
 
 					);
-					$this->db->update('anggaran_kegiatan', $object, array('id_anggaran_kegiatan' => $value));
+					$this->db->update('pk_anggaran_kegiatan_perubahan', $object, array('id_pk_anggaran_kegiatan_perubahan' => $value));
 
 					$this->template->alert(
 						' Tersimpan! Data berhasil tersimpan.', 
@@ -386,6 +383,63 @@ class Mrealisasi_sasaran extends Skpd_model
 				}
 			}
 		}
+	}
+
+	public function get_sasaran_for_analisis_triwulan($param=0)
+	{
+		return $this->db->get_where('sasaran', array('id_kepala' => $this->session->userdata('SKPD')->ID, 'id_sasaran' => $param))->row();
+	}
+
+	public function reanalisis_triwulan($id_sasaran=0, $tahun=0, $triwulan='')
+	{
+		return $this->db->get_where('analisis_sasaran_pertriwulan', array('id_sasaran' => $id_sasaran, 'tahun_analisis_sasaran_pertriwulan' => $tahun, 'triwulan_analisis_sasaran_pertriwulan' => $triwulan))->row();
+	}
+
+	public function save_analisis_triwulan()
+	{
+		if( $this->input->post('create') )
+		{
+			if( is_array($this->input->post('create')) )
+			{
+				
+					$this->template->alert(
+						'Kesalahan Dalam Menyimpan Data ! Silahkan Ulangi', 
+						array('type' => 'warning','icon' => 'warning')
+					);
+			}
+		} else {
+			if( is_array($this->input->post('update_analisis')) )
+			{
+				foreach($this->input->post('update_analisis[ID]') as $key => $value) 
+				{
+					$object = array(
+						'penjelasan_umum' => $this->input->post("update_analisis[penjelasan_umum][{$value}]"),
+						'instrumen' => $this->input->post("update_analisis[instrumen][{$value}]"),
+						'kerja_nyata_vs_rencana' => $this->input->post("update_analisis[kerja_nyata_vs_rencana][{$value}]"),
+						'kerja_nyata_tahun_sebelum' => $this->input->post("update_analisis[kerja_nyata_tahun_sebelum][{$value}]"),
+						'perbandingan' => $this->input->post("update_analisis[perbandingan][{$value}]"),
+						'output_PKA' => $this->input->post("update_analisis[output_PKA][{$value}]"),
+						'pendukung' => $this->input->post("update_analisis[pendukung][{$value}]"),
+						'penghambat' => $this->input->post("update_analisis[penghambat][{$value}]"),
+						'solusi' => $this->input->post("update_analisis[solusi][{$value}]"),
+
+					);
+					$this->db->update('analisis_sasaran_pertriwulan', $object, array('id_analisis_sasaran_pertriwulan' => $value));
+
+					$this->template->alert(
+						' Tersimpan! Data berhasil tersimpan.', 
+						array('type' => 'success','icon' => 'check')
+					);
+				}
+			}
+		}
+	}
+
+	public function cara_ukur_indikator($id_sasaran=0)
+	{
+		$this->db->join('formulasi_sasaran', 'formulasi_sasaran.id_indikator_sasaran = indikator_sasaran.id_indikator_sasaran', 'left');
+
+		return $this->db->get_where('indikator_sasaran',array('id_sasaran' => $id_sasaran) )->result();
 	}
 
  }

@@ -68,7 +68,7 @@
                                 while($x <= $this->m_misi->get_periode()->periode_akhir ){ ?>
                                
                                 <button type="button" class="btn btn-md" style="margin-bottom: 4px; margin-bottom: 4px">
-                                <input  name="create[tahun]['<?php echo $this->session->userdata('SKPD')->kepala ?>'][]" value="<?php echo $x ?>" type="checkbox" class="minimal" >
+                                <input checked="checked" required="required" name="create[tahun]['<?php echo $this->session->userdata('SKPD')->kepala ?>'][]" value="<?php echo $x ?>" type="checkbox" class="minimal" >
                                 <span class="em3 text-center"> <?php echo $x ?></span>
                             </button>
 
@@ -89,8 +89,10 @@
                             <tr>
                                 <td colspan="3"></td>
                                 <td >
-                                    <button class="btn btn-small btn-default" onclick="additem(); hide('param'); return false; " id="param" style="" data-toggle="tooltip" data-placement="top" title="Tambah Misi"><i class="fa fa-plus"></i></button>
 
+                                      <?php if (count($misi) > 0): ?>
+                                    <button class="btn btn-small btn-default" onclick="additem(); hide('param'); return false; " id="param" style="" data-toggle="tooltip" data-placement="top" title="Tambah Misi"><i class="fa fa-plus"></i></button>
+                                        <?php endif ?>
                                     <button  class="btn btn-small btn-success"><i class="fa fa-save"></i> Simpan</button>
 
                                 </td>
@@ -147,7 +149,7 @@
 
                 input_tahun.innerHTML ='<?php
                             $x = $this->m_misi->get_periode()->periode_awal;
-                            while($x <= $this->m_misi->get_periode()->periode_akhir ){ ?><button type="button" class="btn btn-md" style="margin-bottom:4px;  margin-bottom:4px"><input  name="create[tahun][<?php  echo $this->session->userdata('SKPD')->kepala ?>][]" value="<?php echo $x ?>"  type="checkbox" <?php if ($x==date('Y')) {echo 'required="required"';} ?>class="minimal" ><span class="em3 text-center"> <?php echo $x ?></span></button><?php $x++; } ?>' ;
+                            while($x <= $this->m_misi->get_periode()->periode_akhir ){ ?><button type="button" class="btn btn-md" style="margin-bottom:4px;  margin-bottom:4px"><input checked="checked" name="create[tahun][<?php  echo $this->session->userdata('SKPD')->kepala ?>][]" value="<?php echo $x ?>"  type="checkbox"  <?php if ($x==date('Y')) {echo 'required="required"';} ?>class="minimal" ><span class="em3 text-center"> <?php echo $x ?></span></button><?php $x++; } ?>' ;
 
                
 //              membuat aksi delete element
