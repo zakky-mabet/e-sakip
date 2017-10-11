@@ -82,7 +82,6 @@
                                 <td></td>
                             </tr>
                             <?php endif ?>
-                        
 
                         </tbody>
                         <tfoot>
