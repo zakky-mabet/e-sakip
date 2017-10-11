@@ -221,8 +221,8 @@
 										<tr>
 											<td class="text-center" style="vertical-align: middle;">Output</td>
 											<td colspan="3">
-												<?php echo form_hidden("update[ID][]", $kegiatan->id_anggaran_kegiatan);?>
-												<textarea class="form-control" name="update[output][<?php echo $kegiatan->id_anggaran_kegiatan ?>]" ><?php echo $kegiatan->output ?></textarea>
+												<?php echo form_hidden("update[ID][]" );?>
+												<textarea class="form-control" name="update[output][<?php ?>]" ><?php echo $kegiatan->output ?></textarea>
 											</td>
 								 		</tr>
 
