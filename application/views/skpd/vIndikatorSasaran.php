@@ -18,12 +18,16 @@
              **/
             foreach( $this->msasaran->get_tujuandansasaran() as $key => $tujuan) : ?>
             <li class="time-label">
+
                   <span class="bg-gray">Tujuan </span><span class="bg-blue"> <small><?php echo $tujuan->deskripsi ?></small></span>
+
             </li>
-            <?php $nos=1; foreach ($this->msasaran->get_sasaran($tujuan->id_sasaran) as $keys => $sasaran): ?>
+            <?php $nos=1; foreach ($this->msasaran->get_sasaran($tujuan->id_sasaran) as $key => $sasaran): ?>
             
            	<li class="time-label">
+
                   <span class="bg-gray">Sasaran  </span><span class="bg-blue"> <small><?php echo $sasaran->deskripsi ?></small></span>
+
             </li>
             <li>
                 <i class="fa fa-pencil"></i>
@@ -49,7 +53,7 @@
 	                        		echo form_hidden("update[ID][]", $indikator->id_indikator_sasaran);
 	                        	?>
 	                        	<tr class="dt-<?php echo $indikator->id_indikator_sasaran; ?>">
-	                        		<td class="text-center"><?php echo $no++ ?></td>
+	                        		<td class="text-center"><?php echo ++$key ?></td>
 	                        		<td>               
 				                       <?php for($tahun = $this->msasaran->periode_awal; $tahun <= $this->msasaran->periode_akhir; $tahun++) : ?>
 	                        			<div class="col-md-6">
@@ -103,8 +107,9 @@
 				                       <?php for($tahun = $this->msasaran->periode_awal; $tahun <= $this->msasaran->periode_akhir; $tahun++) : ?>
 	                        			<div class="col-md-6">
 		                        			<label>
-		                        				<input type="checkbox" checked="checked" required="required"
-		                        				  name="create[tahun][<?php echo $sasaran->id_sasaran ?>][]" value="<?php echo $tahun ?>">  <?php echo $tahun ?>
+		                        				<input type="checkbox" <?php if (date('Y')==$tahun): ?>
+		                        					checked
+		                        				<?php endif ?>  name="create[tahun][<?php echo $sasaran->id_sasaran ?>][]" value="<?php echo $tahun ?>">  <?php echo $tahun ?>
 		                        			</label>
 										</div>
 	                        		<?php endfor; ?>

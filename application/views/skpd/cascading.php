@@ -50,7 +50,7 @@
 			</div>
 			<div class="rkt flow last hvr-pulse-grow">
 				<span>12</span>
-				<a href="<?php echo base_url('rktprogram/anggarankegiatanrkt') ?>">ANGGARAN KEGIATAN RKT</a>
+				<a href="<?php echo base_url('skpd/rktprogram/anggarankegiatanrkt') ?>">ANGGARAN KEGIATAN RKT</a>
 			</div>
 		</div>
 		<div class="flow-wrapper" id="row3">
@@ -97,12 +97,12 @@
 				<a href="<?php echo base_url('skpd/panggarankegiatan') ?>">PENYERAPAN ANGGARAN PROGRAM</a>
 			</div>
 			<div class="kinerja flow center hvr-pulse-grow">
-				<span style="text-decoration: line-through red;">23</span>
-				<a href="">PENYERAPAN ANGGARAN KEGIATAN</a>
+				<span>23</span>
+				<a href="<?php echo base_url('skpd/panggarankegiatan') ?>">PENYERAPAN ANGGARAN KEGIATAN</a>
 			</div>
 			<div class="kinerja flow hvr-pulse-grow">
-				<span style="text-decoration: line-through red;">24</span>
-				<a href="">LAKIP</a>
+				<span>24</span>
+				<a href="<?php echo base_url('skpd/report/renstra') ?>">LAKIP</a>
 			</div>
 		</div>
 

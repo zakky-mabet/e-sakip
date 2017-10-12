@@ -25,7 +25,7 @@
 				foreach($this->mprogram->getProgramByLogin() as $keProgram => $program) :
 				?>
 			            <li>
-					<table class="mini-font table table-bordered bg-white">
+					<table class="table table-bordered bg-white">
 						<thead class="bg-blue">
 							<tr>
 								<th rowspan="1" width="50"><?php echo $tahun ?></th>
@@ -57,7 +57,7 @@
 						?>
 							<tr>
 								<td><?php echo ++$keyKegiatan ?>.</td>
-								<td><?php echo $program->deskripsi; ?></td>
+								<td><?php echo $kegiatan->deskripsi; ?></td>
 								<td class="text-center"><?php echo @number_format($anggaran) ?></td>
 								<td><?php echo number_format( @$rkt->anggaran_rkt) ?></td>
 								<td>

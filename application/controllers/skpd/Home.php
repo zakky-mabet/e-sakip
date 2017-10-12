@@ -7,6 +7,7 @@ class Home extends Skpd {
 	{
 		parent::__construct();
 
+		$this->load->model('setting');
 	}
 
 	public function index() 
@@ -29,7 +30,7 @@ class Home extends Skpd {
 		$this->page_title->push('Cascading', ' Alur Pengisian Data');
 
 		$this->data = array(
-			'title' => "Main Dashboard", 
+			'title' => "Cascading", 
 			'breadcrumbs' => $this->breadcrumbs->show(),
 			'page_title' => $this->page_title->show()
 		);

@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  **/
 $this->load->view('skpd/report/print/layout/header');
 ?>
-<p class="text-center"><strong>Capaian Indikator Kinerja Utama Tahun <?php echo $this->tahun ?></strong></p>
+<p class="text-center"><strong>Capaian Indikator Kinerja Strategis Tahun <?php echo $this->tahun ?></strong></p>
 				<table class="mini-font table table-bordered" style="width: 100%;">
 					<thead class="bg-blue">
 						<tr>
@@ -43,7 +43,7 @@ $this->load->view('skpd/report/print/layout/header');
 			         * @var string
 			         **/
 			        foreach(  $this->mprogram->getSasaranByLogin() as $key => $sasaran) : 
-			        	$DIndikator = $this->tjuan->getInodikatorSasaranBySasaran($sasaran->id_sasaran, 'yes');
+			        	$DIndikator = $this->tjuan->getInodikatorSasaranBySasaran($sasaran->id_sasaran);
 			        	$col1 = (count($DIndikator) + 1) + (count($DIndikator)*5);
 			        ?>
 					<tr>

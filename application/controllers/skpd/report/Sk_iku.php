@@ -11,7 +11,7 @@ class Sk_iku extends Skpd
 		
 		$this->breadcrumbs->unshift(1, 'Laporan',  'skpd/report/sk_ibu');
 
-		$this->load->model(array('msk_iku_report','mpk_indikator_sasaran'));
+		$this->load->model(array('msk_iku_report'));
 	}
 
 	public function index()
@@ -32,12 +32,12 @@ class Sk_iku extends Skpd
 		switch ( $this->input->get('output') ) 
 		{
 			case 'print':
-				$this->load->view('skpd/report/print/SK_IKU_print', $this->data);
+				$this->load->view('skpd/report/print/indexiku', $this->data);
 				break;
 			case 'pdf':
-			    $this->pdf->setPaper('legal', 'landscape');
+			    $this->pdf->setPaper('legal', 'potrait');
 			    $this->pdf->filename = strtoupper($this->data['title']).".pdf";
-			    $this->pdf->load_view('skpd/report/print/SK_IKU_print', $this->data);
+			    $this->pdf->load_view('skpd/report/print/indexiku', $this->data);
 				break;
 			case 'excel':
 				show_error('On Progress!');

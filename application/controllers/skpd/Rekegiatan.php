@@ -20,10 +20,10 @@ class Rekegiatan extends Skpd
 
 	public function index()
 	{
-		$this->page_title->push('Kinerja', 'Capaian Kinerja Output Kegiatan Per Tahun');
+		$this->page_title->push('Kinerja', 'Capaian Kinerja Output Kegiatan');
 
 		$this->data = array(
-			'title' => "Capaian Kinerja Output Kegiatan Per Tahun", 
+			'title' => "Capaian Kinerja Output Kegiatan", 
 			'breadcrumbs' => $this->breadcrumbs->show(),
 			'page_title' => $this->page_title->show(),
 		);

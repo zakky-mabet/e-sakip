@@ -64,7 +64,49 @@ $(function()
 		}
 	});
 
+	$('a[data-key="satuan"]').on('click', function() 
+	{
+		var ID = $(this).data('id');
 
+		switch($(this).data('action')) 
+		{
+			case 'update':
+				$.get(base_url + '/satuan/getsatuanjson/' + ID, function(result) 
+				{
+					$('#update-satuan').val(result.nama);
+
+			        $('#update-jenis option').filter(function() 
+			        {
+			            return this.textContent == result.jenis;
+			        }).prop('selected', true);
+
+					$('div#modal-update').modal('show');
+
+					$( "#form-update" ).submit(function( event ) 
+					{
+					  	event.preventDefault();
+
+					  	$.post(base_url + '/satuan/updatesatuan/' + ID, {
+					  		satuan : $('#update-satuan').val(),
+					  		jenis : $('#update-jenis').val()
+					  	}, function(response) 
+					  	{
+					  		console.log(response.status);
+
+					  		if( response.status === 'success') {
+					  			$('div#modal-update').modal('hide');
+					  			window.location.reload();
+					  		}
+					  	})
+					});
+				});
+			break;
+			case 'delete':
+			$('#modal-delete').modal('show');
+			$('a#btn-yes').attr('href', base_url + '/satuan/delete/' + $(this).data('id'));
+			break;
+		}
+	});
 });
 
 $(function() {
