@@ -58,12 +58,12 @@
 					            	
 					            ?>
 	                        	<tr class="dt-<?php echo $tujuan->id_sasaran; ?>">
-	                        		<td><?php echo $key ?>.<?php echo ($key+$keyTjuan) ?></td>
+	                        		<td class="text-center"><?php echo ++$keyTjuan ?></td>
 	                        		<td>
 	                        		<?php for($tahun = $this->msasaran->periode_awal; $tahun <= $this->msasaran->periode_akhir; $tahun++) : ?>
 	                        			<div class="col-md-6">
 		                        			<label>
-		                        				<input type="checkbox" name="update[tahun][<?php echo $tujuan->id_sasaran ?>][]" value="<?php echo $tahun ?>" <?php if(in_array($tahun, explode(',', $tujuan->tahun))) echo 'checked'; ?>> <?php echo $tahun ?>
+		                        				<input type="checkbox" required="required" name="update[tahun][<?php echo $tujuan->id_sasaran ?>][]" value="<?php echo $tahun ?>" <?php if(in_array($tahun, explode(',', $tujuan->tahun))) echo 'checked'; ?>> <?php echo $tahun ?>
 		                        			</label>
 										</div>
 	                        		<?php endfor; ?>
@@ -88,7 +88,8 @@
 										data-remove="tr.dt-<?php echo $tujuan->id_sasaran; ?>">
 											<i class="fa fa-times"></i>
 										</a>
-										<button style="margin-top: 40px" id="btn-add-sasaran" type="button" class="btn btn-default" 
+
+										<button onclick="hide('param'); return false;" style="margin-top: 40px" id="param"  type="button" class="btn btn-default btn-add-sasaran" 
 										data-id="<?php echo $tujuan->id_tujuan ?>" 
 										data-parent="<?php echo $key ?>"
 										data-key="<?php echo ($keyTjuan+1) ?>" data-toggle="tooltip" data-placement="top"
@@ -102,12 +103,12 @@
 					            ?>
 								<!-- End Update -->
 	                        	<tr>
-	                        		<td><?php echo $key ?>.1</td>
+	                        		<td><?php echo $key ?></td>
 	                        		<td>
 	                        		<?php for($tahun = $this->msasaran->periode_awal; $tahun <= $this->msasaran->periode_akhir; $tahun++) : ?>
 	                        			<div class="col-md-6">
 		                        			<label>
-		                        				<input type="checkbox" name="create[tahun][<?php echo $misi->id_tujuan ?>][]" value="<?php echo $tahun ?>"> <?php echo $tahun ?>
+		                        				<input type="checkbox" checked="checked" required="required" name="create[tahun][<?php echo $misi->id_tujuan ?>][]" value="<?php echo $tahun ?>"> <?php echo $tahun ?>
 		                        			</label>
 										</div>
 	                        		<?php endfor; ?>
@@ -204,3 +205,11 @@
 		</div>
 	</div>
 </div>
+
+<script>
+        function hide(param) {
+
+        document.getElementById(param).style.display = 'none';
+
+        }
+</script>

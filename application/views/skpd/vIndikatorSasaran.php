@@ -18,12 +18,12 @@
              **/
             foreach( $this->msasaran->get_tujuandansasaran() as $key => $tujuan) : ?>
             <li class="time-label">
-                  <span class="bg-gray">Tujuan <?php echo ++$key ?>.</span><span class="bg-blue"> <small><?php echo $tujuan->deskripsi ?></small></span>
+                  <span class="bg-gray">Tujuan </span><span class="bg-blue"> <small><?php echo $tujuan->deskripsi ?></small></span>
             </li>
             <?php $nos=1; foreach ($this->msasaran->get_sasaran($tujuan->id_sasaran) as $keys => $sasaran): ?>
             
            	<li class="time-label">
-                  <span class="bg-gray">Sasaran <?php echo $key ?>. </span><span class="bg-blue"> <small><?php echo $sasaran->deskripsi ?></small></span>
+                  <span class="bg-gray">Sasaran  </span><span class="bg-blue"> <small><?php echo $sasaran->deskripsi ?></small></span>
             </li>
             <li>
                 <i class="fa fa-pencil"></i>
@@ -54,7 +54,7 @@
 				                       <?php for($tahun = $this->msasaran->periode_awal; $tahun <= $this->msasaran->periode_akhir; $tahun++) : ?>
 	                        			<div class="col-md-6">
 		                        			<label>
-		                        				<input type="checkbox" name="update[tahun][<?php echo $indikator->id_indikator_sasaran ?>][]" value="<?php echo $tahun ?>" <?php if(in_array($tahun, explode(',', $indikator->tahun))) echo 'checked'; ?>> <?php echo $tahun ?>
+		                        				<input type="checkbox" required="required" name="update[tahun][<?php echo $indikator->id_indikator_sasaran ?>][]" value="<?php echo $tahun ?>" <?php if(in_array($tahun, explode(',', $indikator->tahun))) echo 'checked'; ?>> <?php echo $tahun ?>
 		                        			</label>
 										</div>
 	                        		<?php endfor; ?>

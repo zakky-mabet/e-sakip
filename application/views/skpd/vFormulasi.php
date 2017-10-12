@@ -26,7 +26,7 @@
 	                        <thead>
 	                            <tr class="bg-blue">
 	                                <th width="30" class="text-center" >NO.</th>
-	                                <th colspan="6" class="text-center" width="170">Indikator</th>
+	                                <th colspan="6" class="text-center">Indikator</th>
 	                          		<th class="text-center" >Satuan</th>	
 	                                <th colspan="" class="text-center"  width="150">IKU</th>
 	                            
@@ -53,7 +53,7 @@
 	                        		<td class="text-center" rowspan="4"></td>
 	                        	</tr>
 	                        	<tr>
-	                        		<td style="margin-top: 300px;  vertical-align:middle; font-weight: 600;" class="text-center bg-red"  ><span >Alasan</span></td>
+	                        		<td width="200" style="margin-top: 300px;  vertical-align:middle; font-weight: 600;" class="text-center bg-red"  ><span >Alasan</span></td>
 	                        		<td colspan="7"><textarea name="update[alasan][<?php echo $indikator->id_formulasi_sasaran ?>]" class="form-control"><?php echo $indikator->alasan ?></textarea>
 	                        	</td>
 	                        	</tr>

@@ -1,7 +1,7 @@
 	$(document).ready( function() 
 	{
 
-	$('button#btn-add-sasaran').on('click', function()
+	$('button.btn-add-sasaran').on('click', function()
 	{
 		var key = $(this).data('key');
 		var ID = $(this).data('id');
@@ -19,8 +19,6 @@
 		add_form_indikator_sasaran(ID, key, nomor, $(this).data('parent') );
 
 	});
-
-
 
      /*!
     * Modal Masalah 
@@ -201,7 +199,7 @@
 
 function add_form_indikator_sasaran(data, key, nomor, parent) {
 
-	var html = '<tr id="baris-'+data+'-'+nomor+'"><td>'+ nomor +'</td>';
+	var html = '<tr id="baris-'+data+'-'+nomor+'"><td>'+'</td>';
 	html += '<td>';
 
 	for( var tahun = $('tbody#data-' + data).data('tahun-awal'); tahun <= $('tbody#data-' + data).data('tahun-akhir'); tahun++)
