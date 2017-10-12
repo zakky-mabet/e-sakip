@@ -6,35 +6,32 @@
 		<div class="box">
 			<div class="box-header">
 				<div class="col-md-6">
-					<h4 class="box-heading">Data Prestasi</h4>
+					<h4 class="box-heading">Master Data Satuan</h4>
 				</div>
                 <a class="btn btn-default pull-right"  data-toggle="modal" href='#modal-tambah'>
-                    <i class="fa fa-plus"></i> Tambah Prestasi
+                    <i class="fa fa-plus"></i> Tambah Sataun
                 </a>
 			</div>
 			<div class="box-body">
 				<div class="col-md-12 bottom2x">
 				<?php echo form_open(current_url(), array('method' => 'get')); ?>
-					<div class="col-md-2">
-						<label for="">Tahun</label>
-						<select name="thn" class="form-control input-sm">
+					<div class="col-md-4">
+						<label for="">SKPD</label>
+						<select name="skpd" class="form-control input-sm">
 							<option value="">-- PILIH --</option>
-						<?php foreach( range($this->periode_awal, $this->periode_akhir) as $tahun) 
-						{
-							$selected = ($this->input->get('thn') == $tahun) ? 'selected' : '';
-							echo '<option value="'.$tahun.'" '.$selected.'>'.$tahun.'</option>';
-						}
-						?>
+						<?php foreach($this->db->get('skpd')->result() as $row) : ?>
+							<option value="<?php echo $row->ID ?>" <?php if($this->input->get('skpd')==$row->ID) echo 'selected' ?>>
+								<?php echo $row->nama ?>
+							</option>
+						<?php endforeach; ?>
 						</select>
 					</div>
-					<div class="col-md-3">
-						<label for="">Tingkat</label>
-						<select name="tingkat" class="form-control input-sm">
+					<div class="col-md-2">
+						<label for="">Jenis</label>
+						<select name="jenis" class="form-control input-sm">
 							<option value="">-- PILIH --</option>
-							<option value="internasional" <?php if($this->input->get('tingkat')=='internasional') echo 'selected' ?>>internasional</option>
-							<option value="nasional" <?php if($this->input->get('tingkat')=='nasional') echo 'selected' ?>>nasional</option>
-							<option value="provinsi" <?php if($this->input->get('tingkat')=='provinsi') echo 'selected' ?>>provinsi</option>
-							<option value="kota/kabupaten" <?php if($this->input->get('tingkat')=='kota/kabupaten') echo 'selected' ?>>kota/kabupaten</option>
+							<option value="Kuantitatif" <?php if($this->input->get('jenis')=='Kuantitatif') echo 'selected' ?>>Kuantitatif</option>
+							<option value="Kualitatif" <?php if($this->input->get('jenis')=='Kualitatif') echo 'selected' ?>>Kualitatif</option>
 						</select>
 					</div>
 					<div class="col-md-3">
@@ -51,29 +48,28 @@
 					<thead class="bg-blue">
 						<tr>
 							<th class="text-center" width="50">No.</th>
-							<th class="text-center">Prestasi</th>
-							<th class="text-center">Tahun</th>
-							<th class="text-center">Tingkat</th>
+							<th class="text-center">Nama SKPD</th>
+							<th class="text-center">Nama Satuan</th>
+							<th class="text-center">Jenis Satuan</th>
+							<th width="100"></th>
 						</tr>
 					</thead>
 					<tbody>
-					<?php foreach( $prestasi as $key => $row ) : ?>
+					<?php foreach( $satuan as $key => $row ) : ?>
 						<tr>
 							<td><?php echo ++$this->page; ?>.</td>
-							<td class="td-action">
-								<?php echo $row->deskripsi; ?>
-								<div class="button-action">
-									
-									<a href="javascript:void(0)" data-action="update" data-key="prestasi" data-id="<?php echo $row->id_prestasi ?>"><i class="fa fa-pencil"></i> Ubah</a> 
-									 |
-									<a href="javascript:void(0)" data-action="delete" data-key="prestasi" data-id="<?php echo $row->id_prestasi ?>" class="red"> <i class="fa fa-trash-o"></i> Hapus</a>
-								</div>
+							<td><?php echo $row->nama_skpd ?></td>
+							<td> <?php echo $row->nama; ?></td>
+							<td class="text-center"><?php echo $row->jenis; ?></td>
+							<td class="text-center">
+								<?php if($this->SKPD == $row->id_skpd) : ?>
+								<a href="javascript:void(0)" data-id="<?php echo $row->id ?>" data-action="update" data-key="satuan" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></a>
+								<a href="javascript:void(0)" data-id="<?php echo $row->id ?>" data-action="delete" data-key="satuan" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+								<?php endif; ?>
 							</td>
-							<td class="text-center"><?php echo $row->tahun; ?></td>
-							<td class="text-center"><?php echo strtoupper($row->tingkat) ?></td>
 						</tr>
 					<?php endforeach; 
-					if( ! $prestasi ) :
+					if( ! $satuan ) :
 					?>
 						<tr>
 							<td colspan="5">
@@ -97,29 +93,20 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title"><i class="fa fa-pencil"></i> Tambah Prestasi</h4>
+				<h4 class="modal-title"><i class="fa fa-plus"></i> Tambah Satuan</h4>
 			</div>
 			<?php echo form_open(current_url()); ?>
 			<div class="modal-body">
 				<div class="form-group">
-					<label for="">Prestasi :</label>
-					<textarea name="prestasi" class="form-control" rows="2" required></textarea>
+					<label for="">Nama Satuan :</label>
+					<textarea name="satuan" class="form-control" rows="2" required></textarea>
 				</div>
 				<div class="form-group">
-					<label for="">Tahun Prestasi :</label>
-					<select name="tahun" class="form-control" required="required">
-					<?php foreach( range($this->periode_awal, $this->periode_akhir) as $tahun) 
-					echo '<option value="'.$tahun.'">'.$tahun.'</option>';
-					?>
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="">Tingkat Prestasi :</label>
-					<select name="tingkat" class="form-control" required="required">
-							<option value="internasional">internasional</option>
-							<option value="nasional">nasional</option>
-							<option value="provinsi">provinsi</option>
-							<option value="kota/kabupaten">kota/kabupaten</option>
+					<label for="">Jenis :</label>
+					<select name="jenis" class="form-control input-sm">
+						<option value="">-- PILIH --</option>
+						<option value="Kuantitatif" <?php if($this->input->get('jenis')=='Kuantitatif') echo 'selected' ?>>Kuantitatif</option>
+						<option value="Kualitatif" <?php if($this->input->get('jenis')=='Kualitatif') echo 'selected' ?>>Kualitatif</option>
 					</select>
 				</div>
 			</div>
@@ -137,29 +124,20 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title"><i class="fa fa-plus"></i> Update Prestasi</h4>
+				<h4 class="modal-title"><i class="fa fa-pencil"></i> Update Satuan</h4>
 			</div>
 			<form method="post" id="form-update">
 			<div class="modal-body">
 				<div class="form-group">
-					<label for="">Prestasi :</label>
-					<textarea name="prestasi" id="update-prestasi" class="form-control" rows="2" required></textarea>
+					<label for="">Nama Satuan :</label>
+					<textarea name="satuan" id="update-satuan" class="form-control" rows="2" required></textarea>
 				</div>
 				<div class="form-group">
-					<label for="">Tahun Prestasi :</label>
-					<select name="tahun" id="update-tahun" class="form-control" required="required">
-					<?php foreach( range($this->periode_awal, $this->periode_akhir) as $tahun) 
-					echo '<option value="'.$tahun.'">'.$tahun.'</option>';
-					?>
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="">Tingkat Prestasi :</label>
-					<select name="tingkat" id="update-tingkat" class="form-control" required="required">
-							<option value="internasional">internasional</option>
-							<option value="nasional">nasional</option>
-							<option value="provinsi">provinsi</option>
-							<option value="kota/kabupaten">kota/kabupaten</option>
+					<label for="">Jenis :</label>
+					<select name="jenis" id="update-jenis" class="form-control input-sm">
+						<option value="">-- PILIH --</option>
+						<option value="Kuantitatif" <?php if($this->input->get('jenis')=='Kuantitatif') echo 'selected' ?>>Kuantitatif</option>
+						<option value="Kualitatif" <?php if($this->input->get('jenis')=='Kualitatif') echo 'selected' ?>>Kualitatif</option>
 					</select>
 				</div>
 			</div>

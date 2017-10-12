@@ -43,18 +43,10 @@ class Maccount extends Skpd_model
 			'id_skpd' => $this->SKPD
 		));
 
-		if( $this->db->affected_rows() )
-		{
-			$this->template->alert(
-				' Tersimpan! Perubahan berhasil tersimpan.', 
-				array('type' => 'success','icon' => 'check')
-			);
-		} else {
-			$this->template->alert(
-				' Gagal! Tidak ada data yang diubah.', 
-				array('type' => 'warning','icon' => 'warning')
-			);
-		}
+		$this->template->alert(
+			' Tersimpan! Perubahan berhasil tersimpan.', 
+			array('type' => 'success','icon' => 'check')
+		);
 	}
 
 	public function passwordUpdate()

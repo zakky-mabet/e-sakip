@@ -115,6 +115,138 @@ class Skpd_model extends MY_Model
 		$this->db->where_in('id_tujuan', $IDTujuan);
 		return $this->db->get('sasaran')->result();
 	}
+
+	public function countMisi()
+	{
+		return $this->db->get_where('misi', array('id_kepala' => $this->kepala))->num_rows();
+	}
+
+	public function countTujuan()
+	{
+		return $this->db->get_where('tujuan', array('id_kepala' => $this->kepala))->num_rows();
+	}
+
+	public function countSasaran()
+	{
+		return $this->db->get_where('sasaran', array('id_kepala' => $this->kepala))->num_rows();
+	}
+
+	public function countIndikatorKinerja()
+	{
+		$sasaran = $this->db->get_where('sasaran', array('id_kepala' => $this->kepala))->result();
+
+		if(!$sasaran)
+			return 0;
+
+		$IDSasaran = array();
+		foreach ($sasaran as $key => $value) 
+			$IDSasaran[] = $value->id_sasaran;
+
+		$this->db->where_in('id_sasaran', $IDSasaran);
+		return $this->db->get_where('indikator_sasaran')->num_rows();
+	}
+
+	public function countProgram()
+	{
+		$sasaran = $this->db->get_where('sasaran', array('id_kepala' => $this->kepala))->result();
+
+		if(!$sasaran)
+			return 0;
+
+		$IDSasaran = array();
+		foreach ($sasaran as $key => $value) 
+			$IDSasaran[] = $value->id_sasaran;
+
+		$this->db->where_in('id_sasaran', $IDSasaran);
+		return $this->db->get_where('program')->num_rows();
+	}
+
+	public function statusWarna()
+	{
+		if($this->checkPKPerubahanEntries())
+			return '#347A31';
+
+		if($this->checkPKPerubahanEntries())
+			return '#DB8B0B';
+
+		if($this->checkRKTEntries())
+			return '#D94A38';
+
+		if($this->checkRenstraEntries())
+			return '#3C8DBC';
+	}
+
+	public function checkRenstraEntries($result = FALSE)
+	{
+		$sasaran = $this->db->get_where('sasaran', array('id_kepala' => $this->kepala))->result();
+
+		if(!$sasaran)
+			return FALSE;
+
+		$IDSasaran = array();
+		foreach ($sasaran as $key => $value) 
+			$IDSasaran[] = $value->id_sasaran;
+
+		$this->db->where_in('id_sasaran', $IDSasaran);
+		$program = $this->db->get_where('program')->result();
+
+		// PROGRAM
+		$IDProgram = array();
+		foreach ($program as $key => $value)
+			$IDProgram[] = $value->id_program;
+
+		$this->db->where_in('id_program', $IDProgram);
+		if($result == FALSE) {
+			return $this->db->get('kegiatan_program')->num_rows();
+		} else {
+			return $this->db->get('kegiatan_program')->result();
+		}
+	}
+
+	private function checkRKTEntries()
+	{
+		if($this->checkRenstraEntries() == FALSE)
+			return FALSE;
+
+		$IDKegiatan = array();
+		foreach ($this->checkRenstraEntries(TRUE) as $key => $value) 
+			$IDKegiatan[] = $value->id_kegiatan;
+
+		$this->db->where_in('id_kegiatan', $IDKegiatan);
+		$this->db->where('anggaran_rkt !=', 0);
+
+		return $this->db->get('rkt_anggaran_kegiatan')->num_rows();
+	}
+
+	private function checkPKPerubahanEntries()
+	{
+		if($this->checkRenstraEntries() == FALSE)
+			return FALSE;
+
+		$IDKegiatan = array();
+		foreach ($this->checkRenstraEntries(TRUE) as $key => $value) 
+			$IDKegiatan[] = $value->id_kegiatan;
+
+		$this->db->where_in('id_kegiatan', $IDKegiatan);
+		$this->db->where('nilai_anggaran !=', 0);
+
+		return $this->db->get('pk_anggaran_kegiatan_perubahan')->num_rows();
+	}
+
+	private function checkPAnggaranKegiatan()
+	{
+		if($this->checkRenstraEntries() == FALSE)
+			return FALSE;
+
+		$IDKegiatan = array();
+		foreach ($this->checkRenstraEntries(TRUE) as $key => $value) 
+			$IDKegiatan[] = $value->id_kegiatan;
+
+		$this->db->where_in('id_kegiatan', $IDKegiatan);
+		$this->db->where('nilai_anggaran !=', 0);
+
+		return $this->db->get('pk_anggaran_kegiatan_perubahan')->num_rows();
+	}
 }
 
 /* End of file MY_Model.php */

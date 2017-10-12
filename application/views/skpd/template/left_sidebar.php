@@ -4,13 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <aside class="main-sidebar">
       <section class="sidebar">
       <div class="user-panel">
-         <div class="pull-left image">
-            <img src="<?php echo base_url('assets/public/image/avatar.jpg'); ?>" class="img-circle" alt="User Image">
+         <div class="pull-left">
+            <p><strong>SKPD :</strong> <br> <?php echo strtoupper($this->session->userdata('SKPD')->nama) ?></p>
+            <small><strong>E-Mail :</strong> <?php echo $this->session->userdata('SKPD')->email ?></small>
          </div>
-         <div class="pull-left info">
-            <p><?php echo $this->session->userdata('SKPD')->nama ?></p>
-            <small><?php echo $this->session->userdata('SKPD')->email ?></small>
-         </div>
+         <div style="margin-bottom: 40px;"></div>
       </div>
       <ul class="sidebar-menu">
         <li class="<?php echo active_link_method('index','home'); ?>">
@@ -243,7 +241,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
           </ul>
         </li>
-        <li class="treeview <?php  echo active_link_multiple(array('renstra','rrkt','iku','reanggaran','reaksi','efisiensi_kinerja','pk','tabulasi')); ?>">
+        <li class="treeview <?php  echo active_link_multiple(array('renstra','rrkt','iku','reanggaran','reaksi','efisiensi_kinerja','pk','tabulasi','sk_iku')); ?>">
           <a href="#">
             <i class="fa fa-line-chart"></i>
             <span>Laporan</span>
@@ -298,8 +296,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li class="<?php echo active_link_method('index','tabulasi'); ?>">
                 <a href="<?php echo base_url('skpd/report/tabulasi'); ?>"> Tabulasi</a>
             </li>
-            <li class="<?php echo active_link_method('index','sd'); ?>" style="text-decoration: line-through;">
-                <a href=""> SK IKU</a>
+            <li class="<?php echo active_link_method('index','sk_iku'); ?>">
+                <a href="<?php echo base_url('skpd/report/sk_iku') ?>"> SK IKU</a>
             </li>
             <li class="<?php echo active_link_method('index','reaksi'); ?>">
                 <a href="<?php echo base_url("skpd/report/reaksi") ?>"> Rencana Aksi</a>
@@ -309,16 +307,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
           </ul>
         </li>
+        <li class="<?php echo active_link_controller('satuan'); ?>">
+            <a href="<?php  echo site_url('skpd/satuan') ?>">
+                <i class="fa fa-hourglass-half"></i> <span>Master Satuan</span>
+            </a>
+        </li>
         <li class="<?php echo active_link_controller('account'); ?>">
             <a href="<?php  echo site_url('skpd/account') ?>">
                <i class="fa fa-wrench"></i> <span>Pengaturan Akun</span>
             </a>
         </li>
-        <li class="<?php echo active_link_controller('instansi'); ?>">
-            <a href="">
-               <i class="fa fa-info-circle"></i> <span>Panduan Pengguna</span>
-            </a>
-        </li>
+<!--         <li class="<?php echo active_link_controller('instansi'); ?>">
+    <a href="">
+       <i class="fa fa-info-circle"></i> <span>Panduan Pengguna</span>
+    </a>
+</li> -->
         </ul>
       </section>
    </aside>
