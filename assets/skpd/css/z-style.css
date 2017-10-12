@@ -1,12 +1,15 @@
 .bold { font-weight: 600 }
 
+.td-top { vertical-align: top }
+.td-middle { vertical-align: middle }
+
 /* time line dashboard */
 
 .em1 { font-size: 0.8em; }
 .em2 { font-size: 0.6em; }
 .em3 { font-size: 0.9em; }
 .uppercase{ text-transform: uppercase }
-.font-times { font-family: "Times New Roman", Georgia, Serif; }
+.font-times { font-family: "Times New Roman", Georgia, Serif; font-size: 1.1em;}
 
 .border-radius {
 	border-radius: 9px 9px 9px 9px;
