@@ -1,44 +1,20 @@
-<div class="row">
-	<div class="col-md-12">
-		<div class="box" id="stickerButton100x">
-			<div class="box-header">
-				<div class="col-md-4">
-					<h4 class="box-heading"> <i class="fa fa-files-o"></i> Surat Keputusan Indikator Kinerja Utama </h4>
-					<p style="margin-left: 23px;">Periode <?php echo $this->periode_awal.'-'.$this->periode_akhir ?></p>
-				</div>
-				<div class="col-md-7">
-					<div class="col-md-4">
-						<label>Tahun</label>
-						<select name="thn" class="form-control input-sm" onchange="window.location = '<?php echo current_url() ?>?thn=' + this.value">
-						<?php  
-						foreach(range($this->periode_awal, $this->periode_akhir) as $tahun) 
-						{
-							$selected = ($tahun == $this->tahun) ? 'selected' : '';
-							echo '<option value="'.$tahun.'" '.$selected.'>'.$tahun.'</option>';
-						}
-						?>
-						</select>
-					</div>
-					<div class="col-md-6 pull-right top2x">
-						<a href="<?php echo current_url().'?output=print' ?>" class="btn btn-default btn-print">
-							<i class="fa fa-print"></i> Cetak
-						</a>
-						<a href="<?php echo current_url().'?output=pdf' ?>" target="_blank" class="btn btn-default">
-							<i class="fa fa-file-pdf-o"></i> PDF
-						</a>
-						<!-- <a href="" class="btn btn-default">
-							<i class="fa fa-file-excel-o"></i> Excel
-						</a> -->
-					</div>
-				</div>
-			</div>
-			<div class="clearfix"></div>
-		</div>
-		<div class="box no-border">
-			<div class="box-body no-padding">
-				<div class="clearfix"></div>
-				<hr>
-				<div class="col-md-12 text-center ">
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+/**
+ * Call Header Print (KOP)
+ *
+ * @author Vicky Nitinegoro http://vicky.work
+ **/
+$this->load->view('skpd/report/print/layout/header');
+?>
+
+<link rel="stylesheet" href="<?php echo base_url() ?>/assets/skpd/css/z-style.css">
+<style>	
+	.text-left { text-align: left   }
+</style>
+
+<div class="col-md-12 text-center ">
 					<p class="font-times">
 						<strong class="font-times">
 							KEPUTUSAN <br>
@@ -47,19 +23,19 @@
 						</strong>
 							NOMOR : 
 					</p>
-					<br>
+			
 					<p class="font-times">
 						<b class="font-times">TENTANG
 						PENETAPAN INDIKATOR KINERJA UTAMA (IKU) <br>
 						DI LINGKUNGAN <span class="uppercase font-times">  <?php echo $this->session->userdata('SKPD')->nama; ?> </span><br>
 						KABUPATEN BANGKA TENGAH</b>
 					</p>
-					<br>
+				
 					<p class="uppercase font-times"> <b class="font-times ">
 					PLT.KEPALA DINAS PERTANIAN DAN PETERNAKAN <br>
 					KABUPATEN BANGKA TENGAH</b>
 					</p>
-					<br>
+				
 					
 					<!-- Menimbang -->
 					<table>
@@ -108,11 +84,9 @@
 							</tr>
 				
 					</table>
-							<br><br>	
+					
 
 							<p class=" text-center uppercase font-times">Memutuskan :</p>
-
-		
 
 					<!-- Menetapkan -->
 					<table>
@@ -165,7 +139,7 @@
 						<tr>
 							<td  class="text-left td-top font-times"> Pada tanggal </td>
 							<td width="40" class="text-center td-top font-times"> :</td>
-							<td class="text-left td-top font-times"></td>
+							<td class="text-left td-top font-times"> </td>
 						</tr>
 
 					</table>
@@ -191,16 +165,16 @@
 
 					</table>
 					</div>	
-				
+						<hr>	
 					<div class="col-md-12 text-center font-times">
-						<br><br><br><br><br><br><br><br>	
+						
 						Lampiran	:	Keputusan Plt. <span class="uppercase font-times"><?php echo $this->session->userdata('SKPD')->nama; ?> </span> <br>
 							Nomor :  <br>
 							Tanggal :  <br>
 
 							<span class="bold uppercase font-times">INDIKATOR KINERJA UTAMA (IKU)</span> <br>
 							<span class="uppercase font-times bold"><?php echo $this->session->userdata('SKPD')->nama; ?> </span> <br>
-							<span class="bold uppercase font-times">KABUPATEN BANGKA TENGAH</span> <br><br>
+							<span class="bold uppercase font-times">KABUPATEN BANGKA TENGAH</span> 
 
 					</div>
 					
@@ -253,7 +227,7 @@
 
 
 									<td  class="text-center td-top font-times">
-										<span class="uppercase font-times"> PLT.  <?php echo $this->session->userdata('SKPD')->nama; ?> </span> <br><br><br><br><br>
+										<span class="uppercase font-times"><br>	 PLT.  <?php echo $this->session->userdata('SKPD')->nama; ?> </span> <br><br><br><br><br>
 
 										<?php echo $this->msk_iku_report->kepala_skpd($this->session->userdata('SKPD')->ID)->nama_kepala; ?> <br>
 										<?php echo $this->msk_iku_report->kepala_skpd($this->session->userdata('SKPD')->ID)->pangkat; ?> <?php echo $this->msk_iku_report->kepala_skpd($this->session->userdata('SKPD')->ID)->golongan; ?> <br>
@@ -263,15 +237,10 @@
 								</tr>
 
 							</table>
-							</div>
-
-				
-		
-					
-					<div style="margin-bottom:400px;"></div>
-
+						</div>
 				</div>
-			</div>
-		</div>
-	</div>
-</div>
+<?php
+$this->load->view('skpd/report/print/layout/footer');
+
+/* End of file print-people.php */
+/* Location: ./application/views/people/print-people.php */

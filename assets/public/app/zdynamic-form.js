@@ -170,12 +170,12 @@
 	for( var tahun = $('tbody#data-' + data).data('tahun-awal'); tahun <= $('tbody#data-' + data).data('tahun-akhir'); tahun++)
 	{
 		html += '<div class="col-md-6"><label>';
-		html += '<input type="checkbox" name="create[tahun]['+data+']['+tahun+']" value="'+tahun+'"> ' + tahun;
+		html += '<input required="required" checked="checked" type="checkbox" name="create[tahun]['+data+']['+tahun+']" value="'+tahun+'"> ' + tahun;
 		html += '</label></div>'
 	}
 		html += '</td><td>';
 
-		html += '<textarea name="create[deskripsi]['+data+']" class="form-control" rows="4"></textarea>';
+		html += '<textarea required="required" name="create[deskripsi]['+data+']" class="form-control" rows="4"></textarea>';
 		html += '</td><td class="text-center">',
 		html += '<a href="javascript:void(0)" id="delete-form" data-delete="tr#baris-'+data+'-'+nomor+'" title="Hapus sasaran ini?" class="btn btn-default"><i class="fa fa-times"></i></a>';
 	    html += '</td>';
@@ -207,7 +207,7 @@ function add_form_indikator_sasaran(data, key, nomor, parent) {
 	for( var tahun = $('tbody#data-' + data).data('tahun-awal'); tahun <= $('tbody#data-' + data).data('tahun-akhir'); tahun++)
 	{
 		html += '<div class="col-md-6"><label>';
-		html += '<input type="checkbox" checked name="create[tahun]['+data+']['+tahun+']" value="'+tahun+'"> ' + tahun;
+		html += '<input  required="required" checked="checked" type="checkbox" checked name="create[tahun]['+data+']['+tahun+']" value="'+tahun+'"> ' + tahun;
 		html += '</label></div>'
 	}
 		html += '</td><td>';
