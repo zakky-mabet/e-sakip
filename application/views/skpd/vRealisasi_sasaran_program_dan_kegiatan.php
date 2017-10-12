@@ -47,19 +47,12 @@
 				 		<tr>
 							<td style="vertical-align: middle;" class="text-center"><?php echo ++$key ?></td>
 							<td colspan="2"><?php echo $program->deskripsi ?></td>
+							<td style="vertical-align: middle;" class="text-center"><?php echo number_format($this->mrealisasi_sasaran->getTotalAnggaranKegiatanByProgramTahun($program->id_program, $tahun), 0, '.', '.'); ?></td>
 							<td style="vertical-align: middle;" class="text-center">
-								 <?php echo number_format($this->mrealisasi_sasaran->getTotalAnggaranKegiatanByProgramTahun($program->id_program, $tahun), 0, '.', '.'); ?>
-									 
-								</td>
-							<td style="vertical-align: middle;" class="text-center">
-								 <?php echo number_format($this->mrealisasi_sasaran->program_penyerapan_per_kegiatan($program->id_program, $tahun), 0, '.', '.');
-								 ?> 
+								<?php echo number_format($this->mrealisasi_sasaran->program_penyerapan_per_kegiatan($program->id_program, $tahun), 0, '.', '.');
+								 ?>
 							</td>
 						</tr>
-						
-						
-							
-						
 
 				 		<tr style="font-weight: 600;">
 							<td rowspan="10000"></td>
@@ -68,30 +61,25 @@
 							<td style="vertical-align: middle;" class="text-center bg-yellow">Anggaran</td>
 							<td style="vertical-align: middle;" class="text-center bg-yellow">Penyerapan</td>
 						</tr>
-					
-						<?php foreach ($this->mrealisasi_sasaran->Get_kegiatan_dari_program($program->id_program, $tahun) as $key => $value): ?>
+					<?php foreach ($this->mrealisasi_sasaran->get_sasaran_kegiatan($program->id_program, $tahun) as $key => $kegiatan): 
+					?>			
 						<tr>
 							 <td class="text-center" style="vertical-align: middle;"><?php echo ++$key ?></td>
-							 <td style="vertical-align: middle;"><?php echo $value->deskripsi ?></td>
-							 <td class="text-center " style="vertical-align: middle;">
-							
-							  <?php echo number_format($this->mrealisasi_sasaran->get_anggaran_perubahan_kegiatan($value->id_kegiatan, $tahun)->nilai_anggaran, 0, '.', '.');  ?>							 			
-							 	</td>
+							 <td style="vertical-align: middle;"><?php echo $kegiatan->deskripsi ?></td>
+							 <td class="text-center " style="vertical-align: middle;"><?php echo number_format($kegiatan->nilai_anggaran, 0, '.', '.'); ?></td>
 							 <td class="text-center" style="vertical-align: middle;">
-							 	 	<?php echo number_format($this->mrealisasi_sasaran->penyerapan_per_kegiatan($value->id_kegiatan, $tahun), 0, '.', '.');  ?>
+							 	<?php echo number_format($this->mrealisasi_sasaran->penyerapan_per_kegiatan($kegiatan->id_kegiatan, $tahun), 0, '.', '.');  ?>
 							 </td>
 				 		</tr>
 						<tr>
-
 							<td class="text-center" style="vertical-align: middle;">Output</td>
 							<td colspan="3">
-								<?php 
-								echo form_hidden("update[ID][]", $value->id_pk_anggaran_kegiatan_perubahan );?>
-								<textarea class="form-control" name="update[output][<?php echo $value->id_pk_anggaran_kegiatan_perubahan ?>]" ><?php echo $value->output ?></textarea>
+								<?php echo form_hidden("update[ID][]", $kegiatan->id_pk_anggaran_kegiatan_perubahan);?>
+								<textarea class="form-control" name="update[output][<?php echo $kegiatan->id_pk_anggaran_kegiatan_perubahan ?>]" ><?php echo $kegiatan->output ?></textarea>
 							</td>
-
 				 		</tr>
-						<?php endforeach ?>
+
+					<?php endforeach ?>
 					</table>	
 					<?php endforeach ?>
 

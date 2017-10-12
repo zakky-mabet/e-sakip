@@ -178,70 +178,57 @@
 					                <h3 class="timeline-header"><a href="#">Output Program / Kegiatan / Anggaran serta pernyataan keberhasilan/kegagalan Program/Kegiatan dalam menunjang pencapaian kinerja</a></h3>
 
 					                <div class="timeline-body">
-					              <?php
+					                <?php
 					
-					 foreach ($this->mrealisasi_sasaran->get_sasaran_program($id_sasaran) as $key => $program): 
-					?>
-					<table class="table table-bordered bg-white">
-						<tr>
-							<th class="text-center bg-blue">No.</th>
-							<th class="text-center bg-blue" colspan="2">Program</th>
-							<th class="text-center bg-blue">Anggaran</th>
-							<th class="text-center bg-blue">Penyerapan</th>
-						</tr>
-				
-				 		<tr>
-							<td style="vertical-align: middle;" class="text-center"><?php echo ++$key ?></td>
-							<td colspan="2"><?php echo $program->deskripsi ?></td>
-							<td style="vertical-align: middle;" class="text-center">
-								 <?php echo number_format($this->mrealisasi_sasaran->getTotalAnggaranKegiatanByProgramTahun($program->id_program, $tahun), 0, '.', '.'); ?>
-									 
-								</td>
-							<td style="vertical-align: middle;" class="text-center">
-								 <?php echo number_format($this->mrealisasi_sasaran->program_penyerapan_per_kegiatan_triwulan($program->id_program, $tahun, $triwulan), 0, '.', '.');
-								 ?> 
-							</td>
-						</tr>
-						
-					
-				 		<tr style="font-weight: 600;">
-							<td rowspan="10000"></td>
-							<td style="vertical-align: middle;" class="text-center bg-yellow">No</td>
-							<td style="vertical-align: middle;" class="text-center bg-yellow">Kegiatan</td>
-							<td style="vertical-align: middle;" class="text-center bg-yellow">Anggaran</td>
-							<td style="vertical-align: middle;" class="text-center bg-yellow">Penyerapan Triwulan <?php if ($triwulan == 'T1') { echo '1';}  elseif ($triwulan == 'T2') { echo '2'; } elseif ($triwulan == 'T3') { echo '3'; } elseif ($triwulan == 'T4') { echo '4'; }?></td>
-						</tr>
-					
-						<?php foreach ($this->mrealisasi_sasaran->Get_kegiatan_dari_program_triwulan($program->id_program, $tahun, $triwulan) as $key => $value): ?>
-						
-						<tr>
-							 <td class="text-center" style="vertical-align: middle;"><?php echo ++$key ?></td>
-							 <td style="vertical-align: middle;"><?php echo $value->deskripsi ?></td>
-							 <td class="text-center " style="vertical-align: middle;">
-							
-							  <?php echo number_format($this->mrealisasi_sasaran->get_anggaran_perubahan_kegiatan($value->id_kegiatan, $tahun)->nilai_anggaran, 0, '.', '.');  ?>							 			
-							 	</td>
-							 <td class="text-center" style="vertical-align: middle;">
-							 	 	<?php echo  
+									 foreach ($this->mrealisasi_sasaran->get_sasaran_program($id_sasaran) as $key => $program): 
+									?>
+									<table class="table table-bordered bg-white">
+										<tr>
+											<th class="text-center bg-blue">No.</th>
+											<th class="text-center bg-blue" colspan="2">Program</th>
+											<th class="text-center bg-blue">Anggaran</th>
+											<th class="text-center bg-blue">Penyerapan</th>
+										</tr>
+								
+								 		<tr>
+											<td style="vertical-align: middle;" class="text-center"><?php echo ++$key ?></td>
+											<td colspan="2"><?php echo $program->deskripsi ?></td>
+											<td style="vertical-align: middle;" class="text-center"><?php echo number_format($this->mrealisasi_sasaran->getTotalAnggaranKegiatanByProgramTahun($program->id_program, $tahun), 0, '.', '.'); ?></td>
+											<td style="vertical-align: middle;" class="text-center">
+												<?php echo number_format($this->mrealisasi_sasaran->program_penyerapan_per_kegiatan($program->id_program, $tahun), 0, '.', '.');
+												 ?>
+											</td>
+										</tr>
 
-							 	 	number_format($this->mrealisasi_sasaran->penyerapan_per_kegiatan_triwulan($value->id_kegiatan, $tahun, $triwulan)->nilai_anggaran , 0, '.', '.');  
+								 		<tr style="font-weight: 600;">
+											<td rowspan="10000"></td>
+											<td style="vertical-align: middle;" class="text-center bg-yellow">No</td>
+											<td style="vertical-align: middle;" class="text-center bg-yellow">Kegiatan</td>
+											<td style="vertical-align: middle;" class="text-center bg-yellow">Anggaran</td>
+											<td style="vertical-align: middle;" class="text-center bg-yellow">Penyerapan</td>
+										</tr>
+									<?php foreach ($this->mrealisasi_sasaran->get_sasaran_kegiatan($program->id_program, $tahun) as $key => $kegiatan): 
+									?>			
+											
+										<tr>
+											 <td class="text-center" style="vertical-align: middle;"><?php echo ++$key ?></td>
+											 <td style="vertical-align: middle;"><?php echo $kegiatan->deskripsi ?></td>
+											 <td class="text-center " style="vertical-align: middle;"><?php echo number_format($kegiatan->nilai_anggaran, 0, '.', '.'); ?></td>
+											 <td class="text-center" style="vertical-align: middle;">
+											 	<?php echo number_format($this->mrealisasi_sasaran->penyerapan_per_kegiatan($kegiatan->id_kegiatan, $tahun), 0, '.', '.');  ?>
+											 </td>
+								 		</tr>
+										<tr>
+											<td class="text-center" style="vertical-align: middle;">Output</td>
+											<td colspan="3">
+												<?php echo form_hidden("update[ID][]" );?>
+												<textarea class="form-control" name="update[output][<?php ?>]" ><?php echo $kegiatan->output ?></textarea>
+											</td>
+								 		</tr>
 
-							 	 	?>
-							 </td>
-				 		</tr>
-						<tr>
-
-							<td class="text-center" style="vertical-align: middle;">Output</td>
-							<td colspan="3">
-								<?php 
-								echo form_hidden("update[ID][]", $value->id_reanggaran_kegiatan );?>
-								<textarea class="form-control" name="update[output][<?php echo $value->id_reanggaran_kegiatan ?>]" ><?php echo $value->output ?></textarea>
-							</td>
-
-				 		</tr>
-						<?php endforeach ?>
-					</table>	
-					<?php endforeach ?>
+									<?php endforeach; ?>
+									</table>	
+										<?php endforeach; ?>
 					                <textarea name="update_analisis[output_PKA][<?php echo $this->mrealisasi_sasaran->reanalisis_triwulan($id_sasaran, $tahun, $triwulan)->id_analisis_sasaran_pertriwulan ?>]" class="form-control summernote" id="" >
 					                  	<?php echo $this->mrealisasi_sasaran->reanalisis_triwulan($id_sasaran, $tahun, $triwulan)->output_PKA ?>
 					                </textarea>
