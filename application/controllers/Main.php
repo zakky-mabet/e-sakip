@@ -15,7 +15,7 @@ class Main extends CI_Controller
 			'title' => "E-SAKIP Sistem Informasi Akuntabilitas Kinerja Instansi Pemerintah - Kab. Bangka Tengah"
 		);
 
-		$this->load->view('main-index', $this->data);
+		$this->load->view('portal', $this->data);
 	}
 
 }

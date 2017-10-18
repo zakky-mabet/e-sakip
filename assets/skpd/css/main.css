@@ -40,7 +40,7 @@ nav.navbar {
     color: #FCFCFC !important;
 }
 .navbar-inverse {
-    border-top: 0pc !important;
+    border-top: 2px solid #FF9E03 !important;
     text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
     background: #03133C; /* Old browsers */
     background: -moz-linear-gradient(45deg,  #03133C 0%, #2780e3 100%); /* FF3.6+ */
@@ -75,21 +75,21 @@ nav.navbar {
 
 div.line {
     height: 40px;
-    width: 100%;
-    margin-top: -50px;
+    width:100%;
+    margin-top: -65px;
+
 }
 
 div.line > div.box-line-orange {
     background-color: #FF9E02;
     padding: 5px;
-    text-align: right;
     float: right;
     width: 20% !important;
-    border-bottom: 3px solid white;
-    border-radius: 50px 0px 50px 0px;
-    -webkit-box-shadow: 0px 10px 56px 0px rgba(0,0,0,0.31);
-    -moz-box-shadow: 0px 10px 56px 0px rgba(0,0,0,0.31);
-    box-shadow: 0px 10px 56px 0px rgba(0,0,0,0.31);
+    border-bottom: 2px solid white;
+    border-radius: 12px 12px 10px 12px;
+    -webkit-box-shadow: 12px 12px 10px 12px rgba(0,0,0,0.31);
+    -moz-box-shadow: 12px 12px 10px 12px rgba(0,0,0,0.31);
+    box-shadow: 12px 12px 10px 12px rgba(0,0,0,0.31);
 }
 div.line > div.box-line-orange > span.text-line {
     padding-right: 30px;

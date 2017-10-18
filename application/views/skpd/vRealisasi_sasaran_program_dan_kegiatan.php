@@ -62,13 +62,20 @@
 							<td style="vertical-align: middle;" class="text-center bg-yellow">Penyerapan</td>
 						</tr>
 					<?php foreach ($this->mrealisasi_sasaran->get_sasaran_kegiatan($program->id_program, $tahun) as $key => $kegiatan): 
-					?>			
+					?>	
+
+								
 						<tr>
 							 <td class="text-center" style="vertical-align: middle;"><?php echo ++$key ?></td>
 							 <td style="vertical-align: middle;"><?php echo $kegiatan->deskripsi ?></td>
-							 <td class="text-center " style="vertical-align: middle;"><?php echo number_format($kegiatan->nilai_anggaran, 0, '.', '.'); ?></td>
+							 <td class="text-center " style="vertical-align: middle;">
+							 	<?php echo number_format($kegiatan->nilai_anggaran, 0, '.', '.'); ?>
+							 		
+							 	</td>
 							 <td class="text-center" style="vertical-align: middle;">
-							 	<?php echo number_format($this->mrealisasi_sasaran->penyerapan_per_kegiatan($kegiatan->id_kegiatan, $tahun), 0, '.', '.');  ?>
+							 	<?php echo number_format(@$this->mrealisasi_sasaran->penyerapan_per_kegiatan($kegiatan->id_kegiatan, $tahun), 0, '.', '.');  ?>
+
+							 	
 							 </td>
 				 		</tr>
 						<tr>
