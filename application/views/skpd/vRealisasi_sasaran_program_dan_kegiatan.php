@@ -33,7 +33,6 @@
 			</div>
 			<div class="box-body">
 					<?php
-					
 					 foreach ($this->mrealisasi_sasaran->get_sasaran_program($get_sasaran_program_dan_kegiatan->id_sasaran) as $key => $program): 
 					?>
 					<table class="table table-bordered bg-white">
@@ -53,7 +52,6 @@
 								 ?>
 							</td>
 						</tr>
-
 				 		<tr style="font-weight: 600;">
 							<td rowspan="10000"></td>
 							<td style="vertical-align: middle;" class="text-center bg-yellow">No</td>
@@ -73,9 +71,7 @@
 							 		
 							 	</td>
 							 <td class="text-center" style="vertical-align: middle;">
-							 	<?php echo number_format(@$this->mrealisasi_sasaran->penyerapan_per_kegiatan($kegiatan->id_kegiatan, $tahun), 0, '.', '.');  ?>
-
-							 	
+							 	<?php echo number_format(@$this->mrealisasi_sasaran->penyerapan_per_kegiatan($kegiatan->id_kegiatan, $tahun), 0, '.', '.');  ?>							 	
 							 </td>
 				 		</tr>
 						<tr>
@@ -89,7 +85,6 @@
 					<?php endforeach ?>
 					</table>	
 					<?php endforeach ?>
-
 		</div>
 	</div>		
 </div>
